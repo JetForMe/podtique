@@ -51,10 +51,12 @@ The digital inputs all have the internal pull-up enabled. The connected switches
 * GPIO2\_3 / 67 (P8_08 / 37) is mode 1.
 * GPIO2\_5 / 69 (P8_09 / 39) is mode 2.
 * GPIO2\_4 / 68 (P8_10 / 38) is mode 3.
-
+* GPIO0\_23 / 23 (P8_13 / 9) is left momentary (not currently installed).
+* GPIO0\_26 / 26 (P8_14 / 10) is right momentary (not currently installed).
+ 
 There is an output used to control the amplifier’s standby mode:
 
-* GPIO0\_23 (P8_13 / 9) is an output to control the amplifier.
+* GPIO0\_27 / 27 (P8_17 / 11) is an output to control the amplifier.
 
 The LEDs are AdaFruit NeoPixel (24-LED ring), and driving those requires the use of the PRU.
 
@@ -84,15 +86,19 @@ The following configuration file works for the Audio-Technica USB audio dongle I
 Radio Notes
 ===========
 
+* Screws in bottom to hold everything in place.
+* Add battery switch and wiring harness.
+* Add battery.
+* Make sure I can talk to it without a network present (straight cable connection).
+* Try turning off eth0 config at boot and config after (wicd/connman).
+* modprobe uio_pruss at boot.
+
+Done
+----
 * Turn off LEDs on everything.
 * Add dial LEDs as needed.
 * Add amp control GPIO to avoid power-on pop.
 * Some light can be seen through speaker grill. Add opaque cover behind.
-* Mounting holes in bottom plate? Maybe just wood screws up from bottom into it.
-
-
-Done
-----
 * Make back plate rectangular and nearly full height. Mount BBB and amp to it. * Holes for zip tie for USB audio adapter?
 * Add mounting holes for 5 VDC regulator (eventually part of BBB cape).
 * Cut opening to allow long potentiometers to be fit into front plate.
