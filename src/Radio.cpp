@@ -99,6 +99,8 @@ Radio::setFrequency(float inVal)
 {
 	std::lock_guard<std::mutex>		lock(mConfigMutex);
 	mFrequency = inVal;
+	
+	LogDebug("Frequency set: %f", mFrequency);
 }
 
 float
@@ -126,6 +128,8 @@ Radio::setVolume(float inVal)
 	
 	std::lock_guard<std::mutex>		lock(mConfigMutex);
 	mVolume = v;
+	
+	LogDebug("Volume set: %f", mVolume);
 }
 
 void
