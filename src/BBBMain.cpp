@@ -114,6 +114,8 @@ main(int inArgCount, const char** inArgs)
 	Radio* mRadio = new Radio(p);
 	mRadio->start();
 	
+	mRadio->setOn(true);
+	
 	//	Loop over reading the input state,
 	//	and updating the radio…
 	
