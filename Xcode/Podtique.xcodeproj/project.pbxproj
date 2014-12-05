@@ -1,0 +1,480 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C6B5DFA91A31A89A00A3A9ED /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6B5DFA81A31A89A00A3A9ED /* AppDelegate.mm */; };
+		C6B5DFAB1A31A89A00A3A9ED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B5DFAA1A31A89A00A3A9ED /* main.m */; };
+		C6B5DFAE1A31A89A00A3A9ED /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B5DFAD1A31A89A00A3A9ED /* ViewController.m */; };
+		C6B5DFB01A31A89A00A3A9ED /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6B5DFAF1A31A89A00A3A9ED /* Images.xcassets */; };
+		C6B5DFB31A31A89A00A3A9ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6B5DFB11A31A89A00A3A9ED /* Main.storyboard */; };
+		C6B5DFBF1A31A89A00A3A9ED /* PodtiqueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B5DFBE1A31A89A00A3A9ED /* PodtiqueTests.m */; };
+		C6B5DFD91A31A8D500A3A9ED /* MP3Decoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6B5DFCC1A31A8D500A3A9ED /* MP3Decoder.cpp */; };
+		C6B5DFDA1A31A8D500A3A9ED /* Radio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6B5DFCF1A31A8D500A3A9ED /* Radio.cpp */; };
+		C6B5DFDD1A31A8D500A3A9ED /* SoundPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6B5DFD41A31A8D500A3A9ED /* SoundPlayer.cpp */; };
+		C6B5DFDF1A31A95000A3A9ED /* libmpg123.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B5DFDE1A31A95000A3A9ED /* libmpg123.0.dylib */; };
+		C6B5DFE11A31A95A00A3A9ED /* libao.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B5DFE01A31A95A00A3A9ED /* libao.4.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C6B5DFB91A31A89A00A3A9ED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6B5DF9A1A31A89A00A3A9ED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C6B5DFA11A31A89A00A3A9ED;
+			remoteInfo = Podtique;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C6B5DFA21A31A89A00A3A9ED /* Podtique.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Podtique.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6B5DFA61A31A89A00A3A9ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C6B5DFA71A31A89A00A3A9ED /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		C6B5DFA81A31A89A00A3A9ED /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		C6B5DFAA1A31A89A00A3A9ED /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C6B5DFAC1A31A89A00A3A9ED /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		C6B5DFAD1A31A89A00A3A9ED /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		C6B5DFAF1A31A89A00A3A9ED /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		C6B5DFB21A31A89A00A3A9ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C6B5DFB81A31A89A00A3A9ED /* PodtiqueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PodtiqueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6B5DFBD1A31A89A00A3A9ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C6B5DFBE1A31A89A00A3A9ED /* PodtiqueTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PodtiqueTests.m; sourceTree = "<group>"; };
+		C6B5DFC91A31A8D500A3A9ED /* BBBMain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BBBMain.cpp; sourceTree = "<group>"; };
+		C6B5DFCC1A31A8D500A3A9ED /* MP3Decoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MP3Decoder.cpp; sourceTree = "<group>"; };
+		C6B5DFCD1A31A8D500A3A9ED /* MP3Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP3Decoder.h; sourceTree = "<group>"; };
+		C6B5DFCE1A31A8D500A3A9ED /* picojson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = picojson.h; sourceTree = "<group>"; };
+		C6B5DFCF1A31A8D500A3A9ED /* Radio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Radio.cpp; sourceTree = "<group>"; };
+		C6B5DFD11A31A8D500A3A9ED /* Radio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Radio.h; sourceTree = "<group>"; };
+		C6B5DFD31A31A8D500A3A9ED /* RadioDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioDebug.h; sourceTree = "<group>"; };
+		C6B5DFD41A31A8D500A3A9ED /* SoundPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundPlayer.cpp; sourceTree = "<group>"; };
+		C6B5DFD51A31A8D500A3A9ED /* SoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundPlayer.h; sourceTree = "<group>"; };
+		C6B5DFDE1A31A95000A3A9ED /* libmpg123.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpg123.0.dylib; path = ../../../../../../usr/local/Cellar/mpg123/1.20.1/lib/libmpg123.0.dylib; sourceTree = "<group>"; };
+		C6B5DFE01A31A95A00A3A9ED /* libao.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libao.4.dylib; path = ../../../../../../usr/local/Cellar/libao/1.2.0/lib/libao.4.dylib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C6B5DF9F1A31A89A00A3A9ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6B5DFE11A31A95A00A3A9ED /* libao.4.dylib in Frameworks */,
+				C6B5DFDF1A31A95000A3A9ED /* libmpg123.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C6B5DFB51A31A89A00A3A9ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C6B5DF991A31A89A00A3A9ED = {
+			isa = PBXGroup;
+			children = (
+				C6B5DFE01A31A95A00A3A9ED /* libao.4.dylib */,
+				C6B5DFDE1A31A95000A3A9ED /* libmpg123.0.dylib */,
+				C6B5DFC81A31A8D500A3A9ED /* src */,
+				C6B5DFA41A31A89A00A3A9ED /* Podtique */,
+				C6B5DFBB1A31A89A00A3A9ED /* PodtiqueTests */,
+				C6B5DFA31A31A89A00A3A9ED /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C6B5DFA31A31A89A00A3A9ED /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C6B5DFA21A31A89A00A3A9ED /* Podtique.app */,
+				C6B5DFB81A31A89A00A3A9ED /* PodtiqueTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C6B5DFA41A31A89A00A3A9ED /* Podtique */ = {
+			isa = PBXGroup;
+			children = (
+				C6B5DFA71A31A89A00A3A9ED /* AppDelegate.h */,
+				C6B5DFA81A31A89A00A3A9ED /* AppDelegate.mm */,
+				C6B5DFAC1A31A89A00A3A9ED /* ViewController.h */,
+				C6B5DFAD1A31A89A00A3A9ED /* ViewController.m */,
+				C6B5DFAF1A31A89A00A3A9ED /* Images.xcassets */,
+				C6B5DFB11A31A89A00A3A9ED /* Main.storyboard */,
+				C6B5DFA51A31A89A00A3A9ED /* Supporting Files */,
+			);
+			path = Podtique;
+			sourceTree = "<group>";
+		};
+		C6B5DFA51A31A89A00A3A9ED /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C6B5DFA61A31A89A00A3A9ED /* Info.plist */,
+				C6B5DFAA1A31A89A00A3A9ED /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C6B5DFBB1A31A89A00A3A9ED /* PodtiqueTests */ = {
+			isa = PBXGroup;
+			children = (
+				C6B5DFBE1A31A89A00A3A9ED /* PodtiqueTests.m */,
+				C6B5DFBC1A31A89A00A3A9ED /* Supporting Files */,
+			);
+			path = PodtiqueTests;
+			sourceTree = "<group>";
+		};
+		C6B5DFBC1A31A89A00A3A9ED /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C6B5DFBD1A31A89A00A3A9ED /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C6B5DFC81A31A8D500A3A9ED /* src */ = {
+			isa = PBXGroup;
+			children = (
+				C6B5DFCE1A31A8D500A3A9ED /* picojson.h */,
+				C6B5DFD31A31A8D500A3A9ED /* RadioDebug.h */,
+				C6B5DFD11A31A8D500A3A9ED /* Radio.h */,
+				C6B5DFCF1A31A8D500A3A9ED /* Radio.cpp */,
+				C6B5DFCD1A31A8D500A3A9ED /* MP3Decoder.h */,
+				C6B5DFCC1A31A8D500A3A9ED /* MP3Decoder.cpp */,
+				C6B5DFD51A31A8D500A3A9ED /* SoundPlayer.h */,
+				C6B5DFD41A31A8D500A3A9ED /* SoundPlayer.cpp */,
+				C6B5DFC91A31A8D500A3A9ED /* BBBMain.cpp */,
+			);
+			name = src;
+			path = ../src;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C6B5DFA11A31A89A00A3A9ED /* Podtique */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C6B5DFC21A31A89A00A3A9ED /* Build configuration list for PBXNativeTarget "Podtique" */;
+			buildPhases = (
+				C6B5DF9E1A31A89A00A3A9ED /* Sources */,
+				C6B5DF9F1A31A89A00A3A9ED /* Frameworks */,
+				C6B5DFA01A31A89A00A3A9ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Podtique;
+			productName = Podtique;
+			productReference = C6B5DFA21A31A89A00A3A9ED /* Podtique.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C6B5DFB71A31A89A00A3A9ED /* PodtiqueTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C6B5DFC51A31A89A00A3A9ED /* Build configuration list for PBXNativeTarget "PodtiqueTests" */;
+			buildPhases = (
+				C6B5DFB41A31A89A00A3A9ED /* Sources */,
+				C6B5DFB51A31A89A00A3A9ED /* Frameworks */,
+				C6B5DFB61A31A89A00A3A9ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C6B5DFBA1A31A89A00A3A9ED /* PBXTargetDependency */,
+			);
+			name = PodtiqueTests;
+			productName = PodtiqueTests;
+			productReference = C6B5DFB81A31A89A00A3A9ED /* PodtiqueTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C6B5DF9A1A31A89A00A3A9ED /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Latency: Zero";
+				TargetAttributes = {
+					C6B5DFA11A31A89A00A3A9ED = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					C6B5DFB71A31A89A00A3A9ED = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = C6B5DFA11A31A89A00A3A9ED;
+					};
+				};
+			};
+			buildConfigurationList = C6B5DF9D1A31A89A00A3A9ED /* Build configuration list for PBXProject "Podtique" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C6B5DF991A31A89A00A3A9ED;
+			productRefGroup = C6B5DFA31A31A89A00A3A9ED /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C6B5DFA11A31A89A00A3A9ED /* Podtique */,
+				C6B5DFB71A31A89A00A3A9ED /* PodtiqueTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C6B5DFA01A31A89A00A3A9ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6B5DFB01A31A89A00A3A9ED /* Images.xcassets in Resources */,
+				C6B5DFB31A31A89A00A3A9ED /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C6B5DFB61A31A89A00A3A9ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C6B5DF9E1A31A89A00A3A9ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6B5DFAE1A31A89A00A3A9ED /* ViewController.m in Sources */,
+				C6B5DFD91A31A8D500A3A9ED /* MP3Decoder.cpp in Sources */,
+				C6B5DFAB1A31A89A00A3A9ED /* main.m in Sources */,
+				C6B5DFA91A31A89A00A3A9ED /* AppDelegate.mm in Sources */,
+				C6B5DFDA1A31A8D500A3A9ED /* Radio.cpp in Sources */,
+				C6B5DFDD1A31A8D500A3A9ED /* SoundPlayer.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C6B5DFB41A31A89A00A3A9ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6B5DFBF1A31A89A00A3A9ED /* PodtiqueTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C6B5DFBA1A31A89A00A3A9ED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C6B5DFA11A31A89A00A3A9ED /* Podtique */;
+			targetProxy = C6B5DFB91A31A89A00A3A9ED /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C6B5DFB11A31A89A00A3A9ED /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C6B5DFB21A31A89A00A3A9ED /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C6B5DFC01A31A89A00A3A9ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		C6B5DFC11A31A89A00A3A9ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		C6B5DFC31A31A89A00A3A9ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include,
+				);
+				INFOPLIST_FILE = Podtique/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C6B5DFC41A31A89A00A3A9ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include,
+				);
+				INFOPLIST_FILE = Podtique/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		C6B5DFC61A31A89A00A3A9ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PodtiqueTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Podtique.app/Contents/MacOS/Podtique";
+			};
+			name = Debug;
+		};
+		C6B5DFC71A31A89A00A3A9ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PodtiqueTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Podtique.app/Contents/MacOS/Podtique";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C6B5DF9D1A31A89A00A3A9ED /* Build configuration list for PBXProject "Podtique" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C6B5DFC01A31A89A00A3A9ED /* Debug */,
+				C6B5DFC11A31A89A00A3A9ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C6B5DFC21A31A89A00A3A9ED /* Build configuration list for PBXNativeTarget "Podtique" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C6B5DFC31A31A89A00A3A9ED /* Debug */,
+				C6B5DFC41A31A89A00A3A9ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C6B5DFC51A31A89A00A3A9ED /* Build configuration list for PBXNativeTarget "PodtiqueTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C6B5DFC61A31A89A00A3A9ED /* Debug */,
+				C6B5DFC71A31A89A00A3A9ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C6B5DF9A1A31A89A00A3A9ED /* Project object */;
+}
