@@ -52,8 +52,9 @@
 		C6B5DFD31A31A8D500A3A9ED /* RadioDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioDebug.h; sourceTree = "<group>"; };
 		C6B5DFD41A31A8D500A3A9ED /* SoundPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundPlayer.cpp; sourceTree = "<group>"; };
 		C6B5DFD51A31A8D500A3A9ED /* SoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundPlayer.h; sourceTree = "<group>"; };
-		C6B5DFDE1A31A95000A3A9ED /* libmpg123.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpg123.0.dylib; path = ../../../../../../usr/local/Cellar/mpg123/1.20.1/lib/libmpg123.0.dylib; sourceTree = "<group>"; };
-		C6B5DFE01A31A95A00A3A9ED /* libao.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libao.4.dylib; path = ../../../../../../usr/local/Cellar/libao/1.2.0/lib/libao.4.dylib; sourceTree = "<group>"; };
+		C6B5DFDE1A31A95000A3A9ED /* libmpg123.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpg123.0.dylib; path = /usr/local/Cellar/mpg123/1.20.1/lib/libmpg123.0.dylib; sourceTree = "<absolute>"; };
+		C6B5DFE01A31A95A00A3A9ED /* libao.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libao.4.dylib; path = /usr/local/Cellar/libao/1.2.0/lib/libao.4.dylib; sourceTree = "<absolute>"; };
+		C6B5DFE21A31AEB900A3A9ED /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,10 +80,10 @@
 		C6B5DF991A31A89A00A3A9ED = {
 			isa = PBXGroup;
 			children = (
-				C6B5DFE01A31A95A00A3A9ED /* libao.4.dylib */,
-				C6B5DFDE1A31A95000A3A9ED /* libmpg123.0.dylib */,
+				C6B5DFE21A31AEB900A3A9ED /* README.md */,
 				C6B5DFC81A31A8D500A3A9ED /* src */,
 				C6B5DFA41A31A89A00A3A9ED /* Podtique */,
+				C6B5DFE41A31AEC900A3A9ED /* Libraries */,
 				C6B5DFBB1A31A89A00A3A9ED /* PodtiqueTests */,
 				C6B5DFA31A31A89A00A3A9ED /* Products */,
 			);
@@ -152,6 +153,15 @@
 			);
 			name = src;
 			path = ../src;
+			sourceTree = "<group>";
+		};
+		C6B5DFE41A31AEC900A3A9ED /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				C6B5DFE01A31A95A00A3A9ED /* libao.4.dylib */,
+				C6B5DFDE1A31A95000A3A9ED /* libmpg123.0.dylib */,
+			);
+			name = Libraries;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
