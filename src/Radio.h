@@ -9,41 +9,65 @@
 #ifndef __WoodenRadio__Radio__
 #define __WoodenRadio__Radio__
 
+//
+//	Standard Includes
+//
+
 #include <string>
+#include <mutex>
 #include <thread>
+#include <vector>
+
+//
+//	Library Includes
+//
 
 #include <mpg123.h>
 
 
-
+class AudioDevice;
 class MP3Decoder;
+class Spectrum;
+class SndFile;
 
+
+/**
+*/
 
 class
 Radio
 {
 public:
-					Radio();
+						Radio(const std::string& inDataPath);
 	
-	void			start(const std::string& inDataPath);
+	void				start();
 	
-	void			setFrequency(float inFrequency);
-	void			setVolume(float inVolume);
+	void				setFrequency(float inFrequency);
+	float				frequency()							const;
+	void				setVolume(float inVolume);
 	
-	void			join();
+	void				join();
 	
 protected:
-	void			entry();
+	void				entry();
+	void				processAudioAndOutput(void* ioBuffer, size_t inBufSize);
 	
 private:
-	std::thread		mRadioThread;
-	std::string		mDataDirectory;
+	std::thread			mRadioThread;
+	std::string			mDataDirectory;
 	
-	std::mutex		mConfigMutex;
+	std::mutex			mConfigMutex;
 	
-	MP3Decoder*		mCurrentTrack;
-	float			mFrequency;
-	float			mVolume;
+	Spectrum*			mSpectrum;
+	float				mFrequency;
+	float				mVolume;
+	
+	SndFile*			mPinkNoise;
+	int16_t*			mPinkNoiseBuffer;
+	size_t				mPNBufIdx;
+	int16_t*			mZeroBuffer;
+	
+	AudioDevice*		mOutputDevice;
 };
 
 #endif /* defined(__WoodenRadio__Radio__) */

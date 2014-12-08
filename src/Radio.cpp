@@ -13,13 +13,13 @@
 //
 
 #include <cstdio>
+#include <mutex>
 #include <thread>
 
 //
 //	Library Includes
 //
 
-#include <ao/ao.h>
 #include <mpg123.h>
 
 #include "picojson.h"
@@ -28,32 +28,56 @@
 //	Project Includes
 //
 
+#include "AudioDevice.h"
 #include "MP3Decoder.h"
+#include "RadioConstants.h"
 #include "RadioDebug.h"
+#include "Spectrum.h"
+#include "SndFile.h"
 
 
 
 
 
-Radio::Radio()
+
+
+
+#pragma mark -
+#pragma mark • Radio
+
+const size_t	kPinkNoiseNumFrames				=	64 * 1024;
+const size_t	kEmptyBufferSize				=	4 * 1024;
+
+
+Radio::Radio(const std::string& inDataDirectory)
 	:
-	mCurrentTrack(NULL),
-	mFrequency(0.0),
-	mVolume(0.0)
+	mDataDirectory(inDataDirectory),
+	mSpectrum(NULL),
+	mVolume(0.0),
+	mPinkNoise(NULL),
+	mOutputDevice(NULL)
 {
+	LogDebug("Using data directory: '%s'", mDataDirectory.c_str());
+	
+	mPinkNoise = new SndFile(mDataDirectory + "/pinknoise.wav");
+	mPinkNoiseBuffer = new int16_t[kPinkNoiseNumFrames];
+	size_t framesRead = mPinkNoise->read(mPinkNoiseBuffer, kPinkNoiseNumFrames);
+	if (framesRead != kPinkNoiseNumFrames)
+	{
+		LogDebug("Unable to read all frames");
+	}
+	mPNBufIdx = 0;
+	
+	mZeroBuffer = new int16_t[kEmptyBufferSize];
+	::memset(mZeroBuffer, 0, sizeof (int16_t) * kEmptyBufferSize);
+	
+	mSpectrum = new Spectrum(mDataDirectory);
+	mOutputDevice = new AudioDevice();
 }
 
 void
-Radio::start(const std::string& inDataPath)
+Radio::start()
 {
-	//	Initialize the audio APIs…
-	
-	::ao_initialize();
-	
-	mCurrentTrack = new MP3Decoder();
-	
-	mDataDirectory = inDataPath;
-	LogDebug("Using data directory: '%s'", mDataDirectory.c_str());
 	
 	//	Open the JSON file…
 	
@@ -71,6 +95,14 @@ Radio::setFrequency(float inVal)
 	mFrequency = inVal;
 }
 
+float
+Radio::frequency() const
+{
+	Radio* self = const_cast<Radio*> (this);
+	std::lock_guard<std::mutex>		lock(self->mConfigMutex);
+	return mFrequency;
+}
+
 void
 Radio::setVolume(float inVal)
 {
@@ -83,62 +115,93 @@ Radio::entry()
 {
 	LogDebug("Radio::entry()");
 	
-	//	For now, open a known MP3 file…
-	
-	std::string path = mDataDirectory + "/09_WorkJuice_anthem.mp3";
-	if (!mCurrentTrack->open(path))
-	{
-		return;
-	}
-	
-	if (mCurrentTrack->encoding() != MPG123_ENC_SIGNED_16)
-	{
-		LogDebug("Unexpected encoding: %d", mCurrentTrack->encoding());
-		return;
-	}
-	
-	
-	size_t bufSize = mCurrentTrack->recommendedBufferSize();
-	uint8_t* buffer = new uint8_t[bufSize];
-	
-	//	Open the output audio channel…
-	
-	int driverID = ::ao_default_driver_id();
-	ao_sample_format format = { 0 };
-	format.bits = 16;
-	format.channels = mCurrentTrack->numChannels();
-	format.rate = (int) mCurrentTrack->rate();
-	format.byte_format = AO_FMT_LITTLE;
-	
-	ao_device* device = ::ao_open_live(driverID, &format, NULL);
-	if (device == NULL)
-	{
-		LogDebug("Error opening output device");
-		return;
-	}
-	
 	//	Decode bytes, send them to the output channel…
 	
-	bool success;
+	uint8_t* buffer = NULL;
+	size_t lastBufferSize = 0;
 	do
 	{
-		size_t bytesDecoded;
-		success = mCurrentTrack->read(buffer, bufSize, bytesDecoded);
-		if (success)
+		//	Update the tuning at the start of each pass through the
+		//	loop…
+		
+		mSpectrum->setFrequency(frequency());
+		mSpectrum->updateTuning();
+		
+		if (mSpectrum->stationTuned())
 		{
-			LogDebug("Decoded %lu bytes", bytesDecoded);
+			mOutputDevice->setFormat(mSpectrum->numChannels(), mSpectrum->rate());
+		}
+		else
+		{
+			mOutputDevice->setFormat(2, 44100);
 		}
 		
-		::ao_play(device, (char*) buffer, (uint32_t) bufSize);
+		//	Reallocate buffer if minimum size changes…
+		
+		size_t bufSize = mSpectrum->minimumBufferSize();
+		if (lastBufferSize != bufSize)
+		{
+			delete [] buffer;
+			buffer = new uint8_t[bufSize];
+			lastBufferSize = bufSize;
+		}
+	
+		size_t bytesDecoded;
+		bool success = mSpectrum->getStationAudioData(buffer, bufSize, bytesDecoded);
+		if (success)
+		{
+			//LogDebug("Decoded %lu bytes", bytesDecoded);
+			
+			processAudioAndOutput(buffer, bytesDecoded);
+		}
+		else
+		{
+			processAudioAndOutput(mZeroBuffer, kEmptyBufferSize);
+		}
 	}
-	while (success);
+	while (true);
 	
-	::ao_close(device);
+	//std::chrono::milliseconds dur(2000);
+	//std::this_thread::sleep_for(dur);
 	
-	std::chrono::milliseconds dur(2000);
-	std::this_thread::sleep_for(dur);
+	//LogDebug("Radio::entry() exit");
+}
+
+void
+Radio::processAudioAndOutput(void* ioBuffer, size_t inBufSize)
+{
+	//	Attentuate the signal…
 	
-	LogDebug("Radio::entry() exit");
+	float f = 0.0;
+	if (mSpectrum->stationTuned())
+	{
+		float df = mSpectrum->stationFrequency() - frequency();
+		df = std::fabs(df);
+		if (df > kStationHalfBand) df = kStationHalfBand;
+		
+		df = kStationHalfBand - df;
+		f = df / kStationHalfBand;
+		//LogDebug("df: %f %f", df, f);
+	}
+	
+	//	TODO: We're assuming a lot about the structure of the buffer here!
+	
+	int16_t* p = reinterpret_cast<int16_t*> (ioBuffer);
+	size_t numSamples = inBufSize / sizeof (int16_t);
+	for (size_t i = 0; i < numSamples; ++i)
+	{
+		int16_t noise = mPinkNoiseBuffer[mPNBufIdx++];
+		if (mPNBufIdx >= kPinkNoiseNumFrames)
+		{
+			mPNBufIdx = 0;
+		}
+		
+		p[i] = p[i] * f + noise * (1.0 - f) * 0.05;
+	}
+	
+	//	Output the result…
+	
+	mOutputDevice->play(ioBuffer, inBufSize);
 }
 
 void

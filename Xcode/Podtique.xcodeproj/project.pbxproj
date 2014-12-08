@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		C6B5DFA91A31A89A00A3A9ED /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6B5DFA81A31A89A00A3A9ED /* AppDelegate.mm */; };
 		C6B5DFAB1A31A89A00A3A9ED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B5DFAA1A31A89A00A3A9ED /* main.m */; };
-		C6B5DFAE1A31A89A00A3A9ED /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B5DFAD1A31A89A00A3A9ED /* ViewController.m */; };
+		C6B5DFAE1A31A89A00A3A9ED /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6B5DFAD1A31A89A00A3A9ED /* ViewController.mm */; };
 		C6B5DFB01A31A89A00A3A9ED /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6B5DFAF1A31A89A00A3A9ED /* Images.xcassets */; };
 		C6B5DFB31A31A89A00A3A9ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6B5DFB11A31A89A00A3A9ED /* Main.storyboard */; };
 		C6B5DFBF1A31A89A00A3A9ED /* PodtiqueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B5DFBE1A31A89A00A3A9ED /* PodtiqueTests.m */; };
@@ -18,6 +18,10 @@
 		C6B5DFDD1A31A8D500A3A9ED /* SoundPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6B5DFD41A31A8D500A3A9ED /* SoundPlayer.cpp */; };
 		C6B5DFDF1A31A95000A3A9ED /* libmpg123.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B5DFDE1A31A95000A3A9ED /* libmpg123.0.dylib */; };
 		C6B5DFE11A31A95A00A3A9ED /* libao.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B5DFE01A31A95A00A3A9ED /* libao.4.dylib */; };
+		C6B5DFE91A33B0EC00A3A9ED /* Spectrum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6B5DFE71A33B0EC00A3A9ED /* Spectrum.cpp */; };
+		C6B5DFEC1A34E9AF00A3A9ED /* AudioDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6B5DFEA1A34E9AF00A3A9ED /* AudioDevice.cpp */; };
+		C6B5DFF01A35AD8200A3A9ED /* SndFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6B5DFEE1A35AD8200A3A9ED /* SndFile.cpp */; };
+		C6B5DFF21A35B49700A3A9ED /* libsndfile.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B5DFF11A35B49700A3A9ED /* libsndfile.1.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +41,7 @@
 		C6B5DFA81A31A89A00A3A9ED /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		C6B5DFAA1A31A89A00A3A9ED /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C6B5DFAC1A31A89A00A3A9ED /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		C6B5DFAD1A31A89A00A3A9ED /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		C6B5DFAD1A31A89A00A3A9ED /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		C6B5DFAF1A31A89A00A3A9ED /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C6B5DFB21A31A89A00A3A9ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C6B5DFB81A31A89A00A3A9ED /* PodtiqueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PodtiqueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,7 +58,17 @@
 		C6B5DFD51A31A8D500A3A9ED /* SoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundPlayer.h; sourceTree = "<group>"; };
 		C6B5DFDE1A31A95000A3A9ED /* libmpg123.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpg123.0.dylib; path = /usr/local/Cellar/mpg123/1.20.1/lib/libmpg123.0.dylib; sourceTree = "<absolute>"; };
 		C6B5DFE01A31A95A00A3A9ED /* libao.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libao.4.dylib; path = /usr/local/Cellar/libao/1.2.0/lib/libao.4.dylib; sourceTree = "<absolute>"; };
-		C6B5DFE21A31AEB900A3A9ED /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		C6B5DFE21A31AEB900A3A9ED /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; wrapsLines = 1; };
+		C6B5DFE51A31AF1500A3A9ED /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = Makefile; path = ../Makefile; sourceTree = "<group>"; };
+		C6B5DFE61A31AF1F00A3A9ED /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		C6B5DFE71A33B0EC00A3A9ED /* Spectrum.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Spectrum.cpp; sourceTree = "<group>"; };
+		C6B5DFE81A33B0EC00A3A9ED /* Spectrum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spectrum.h; sourceTree = "<group>"; };
+		C6B5DFEA1A34E9AF00A3A9ED /* AudioDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioDevice.cpp; sourceTree = "<group>"; };
+		C6B5DFEB1A34E9AF00A3A9ED /* AudioDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioDevice.h; sourceTree = "<group>"; };
+		C6B5DFED1A3599FE00A3A9ED /* RadioConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RadioConstants.h; sourceTree = "<group>"; };
+		C6B5DFEE1A35AD8200A3A9ED /* SndFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SndFile.cpp; sourceTree = "<group>"; };
+		C6B5DFEF1A35AD8200A3A9ED /* SndFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SndFile.h; sourceTree = "<group>"; };
+		C6B5DFF11A35B49700A3A9ED /* libsndfile.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsndfile.1.dylib; path = ../../../../../../usr/local/Cellar/libsndfile/1.0.25/lib/libsndfile.1.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6B5DFF21A35B49700A3A9ED /* libsndfile.1.dylib in Frameworks */,
 				C6B5DFE11A31A95A00A3A9ED /* libao.4.dylib in Frameworks */,
 				C6B5DFDF1A31A95000A3A9ED /* libmpg123.0.dylib in Frameworks */,
 			);
@@ -80,7 +95,10 @@
 		C6B5DF991A31A89A00A3A9ED = {
 			isa = PBXGroup;
 			children = (
+				C6B5DFF11A35B49700A3A9ED /* libsndfile.1.dylib */,
+				C6B5DFE51A31AF1500A3A9ED /* Makefile */,
 				C6B5DFE21A31AEB900A3A9ED /* README.md */,
+				C6B5DFE61A31AF1F00A3A9ED /* LICENSE */,
 				C6B5DFC81A31A8D500A3A9ED /* src */,
 				C6B5DFA41A31A89A00A3A9ED /* Podtique */,
 				C6B5DFE41A31AEC900A3A9ED /* Libraries */,
@@ -104,7 +122,7 @@
 				C6B5DFA71A31A89A00A3A9ED /* AppDelegate.h */,
 				C6B5DFA81A31A89A00A3A9ED /* AppDelegate.mm */,
 				C6B5DFAC1A31A89A00A3A9ED /* ViewController.h */,
-				C6B5DFAD1A31A89A00A3A9ED /* ViewController.m */,
+				C6B5DFAD1A31A89A00A3A9ED /* ViewController.mm */,
 				C6B5DFAF1A31A89A00A3A9ED /* Images.xcassets */,
 				C6B5DFB11A31A89A00A3A9ED /* Main.storyboard */,
 				C6B5DFA51A31A89A00A3A9ED /* Supporting Files */,
@@ -143,12 +161,19 @@
 			children = (
 				C6B5DFCE1A31A8D500A3A9ED /* picojson.h */,
 				C6B5DFD31A31A8D500A3A9ED /* RadioDebug.h */,
+				C6B5DFED1A3599FE00A3A9ED /* RadioConstants.h */,
 				C6B5DFD11A31A8D500A3A9ED /* Radio.h */,
 				C6B5DFCF1A31A8D500A3A9ED /* Radio.cpp */,
+				C6B5DFE81A33B0EC00A3A9ED /* Spectrum.h */,
+				C6B5DFE71A33B0EC00A3A9ED /* Spectrum.cpp */,
 				C6B5DFCD1A31A8D500A3A9ED /* MP3Decoder.h */,
 				C6B5DFCC1A31A8D500A3A9ED /* MP3Decoder.cpp */,
+				C6B5DFEB1A34E9AF00A3A9ED /* AudioDevice.h */,
+				C6B5DFEA1A34E9AF00A3A9ED /* AudioDevice.cpp */,
 				C6B5DFD51A31A8D500A3A9ED /* SoundPlayer.h */,
 				C6B5DFD41A31A8D500A3A9ED /* SoundPlayer.cpp */,
+				C6B5DFEF1A35AD8200A3A9ED /* SndFile.h */,
+				C6B5DFEE1A35AD8200A3A9ED /* SndFile.cpp */,
 				C6B5DFC91A31A8D500A3A9ED /* BBBMain.cpp */,
 			);
 			name = src;
@@ -263,12 +288,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6B5DFAE1A31A89A00A3A9ED /* ViewController.m in Sources */,
+				C6B5DFAE1A31A89A00A3A9ED /* ViewController.mm in Sources */,
+				C6B5DFE91A33B0EC00A3A9ED /* Spectrum.cpp in Sources */,
+				C6B5DFEC1A34E9AF00A3A9ED /* AudioDevice.cpp in Sources */,
 				C6B5DFD91A31A8D500A3A9ED /* MP3Decoder.cpp in Sources */,
 				C6B5DFAB1A31A89A00A3A9ED /* main.m in Sources */,
 				C6B5DFA91A31A89A00A3A9ED /* AppDelegate.mm in Sources */,
 				C6B5DFDA1A31A8D500A3A9ED /* Radio.cpp in Sources */,
 				C6B5DFDD1A31A8D500A3A9ED /* SoundPlayer.cpp in Sources */,
+				C6B5DFF01A35AD8200A3A9ED /* SndFile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,6 +411,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -393,6 +422,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/lib,
+					/usr/local/Cellar/libsndfile/1.0.25/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -403,6 +433,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -413,6 +444,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/lib,
+					/usr/local/Cellar/libsndfile/1.0.25/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

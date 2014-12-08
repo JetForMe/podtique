@@ -37,12 +37,16 @@ public:
 	void			close();
 	
 	bool			read(void* inBuffer, size_t inBufferSize, size_t& outBytesDecoded);
+	bool			done()								const				{ return mDone; }
 	
 	int				encoding()							const				{ return mEncoding; }
 	int				numChannels()						const				{ return mNumChannels; }
 	long			rate()								const				{ return mRate; }
 	
-	size_t			recommendedBufferSize()				const;
+	off_t			currentFrame()						const;
+	void			setCurrentFrame(off_t inFrame);
+	
+	size_t			minimumBufferSize()					const;
 	
 protected:
 	bool			createDecoder();
@@ -50,6 +54,7 @@ protected:
 	
 private:
 	mpg123_handle*	mMPG;
+	bool			mDone;
 	long			mRate;
 	int				mNumChannels;
 	int				mEncoding;

@@ -6,7 +6,7 @@ CC		= gcc
 CPP		= g++
 CFLAGS	= -g -Wall -I. -ISDL -I../libxively/src/libxively -Wno-unknown-pragmas -D_REENTRANT
 CPPFLAGS  = $(CFLAGS) -std=gnu++0x
-LDFLAGS = -L/usr/local/lib -Wl,-rpath,/usr/local/lib -lao -lmpg123 -lpthread
+LDFLAGS = -L/usr/local/lib -Wl,-rpath,/usr/local/lib -lao -lmpg123 -lsndfile -lpthread
 
 
 CORE   = \
@@ -15,8 +15,13 @@ COMMON = \
 	
 
 CPPSRC = \
+	$(SRC)/AudioDevice.cpp \
+	$(SRC)/BBBMain.cpp \
+	$(SRC)/MP3Decoder.cpp \
 	$(SRC)/Radio.cpp \
-	$(SRC)/BBBMain.cpp
+	$(SRC)/Spectrum.cpp \
+	$(SRC)/SndFile.cpp \
+
 
 CORE_OBJ   = $(CORE:.c=.o)
 COMMON_OBJ = $(COMMON:.c=.o)

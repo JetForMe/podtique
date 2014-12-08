@@ -36,7 +36,11 @@
 
 MP3Decoder::MP3Decoder()
 	:
-	mMPG(NULL)
+	mMPG(NULL),
+	mDone(false),
+	mRate(0),
+	mNumChannels(0),
+	mEncoding(0)
 {
 }
 
@@ -109,6 +113,8 @@ MP3Decoder::open(const std::string& inPath)
 	::mpg123_format_none(mMPG);
 	::mpg123_format(mMPG, mRate, mNumChannels, mEncoding);
 	
+	mDone = false;
+	
 	return true;
 }
 
@@ -121,15 +127,33 @@ MP3Decoder::close()
 	}
 }
 
+off_t
+MP3Decoder::currentFrame() const
+{
+	return ::mpg123_tellframe(mMPG);
+}
+
+void
+MP3Decoder::setCurrentFrame(off_t inFrame)
+{
+	(void) ::mpg123_seek_frame(mMPG, inFrame, SEEK_SET);
+}
+
+
 bool
 MP3Decoder::read(void* inBuffer, size_t inBufferSize, size_t& outBytesDecoded)
 {
 	int err = ::mpg123_read(mMPG, reinterpret_cast<unsigned char*> (inBuffer), inBufferSize, &outBytesDecoded);
+	if (err == MPG123_DONE)
+	{
+		mDone = true;
+	}
+	
 	return err == MPG123_OK;
 }
 
 size_t
-MP3Decoder::recommendedBufferSize() const
+MP3Decoder::minimumBufferSize() const
 {
 	return ::mpg123_outblock(mMPG);
 }

@@ -8,15 +8,10 @@
 
 #import "AppDelegate.h"
 
-#import <string>
-#import "Radio.h"
 
 
 
 @interface AppDelegate()
-{
-	Radio*				mRadio;
-}
 
 @end
 
@@ -27,16 +22,6 @@
 - (void)
 applicationDidFinishLaunching: (NSNotification*) inNotification
 {
-	NSURL* dir = [[NSFileManager defaultManager] URLsForDirectory: NSApplicationSupportDirectory inDomains: NSUserDomainMask].lastObject;
-	dir = [dir URLByAppendingPathComponent: @"WoodenRadio"];
-	if (dir != nil)
-	{
-		mRadio = new Radio();
-		
-		const char* path = dir.path.UTF8String;
-		std::string p(path, std::strlen(path));
-		mRadio->start(p);
-	}
 }
 
 @end

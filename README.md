@@ -29,3 +29,8 @@ Linux
 Use your favorite package manager or download libao and libmpg123. cd to the podtique directory and make:
 
 	$ make
+
+Cross-Compiling for BBB
+-----------------------
+
+It’s not yet possible to cross-compile for BBB. I’m hosting the build on Ubuntu 14.04. I need to figure out how to get ARM-targeted versions of libao and libmpg123. ALSA will be needed on the target as well. The Makefile needs to be enhanced to support cross-compiling or host compiling.
