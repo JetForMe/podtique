@@ -61,5 +61,5 @@ clean:
 	rm -f *.o *.d *.out *.hex $(SRC)/*.o $(SRC)/*.d
 
 xfer:
-	rsync -e ssh -avz --exclude="*.d" --exclude="*.o" Makefile SPSDisplayApp.* BBBDisplayApp.* TristarMPPT.* ChargeController.* SDL spa.* fonts beaglebone.local:app
+	rsync -e ssh -avz --exclude="*.d" --exclude="*.o" Makefile src debian@arm.local:radio
 	
