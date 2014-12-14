@@ -73,6 +73,7 @@ Radio::Radio(const std::string& inDataDirectory)
 	
 	mSpectrum = new Spectrum(mDataDirectory);
 	mOutputDevice = new AudioDevice();
+	mOutputDevice->setFormat(1, 44100);
 }
 
 void
@@ -127,15 +128,17 @@ Radio::entry()
 		mSpectrum->setFrequency(frequency());
 		mSpectrum->updateTuning();
 		
+#if 0
 		if (mSpectrum->stationTuned())
 		{
 			mOutputDevice->setFormat(mSpectrum->numChannels(), mSpectrum->rate());
 		}
 		else
 		{
-			mOutputDevice->setFormat(2, 44100);
+			mOutputDevice->setFormat(1, 44100);
 		}
-		
+#endif
+
 		//	Reallocate buffer if minimum size changes…
 		
 		size_t bufSize = mSpectrum->minimumBufferSize();
@@ -196,7 +199,7 @@ Radio::processAudioAndOutput(void* ioBuffer, size_t inBufSize)
 			mPNBufIdx = 0;
 		}
 		
-		p[i] = p[i] * f + noise * (1.0 - f) * 0.05;
+		p[i] = p[i] * f + noise * (1.0 - f) * 0.2;
 	}
 	
 	//	Output the result…
