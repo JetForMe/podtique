@@ -35,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C6B2152C1A3C3B2D0043E3FD /* ExampleSpectrum.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ExampleSpectrum.json; sourceTree = "<group>"; };
 		C6B5DFA21A31A89A00A3A9ED /* Podtique.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Podtique.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6B5DFA61A31A89A00A3A9ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C6B5DFA71A31A89A00A3A9ED /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -98,6 +99,7 @@
 				C6B5DFF11A35B49700A3A9ED /* libsndfile.1.dylib */,
 				C6B5DFE51A31AF1500A3A9ED /* Makefile */,
 				C6B5DFE21A31AEB900A3A9ED /* README.md */,
+				C6B2152C1A3C3B2D0043E3FD /* ExampleSpectrum.json */,
 				C6B5DFE61A31AF1F00A3A9ED /* LICENSE */,
 				C6B5DFC81A31A8D500A3A9ED /* src */,
 				C6B5DFA41A31A89A00A3A9ED /* Podtique */,

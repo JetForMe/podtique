@@ -28,8 +28,8 @@ viewDidLoad
 {
 	[super viewDidLoad];
 
-	NSURL* dir = [[NSFileManager defaultManager] URLsForDirectory: NSApplicationSupportDirectory inDomains: NSUserDomainMask].lastObject;
-	dir = [dir URLByAppendingPathComponent: @"WoodenRadio"];
+	NSURL* dir = [[NSFileManager defaultManager] URLsForDirectory: NSDesktopDirectory inDomains: NSUserDomainMask].lastObject;
+	dir = [dir URLByAppendingPathComponent: @"TAHReencoded"];
 	if (dir != nil)
 	{
 		const char* path = dir.path.UTF8String;

@@ -15,10 +15,13 @@
 //
 
 #include <cmath>
+#include <fstream>
 
 //
 //	Project Includes
 //
+
+#include "picojson.h"
 
 #include "MP3Decoder.h"
 #include "RadioConstants.h"
@@ -82,22 +85,135 @@ Spectrum::Spectrum(const std::string& inDataDirectory)
 {
 	//	For now, hard-code some stations and playlists…
 	
+#if 0
 	Station s1(0.3);
-	s1.addTrack(mDataDirectory + "/TAH56_Intercepted_Transmission.mp3");
+	s1.addTrack(mDataDirectory + "/TAH__2__Sparks_Nevada--__Inside_Out_in_Outer_Space_.mp3");
 	s1.addTrack(mDataDirectory + "/09_WorkJuice_anthem.mp3");
-	s1.addTrack(mDataDirectory + "/01_A_Word_on_Behalf_of_Ourselves.mp3");
-	s1.addTrack(mDataDirectory + "/02_Thomas_Jefferson_for_Patriot_Brand_Cigarettes.mp3");
+	s1.addTrack(mDataDirectory + "/TAH__6_Sparks_Nevada_Marshal_on_Mars-_The_Agony_of_the_Feet_.mp3");
+	s1.addTrack(mDataDirectory + "/43_Sparks_Nevada_Marshal_on_Mars_Companeros.mp3");
 	addStation(s1);
 	
 	Station s2(0.6);
-	s2.addTrack(mDataDirectory + "/A_word_from_Patriot_Brand_Cigarettes.mp3");
-	s2.addTrack(mDataDirectory + "/TransitionC.mp3");
-	s2.addTrack(mDataDirectory + "/Patriot_Ad_March_11.mp3");
+	s2.addTrack(mDataDirectory + "/TAH__1__Beyond_Belief___Hell_Is_the_Loneliest_Number_.mp3");
+	s2.addTrack(mDataDirectory + "/Beyond_Belief_-_Rosemarys_Baby_Shower.mp3");
+	s2.addTrack(mDataDirectory + "/Beyond_Belief_-_Chitty_Chitty_Bang_Bang_Youre_Dead.mp3");
 	addStation(s2);
+#else
+
+	//	Load the spectrum.json file…
 	
+	std::string sf = mDataDirectory + "/spectrum.json";
+	std::ifstream is(sf);
+	
+	picojson::value json;
+	std::string err = picojson::parse(json, is);
+	if (!err.empty())
+	{
+		LogDebug("Failed to parse spectrum.json: %s", err.c_str());
+	}
+	
+	parseSpectrum(json);
+#endif
+
 	//	Create the MP3 decoder…
 	
 	mCurrentTrack = new MP3Decoder();
+}
+
+bool
+getFromJSONIter(picojson::value::array::const_iterator& inIter, const std::string& inKey, std::string& outVal)
+{
+	if (!inIter->is<picojson::value::object>())
+	{
+		return false;
+	}
+	
+	picojson::value::object obj = inIter->get<picojson::value::object>();
+	const picojson::value& v = obj[inKey];
+	if (!v.is<std::string>())
+	{
+		return false;
+	}
+	outVal = v.get<std::string>();
+	
+	return true;
+}
+
+bool
+getFromJSONIter(picojson::value::array::const_iterator& inIter, const std::string& inKey, double& outVal)
+{
+	if (!inIter->is<picojson::value::object>())
+	{
+		return false;
+	}
+	
+	picojson::value::object obj = inIter->get<picojson::value::object>();
+	const picojson::value& v = obj[inKey];
+	if (!v.is<double>())
+	{
+		return false;
+	}
+	outVal = v.get<double>();
+	
+	return true;
+}
+
+bool
+getFromJSONIter(picojson::value::array::const_iterator& inIter, const std::string& inKey, picojson::value::array& outVal)
+{
+	if (!inIter->is<picojson::value::object>())
+	{
+		return false;
+	}
+	
+	picojson::value::object obj = inIter->get<picojson::value::object>();
+	const picojson::value& v = obj[inKey];
+	if (!v.is<picojson::value::array>())
+	{
+		return false;
+	}
+	outVal = v.get<picojson::value::array>();
+	
+	return true;
+}
+
+bool
+Spectrum::parseSpectrum(const picojson::value& inJSON)
+{
+	//	Top level is an array…
+	
+	if (!inJSON.is<picojson::array>())
+	{
+		return false;
+	}
+	
+	const picojson::value::array& stations = inJSON.get<picojson::array>();
+	for (picojson::value::array::const_iterator iter = stations.begin(); iter != stations.end(); ++iter)
+	{
+		std::string desc;
+		if (!getFromJSONIter(iter, "desc", desc)) { continue; }
+		
+		double freq;
+		if (!getFromJSONIter(iter, "freq", freq)) { continue; }
+		
+		picojson::value::array playlist;
+		if (!getFromJSONIter(iter, "playlist", playlist)) { continue; }
+		
+		LogDebug("Station: %s, freq: %f, tracks: %lu", desc.c_str(), freq, playlist.size());
+		
+		Station station(freq);
+		for(size_t idx = 0; idx < playlist.size(); ++idx)
+		{
+			const picojson::value& v = playlist[idx];
+			if (!v.is<std::string>()) { continue; }
+			std::string track = v.get<std::string>();
+			LogDebug("Track %02lu: %s", idx, track.c_str());
+			station.addTrack(mDataDirectory + "/" + track);
+		}
+		
+		addStation(station);
+	}
+	return true;
 }
 
 /**
@@ -188,15 +304,25 @@ Spectrum::updateTuning()
 	}
 }
 
+/**
+	Opens the current station’s current track.
+*/
+
 bool
 Spectrum::openStationTrack()
 {
+	//	TODO: If we fail to open the current track, try
+	//			the next. Keep trying until we wrap back
+	//			to the current track index, in which case we
+	//			return false.
+	
 	const Station& station = mStations[mCurrentStationIndex];
 	const std::string& path = station.trackPath();
 	bool success = mCurrentTrack->open(path);
 	if (!success)
 	{
 		LogDebug("Error opening track '%s'", path.c_str());
+		return false;
 	}
 	else
 	{
@@ -214,7 +340,7 @@ Spectrum::openStationTrack()
 	//	TODO: Need to re-configure everything when this changes.
 	
 	if (mCurrentTrack->encoding() != MPG123_ENC_SIGNED_16
-		|| mCurrentTrack->numChannels() != 2
+		|| (mCurrentTrack->numChannels() != 2 && mCurrentTrack->numChannels() != 1)
 		|| mCurrentTrack->rate() != 44100)
 	{
 		LogDebug("Unexpected encoding (%d), rate (%ld), or num channels (%d)",

@@ -17,6 +17,14 @@
 #include <vector>
 
 
+//
+//	Project Imports
+//
+
+#import "picojson.h"
+
+
+
 class MP3Decoder;
 
 
@@ -94,6 +102,9 @@ public:
 	bool							getStationAudioData(void* inBuffer, size_t inBufferSize, size_t& outBytesDecoded);
 	
 	void							addStation(const Station& inStation);
+	
+protected:
+	bool							parseSpectrum(const picojson::value& inJSON);
 	
 private:
 	std::string						mDataDirectory;

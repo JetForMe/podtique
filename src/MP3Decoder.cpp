@@ -80,6 +80,11 @@ MP3Decoder::releaseDecoder()
 bool
 MP3Decoder::open(const std::string& inPath)
 {
+	if (inPath.empty())
+	{
+		return false;
+	}
+	
 	//	Ensure there’s an underlying decoder…
 	
 	if (!createDecoder())
