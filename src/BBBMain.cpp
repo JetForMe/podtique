@@ -151,7 +151,7 @@ main(int inArgCount, const char** inArgs)
 		float v = r0 * (std::exp(r1 * vRaw) - 1.0);
 		if (v > 1.0) v = 1.0; else if (v < 0.0) v = 0.0;
 		mRadio->setVolume(v);
-		LogDebug("Set vol: %.3f %.3f", vRaw, v);
+		//LogDebug("Set vol: %.3f %.3f", vRaw, v);
 		
 		std::chrono::milliseconds dur(100);
 		std::this_thread::sleep_for(dur);
