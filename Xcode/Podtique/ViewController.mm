@@ -17,6 +17,7 @@
 }
 
 @property (nonatomic, assign)	float				frequency;
+@property (nonatomic, assign)	float				volume;
 
 @end
 
@@ -38,6 +39,8 @@ viewDidLoad
 		
 		mRadio->start();
 	}
+	
+	self.volume = 0.7;
 }
 
 - (void)
@@ -53,5 +56,19 @@ setFrequency: (float) inVal
 }
 
 @synthesize frequency				=	mFrequency;
+
+- (void)
+setVolume: (float) inVal
+{
+	if (inVal == mVolume)
+	{
+		return;
+	}
+	
+	mVolume = inVal;
+	mRadio->setVolume(self.volume);
+}
+
+@synthesize volume				=	mVolume;
 
 @end

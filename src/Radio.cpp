@@ -199,7 +199,7 @@ Radio::processAudioAndOutput(void* ioBuffer, size_t inBufSize)
 			mPNBufIdx = 0;
 		}
 		
-		p[i] = p[i] * f + noise * (1.0 - f) * 0.2;
+		p[i] = mVolume * (p[i] * f + noise * (1.0 - f) * 0.2);
 	}
 	
 	//	Output the result…

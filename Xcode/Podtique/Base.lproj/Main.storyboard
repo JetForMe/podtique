@@ -681,8 +681,8 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fFM-86-eFU">
-                                <rect key="frame" x="97" y="233" width="24" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0.0" id="RZQ-10-Aq4">
+                                <rect key="frame" x="97" y="233" width="39" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0.000" id="RZQ-10-Aq4">
                                     <numberFormatter key="formatter" formatterBehavior="custom10_4" positiveFormat="0.000" numberStyle="decimal" usesGroupingSeparator="NO" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="3" maximumFractionDigits="3" id="TLA-t2-G1o"/>
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -693,21 +693,55 @@
                                 </connections>
                             </textField>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="U2z-U4-F9j">
-                                <rect key="frame" x="18" y="200" width="444" height="25"/>
+                                <rect key="frame" x="18" y="199" width="444" height="26"/>
                                 <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="1" doubleValue="0.5" tickMarkPosition="above" numberOfTickMarks="9" sliderType="linear" id="Ila-TI-AGI"/>
                                 <connections>
                                     <binding destination="XfG-lQ-9wD" name="value" keyPath="self.frequency" id="uod-T3-5js"/>
                                 </connections>
                             </slider>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xB6-Ki-BgE">
+                                <rect key="frame" x="18" y="169" width="54" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Volume:" id="ams-IP-T37">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uyg-36-UGy">
+                                <rect key="frame" x="18" y="135" width="444" height="26"/>
+                                <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="1" doubleValue="0.5" tickMarkPosition="above" numberOfTickMarks="9" sliderType="linear" id="19Y-Y7-URL"/>
+                                <connections>
+                                    <binding destination="XfG-lQ-9wD" name="value" keyPath="self.volume" id="2Ge-Xk-FRm"/>
+                                </connections>
+                            </slider>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ojr-kH-klf">
+                                <rect key="frame" x="97" y="169" width="39" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0.000" id="DFc-YF-RrO">
+                                    <numberFormatter key="formatter" formatterBehavior="custom10_4" positiveFormat="0.000" numberStyle="decimal" usesGroupingSeparator="NO" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="3" maximumFractionDigits="3" id="72o-Ns-1to"/>
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="XfG-lQ-9wD" name="value" keyPath="self.volume" id="BX6-WV-abS"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="ulV-Tz-zMa" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="6J8-ki-UpS"/>
+                            <constraint firstAttribute="trailing" secondItem="uyg-36-UGy" secondAttribute="trailing" constant="20" id="7rd-uw-DX8"/>
                             <constraint firstItem="U2z-U4-F9j" firstAttribute="top" secondItem="ulV-Tz-zMa" secondAttribute="bottom" constant="8" id="9bE-IU-1Ho"/>
+                            <constraint firstItem="ulV-Tz-zMa" firstAttribute="leading" secondItem="xB6-Ki-BgE" secondAttribute="leading" id="HNf-0I-WKm"/>
                             <constraint firstItem="U2z-U4-F9j" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="OeH-8n-Sci"/>
                             <constraint firstItem="ulV-Tz-zMa" firstAttribute="baseline" secondItem="fFM-86-eFU" secondAttribute="baseline" id="POa-2B-QX0"/>
+                            <constraint firstItem="ojr-kH-klf" firstAttribute="leading" secondItem="fFM-86-eFU" secondAttribute="leading" id="U9g-bL-OhY"/>
+                            <constraint firstItem="uyg-36-UGy" firstAttribute="leading" secondItem="xB6-Ki-BgE" secondAttribute="leading" id="UpV-Pf-0Fy"/>
                             <constraint firstAttribute="trailing" secondItem="U2z-U4-F9j" secondAttribute="trailing" constant="20" id="iqa-0M-1nj"/>
+                            <constraint firstItem="xB6-Ki-BgE" firstAttribute="top" secondItem="U2z-U4-F9j" secondAttribute="bottom" constant="15" id="jmR-kh-BZD"/>
+                            <constraint firstItem="uyg-36-UGy" firstAttribute="top" secondItem="xB6-Ki-BgE" secondAttribute="bottom" constant="8" id="kvv-Hr-wcL"/>
                             <constraint firstItem="fFM-86-eFU" firstAttribute="leading" secondItem="ulV-Tz-zMa" secondAttribute="trailing" constant="10" id="sDN-MB-GSu"/>
                             <constraint firstItem="ulV-Tz-zMa" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="sfL-z4-Ulu"/>
+                            <constraint firstItem="ojr-kH-klf" firstAttribute="baseline" secondItem="xB6-Ki-BgE" secondAttribute="baseline" id="wc3-RI-ceg"/>
                         </constraints>
                     </view>
                 </viewController>

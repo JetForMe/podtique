@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C618FFAB1A43989E00A66EE6 /* BandPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C618FFA91A43989E00A66EE6 /* BandPassFilter.cpp */; };
 		C6B5DFA91A31A89A00A3A9ED /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6B5DFA81A31A89A00A3A9ED /* AppDelegate.mm */; };
 		C6B5DFAB1A31A89A00A3A9ED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B5DFAA1A31A89A00A3A9ED /* main.m */; };
 		C6B5DFAE1A31A89A00A3A9ED /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6B5DFAD1A31A89A00A3A9ED /* ViewController.mm */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C618FFA91A43989E00A66EE6 /* BandPassFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BandPassFilter.cpp; sourceTree = "<group>"; };
+		C618FFAA1A43989E00A66EE6 /* BandPassFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BandPassFilter.h; sourceTree = "<group>"; };
 		C6B2152C1A3C3B2D0043E3FD /* ExampleSpectrum.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ExampleSpectrum.json; sourceTree = "<group>"; };
 		C6B5DFA21A31A89A00A3A9ED /* Podtique.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Podtique.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6B5DFA61A31A89A00A3A9ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -177,6 +180,8 @@
 				C6B5DFEF1A35AD8200A3A9ED /* SndFile.h */,
 				C6B5DFEE1A35AD8200A3A9ED /* SndFile.cpp */,
 				C6B5DFC91A31A8D500A3A9ED /* BBBMain.cpp */,
+				C618FFA91A43989E00A66EE6 /* BandPassFilter.cpp */,
+				C618FFAA1A43989E00A66EE6 /* BandPassFilter.h */,
 			);
 			name = src;
 			path = ../src;
@@ -293,6 +298,7 @@
 				C6B5DFAE1A31A89A00A3A9ED /* ViewController.mm in Sources */,
 				C6B5DFE91A33B0EC00A3A9ED /* Spectrum.cpp in Sources */,
 				C6B5DFEC1A34E9AF00A3A9ED /* AudioDevice.cpp in Sources */,
+				C618FFAB1A43989E00A66EE6 /* BandPassFilter.cpp in Sources */,
 				C6B5DFD91A31A8D500A3A9ED /* MP3Decoder.cpp in Sources */,
 				C6B5DFAB1A31A89A00A3A9ED /* main.m in Sources */,
 				C6B5DFA91A31A89A00A3A9ED /* AppDelegate.mm in Sources */,
