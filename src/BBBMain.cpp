@@ -25,6 +25,7 @@
 //	Project Includes
 //
 
+#include "GPIO.h"
 #include "Radio.h"
 #include "RadioDebug.h"
 
@@ -82,24 +83,6 @@ configGPIOs()
 int
 main(int inArgCount, const char** inArgs)
 {
-	//	Test pruio…
-	
-#if 0
-	pruIo* io = ::pruio_new(PRUIO_DEF_ACTIVE, 0x98, 0, 1);
-	if (io == NULL)
-	{
-		LogDebug("pruio_new() returned NULL");
-		return 1;
-	}
-	 
-	char* pruErr = ::pruio_config(io, 1, 0x1FE, 0, 4);
-	if (pruErr != NULL)
-	{
-		LogDebug("Error in pruio_config: %s", pruErr);
-		return 1;
-	}
-#endif
-	
 	//	Validate arguments…
 	
 	if (inArgCount < 2)
@@ -107,6 +90,11 @@ main(int inArgCount, const char** inArgs)
 		LogDebug("usage: %s <path to data directory>\n", inArgs[0]);
 		return -1;
 	}
+	
+	//	Create the GPIOs…
+	
+	GPIO	onOff(66);
+	onOff.setInput();
 	
 	//	Create the radio…
 	
@@ -117,8 +105,20 @@ main(int inArgCount, const char** inArgs)
 	//	Loop over reading the input state,
 	//	and updating the radio…
 	
+	int count = 0;
 	while (true)
 	{
+		//	Once every 10 times through the loop,
+		//	check the GPIOs…
+		
+		if (count-- <= 0)
+		{
+			count = 10;
+			
+			bool on = onOff.get();
+			mRadio->setOn(on);
+		}
+		
 		float f = readADC(0);
 		mRadio->setFrequency(f);
 		//LogDebug("Set frequency to: %.3f", f);

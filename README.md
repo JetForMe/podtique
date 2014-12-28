@@ -47,10 +47,10 @@ Most of the I/O is done via sysfs (gross, but speed isn't critical).
 
 The digital inputs all have the internal pull-up enabled. The connected switches pull them down.
 
-* GPIO2\_2 (P8_07 / 36) is on/off input.
-* GPIO2\_3 (P8_08 / 37) is mode 1.
-* GPIO2\_5 (P8_09 / 39) is mode 2.
-* GPIO2\_4 (P8_10 / 38) is mode 3.
+* GPIO2\_2 / 66 (P8_07 / 36) is on/off input.
+* GPIO2\_3 / 67 (P8_08 / 37) is mode 1.
+* GPIO2\_5 / 69 (P8_09 / 39) is mode 2.
+* GPIO2\_4 / 68 (P8_10 / 38) is mode 3.
 
 There is an output used to control the amplifier’s standby mode:
 
