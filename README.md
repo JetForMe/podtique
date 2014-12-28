@@ -60,31 +60,51 @@ The LEDs are AdaFruit NeoPixel (24-LED ring), and driving those requires the use
 
 * GPIO1\_13 (P8_11 / 13) is used by the PRU to communicate with the NeoPixel ring.
 
- 
+Note that the sysfs nodes for GPIO must be accessed by root. It might be possible to set up udev rules to set the group and access modes such that a non-root user can access the pins, but I couldn't figure it out. Something like KERNEL=="gpio*", GROUP="gpio", MODE="0660", but I didn't try it.
+
+Linux Audio Configuration
+-------------------------
+
+Make sure the user running the program has audio privileges (generally means adding that user to the audio group).
+
+The following configuration file works for the Audio-Technica USB audio dongle I used.
+
+	$ cat /etc/asound.conf 
+	pcm.!default {
+	  type plug
+	  slave {
+	    pcm "hw:1,0"
+	  }
+	}
+	ctl.!default {
+	  type hw
+	  card 1
+	}
+
 Radio Notes
 ===========
 
-Turn off LEDs on everything.
-Add dial LEDs as needed.
-Add amp control GPIO to avoid power-on pop.
-Some light can be seen through speaker grill. Add opaque cover behind.
-Mounting holes in bottom plate? Maybe just wood screws up from bottom into it.
+* Turn off LEDs on everything.
+* Add dial LEDs as needed.
+* Add amp control GPIO to avoid power-on pop.
+* Some light can be seen through speaker grill. Add opaque cover behind.
+* Mounting holes in bottom plate? Maybe just wood screws up from bottom into it.
 
-Mid-pass filter effect?
 
 Done
 ----
-Make back plate rectangular and nearly full height. Mount BBB and amp to it. Holes for zip tie for USB audio adapter?
-Add mounting holes for 5 VDC regulator (eventually part of BBB cape).
-Cut opening to allow long potentiometers to be fit into front plate.
-Move tuning potentiometer to middle wall.
-Need place for batteries!
-Move front plate back a few mm so slots become holes.
-Cut pulleys out of wood. Make middle wall larger to allow for stops? Means needs good coupling with tuning axle. Instead, use all 10 turns of tuning axle, let potentiometer do the stopping, and make the ratio be 20:1 (half turn of dial for 10 turns of pot).
-Make sure top of back isn't so tall as to prevent assembly.
+* Make back plate rectangular and nearly full height. Mount BBB and amp to it. * Holes for zip tie for USB audio adapter?
+* Add mounting holes for 5 VDC regulator (eventually part of BBB cape).
+* Cut opening to allow long potentiometers to be fit into front plate.
+* Move tuning potentiometer to middle wall.
+* Need place for batteries!
+* Move front plate back a few mm so slots become holes.
+* Cut pulleys out of wood. Make middle wall larger to allow for stops? Means needs good coupling with tuning axle. Instead, use all 10 turns of tuning axle, let potentiometer do the stopping, and make the ratio be 20:1 (half turn of dial for 10 turns of pot).
+* Make sure top of back isn't so tall as to prevent assembly.
 
 
 Later Version
-=============
-Make tube amplifier to show tubes in back?
-Investigate sleep modes for BBB.
+-------------
+* Make tube amplifier to show tubes in back?
+* Investigate sleep modes for BBB.
+* Mid-pass filter effect?

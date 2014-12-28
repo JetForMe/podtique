@@ -180,6 +180,12 @@
 		C6B5DFC81A31A8D500A3A9ED /* src */ = {
 			isa = PBXGroup;
 			children = (
+				C6B5DFEB1A34E9AF00A3A9ED /* AudioDevice.h */,
+				C6B5DFEA1A34E9AF00A3A9ED /* AudioDevice.cpp */,
+				C618FFAA1A43989E00A66EE6 /* BandPassFilter.h */,
+				C618FFA91A43989E00A66EE6 /* BandPassFilter.cpp */,
+				C6B5DFCD1A31A8D500A3A9ED /* MP3Decoder.h */,
+				C6B5DFCC1A31A8D500A3A9ED /* MP3Decoder.cpp */,
 				C6B5DFCE1A31A8D500A3A9ED /* picojson.h */,
 				C6B5DFD31A31A8D500A3A9ED /* RadioDebug.h */,
 				C6B5DFED1A3599FE00A3A9ED /* RadioConstants.h */,
@@ -187,18 +193,12 @@
 				C6B5DFCF1A31A8D500A3A9ED /* Radio.cpp */,
 				C6B5DFE81A33B0EC00A3A9ED /* Spectrum.h */,
 				C6B5DFE71A33B0EC00A3A9ED /* Spectrum.cpp */,
-				C6B5DFCD1A31A8D500A3A9ED /* MP3Decoder.h */,
-				C6B5DFCC1A31A8D500A3A9ED /* MP3Decoder.cpp */,
-				C6B5DFEB1A34E9AF00A3A9ED /* AudioDevice.h */,
-				C6B5DFEA1A34E9AF00A3A9ED /* AudioDevice.cpp */,
-				C6B5DFD51A31A8D500A3A9ED /* SoundPlayer.h */,
-				C6B5DFD41A31A8D500A3A9ED /* SoundPlayer.cpp */,
-				C6B5DFEF1A35AD8200A3A9ED /* SndFile.h */,
-				C6B5DFEE1A35AD8200A3A9ED /* SndFile.cpp */,
-				C618FFAA1A43989E00A66EE6 /* BandPassFilter.h */,
-				C618FFA91A43989E00A66EE6 /* BandPassFilter.cpp */,
 				C6200C7C1A4FF99400FB48AD /* Semaphore.h */,
 				C6200C7B1A4FF99400FB48AD /* Semaphore.cpp */,
+				C6B5DFEF1A35AD8200A3A9ED /* SndFile.h */,
+				C6B5DFEE1A35AD8200A3A9ED /* SndFile.cpp */,
+				C6B5DFD51A31A8D500A3A9ED /* SoundPlayer.h */,
+				C6B5DFD41A31A8D500A3A9ED /* SoundPlayer.cpp */,
 				C6200C7E1A50161600FB48AD /* BBB */,
 			);
 			name = src;
