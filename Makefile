@@ -64,5 +64,7 @@ clean:
 xfer:
 	rsync -e ssh -avzu --exclude="*.d" --exclude="*.o" Makefile src rmann@arm.local:radio
 	
-dtbo:
-	dtc -O dtb -o Podtique-00A0.dtbo -b 0 -@ podtique.dts
+dtbo: podtique.dts
+	dtc -O dtb -o podtique-00A0.dtbo -b 0 -@ podtique.dts
+	sudo cp podtique-00A0.dtbo /lib/firmware
+	

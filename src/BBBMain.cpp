@@ -93,8 +93,11 @@ main(int inArgCount, const char** inArgs)
 	
 	//	Create the GPIOs…
 	
-	GPIO	offOn(66);		//	"on" when low
+	GPIO	offOn(66);				//	"on" when low
 	offOn.setInput();
+	
+	GPIO	audioEnable(27);		//	Audio is enabled when GPIO is high (FET pulls STBY line low)
+	audioEnable.setOutput();
 	
 	//	Create the radio…
 	
@@ -108,17 +111,21 @@ main(int inArgCount, const char** inArgs)
 	int count = 0;
 	while (true)
 	{
-		//	Once every 10 times through the loop,
+		//	Every few times through the loop,
 		//	check the GPIOs…
 		
 		if (count-- <= 0)
 		{
-			count = 10;
+			count = 5;
 			
 			//	Check to see if the radio is on. It is on when the GPIO is low…
 			
 			bool off = offOn.get();
 			mRadio->setOn(!off);
+			
+			//	Enable the audio with the radio…
+			
+			audioEnable.set(!off);
 		}
 		
 		float f = readADC(0);

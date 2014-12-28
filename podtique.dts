@@ -1,0 +1,57 @@
+/*  
+* Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Purpose License Version 2 as
+* published by the Free Software Foundation
+*
+* Original from: github.com/jadonk/validation-scripts/blob/master/test-capemgr/ 
+*
+* Modified by Derek Molloy for the example on www.derekmolloy.ie
+* that maps GPIO pins for the example
+*/
+
+/dts-v1/;
+/plugin/;
+
+/{
+	compatible = "ti,beaglebone-black";
+	part-number = "Podtique";
+	version = "00A0";
+	
+	fragment@0 {
+		target = <&am33xx_pinmux>;
+		
+		__overlay__ {
+			podtique: Podtique {
+				pinctrl-single,pins = <
+				
+					0x090 0x37		/* P8_07 36	GPIO2_02 66	INPUT  MODE7 pullup		On/Off switch		*/
+					0x094 0x37		/* P8_08 37	GPIO2_03 67	INPUT  MODE7 pullup		Mode 1 selection	*/
+					0x09c 0x37		/* P8_09 39	GPIO2_05 69	INPUT  MODE7 pullup		Mode 2 selection	*/
+					0x098 0x37		/* P8_10 38	GPIO2_04 68	INPUT  MODE7 pullup		Mode 3 selection	*/
+					0x024 0x37		/* P8_13  9	GPIO0_23 	INPUT  MODE7 pullup		Future: left momentary	*/
+					0x028 0x37		/* P8_14 10	GPIO0_26	INPUT  MODE7 pullup		Future: right momentary	*/
+					
+					0x02c 0x2f		/* P8_17 11	GPIO0_27 27	OUTPUT MODE7 none		Amplifier standby	*/
+					
+					/* OUTPUT	GPIO(mode7) 0x07 pulldown, 0x17 pullup, 0x?f no pullup/down */
+					/* INPUT	GPIO(mode7) 0x27 pulldown, 0x37 pullup, 0x?f no pullup/down */
+				
+				>;
+			};
+		};
+	};
+	
+	fragment@1 {
+		target = <&ocp>;
+		__overlay__ {
+			test_helper: helper {
+				compatible = "bone-pinmux-helper";
+				pinctrl-names = "default";
+				pinctrl-0 = <&podtique>;
+				status = "okay";
+			};
+		};
+	};
+};
