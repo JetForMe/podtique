@@ -14,6 +14,7 @@
 
 #include <fstream>
 #include <sstream>
+#include <thread>
 
 
 //
@@ -34,6 +35,7 @@ GPIO::GPIO(uint16_t inNumber)
 	std::stringstream ss;
 	ss << sGPIOPath << "gpio" << mNumber << "/";
 	mPath = ss.str();
+	exportGPIO();
 }
 
 
@@ -41,6 +43,11 @@ void
 GPIO::exportGPIO()
 {
 	write(sGPIOPath, "export", mNumber);
+	
+	//	Give sysfs a chance to set up the file. Gross…
+	
+	std::chrono::milliseconds dur(250);
+	std::this_thread::sleep_for(dur);
 }
 
 void
@@ -83,7 +90,7 @@ GPIO::write(const std::string& inDir, const std::string& inFile, const std::stri
 	fs.open(path.c_str());
 	if (!fs.is_open())
 	{
-		LogDebug("Unable to open GPIO %u for writing", mNumber);
+		LogDebug("Unable to open GPIO %u (%s) for writing: %s", mNumber, path.c_str(), ::strerror(errno));
 		return;
 	}
 	
@@ -107,12 +114,12 @@ GPIO::read(const std::string& inDir, const std::string& inFile) const
 	fs.open(path.c_str());
 	if (!fs.is_open())
 	{
-		LogDebug("Unable to open GPIO %u for reading", mNumber);
+		LogDebug("Unable to open GPIO %u (%s) for reading: %s", mNumber, path.c_str(), ::strerror(errno));
 		return "";
 	}
 	
 	std::string input;
-	getline(fs, input);
+	std::getline(fs, input);
 	fs.close();
 	return input;
 }

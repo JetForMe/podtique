@@ -200,7 +200,7 @@ Spectrum::parseSpectrum(const picojson::value& inJSON)
 		picojson::value::array playlist;
 		if (!getFromJSONIter(iter, "playlist", playlist)) { continue; }
 		
-		LogDebug("Station: %s, freq: %f, tracks: %ju", desc.c_str(), freq, (uintmax_t) playlist.size());
+		//LogDebug("Station: %s, freq: %f, tracks: %ju", desc.c_str(), freq, (uintmax_t) playlist.size());
 		
 		Station station(freq, desc);
 		for(size_t idx = 0; idx < playlist.size(); ++idx)
@@ -208,7 +208,7 @@ Spectrum::parseSpectrum(const picojson::value& inJSON)
 			const picojson::value& v = playlist[idx];
 			if (!v.is<std::string>()) { continue; }
 			std::string track = v.get<std::string>();
-			LogDebug("Track %02ju: %s", (uintmax_t) idx, track.c_str());
+			//LogDebug("Track %02ju: %s", (uintmax_t) idx, track.c_str());
 			station.addTrack(mDataDirectory + "/" + track);
 		}
 		

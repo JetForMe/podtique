@@ -160,7 +160,9 @@ Radio::entry()
 		
 		if (!mOn)
 		{
+			LogDebug("Radio off");
 			mOnOff.wait();
+			LogDebug("Radio on");
 		}
 		
 		//	Update the tuning at the start of each pass through the
