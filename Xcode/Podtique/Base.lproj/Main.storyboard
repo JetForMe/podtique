@@ -726,6 +726,16 @@
                                     <binding destination="XfG-lQ-9wD" name="value" keyPath="self.volume" id="BX6-WV-abS"/>
                                 </connections>
                             </textField>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="Y2C-mF-SsC">
+                                <rect key="frame" x="18" y="98" width="80" height="18"/>
+                                <buttonCell key="cell" type="check" title="Radio On" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="aX5-WF-Qr7">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="XfG-lQ-9wD" name="value" keyPath="self.radioOn" id="6F4-47-cMQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="ulV-Tz-zMa" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="6J8-ki-UpS"/>
@@ -736,10 +746,12 @@
                             <constraint firstItem="ulV-Tz-zMa" firstAttribute="baseline" secondItem="fFM-86-eFU" secondAttribute="baseline" id="POa-2B-QX0"/>
                             <constraint firstItem="ojr-kH-klf" firstAttribute="leading" secondItem="fFM-86-eFU" secondAttribute="leading" id="U9g-bL-OhY"/>
                             <constraint firstItem="uyg-36-UGy" firstAttribute="leading" secondItem="xB6-Ki-BgE" secondAttribute="leading" id="UpV-Pf-0Fy"/>
+                            <constraint firstItem="Y2C-mF-SsC" firstAttribute="top" secondItem="uyg-36-UGy" secondAttribute="bottom" constant="23" id="cyG-T1-BOO"/>
                             <constraint firstAttribute="trailing" secondItem="U2z-U4-F9j" secondAttribute="trailing" constant="20" id="iqa-0M-1nj"/>
                             <constraint firstItem="xB6-Ki-BgE" firstAttribute="top" secondItem="U2z-U4-F9j" secondAttribute="bottom" constant="15" id="jmR-kh-BZD"/>
                             <constraint firstItem="uyg-36-UGy" firstAttribute="top" secondItem="xB6-Ki-BgE" secondAttribute="bottom" constant="8" id="kvv-Hr-wcL"/>
                             <constraint firstItem="fFM-86-eFU" firstAttribute="leading" secondItem="ulV-Tz-zMa" secondAttribute="trailing" constant="10" id="sDN-MB-GSu"/>
+                            <constraint firstItem="uyg-36-UGy" firstAttribute="leading" secondItem="Y2C-mF-SsC" secondAttribute="leading" id="seF-KS-Cdz"/>
                             <constraint firstItem="ulV-Tz-zMa" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="sfL-z4-Ulu"/>
                             <constraint firstItem="ojr-kH-klf" firstAttribute="baseline" secondItem="xB6-Ki-BgE" secondAttribute="baseline" id="wc3-RI-ceg"/>
                         </constraints>

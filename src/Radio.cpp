@@ -48,12 +48,17 @@
 const size_t	kPinkNoiseNumFrames				=	64 * 1024;
 const size_t	kEmptyBufferSize				=	4 * 1024;
 
+const float		kVolumeR1 = 3.5;
+const float		kVolumeR0 = 1.0 / (std::exp(kVolumeR1) - 1.0);
+		
+
 
 Radio::Radio(const std::string& inDataDirectory)
 	:
 	mDataDirectory(inDataDirectory),
 	mSpectrum(NULL),
 	mVolume(0.0),
+	mOn(false),
 	mPinkNoise(NULL),
 	mOutputDevice(NULL)
 {
@@ -107,8 +112,37 @@ Radio::frequency() const
 void
 Radio::setVolume(float inVal)
 {
+	//	Logarithmic volume from https://mathscinotes.wordpress.com/2011/12/22/potentiometer-math/
+	
+	float v = kVolumeR0 * (std::exp(kVolumeR1 * inVal) - 1.0);
+	if (v > 1.0)
+	{
+		v = 1.0;
+	}
+	else if (v < 0.0)
+	{
+		v = 0.0;
+	}
+	
 	std::lock_guard<std::mutex>		lock(mConfigMutex);
-	mVolume = inVal;
+	mVolume = v;
+}
+
+void
+Radio::setOn(bool inVal)
+{
+	std::lock_guard<std::mutex>		lock(mConfigMutex);
+	
+	if (inVal == mOn)
+	{
+		return;
+	}
+	
+	mOn = inVal;
+	if (mOn)
+	{
+		mOnOff.notify();
+	}
 }
 
 void
@@ -122,6 +156,13 @@ Radio::entry()
 	size_t lastBufferSize = 0;
 	do
 	{
+		//	Wait until we’re turned on…
+		
+		if (!mOn)
+		{
+			mOnOff.wait();
+		}
+		
 		//	Update the tuning at the start of each pass through the
 		//	loop…
 		

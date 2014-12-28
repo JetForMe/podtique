@@ -1,0 +1,51 @@
+//
+//  Semaphore.h
+//  Podtique
+//
+//  Created by Roderick Mann on 12/28/14.
+//  Copyright (c) 2014 Latency: Zero. All rights reserved.
+//
+
+#ifndef __Podtique__Semaphore__
+#define __Podtique__Semaphore__
+
+#include <mutex>
+#include <condition_variable>
+
+class
+Semaphore
+{
+public:
+	Semaphore(int inCount = 0)
+		:
+		mCount(inCount)
+	{
+	}
+	
+	void
+	notify()
+	{
+		std::lock_guard<std::mutex>		lock(mMutex);
+		++mCount;
+		mCondition.notify_one();
+	}
+	
+	void
+	wait()
+	{
+		std::unique_lock<std::mutex>	lock(mMutex);
+		mCondition.wait(lock,
+						[this]()
+						{
+							return mCount > 0;
+						});
+		mCount--;
+	}
+	
+private:
+	std::mutex					mMutex;
+	std::condition_variable		mCondition;
+	int							mCount;
+};
+
+#endif /* defined(__Podtique__Semaphore__) */

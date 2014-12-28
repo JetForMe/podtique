@@ -24,6 +24,11 @@
 
 #include <mpg123.h>
 
+//
+//	Project Includes
+//
+
+#include "Semaphore.h"
 
 class AudioDevice;
 class MP3Decoder;
@@ -45,6 +50,7 @@ public:
 	void				setFrequency(float inFrequency);
 	float				frequency()							const;
 	void				setVolume(float inVolume);
+	void				setOn(bool inVal);
 	
 	void				join();
 	
@@ -57,10 +63,12 @@ private:
 	std::string			mDataDirectory;
 	
 	std::mutex			mConfigMutex;
+	Semaphore			mOnOff;
 	
 	Spectrum*			mSpectrum;
 	float				mFrequency;
 	float				mVolume;
+	bool				mOn;
 	
 	SndFile*			mPinkNoise;
 	int16_t*			mPinkNoiseBuffer;

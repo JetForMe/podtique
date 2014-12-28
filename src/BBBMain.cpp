@@ -114,57 +114,22 @@ main(int inArgCount, const char** inArgs)
 	Radio* mRadio = new Radio(p);
 	mRadio->start();
 	
-	//	Walk the radio dial…
+	//	Loop over reading the input state,
+	//	and updating the radio…
 	
-#if 0
-	float f = 0.0;
-	float df = 0.001;
-	float min = 0.25;
-	float max = 0.35;
-	while (true)
-	{
-		LogDebug("Set frequency to: %.3f", f);
-		mRadio->setFrequency(f);
-		f += df;
-		if (f > max)
-		{
-			f = max;
-			df = -df;
-		}
-		else if (f < min)
-		{
-			f = min;
-			df = -df;
-		}
-		
-		//	Delay a bit…
-		
-		std::chrono::milliseconds dur(1000);
-		std::this_thread::sleep_for(dur);
-	}
-#else
-	
-	//	Logarithmic volume from https://mathscinotes.wordpress.com/2011/12/22/potentiometer-math/
-	
-	const float r1 = 3.5;
-	const float r0 = 1.0 / (std::exp(r1) - 1.0);
-		
 	while (true)
 	{
 		float f = readADC(0);
 		mRadio->setFrequency(f);
 		//LogDebug("Set frequency to: %.3f", f);
 		
-		float vRaw = readADC(1);
-		float v = r0 * (std::exp(r1 * vRaw) - 1.0);
-		if (v > 1.0) v = 1.0; else if (v < 0.0) v = 0.0;
+		float v = readADC(1);
 		mRadio->setVolume(v);
-		//LogDebug("Set vol: %.3f %.3f", vRaw, v);
+		//LogDebug("Set vol: %.3f", v);
 		
 		std::chrono::milliseconds dur(100);
 		std::this_thread::sleep_for(dur);
 	}
-#endif
 
 	//	Hang out while the radio runs…
 	

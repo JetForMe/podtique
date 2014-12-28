@@ -18,6 +18,7 @@
 
 @property (nonatomic, assign)	float				frequency;
 @property (nonatomic, assign)	float				volume;
+@property (nonatomic, assign)	bool				radioOn;
 
 @end
 
@@ -69,6 +70,20 @@ setVolume: (float) inVal
 	mRadio->setVolume(self.volume);
 }
 
-@synthesize volume				=	mVolume;
+@synthesize volume					=	mVolume;
+
+- (void)
+setRadioOn: (bool) inVal
+{
+	if (inVal == mRadioOn)
+	{
+		return;
+	}
+	
+	mRadioOn = inVal;
+	mRadio->setOn(self.radioOn);
+}
+
+@synthesize radioOn					=	mRadioOn;
 
 @end
