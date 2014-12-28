@@ -4,7 +4,7 @@ SRC	=	src
 
 CC		= gcc
 CPP		= g++
-CFLAGS	= -g -Wall -I. -ISDL -I../libxively/src/libxively -Wno-unknown-pragmas -D_REENTRANT
+CFLAGS	= -g -Wall -I. -ISDL -Wno-unknown-pragmas -D_REENTRANT
 CPPFLAGS  = $(CFLAGS) -std=gnu++0x
 LDFLAGS = -L/usr/local/lib -Wl,-rpath,/usr/local/lib -lao -lmpg123 -lsndfile -lpthread
 
@@ -63,3 +63,5 @@ clean:
 xfer:
 	rsync -e ssh -avz --exclude="*.d" --exclude="*.o" Makefile src debian@arm.local:radio
 	
+dtbo:
+	dtc -O dtb -o Podtique-00A0.dtbo -b 0 -@ podtique.dts

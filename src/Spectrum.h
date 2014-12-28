@@ -48,18 +48,21 @@ class
 Station
 {
 public:
-									Station(float inFrequency);
+									Station(float inFrequency, const std::string& inDesc);
 	void							addTrack(const std::string& inPath);
 	
 	float							frequency()							const		{ return mFrequency; }
+	const std::string&				desc()								const		{ return mDesc; }
 	const std::string&				trackPath()							const		{ return mCurrentTrack; }
 	off_t							lastPausedFrame()					const		{ return mLastPausedFrame; }
 	void							setLastPausedFrame(off_t inVal)					{ mLastPausedFrame = inVal; }
 
 	void							nextTrack();
+	uint32_t						trackIdx()							const		{ return mCurrentTrackIdx; }
 	
 private:
 	float							mFrequency;
+	std::string						mDesc;
 	
 	std::vector<std::string>		mTracks;
 	std::string						mCurrentTrack;

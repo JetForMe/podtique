@@ -73,6 +73,12 @@ readADC(int inChannel)
 	return result;
 }
 
+void
+configGPIOs()
+{
+	
+}
+
 int
 main(int inArgCount, const char** inArgs)
 {
@@ -137,6 +143,8 @@ main(int inArgCount, const char** inArgs)
 		std::this_thread::sleep_for(dur);
 	}
 #else
+	
+	//	Logarithmic volume from https://mathscinotes.wordpress.com/2011/12/22/potentiometer-math/
 	
 	const float r1 = 3.5;
 	const float r0 = 1.0 / (std::exp(r1) - 1.0);

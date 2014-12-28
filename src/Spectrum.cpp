@@ -35,9 +35,10 @@
 #pragma mark • Station
 
 
-Station::Station(float inFrequency)
+Station::Station(float inFrequency, const std::string& inDesc)
 	:
 	mFrequency(inFrequency),
+	mDesc(inDesc),
 	mCurrentTrackIdx(0),
 	mLastPausedFrame(0)
 {
@@ -201,7 +202,7 @@ Spectrum::parseSpectrum(const picojson::value& inJSON)
 		
 		LogDebug("Station: %s, freq: %f, tracks: %ju", desc.c_str(), freq, (uintmax_t) playlist.size());
 		
-		Station station(freq);
+		Station station(freq, desc);
 		for(size_t idx = 0; idx < playlist.size(); ++idx)
 		{
 			const picojson::value& v = playlist[idx];
@@ -279,10 +280,10 @@ Spectrum::updateTuning()
 				station.setLastPausedFrame(mCurrentTrack->currentFrame());
 				
 				mCurrentStationIndex = -1;
+				LogDebug("Tuned no station");
+				
 				//	TODO: persist the station data
 			}
-			
-			//	Fall through, will return false…
 		}
 		else
 		{
@@ -294,6 +295,7 @@ Spectrum::updateTuning()
 				//	Set the new station…
 				
 				mCurrentStationIndex = stationIdx;
+				LogDebug("Tuned station: %s", mStations[mCurrentStationIndex].desc().c_str());
 				
 				if (!openStationTrack())
 				{
@@ -311,25 +313,42 @@ Spectrum::updateTuning()
 bool
 Spectrum::openStationTrack()
 {
-	//	TODO: If we fail to open the current track, try
-	//			the next. Keep trying until we wrap back
-	//			to the current track index, in which case we
-	//			return false.
+	//	Open the station’s current track. If that fails,
+	//	move on to the next one. Return false if none could be
+	//	opened…
 	
-	const Station& station = mStations[mCurrentStationIndex];
-	const std::string& path = station.trackPath();
-	bool success = mCurrentTrack->open(path);
-	if (!success)
+	Station& station = mStations[mCurrentStationIndex];
+	uint32_t startTrackIdx = station.trackIdx();
+	while (true)
 	{
-		LogDebug("Error opening track '%s'", path.c_str());
-		return false;
-	}
-	else
-	{
-		LogDebug("Opened track '%s'", path.c_str());
+		const std::string& path = station.trackPath();
+		bool success = mCurrentTrack->open(path);
+		if (!success)
+		{
+			//	The current track failed to open, so we must reset
+			//	any remembered frame…
+			
+			LogDebug("Error opening track '%s'", path.c_str());
+			station.setLastPausedFrame(0);
+			
+			//	Try the next track. Station will automatically wrap.
+			//	If we come back to the one we were on, bail…
+			
+			station.nextTrack();
+			if (station.trackIdx() == startTrackIdx)
+			{
+				LogDebug("Unable to open any track for station “%s”", station.desc().c_str());
+				return false;
+			}
+		}
+		else
+		{
+			LogDebug("Opened track '%s'", path.c_str());
+			break;
+		}
 	}
 	
-	//	Set the track to where it last left off…
+	//	Set the set the decoder to where it last left off…
 	
 	if (station.lastPausedFrame() != 0)
 	{
