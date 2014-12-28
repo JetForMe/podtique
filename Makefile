@@ -61,7 +61,7 @@ clean:
 	rm -f *.o *.d *.out *.hex $(SRC)/*.o $(SRC)/*.d
 
 xfer:
-	rsync -e ssh -avz --exclude="*.d" --exclude="*.o" Makefile src debian@arm.local:radio
+	rsync -e ssh -avzu --exclude="*.d" --exclude="*.o" Makefile src rmann@arm.local:radio
 	
 dtbo:
 	dtc -O dtb -o Podtique-00A0.dtbo -b 0 -@ podtique.dts
