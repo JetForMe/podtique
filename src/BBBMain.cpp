@@ -93,8 +93,8 @@ main(int inArgCount, const char** inArgs)
 	
 	//	Create the GPIOs…
 	
-	GPIO	onOff(66);
-	onOff.setInput();
+	GPIO	offOn(66);		//	"on" when low
+	offOn.setInput();
 	
 	//	Create the radio…
 	
@@ -115,8 +115,10 @@ main(int inArgCount, const char** inArgs)
 		{
 			count = 10;
 			
-			bool on = onOff.get();
-			mRadio->setOn(on);
+			//	Check to see if the radio is on. It is on when the GPIO is low…
+			
+			bool off = offOn.get();
+			mRadio->setOn(!off);
 		}
 		
 		float f = readADC(0);
