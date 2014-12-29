@@ -50,7 +50,7 @@ readADC(int inChannel)
 	if (fd < 0)
 	{
 		LogDebug("Unable to open ADC0: %s", std::strerror(errno));
-		return 0.0;
+		return -1.0;
 	}
 	
 	float result = 0.0;
@@ -105,39 +105,60 @@ main(int inArgCount, const char** inArgs)
 	Radio* mRadio = new Radio(p);
 	mRadio->start();
 	
+	//	Hacky delay to let the radio thread get
+	//	to the wait to be turned on. Really there
+	//	should be a radio ready wait…
+	
+	std::chrono::milliseconds dur(100);
+	std::this_thread::sleep_for(dur);
+	LogDebug("Radio Started");
+	
 	//	Loop over reading the input state,
 	//	and updating the radio…
 	
+	dur = std::chrono::milliseconds(50);
 	int count = 0;
 	while (true)
 	{
 		//	Every few times through the loop,
 		//	check the GPIOs…
 		
+#if 0
 		if (count-- <= 0)
 		{
 			count = 5;
-			
+#endif			
 			//	Check to see if the radio is on. It is on when the GPIO is low…
+			
+			std::this_thread::sleep_for(dur);
 			
 			bool off = offOn.get();
 			mRadio->setOn(!off);
+			//LogDebug("On: %u", !off);
 			
 			//	Enable the audio with the radio…
 			
+			std::this_thread::sleep_for(dur);
 			audioEnable.set(!off);
+#if 0
 		}
+#endif
+		
+		std::this_thread::sleep_for(dur);
 		
 		float f = readADC(0);
+		if (f < 0.0) f = 0.100;
 		mRadio->setFrequency(f);
 		//LogDebug("Set frequency to: %.3f", f);
 		
+		std::this_thread::sleep_for(dur);
+		
 		float v = readADC(1);
+		if (v < 0.0) v = 0.4;
 		mRadio->setVolume(v);
 		//LogDebug("Set vol: %.3f", v);
 		
-		std::chrono::milliseconds dur(100);
-		std::this_thread::sleep_for(dur);
+		//std::this_thread::sleep_for(dur);
 	}
 
 	//	Hang out while the radio runs…

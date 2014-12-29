@@ -26,17 +26,17 @@
 			podtique: Podtique {
 				pinctrl-single,pins = <
 				
-					0x090 0x37		/* P8_07 36	GPIO2_02 66	INPUT  MODE7 pullup		On/Off switch		*/
-					0x094 0x37		/* P8_08 37	GPIO2_03 67	INPUT  MODE7 pullup		Mode 1 selection	*/
-					0x09c 0x37		/* P8_09 39	GPIO2_05 69	INPUT  MODE7 pullup		Mode 2 selection	*/
-					0x098 0x37		/* P8_10 38	GPIO2_04 68	INPUT  MODE7 pullup		Mode 3 selection	*/
-					0x024 0x37		/* P8_13  9	GPIO0_23 	INPUT  MODE7 pullup		Future: left momentary	*/
-					0x028 0x37		/* P8_14 10	GPIO0_26	INPUT  MODE7 pullup		Future: right momentary	*/
+					0x090 0x37		//	P8_07 36	GPIO2_02 66	INPUT  MODE7 pullup		On/Off switch
+					0x094 0x37		//	P8_08 37	GPIO2_03 67	INPUT  MODE7 pullup		Mode 1 selection
+					0x09c 0x37		//	P8_09 39	GPIO2_05 69	INPUT  MODE7 pullup		Mode 2 selection
+					0x098 0x37		//	P8_10 38	GPIO2_04 68	INPUT  MODE7 pullup		Mode 3 selection
+					0x024 0x37		//	P8_13  9	GPIO0_23 	INPUT  MODE7 pullup		Future: left momentary
+					0x028 0x37		//	P8_14 10	GPIO0_26	INPUT  MODE7 pullup		Future: right momentary
 					
-					0x02c 0x2f		/* P8_17 11	GPIO0_27 27	OUTPUT MODE7 none		Amplifier standby	*/
+					0x02c 0x37		//	P8_17 11	GPIO0_27 27	OUTPUT MODE7 none		Amplifier standby
 					
-					/* OUTPUT	GPIO(mode7) 0x07 pulldown, 0x17 pullup, 0x?f no pullup/down */
-					/* INPUT	GPIO(mode7) 0x27 pulldown, 0x37 pullup, 0x?f no pullup/down */
+					//	OUTPUT	GPIO(mode7) 0x07 pulldown, 0x17 pullup, 0x?f no pullup/down
+					//	INPUT	GPIO(mode7) 0x27 pulldown, 0x37 pullup, 0x?f no pullup/down
 				
 				>;
 			};

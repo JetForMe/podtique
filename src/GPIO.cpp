@@ -48,18 +48,24 @@ GPIO::exportGPIO()
 	
 	std::chrono::milliseconds dur(250);
 	std::this_thread::sleep_for(dur);
+	
+	LogDebug("Exported gpio%u", mNumber);
 }
 
 void
 GPIO::setInput()
 {
+	LogDebug("Setting gpio%u as input", mNumber);
 	write(mPath, "direction", "in");
+	LogDebug("Set gpio%u as input", mNumber);
 }
 
 void
 GPIO::setOutput()
 {
+	LogDebug("Setting gpio%u as output", mNumber);
 	write(mPath, "direction", "out");
+	LogDebug("Set gpio%u as output", mNumber);
 }
 
 bool

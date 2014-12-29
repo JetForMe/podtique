@@ -139,10 +139,7 @@ Radio::setOn(bool inVal)
 	}
 	
 	mOn = inVal;
-	if (mOn)
-	{
-		mOnOff.notify();
-	}
+	mOnOff.set(mOn);
 }
 
 void
@@ -161,7 +158,7 @@ Radio::entry()
 		if (!mOn)
 		{
 			LogDebug("Radio off");
-			mOnOff.wait();
+			mOnOff.waitReady();
 			LogDebug("Radio on");
 		}
 		
