@@ -59,7 +59,7 @@ $(APP): $(CORE_OBJ) $(COMMON_OBJ) $(CPP_OBJ)
 	@rm -f $*.d.tmp
 
 clean:
-	rm -f *.o *.d *.out *.hex $(SRC)/*.o $(SRC)/*.d
+	rm -f $(APP) *.o *.d *.out *.hex $(SRC)/*.o $(SRC)/*.d
 
 xfer:
 	rsync -e ssh -avzu --exclude="*.d" --exclude="*.o" Makefile src rmann@arm.local:radio

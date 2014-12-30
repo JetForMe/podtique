@@ -96,8 +96,9 @@ main(int inArgCount, const char** inArgs)
 	GPIO	offOn(66);				//	"on" when low
 	offOn.setInput();
 	
-	GPIO	audioEnable(27);		//	Audio is enabled when GPIO is high (FET pulls STBY line low)
-	audioEnable.setOutput();
+	GPIO	audioMute(27);			//	Audio is muted when GPIO is high (FET pulls STBY line low, which mutes things, despite what the data sheet says)
+	audioMute.setOutput();
+	audioMute.set(true);
 	
 	//	Create the radio…
 	
@@ -117,44 +118,47 @@ main(int inArgCount, const char** inArgs)
 	//	and updating the radio…
 	
 	dur = std::chrono::milliseconds(50);
-	int count = 0;
+	bool lastOff = true;
 	while (true)
 	{
-		//	Every few times through the loop,
-		//	check the GPIOs…
-		
-#if 0
-		if (count-- <= 0)
-		{
-			count = 5;
-#endif			
-			//	Check to see if the radio is on. It is on when the GPIO is low…
-			
-			std::this_thread::sleep_for(dur);
-			
-			bool off = offOn.get();
-			mRadio->setOn(!off);
-			//LogDebug("On: %u", !off);
-			
-			//	Enable the audio with the radio…
-			
-			std::this_thread::sleep_for(dur);
-			audioEnable.set(!off);
-#if 0
-		}
-#endif
+		//	Read GPIOs and ADCs (with a delay before each, since
+		//	reading these too rapidly leads to a hang)…
 		
 		std::this_thread::sleep_for(dur);
+		bool off = offOn.get();
 		
+		std::this_thread::sleep_for(dur);
 		float f = readADC(0);
 		if (f < 0.0) f = 0.100;
-		mRadio->setFrequency(f);
-		//LogDebug("Set frequency to: %.3f", f);
 		
 		std::this_thread::sleep_for(dur);
-		
 		float v = readADC(1);
 		if (v < 0.0) v = 0.4;
+		
+		//	Enable the audio with the radio…
+		
+		if (lastOff != off)
+		{
+			std::this_thread::sleep_for(dur);
+			audioMute.set(off);
+			lastOff = off;
+			
+			//	If turning on, delay a bit before turning on
+			//	the radio to reduce the content missed…
+			
+			if (!off)
+			{
+				std::chrono::milliseconds turnOnDelay(250);
+				std::this_thread::sleep_for(turnOnDelay);
+			}
+		}	
+		
+		//	Update the radio’s state…
+			
+		mRadio->setOn(!off);
+		//LogDebug("On: %u", !off);
+		mRadio->setFrequency(f);
+		//LogDebug("Set frequency to: %.3f", f);
 		mRadio->setVolume(v);
 		//LogDebug("Set vol: %.3f", v);
 		
