@@ -19,6 +19,9 @@ GPIO
 {
 public:
 						GPIO(uint16_t inNumber);
+						
+	void				init();
+	
 	void				setInput();
 	void				setOutput();
 	bool				get() const;

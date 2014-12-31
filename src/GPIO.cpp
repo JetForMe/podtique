@@ -38,6 +38,10 @@ GPIO::GPIO(uint16_t inNumber)
 	exportGPIO();
 }
 
+void
+GPIO::init()
+{
+}
 
 void
 GPIO::exportGPIO()
@@ -49,23 +53,23 @@ GPIO::exportGPIO()
 	std::chrono::milliseconds dur(250);
 	std::this_thread::sleep_for(dur);
 	
-	LogDebug("Exported gpio%u", mNumber);
+	//LogDebug("Exported gpio%u", mNumber);
 }
 
 void
 GPIO::setInput()
 {
-	LogDebug("Setting gpio%u as input", mNumber);
+	//LogDebug("Setting gpio%u as input", mNumber);
 	write(mPath, "direction", "in");
-	LogDebug("Set gpio%u as input", mNumber);
+	//LogDebug("Set gpio%u as input", mNumber);
 }
 
 void
 GPIO::setOutput()
 {
-	LogDebug("Setting gpio%u as output", mNumber);
+	//LogDebug("Setting gpio%u as output", mNumber);
 	write(mPath, "direction", "out");
-	LogDebug("Set gpio%u as output", mNumber);
+	//LogDebug("Set gpio%u as output", mNumber);
 }
 
 bool
@@ -97,7 +101,7 @@ GPIO::write(const std::string& inDir, const std::string& inFile, const std::stri
 	if (!fs.is_open())
 	{
 		LogDebug("Unable to open GPIO %u (%s) for writing: %s", mNumber, path.c_str(), ::strerror(errno));
-		return;
+		exit(1);
 	}
 	
 	fs << inVal;
@@ -121,6 +125,7 @@ GPIO::read(const std::string& inDir, const std::string& inFile) const
 	if (!fs.is_open())
 	{
 		LogDebug("Unable to open GPIO %u (%s) for reading: %s", mNumber, path.c_str(), ::strerror(errno));
+		exit(1);
 		return "";
 	}
 	

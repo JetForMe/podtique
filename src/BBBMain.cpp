@@ -14,12 +14,15 @@
 #include <cmath>
 #include <cstdlib>
 #include <cstring>
+#include <signal.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 //
 //	Library Includes
 //
 
-#include <pruio.h>
+#include "ledscape.h"
 
 //
 //	Project Includes
@@ -32,17 +35,40 @@
 
 
 
+static sig_atomic_t				sHandledSignal;
 
 
 
+class
+Podtique
+{
+public:
+	Podtique(const std::string& inDataDir);
+	void			run();
+	void			stop();
+	
+protected:
+	float			readADC(int inChannel);
+
+private:
+	std::string		mDataDir;
+	GPIO			mOffOn;				//	"on" when low
+	GPIO			mAudioMute;			//	Audio is muted when GPIO is high (FET pulls STBY line low, which mutes things, despite what the data sheet says)
+	Radio*			mRadio;
+};
 
 
-
-
-
+Podtique::Podtique(const std::string& inDataDir)
+	:
+	mDataDir(inDataDir),
+	mOffOn(66),
+	mAudioMute(27),
+	mRadio(NULL)
+{
+}
 
 float
-readADC(int inChannel)
+Podtique::readADC(int inChannel)
 {
 	char path[128];
 	snprintf(path, 128, "/sys/bus/iio/devices/iio:device0/in_voltage%u_raw", inChannel);
@@ -75,35 +101,26 @@ readADC(int inChannel)
 }
 
 void
-configGPIOs()
+Podtique::run()
 {
+	//	Configure the GPIOs…
 	
-}
-
-int
-main(int inArgCount, const char** inArgs)
-{
-	//	Validate arguments…
+	mOffOn.setInput();
 	
-	if (inArgCount < 2)
-	{
-		LogDebug("usage: %s <path to data directory>\n", inArgs[0]);
-		return -1;
-	}
+	mAudioMute.setOutput();
+	mAudioMute.set(true);
 	
-	//	Create the GPIOs…
+	//	Init the LEDs…
 	
-	GPIO	offOn(66);				//	"on" when low
-	offOn.setInput();
+	ledscape_t* leds = ledscape_init_with_programs(24,
+													"/home/rmann/LEDscape/pru/bin/ws281x-single-channel-pru0.bin",
+													"/home/rmann/LEDscape/pru/bin/ws281x-single-channel-pru1.bin");
 	
-	GPIO	audioMute(27);			//	Audio is muted when GPIO is high (FET pulls STBY line low, which mutes things, despite what the data sheet says)
-	audioMute.setOutput();
-	audioMute.set(true);
 	
 	//	Create the radio…
 	
-	std::string p(inArgs[1]);
-	Radio* mRadio = new Radio(p);
+	LogDebug("Creating radio with data dir: %s", mDataDir.c_str());
+	mRadio = new Radio(mDataDir);
 	mRadio->start();
 	
 	//	Hacky delay to let the radio thread get
@@ -121,11 +138,19 @@ main(int inArgCount, const char** inArgs)
 	bool lastOff = true;
 	while (true)
 	{
+		if (sHandledSignal > 0)
+		{
+			stop();
+			::signal(sHandledSignal, SIG_DFL);
+			::raise(sHandledSignal);
+			break;
+		}
+		
 		//	Read GPIOs and ADCs (with a delay before each, since
 		//	reading these too rapidly leads to a hang)…
 		
 		std::this_thread::sleep_for(dur);
-		bool off = offOn.get();
+		bool off = mOffOn.get();
 		
 		std::this_thread::sleep_for(dur);
 		float f = readADC(0);
@@ -140,7 +165,7 @@ main(int inArgCount, const char** inArgs)
 		if (lastOff != off)
 		{
 			std::this_thread::sleep_for(dur);
-			audioMute.set(off);
+			mAudioMute.set(off);
 			lastOff = off;
 			
 			//	If turning on, delay a bit before turning on
@@ -148,7 +173,7 @@ main(int inArgCount, const char** inArgs)
 			
 			if (!off)
 			{
-				std::chrono::milliseconds turnOnDelay(250);
+				std::chrono::milliseconds turnOnDelay(500);
 				std::this_thread::sleep_for(turnOnDelay);
 			}
 		}	
@@ -167,7 +192,107 @@ main(int inArgCount, const char** inArgs)
 
 	//	Hang out while the radio runs…
 	
-	mRadio->join();
+	//mRadio->join();	no, that's not the right thing to do here
+}
+
+/**
+	Attempts to restore GPIO outputs to “safe” values…
+*/
+
+void
+Podtique::stop()
+{
+	mAudioMute.set(true);		//	Mute audio
+}
+
+#pragma mark -
+#pragma mark • Startup Code
+
+static Podtique*				sPodtique;
+
+void
+exitHandler()
+{
+	sPodtique->stop();
+	
+	LogDebug("Exit handler called");
+}
+
+void
+intHandler(int inSignal)
+{
+	sHandledSignal = inSignal;
+}
+
+int
+main(int inArgCount, const char** inArgs)
+{
+	//	Process arguments…
+	
+	std::string dataDir("/home/rmann/data");
+	bool daemon = false;
+	if (inArgCount > 1)
+	{
+		//LogDebug("usage: %s <path to data directory>\n", inArgs[0]);
+		//return -1;
+		
+		std::string arg1(inArgs[1]);
+		if (arg1 == "-d")
+		{
+			daemon = true;
+			
+			if (inArgCount > 2)
+			{
+				dataDir = inArgs[2];
+			}
+		}
+		else
+		{
+			dataDir = inArgs[1];
+		}
+	}
+	
+	//	If running as a daemon, fork…
+	
+	if (daemon)
+	{
+		LogDebug("Forking");
+		
+		pid_t pid = ::fork();
+		if (pid < 0)
+		{
+			exit(1);
+		}
+		
+		if (pid > 0)
+		{
+			LogDebug("Child process id is %d, parent exiting", pid);
+			exit(0);
+		}
+		
+		//	If we get here, we’re a child…
+		
+		::umask(0);
+		LogDebug("Child running");
+		
+		pid_t sid = ::setsid();
+		if (sid < 0)
+		{
+			LogDebug("Child failed to setsid");
+			exit(1);
+		}
+	}
+	
+	//	Install handlers to try to clean up GPIOs when
+	//	we’re done…
+	
+	std::atexit(exitHandler);
+	::signal(SIGHUP, intHandler);
+	::signal(SIGINT, intHandler);
+	
+	std::string p(dataDir);
+	sPodtique = new Podtique(p);
+	sPodtique->run();
 	
 	return 0;
 }
