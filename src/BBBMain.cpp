@@ -112,9 +112,11 @@ Podtique::run()
 	
 	//	Init the LEDs…
 	
+#if 0
 	ledscape_t* leds = ledscape_init_with_programs(24,
 													"/home/rmann/LEDscape/pru/bin/ws281x-single-channel-pru0.bin",
 													"/home/rmann/LEDscape/pru/bin/ws281x-single-channel-pru1.bin");
+#endif
 	
 	
 	//	Create the radio…
