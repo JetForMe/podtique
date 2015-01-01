@@ -34,6 +34,7 @@
 
 
 
+const uint32_t kNumPixels = 24;
 
 static sig_atomic_t				sHandledSignal;
 
@@ -49,12 +50,15 @@ public:
 	
 protected:
 	float			readADC(int inChannel);
-
+	void			setBacklightColor(uint8_t inRed, uint8_t inGreen, uint8_t inBlue);
+	
 private:
 	std::string		mDataDir;
 	GPIO			mOffOn;				//	"on" when low
 	GPIO			mAudioMute;			//	Audio is muted when GPIO is high (FET pulls STBY line low, which mutes things, despite what the data sheet says)
 	Radio*			mRadio;
+	ledscape_t* 	mLEDs;
+	uint8_t			mLEDBufferIdx;
 };
 
 
@@ -63,7 +67,8 @@ Podtique::Podtique(const std::string& inDataDir)
 	mDataDir(inDataDir),
 	mOffOn(66),
 	mAudioMute(27),
-	mRadio(NULL)
+	mRadio(NULL),
+	mLEDBufferIdx(0)
 {
 }
 
@@ -112,11 +117,10 @@ Podtique::run()
 	
 	//	Init the LEDs…
 	
-#if 0
-	ledscape_t* leds = ledscape_init_with_programs(24,
-													"/home/rmann/LEDscape/pru/bin/ws281x-single-channel-pru0.bin",
-													"/home/rmann/LEDscape/pru/bin/ws281x-single-channel-pru1.bin");
-#endif
+	mLEDs = ::ledscape_init_with_programs(kNumPixels,
+													"/home/rmann/LEDscape/pru/bin/ws281x-inverted-single-channel-pru0.bin",
+													"/home/rmann/LEDscape/pru/bin/ws281x-inverted-single-channel-pru1.bin");
+	setBacklightColor(0, 0, 0);
 	
 	
 	//	Create the radio…
@@ -147,6 +151,9 @@ Podtique::run()
 			::raise(sHandledSignal);
 			break;
 		}
+		
+		::ledscape_wait(mLEDs);
+		::ledscape_draw(mLEDs, 0);
 		
 		//	Read GPIOs and ADCs (with a delay before each, since
 		//	reading these too rapidly leads to a hang)…
@@ -183,6 +190,14 @@ Podtique::run()
 		//	Update the radio’s state…
 			
 		mRadio->setOn(!off);
+		if (off)
+		{
+			setBacklightColor(0, 0, 0);
+		}
+		else
+		{
+			setBacklightColor(30, 30, 10);
+		}
 		//LogDebug("On: %u", !off);
 		mRadio->setFrequency(f);
 		//LogDebug("Set frequency to: %.3f", f);
@@ -197,6 +212,28 @@ Podtique::run()
 	//mRadio->join();	no, that's not the right thing to do here
 }
 
+void
+Podtique::setBacklightColor(uint8_t inRed, uint8_t inGreen, uint8_t inBlue)
+{
+	//	Turn off the LEDs…
+	
+	mLEDBufferIdx = (mLEDBufferIdx + 1) % 2;
+	ledscape_frame_t* const frame = ::ledscape_frame(mLEDs, mLEDBufferIdx);
+	for (uint32_t idx = 0; idx < kNumPixels; ++idx)
+	{
+		::ledscape_set_color(
+			frame,
+			COLOR_ORDER_BRG,
+			0,
+			idx,
+			inRed,
+			inGreen,
+			inBlue);
+	}
+	::ledscape_wait(mLEDs);
+	::ledscape_draw(mLEDs, mLEDBufferIdx);
+}
+
 /**
 	Attempts to restore GPIO outputs to “safe” values…
 */
@@ -205,6 +242,7 @@ void
 Podtique::stop()
 {
 	mAudioMute.set(true);		//	Mute audio
+	
 }
 
 #pragma mark -
