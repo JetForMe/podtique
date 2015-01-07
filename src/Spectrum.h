@@ -96,6 +96,9 @@ public:
 	float							stationFrequency()					const;
 	bool							stationTuned()						const		{ return mCurrentStationIndex >= 0; }
 	
+	float							contentWeight()						const		{ return mContentWeight; }
+	float							staticWeight()						const		{ return mStaticWeight; }
+	
 	int								numChannels()						const;
 	uint32_t						rate()								const;
 	
@@ -115,6 +118,9 @@ private:
 	float							mLastFrequency;
 	float							mOffset;
 	bool							mNeedsTuning;
+	
+	float							mContentWeight;
+	float							mStaticWeight;
 	
 	std::vector<Station>			mStations;
 	int32_t							mCurrentStationIndex;

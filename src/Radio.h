@@ -69,6 +69,8 @@ private:
 	float				mFrequency;
 	float				mVolume;
 	bool				mOn;
+	float				mContentFraction;
+	float				mNoiseFraction;
 	
 	SndFile*			mPinkNoise;
 	int16_t*			mPinkNoiseBuffer;

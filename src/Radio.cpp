@@ -213,20 +213,6 @@ Radio::entry()
 void
 Radio::processAudioAndOutput(void* ioBuffer, size_t inBufSize)
 {
-	//	Attentuate the signal…
-	
-	float f = 0.0;
-	if (mSpectrum->stationTuned())
-	{
-		float df = mSpectrum->stationFrequency() - frequency();
-		df = std::fabs(df);
-		if (df > kStationHalfBand) df = kStationHalfBand;
-		
-		df = kStationHalfBand - df;
-		f = df / kStationHalfBand;
-		//LogDebug("df: %f %f", df, f);
-	}
-	
 	//	TODO: We're assuming a lot about the structure of the buffer here!
 	
 	int16_t* p = reinterpret_cast<int16_t*> (ioBuffer);
@@ -239,7 +225,7 @@ Radio::processAudioAndOutput(void* ioBuffer, size_t inBufSize)
 			mPNBufIdx = 0;
 		}
 		
-		p[i] = mVolume * (p[i] * f + noise * (1.0 - f) * 0.2);
+		p[i] = mVolume * (p[i] * mSpectrum->contentWeight() + noise * mSpectrum->staticWeight() * 0.2);
 	}
 	
 	//	Output the result…

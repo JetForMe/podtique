@@ -299,9 +299,27 @@ Spectrum::updateTuning()
 				
 				if (!openStationTrack())
 				{
-					return;
 				}
 			}
+		}
+		
+		//	Update the weighting factors…
+		
+		if (stationTuned())
+		{
+			float df = stationFrequency() - mFrequency;
+			df = std::fabs(df);
+			if (df > kStationHalfBand) df = kStationHalfBand;
+			
+			df = kStationHalfBand - df;
+			mContentWeight = df / kStationHalfBand;
+			mStaticWeight = 1.0 - mContentWeight;
+			//LogDebug("df: %f %f", df, f);
+		}
+		else
+		{
+			mContentWeight = 0.0;
+			mStaticWeight = 1.0;
 		}
 	}
 }
