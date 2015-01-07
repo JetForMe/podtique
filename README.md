@@ -86,15 +86,19 @@ The following configuration file works for the Audio-Technica USB audio dongle I
 Radio Notes
 ===========
 
+* Screws in bottom to hold everything in place.
+* Add battery switch and wiring harness.
+* Add battery.
+* Make sure I can talk to it without a network present (straight cable connection).
+* Try turning off eth0 config at boot and config after (wicd/connman).
+* modprobe uio_pruss at boot.
+
+Done
+----
 * Turn off LEDs on everything.
 * Add dial LEDs as needed.
 * Add amp control GPIO to avoid power-on pop.
 * Some light can be seen through speaker grill. Add opaque cover behind.
-* Mounting holes in bottom plate? Maybe just wood screws up from bottom into it.
-
-
-Done
-----
 * Make back plate rectangular and nearly full height. Mount BBB and amp to it. * Holes for zip tie for USB audio adapter?
 * Add mounting holes for 5 VDC regulator (eventually part of BBB cape).
 * Cut opening to allow long potentiometers to be fit into front plate.
