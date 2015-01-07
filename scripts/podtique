@@ -1,0 +1,41 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          podtique
+# Required-Start:    $local_fs $syslog
+# Required-Stop:     $local_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start/stop Podtique radio simulator
+### END INIT INFO
+
+
+
+RETVAL=0
+PROG=/home/rmann/podtique/radio
+
+start()
+{
+	echo -n $"Starting $prog:"
+	start-stop-daemon --start --pidfile /var/run/podtique.pid --exec $PROG -- -d
+	RETVAL=$?
+}
+
+stop()
+{
+	echo -n $"Stopping $prog:"
+	start-stop-daemon --stop --signal 1 --exec $PROG
+	RETVAL=$?
+}
+
+case "$1" in
+	start)
+		start
+		;;
+	stop)
+		stop
+		;;
+	*)
+		echo $"Usage: $0 {start}"
+		RETVAL=1
+esac
+exit $RETVAL

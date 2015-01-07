@@ -63,7 +63,7 @@ private:
 	std::string			mDataDirectory;
 	
 	std::mutex			mConfigMutex;
-	Semaphore			mOnOff;
+	BinarySemaphore		mOnOff;
 	
 	Spectrum*			mSpectrum;
 	float				mFrequency;

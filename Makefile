@@ -4,16 +4,18 @@ SRC	=	src
 
 CC		= gcc
 CPP		= g++
-CFLAGS	= -g -Wall -I. -ISDL -Wno-unknown-pragmas -D_REENTRANT
+CFLAGS	= -g -Wall -I. -ISDL -D_REENTRANT -Wno-unknown-pragmas
 CPPFLAGS  = $(CFLAGS) -std=gnu++0x
-LDFLAGS = -L/usr/local/lib -Wl,-rpath,/usr/local/lib -lao -lmpg123 -lsndfile -lpthread
+LDFLAGS = -L/usr/local/lib  -L. -Wl,-rpath,/usr/local/lib -lao -lmpg123 -lprussdrv -lpthread -lsndfile
 
 
 CORE   = \
 
 COMMON = \
+	$(SRC)/ledscape.c \
+	$(SRC)/pru.c \
+	$(SRC)/util.c \
 	
-
 CPPSRC = \
 	$(SRC)/AudioDevice.cpp \
 	$(SRC)/BBBMain.cpp \
@@ -41,8 +43,8 @@ $(APP): $(CORE_OBJ) $(COMMON_OBJ) $(CPP_OBJ)
 
 # compile and generate dependency info
 %.o: %.c
-	$(CC) -c $(CFLAGS) $*.c -o $*.o
-	$(CC) -MM $(CFLAGS) $*.c > $*.d
+	$(CC) -c $(CFLAGS) -std=gnu99 $*.c -o $*.o
+	$(CC) -MM $(CFLAGS) -std=gnu99 $*.c > $*.d
 	@mv -f $*.d $*.d.tmp
 	@sed -e 's|.*:|$*.o:|' < $*.d.tmp > $*.d
 	@sed -e 's/.*://' -e 's/\\$$//' < $*.d.tmp | fmt -1 | \
@@ -59,7 +61,7 @@ $(APP): $(CORE_OBJ) $(COMMON_OBJ) $(CPP_OBJ)
 	@rm -f $*.d.tmp
 
 clean:
-	rm -f *.o *.d *.out *.hex $(SRC)/*.o $(SRC)/*.d
+	rm -f $(APP) *.o *.d *.out *.hex $(SRC)/*.o $(SRC)/*.d
 
 xfer:
 	rsync -e ssh -avzu --exclude="*.d" --exclude="*.o" Makefile src rmann@arm.local:radio
