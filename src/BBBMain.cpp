@@ -221,8 +221,6 @@ Podtique::run()
 void
 Podtique::setBacklightColor(uint8_t inRed, uint8_t inGreen, uint8_t inBlue)
 {
-	//	Turn off the LEDs…
-	
 	mLEDBufferIdx = (mLEDBufferIdx + 1) % 2;
 	ledscape_frame_t* const frame = ::ledscape_frame(mLEDs, mLEDBufferIdx);
 	for (uint32_t idx = 0; idx < kNumPixels; ++idx)
@@ -248,6 +246,7 @@ void
 Podtique::stop()
 {
 	mAudioMute.set(true);		//	Mute audio
+	setBacklightColor(0, 0, 0);
 	
 }
 
