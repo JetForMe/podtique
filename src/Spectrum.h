@@ -124,7 +124,7 @@ private:
 	
 	std::vector<Station>			mStations;
 	int32_t							mCurrentStationIndex;
-	MP3Decoder*						mCurrentTrack;
+	MP3Decoder*						mDecoder;
 };
 
 

@@ -82,7 +82,7 @@ Spectrum::Spectrum(const std::string& inDataDirectory)
 	mFrequency(0.0),
 	mNeedsTuning(true),
 	mCurrentStationIndex(-1),
-	mCurrentTrack(NULL)
+	mDecoder(NULL)
 {
 	//	For now, hard-code some stations and playlists…
 	
@@ -118,7 +118,7 @@ Spectrum::Spectrum(const std::string& inDataDirectory)
 
 	//	Create the MP3 decoder…
 	
-	mCurrentTrack = new MP3Decoder();
+	mDecoder = new MP3Decoder();
 }
 
 bool
@@ -237,7 +237,7 @@ Spectrum::setFrequency(float inFrequency)
 
 /**
 	updateTuning() ensures that the right sound file is open for the given frequency. It must
-	be called before any operation that accesses mCurrentTrack to ensure the correct state,
+	be called before any operation that accesses mDecoder to ensure the correct state,
 	particularly before calling getStationAudioData() and minimumBufferSize(), generally
 	once before each in the main Radio loop.
 */
@@ -277,7 +277,7 @@ Spectrum::updateTuning()
 			if (mCurrentStationIndex >= 0)
 			{
 				Station& station = mStations[mCurrentStationIndex];
-				station.setLastPausedFrame(mCurrentTrack->currentFrame());
+				station.setLastPausedFrame(mDecoder->currentFrame());
 				
 				mCurrentStationIndex = -1;
 				LogDebug("Tuned no station");
@@ -340,7 +340,7 @@ Spectrum::openStationTrack()
 	while (true)
 	{
 		const std::string& path = station.trackPath();
-		bool success = mCurrentTrack->open(path);
+		bool success = mDecoder->open(path);
 		if (!success)
 		{
 			//	The current track failed to open, so we must reset
@@ -370,20 +370,20 @@ Spectrum::openStationTrack()
 	
 	if (station.lastPausedFrame() != 0)
 	{
-		mCurrentTrack->setCurrentFrame(station.lastPausedFrame());
+		mDecoder->setCurrentFrame(station.lastPausedFrame());
 	}
 	
 	//	Verify the encoder parameters…
 	//	TODO: Need to re-configure everything when this changes.
 	
-	if (mCurrentTrack->encoding() != MPG123_ENC_SIGNED_16
-		|| (mCurrentTrack->numChannels() != 2 && mCurrentTrack->numChannels() != 1)
-		|| mCurrentTrack->rate() != 44100)
+	if (mDecoder->encoding() != MPG123_ENC_SIGNED_16
+		|| (mDecoder->numChannels() != 2 && mDecoder->numChannels() != 1)
+		|| mDecoder->rate() != 44100)
 	{
 		LogDebug("Unexpected encoding (%d), rate (%ld), or num channels (%d)",
-					mCurrentTrack->encoding(),
-					mCurrentTrack->rate(),
-					mCurrentTrack->numChannels());
+					mDecoder->encoding(),
+					mDecoder->rate(),
+					mDecoder->numChannels());
 		return false;
 	}
 
@@ -413,7 +413,7 @@ Spectrum::getStationAudioData(void* inBuffer, size_t inBufferSize, size_t& outBy
 		return false;
 	}
 	
-	bool success = mCurrentTrack->read(inBuffer, inBufferSize, outBytesDecoded);
+	bool success = mDecoder->read(inBuffer, inBufferSize, outBytesDecoded);
 	if (!success)
 	{
 		//	If this track is done, advance to the next…
@@ -421,12 +421,12 @@ Spectrum::getStationAudioData(void* inBuffer, size_t inBufferSize, size_t& outBy
 		//			If there is decoded data, it needs to be played first,
 		//			and the track advanced after…
 		
-		if (mCurrentTrack->done())
+		if (mDecoder->done())
 		{
 			Station& station = mStations[mCurrentStationIndex];
 			station.nextTrack();
 			openStationTrack();
-			success = mCurrentTrack->read(inBuffer, inBufferSize, outBytesDecoded);
+			success = mDecoder->read(inBuffer, inBufferSize, outBytesDecoded);
 		}
 	}
 	
@@ -437,19 +437,19 @@ Spectrum::getStationAudioData(void* inBuffer, size_t inBufferSize, size_t& outBy
 size_t
 Spectrum::minimumBufferSize() const
 {
-	return mCurrentTrack->minimumBufferSize();
+	return mDecoder->minimumBufferSize();
 }
 
 int
 Spectrum::numChannels() const
 {
-	return mCurrentTrack->numChannels();
+	return mDecoder->numChannels();
 }
 
 uint32_t
 Spectrum::rate() const
 {
-	return (uint32_t) mCurrentTrack->rate();
+	return (uint32_t) mDecoder->rate();
 }
 
 void
