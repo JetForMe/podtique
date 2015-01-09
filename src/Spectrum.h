@@ -68,6 +68,8 @@ private:
 	std::string						mCurrentTrack;
 	uint32_t						mCurrentTrackIdx;
 	off_t							mLastPausedFrame;
+
+	MP3Decoder*						mDecoder;
 };
 
 

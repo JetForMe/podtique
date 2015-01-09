@@ -313,7 +313,17 @@ Spectrum::updateTuning()
 			
 			df = kStationHalfBand - df;
 			mContentWeight = df / kStationHalfBand;
-			mStaticWeight = 1.0 - mContentWeight;
+			
+			//	If we’re close to the center frequency, just kill the noise…
+			
+			if (df < 0.003)
+			{
+				mStaticWeight = 0.0;
+			}
+			else
+			{
+				mStaticWeight = 1.0 - mContentWeight;
+			}
 			//LogDebug("df: %f %f", df, f);
 		}
 		else
