@@ -49,6 +49,8 @@ Station
 {
 public:
 									Station(float inFrequency, const std::string& inDesc);
+	virtual							~Station();
+	
 	void							addTrack(const std::string& inPath);
 	
 	float							frequency()							const		{ return mFrequency; }
@@ -60,6 +62,17 @@ public:
 	void							nextTrack();
 	uint32_t						trackIdx()							const		{ return mCurrentTrackIdx; }
 	
+	MP3Decoder*						decoder()							const;
+	
+	size_t							minimumBufferSize()					const;
+	int								numChannels()						const;
+	uint32_t						rate()								const;
+	
+	bool							getAudioData(void* inBuffer, size_t inBufferSize, size_t& outBytesDecoded) const;
+
+protected:
+	bool							openTrack();
+
 private:
 	float							mFrequency;
 	std::string						mDesc;
@@ -101,15 +114,12 @@ public:
 	float							contentWeight()						const		{ return mContentWeight; }
 	float							staticWeight()						const		{ return mStaticWeight; }
 	
-	int								numChannels()						const;
-	uint32_t						rate()								const;
-	
 	void							updateTuning();
-	bool							openStationTrack();
-	size_t							minimumBufferSize()					const;
-	bool							getStationAudioData(void* inBuffer, size_t inBufferSize, size_t& outBytesDecoded);
 	
 	void							addStation(const Station& inStation);
+	
+	size_t							minimumBufferSize()					const;
+	bool							getStationAudioData(void* inBuffer, size_t inBufferSize, size_t& outBytesDecoded) const;
 	
 protected:
 	bool							parseSpectrum(const picojson::value& inJSON);
@@ -126,7 +136,6 @@ private:
 	
 	std::vector<Station>			mStations;
 	int32_t							mCurrentStationIndex;
-	MP3Decoder*						mDecoder;
 };
 
 

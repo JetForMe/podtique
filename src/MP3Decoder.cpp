@@ -42,6 +42,7 @@ MP3Decoder::MP3Decoder()
 	mNumChannels(0),
 	mEncoding(0)
 {
+	createDecoder();
 }
 
 MP3Decoder::~MP3Decoder()
