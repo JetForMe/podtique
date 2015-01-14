@@ -3,6 +3,8 @@ Podtique
 
 A podcast and music player that simulates the interface and sound quality of an antique radio.
 
+<img src="https://farm8.staticflickr.com/7513/16266541492_0c1e3a7c20_n.jpg" style="display: block; margin-left: auto; margin-right: auto;"/>
+
 The code is designed to be simulated on OS X and deployed onto a [BeagleBone Black](http://beagleboard.org/black) running Linux. Currently, it builds in Xcode as a native app, and in a recent Linux as a command-line tool. Eventually it should support cross-compilation to ARM.
 
 As of this writing, the code barely plays something, and what it plays is hard-coded.
