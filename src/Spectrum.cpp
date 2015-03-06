@@ -255,7 +255,7 @@ Spectrum::updateTuning()
 		mLastFrequency = mFrequency;
 		mNeedsTuning = false;
 		
-		int32_t stationIdx = -1;
+		int32_t newStationIdx = -1;
 		for (uint32_t i = 0; i < mStations.size(); ++i)
 		{
 			const Station& station = mStations[i];
@@ -263,18 +263,18 @@ Spectrum::updateTuning()
 			float maxSF = station.frequency() + kStationHalfBand;
 			if (minSF <= mLastFrequency && mLastFrequency <= maxSF)
 			{
-				stationIdx = i;
+				newStationIdx = i;
 				break;
 			}
 		}
 		
-		if (stationIdx < 0)
-		{
-			//	The new frequency tunes no station, so note the playback
-			//	position any current station, and return false, indicating
-			//	no audio data is available…
+		//	The new frequency does not tune the current station, so note the playback
+		//	position any current station, and return false, indicating
+		//	no audio data is available…
 			
-			if (mCurrentStationIndex >= 0)
+		if (newStationIdx != mCurrentStationIndex)
+		{
+			if (mCurrentStationIndex >= 0)		//	There was a station, remember its state…
 			{
 				Station& station = mStations[mCurrentStationIndex];
 				station.setLastPausedFrame(mDecoder->currentFrame());
@@ -284,19 +284,14 @@ Spectrum::updateTuning()
 				
 				//	TODO: persist the station data
 			}
-		}
-		else
-		{
-			//	There is a station tuned. If it’s different from the currently-
-			//	tuned station, then reset the decoder for the new track…
-			
-			if (mCurrentStationIndex != stationIdx)
+			else if (newStationIdx >= 0)
 			{
-				//	Set the new station…
-				
-				mCurrentStationIndex = stationIdx;
+				//	There is a station tuned. If it’s different from the currently-
+				//	tuned station, then reset the decoder for the new track…
+			
+				mCurrentStationIndex = newStationIdx;
 				LogDebug("Tuned station: %s", mStations[mCurrentStationIndex].desc().c_str());
-				
+			
 				if (!openStationTrack())
 				{
 				}
