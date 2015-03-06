@@ -40,8 +40,14 @@ Station::Station(float inFrequency, const std::string& inDesc)
 	mFrequency(inFrequency),
 	mDesc(inDesc),
 	mCurrentTrackIdx(0),
-	mLastPausedFrame(0)
+	mLastPausedFrame(0),
+	mDecoder(NULL)
 {
+}
+
+Station::~Station()
+{
+	delete mDecoder;
 }
 
 void
@@ -72,6 +78,138 @@ Station::nextTrack()
 	mLastPausedFrame = 0;
 }
 
+/**
+	Gets the next bufferful of decoded audio data from the current station.
+	Returns true if successful, false if there’s no more data or an error
+	occurred.
+	
+	This method ensures that the correct audio stream is being read, based
+	on the configuration and currently-selected frequency.
+*/
+
+bool
+Station::getAudioData(void* inBuffer, size_t inBufferSize, size_t& outBytesDecoded) const
+{
+	//	This call happens hundreds of times per second, so
+	//	everything in here or called from here needs to be fast…
+	
+	bool success = decoder()->read(inBuffer, inBufferSize, outBytesDecoded);
+	if (!success)
+	{
+		//	If this track is done, advance to the next…
+		//	TOOD: Verify that no data is decoded along with the done flag.
+		//			If there is decoded data, it needs to be played first,
+		//			and the track advanced after…
+		
+		if (decoder()->done())
+		{
+			Station* self = const_cast<Station*> (this);
+			self->nextTrack();
+			self->openTrack();
+			success = decoder()->read(inBuffer, inBufferSize, outBytesDecoded);
+		}
+	}
+	
+	return success;
+}
+
+/**
+	Opens the current station’s current track.
+*/
+
+bool
+Station::openTrack()
+{
+	//	Open the station’s current track. If that fails,
+	//	move on to the next one. Return false if none could be
+	//	opened…
+	
+	uint32_t startTrackIdx = trackIdx();
+	while (true)
+	{
+		const std::string& path = trackPath();
+		bool success = mDecoder->open(path);
+		if (!success)
+		{
+			//	The current track failed to open, so we must reset
+			//	any remembered frame…
+			
+			LogDebug("Error opening track '%s'", path.c_str());
+			setLastPausedFrame(0);
+			
+			//	Try the next track. Station will automatically wrap.
+			//	If we come back to the one we were on, bail…
+			
+			nextTrack();
+			if (trackIdx() == startTrackIdx)
+			{
+				LogDebug("Unable to open any track for station “%s”", desc().c_str());
+				return false;
+			}
+		}
+		else
+		{
+			LogDebug("Opened track '%s'", path.c_str());
+			break;
+		}
+	}
+	
+	//	Set the set the decoder to where it last left off…
+	
+	if (lastPausedFrame() != 0)
+	{
+		mDecoder->setCurrentFrame(lastPausedFrame());
+	}
+	
+	//	Verify the encoder parameters…
+	//	TODO: Need to re-configure everything when this changes.
+	
+	if (mDecoder->encoding() != MPG123_ENC_SIGNED_16
+		|| (mDecoder->numChannels() != 2 && mDecoder->numChannels() != 1)
+		|| mDecoder->rate() != 44100)
+	{
+		LogDebug("Unexpected encoding (%d), rate (%ld), or num channels (%d)",
+					mDecoder->encoding(),
+					mDecoder->rate(),
+					mDecoder->numChannels());
+		return false;
+	}
+
+	return true;
+}
+
+MP3Decoder*
+Station::decoder() const
+{
+	if (mDecoder == NULL)
+	{
+		Station* self = const_cast<Station*> (this);
+		self->mDecoder = new MP3Decoder();
+		self->openTrack();
+	}
+	
+	return mDecoder;
+}
+
+
+size_t
+Station::minimumBufferSize() const
+{
+	return decoder()->minimumBufferSize();
+}
+
+int
+Station::numChannels() const
+{
+	return decoder()->numChannels();
+}
+
+uint32_t
+Station::rate() const
+{
+	return (uint32_t) decoder()->rate();
+}
+
 
 #pragma mark -
 #pragma mark • Spectrum
@@ -81,8 +219,7 @@ Spectrum::Spectrum(const std::string& inDataDirectory)
 	mDataDirectory(inDataDirectory),
 	mFrequency(0.0),
 	mNeedsTuning(true),
-	mCurrentStationIndex(-1),
-	mDecoder(NULL)
+	mCurrentStationIndex(-1)
 {
 	//	For now, hard-code some stations and playlists…
 	
@@ -115,10 +252,6 @@ Spectrum::Spectrum(const std::string& inDataDirectory)
 	
 	parseSpectrum(json);
 #endif
-
-	//	Create the MP3 decoder…
-	
-	mDecoder = new MP3Decoder();
 }
 
 bool
@@ -276,9 +409,6 @@ Spectrum::updateTuning()
 		{
 			if (mCurrentStationIndex >= 0)		//	There was a station, remember its state…
 			{
-				Station& station = mStations[mCurrentStationIndex];
-				station.setLastPausedFrame(mDecoder->currentFrame());
-				
 				mCurrentStationIndex = -1;
 				LogDebug("Tuned no station");
 				
@@ -308,7 +438,17 @@ Spectrum::updateTuning()
 			
 			df = kStationHalfBand - df;
 			mContentWeight = df / kStationHalfBand;
-			mStaticWeight = 1.0 - mContentWeight;
+			
+			//	If we’re close to the center frequency, just kill the noise…
+			
+			if (df < 0.003)
+			{
+				mStaticWeight = 0.0;
+			}
+			else
+			{
+				mStaticWeight = 1.0 - mContentWeight;
+			}
 			//LogDebug("df: %f %f", df, f);
 		}
 		else
@@ -319,136 +459,33 @@ Spectrum::updateTuning()
 	}
 }
 
-/**
-	Opens the current station’s current track.
-*/
-
-bool
-Spectrum::openStationTrack()
-{
-	//	Open the station’s current track. If that fails,
-	//	move on to the next one. Return false if none could be
-	//	opened…
-	
-	Station& station = mStations[mCurrentStationIndex];
-	uint32_t startTrackIdx = station.trackIdx();
-	while (true)
-	{
-		const std::string& path = station.trackPath();
-		bool success = mDecoder->open(path);
-		if (!success)
-		{
-			//	The current track failed to open, so we must reset
-			//	any remembered frame…
-			
-			LogDebug("Error opening track '%s'", path.c_str());
-			station.setLastPausedFrame(0);
-			
-			//	Try the next track. Station will automatically wrap.
-			//	If we come back to the one we were on, bail…
-			
-			station.nextTrack();
-			if (station.trackIdx() == startTrackIdx)
-			{
-				LogDebug("Unable to open any track for station “%s”", station.desc().c_str());
-				return false;
-			}
-		}
-		else
-		{
-			LogDebug("Opened track '%s'", path.c_str());
-			break;
-		}
-	}
-	
-	//	Set the set the decoder to where it last left off…
-	
-	if (station.lastPausedFrame() != 0)
-	{
-		mDecoder->setCurrentFrame(station.lastPausedFrame());
-	}
-	
-	//	Verify the encoder parameters…
-	//	TODO: Need to re-configure everything when this changes.
-	
-	if (mDecoder->encoding() != MPG123_ENC_SIGNED_16
-		|| (mDecoder->numChannels() != 2 && mDecoder->numChannels() != 1)
-		|| mDecoder->rate() != 44100)
-	{
-		LogDebug("Unexpected encoding (%d), rate (%ld), or num channels (%d)",
-					mDecoder->encoding(),
-					mDecoder->rate(),
-					mDecoder->numChannels());
-		return false;
-	}
-
-	return true;
-}
-
-/**
-	Gets the next bufferful of decoded audio data from the current station.
-	Returns true if successful, false if there’s no more data or an error
-	occurred.
-	
-	This method ensures that the correct audio stream is being read, based
-	on the configuration and currently-selected frequency.
-*/
-
-bool
-Spectrum::getStationAudioData(void* inBuffer, size_t inBufferSize, size_t& outBytesDecoded)
-{
-	//	This call happens hundreds of times per second, so
-	//	everything in here or called from here needs to be fast…
-	
-	//	If there's a station, get the audio data from the current track,
-	//	otherwise return false…
-	
-	if (mCurrentStationIndex < 0)
-	{
-		return false;
-	}
-	
-	bool success = mDecoder->read(inBuffer, inBufferSize, outBytesDecoded);
-	if (!success)
-	{
-		//	If this track is done, advance to the next…
-		//	TOOD: Verify that no data is decoded along with the done flag.
-		//			If there is decoded data, it needs to be played first,
-		//			and the track advanced after…
-		
-		if (mDecoder->done())
-		{
-			Station& station = mStations[mCurrentStationIndex];
-			station.nextTrack();
-			openStationTrack();
-			success = mDecoder->read(inBuffer, inBufferSize, outBytesDecoded);
-		}
-	}
-	
-	return success;
-}
-
-
-size_t
-Spectrum::minimumBufferSize() const
-{
-	return mDecoder->minimumBufferSize();
-}
-
-int
-Spectrum::numChannels() const
-{
-	return mDecoder->numChannels();
-}
-
-uint32_t
-Spectrum::rate() const
-{
-	return (uint32_t) mDecoder->rate();
-}
-
 void
 Spectrum::addStation(const Station& inStation)
 {
 	mStations.push_back(inStation);
 }
+
+size_t
+Spectrum::minimumBufferSize() const
+{
+	if (mCurrentStationIndex < 0)
+	{
+		return 0;
+	}
+	
+	const Station& station = mStations[mCurrentStationIndex];
+	return station.minimumBufferSize();
+}
+
+bool
+Spectrum::getStationAudioData(void* inBuffer, size_t inBufferSize, size_t& outBytesDecoded) const
+{
+	if (mCurrentStationIndex < 0)
+	{
+		return false;
+	}
+	
+	const Station& station = mStations[mCurrentStationIndex];
+	return station.getAudioData(inBuffer, inBufferSize, outBytesDecoded);
+}
+

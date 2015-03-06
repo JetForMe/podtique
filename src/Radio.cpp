@@ -229,6 +229,11 @@ Radio::processAudioAndOutput(void* ioBuffer, size_t inBufSize)
 			mPNBufIdx = 0;
 		}
 		
+		float volume = 0.0;
+		{
+			std::lock_guard<std::mutex>		lock(mConfigMutex);
+			volume = mVolume;
+		}
 		p[i] = mVolume * (p[i] * mSpectrum->contentWeight() + noise * mSpectrum->staticWeight() * 0.2);
 	}
 	
