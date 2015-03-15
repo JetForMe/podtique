@@ -1,0 +1,5 @@
+project.xcworkspace
+xcuserdata
+.DS_Store
+node_modules
+/radio
