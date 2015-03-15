@@ -31,6 +31,7 @@
 #include "Semaphore.h"
 
 class AudioDevice;
+class DBUS;
 class MP3Decoder;
 class Spectrum;
 class SndFile;
@@ -78,6 +79,8 @@ private:
 	int16_t*			mZeroBuffer;
 	
 	AudioDevice*		mOutputDevice;
+	
+	DBUS*				mBus;
 };
 
 #endif /* defined(__WoodenRadio__Radio__) */

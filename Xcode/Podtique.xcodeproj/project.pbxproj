@@ -25,6 +25,9 @@
 		C6B5DFEC1A34E9AF00A3A9ED /* AudioDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6B5DFEA1A34E9AF00A3A9ED /* AudioDevice.cpp */; };
 		C6B5DFF01A35AD8200A3A9ED /* SndFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6B5DFEE1A35AD8200A3A9ED /* SndFile.cpp */; };
 		C6B5DFF21A35B49700A3A9ED /* libsndfile.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B5DFF11A35B49700A3A9ED /* libsndfile.1.dylib */; };
+		C6F066751AAFE1D400EDC3E9 /* libdbus-1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C6F066741AAFE1D400EDC3E9 /* libdbus-1.3.dylib */; };
+		C6F066781AAFF00C00EDC3E9 /* DBUS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6F066761AAFF00C00EDC3E9 /* DBUS.cpp */; };
+		C6F0667B1AB03E5000EDC3E9 /* DBusMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6F066791AB03E5000EDC3E9 /* DBusMessage.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,7 +81,12 @@
 		C6B5DFED1A3599FE00A3A9ED /* RadioConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RadioConstants.h; sourceTree = "<group>"; };
 		C6B5DFEE1A35AD8200A3A9ED /* SndFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SndFile.cpp; sourceTree = "<group>"; };
 		C6B5DFEF1A35AD8200A3A9ED /* SndFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SndFile.h; sourceTree = "<group>"; };
-		C6B5DFF11A35B49700A3A9ED /* libsndfile.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsndfile.1.dylib; path = ../../../../../../usr/local/Cellar/libsndfile/1.0.25/lib/libsndfile.1.dylib; sourceTree = "<group>"; };
+		C6B5DFF11A35B49700A3A9ED /* libsndfile.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsndfile.1.dylib; path = /usr/local/Cellar/libsndfile/1.0.25/lib/libsndfile.1.dylib; sourceTree = "<absolute>"; };
+		C6F066741AAFE1D400EDC3E9 /* libdbus-1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libdbus-1.3.dylib"; path = "/usr/local/Cellar/d-bus/1.8.14/lib/libdbus-1.3.dylib"; sourceTree = "<absolute>"; };
+		C6F066761AAFF00C00EDC3E9 /* DBUS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DBUS.cpp; sourceTree = "<group>"; };
+		C6F066771AAFF00C00EDC3E9 /* DBUS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBUS.h; sourceTree = "<group>"; };
+		C6F066791AB03E5000EDC3E9 /* DBusMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DBusMessage.cpp; sourceTree = "<group>"; };
+		C6F0667A1AB03E5000EDC3E9 /* DBusMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBusMessage.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6F066751AAFE1D400EDC3E9 /* libdbus-1.3.dylib in Frameworks */,
 				C6B5DFF21A35B49700A3A9ED /* libsndfile.1.dylib in Frameworks */,
 				C6B5DFE11A31A95A00A3A9ED /* libao.4.dylib in Frameworks */,
 				C6B5DFDF1A31A95000A3A9ED /* libmpg123.0.dylib in Frameworks */,
@@ -115,7 +124,6 @@
 		C6B5DF991A31A89A00A3A9ED = {
 			isa = PBXGroup;
 			children = (
-				C6B5DFF11A35B49700A3A9ED /* libsndfile.1.dylib */,
 				C6B5DFE51A31AF1500A3A9ED /* Makefile */,
 				C6B5DFE21A31AEB900A3A9ED /* README.md */,
 				C6B2152C1A3C3B2D0043E3FD /* ExampleSpectrum.json */,
@@ -184,6 +192,10 @@
 				C6B5DFEA1A34E9AF00A3A9ED /* AudioDevice.cpp */,
 				C618FFAA1A43989E00A66EE6 /* BandPassFilter.h */,
 				C618FFA91A43989E00A66EE6 /* BandPassFilter.cpp */,
+				C6F066771AAFF00C00EDC3E9 /* DBUS.h */,
+				C6F066761AAFF00C00EDC3E9 /* DBUS.cpp */,
+				C6F0667A1AB03E5000EDC3E9 /* DBusMessage.h */,
+				C6F066791AB03E5000EDC3E9 /* DBusMessage.cpp */,
 				C6B5DFCD1A31A8D500A3A9ED /* MP3Decoder.h */,
 				C6B5DFCC1A31A8D500A3A9ED /* MP3Decoder.cpp */,
 				C6B5DFCE1A31A8D500A3A9ED /* picojson.h */,
@@ -209,7 +221,9 @@
 			isa = PBXGroup;
 			children = (
 				C6B5DFE01A31A95A00A3A9ED /* libao.4.dylib */,
+				C6F066741AAFE1D400EDC3E9 /* libdbus-1.3.dylib */,
 				C6B5DFDE1A31A95000A3A9ED /* libmpg123.0.dylib */,
+				C6B5DFF11A35B49700A3A9ED /* libsndfile.1.dylib */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -315,10 +329,12 @@
 			files = (
 				C6200C811A501C8300FB48AD /* GPIO.cpp in Sources */,
 				C6B5DFAE1A31A89A00A3A9ED /* ViewController.mm in Sources */,
+				C6F066781AAFF00C00EDC3E9 /* DBUS.cpp in Sources */,
 				C6200C7D1A4FF99400FB48AD /* Semaphore.cpp in Sources */,
 				C6B5DFE91A33B0EC00A3A9ED /* Spectrum.cpp in Sources */,
 				C6B5DFEC1A34E9AF00A3A9ED /* AudioDevice.cpp in Sources */,
 				C618FFAB1A43989E00A66EE6 /* BandPassFilter.cpp in Sources */,
+				C6F0667B1AB03E5000EDC3E9 /* DBusMessage.cpp in Sources */,
 				C6B5DFD91A31A8D500A3A9ED /* MP3Decoder.cpp in Sources */,
 				C6B5DFAB1A31A89A00A3A9ED /* main.m in Sources */,
 				C6B5DFA91A31A89A00A3A9ED /* AppDelegate.mm in Sources */,
@@ -444,6 +460,8 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/local/include,
+					"/usr/local/include/dbus-1.0",
+					"/usr/local/lib/dbus-1.0/include",
 				);
 				INFOPLIST_FILE = Podtique/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -451,6 +469,7 @@
 					"$(inherited)",
 					/usr/local/lib,
 					/usr/local/Cellar/libsndfile/1.0.25/lib,
+					"/usr/local/Cellar/d-bus/1.8.14/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -466,6 +485,8 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/local/include,
+					"/usr/local/include/dbus-1.0",
+					"/usr/local/lib/dbus-1.0/include",
 				);
 				INFOPLIST_FILE = Podtique/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -473,6 +494,7 @@
 					"$(inherited)",
 					/usr/local/lib,
 					/usr/local/Cellar/libsndfile/1.0.25/lib,
+					"/usr/local/Cellar/d-bus/1.8.14/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

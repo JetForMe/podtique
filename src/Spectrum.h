@@ -114,7 +114,7 @@ public:
 	float							contentWeight()						const		{ return mContentWeight; }
 	float							staticWeight()						const		{ return mStaticWeight; }
 	
-	void							updateTuning();
+	bool							updateTuning();
 	
 	void							addStation(const Station& inStation);
 	

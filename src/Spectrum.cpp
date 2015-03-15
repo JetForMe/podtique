@@ -373,15 +373,19 @@ Spectrum::setFrequency(float inFrequency)
 	be called before any operation that accesses mDecoder to ensure the correct state,
 	particularly before calling getStationAudioData() and minimumBufferSize(), generally
 	once before each in the main Radio loop.
+	
+	Return true if the station changed.
 */
 
-void
+bool
 Spectrum::updateTuning()
 {
 	//	Select the appropriate station…
 	
 	if (mNeedsTuning)
 	{
+		int32_t lastStationIdx = mCurrentStationIndex;
+		
 		//	First pass at this code is to just iterate through the list of stations, and find
 		//	the one that’s close enough to the tuned frequency…
 		
@@ -457,6 +461,8 @@ Spectrum::updateTuning()
 			mContentWeight = 0.0;
 			mStaticWeight = 1.0;
 		}
+		
+		return lastStationIdx != mCurrentStationIndex;
 	}
 }
 

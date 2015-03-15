@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Podtique</title>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="/css/screen.css" />
+</head>
+<body>
+	<% req.pn = "home"; %>
+	<% include ../mainNav.html.ejs %>
+
+    <div class="container" style="padding-top: 2em;">
+
+		<p>Radio: <span id="radioStatus"></span></p>
+		
+      <button id="on">Radio On</button>
+      <button id="off">Radio Off</button>
+
+    </div>
+    
+	<script src="/js/jquery-2.1.3.min.js"></script>
+	<script src="/js/socket.io.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script>
+		$(document).ready(function()
+		{
+			var socket = io();
+			$("#on").click(function()
+			{
+				socket.emit("radioOn");
+			});
+			$("#off").click(function()
+			{
+				socket.emit("radioOff");
+			});
+			
+			socket.on("radioOn", function(inMsg)
+			{
+				$("#radioStatus").text("On");
+			});
+			
+			socket.on("radioOff", function(inMsg)
+			{
+				$("#radioStatus").text("Off");
+			});
+		});
+  	</script>
+</body>
+</html>

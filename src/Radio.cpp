@@ -29,6 +29,7 @@
 //
 
 #include "AudioDevice.h"
+#include "DBUS.h"
 #include "MP3Decoder.h"
 #include "RadioConstants.h"
 #include "RadioDebug.h"
@@ -60,7 +61,8 @@ Radio::Radio(const std::string& inDataDirectory)
 	mVolume(0.0),
 	mOn(false),
 	mPinkNoise(NULL),
-	mOutputDevice(NULL)
+	mOutputDevice(NULL),
+	mBus(NULL)
 {
 	LogDebug("Using data directory: '%s'", mDataDirectory.c_str());
 	
@@ -79,6 +81,11 @@ Radio::Radio(const std::string& inDataDirectory)
 	mSpectrum = new Spectrum(mDataDirectory);
 	mOutputDevice = new AudioDevice();
 	mOutputDevice->setFormat(1, 44100);
+	
+	mBus = new DBUS();
+	mBus->open();
+	mBus->start();
+	mBus->sendRadioState(true);
 }
 
 void
@@ -135,6 +142,8 @@ Radio::setVolume(float inVal)
 void
 Radio::setOn(bool inVal)
 {
+	mBus->sendRadioState(inVal);
+	
 	std::lock_guard<std::mutex>		lock(mConfigMutex);
 	
 	if (inVal == mOn)
@@ -170,7 +179,11 @@ Radio::entry()
 		//	loop…
 		
 		mSpectrum->setFrequency(frequency());
-		mSpectrum->updateTuning();
+		bool changed = mSpectrum->updateTuning();
+		if (changed)
+		{
+			mBus->sendStationName
+		}
 		
 #if 0
 		if (mSpectrum->stationTuned())

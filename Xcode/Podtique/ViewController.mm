@@ -32,6 +32,8 @@ viewDidLoad
 
 	NSURL* dir = [[NSFileManager defaultManager] URLsForDirectory: NSDesktopDirectory inDomains: NSUserDomainMask].lastObject;
 	dir = [dir URLByAppendingPathComponent: @"TAHReencoded"];
+	NSLog(@"Content dir: '%@'", dir.path);
+	
 	if (dir != nil)
 	{
 		const char* path = dir.path.UTF8String;
