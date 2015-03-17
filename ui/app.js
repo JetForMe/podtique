@@ -4,6 +4,7 @@ var dbus = require('dbus-native');
 var server = require('http').Server(app);
 var sio = require('socket.io')(server);
 var util = require('util');
+var Wireless = require("wireless");
 
 //	Setup dbus…
 
@@ -62,6 +63,31 @@ setRadioStatus(inOn)
 		body: [inOn]
 	});
 }
+
+//	Look for wireless networks…
+
+var wifi = new Wireless({ iface : "en0" });
+wifi.enable(function(inError)
+{
+	if (inError)
+	{
+		console.log("Error enabling wifi: " + inError);
+		return;
+	}
+	
+	wifi.start();
+});
+
+wifi.on("error", function(inMsg)
+{
+	console.log("Wifi error " + inMsg);
+});
+
+wifi.on("appear", function(inNetwork)
+{
+	var ssid = inNetwork.ssid || "<HIDDEN>";
+	console.log("New network: " + ssid);
+});
 
 //	Set up the server…
 
