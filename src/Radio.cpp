@@ -182,7 +182,7 @@ Radio::entry()
 		bool changed = mSpectrum->updateTuning();
 		if (changed)
 		{
-			mBus->sendStationName
+			//mBus->sendStationName
 		}
 		
 #if 0
