@@ -1,10 +1,12 @@
 var express = require('express');
 var app = express();
 var dbus = require('dbus-native');
+var fs = require("fs");
 var server = require('http').Server(app);
 var sio = require('socket.io')(server);
 var util = require('util');
 var Wireless = require("wireless");
+var config = require("./config");
 
 //	Setup dbus…
 
@@ -55,8 +57,8 @@ function
 setRadioStatus(inOn)
 {
 	bus.invoke({
-		destination: "com.latencyzero.podtique",
 		path: "/com/latencyzero/podtique",
+		destination: "com.latencyzero.podtique",
 		interface: "com.latencyzero.podtique",
 		member: "RadioStatus",
 		signature: "b",
@@ -80,7 +82,7 @@ wifi.enable(function(inError)
 
 wifi.on("error", function(inMsg)
 {
-	console.log("Wifi error " + inMsg);
+	//console.log("Wifi error " + inMsg);
 });
 
 wifi.on("appear", function(inNetwork)
@@ -140,6 +142,37 @@ app.get("/stations", stations.index);
 var settings = require(__dirname + "/controllers/settings");
 app.get("/settings", settings.index);
 
+//	Our REST API…
+
+app.get("/api/v1", function(inReq, inResp)
+{
+	inResp.send("Radio API is running");
+});
+
+app.get("/api/v1/spectrum", function(inReq, inResp)
+{
+	//	Read the current spectrum file…
+	
+	console.log("Serving spectrum file: " + config.spectrumPath);
+	fs.readFile(config.spectrumPath, 'utf8', function(inErr, inData)
+	{
+		if (inErr) throw inErr;
+		
+		//	Iterate through the stations, and make an array
+		//	of them (without the playlist information)…
+		
+		var stations = [];
+		var spectrum = JSON.parse(inData);
+		for (var i = 0; i < spectrum.length; ++i)
+		{
+			var station = spectrum[i];
+			var retStation = { desc : station.desc, freq : station.freq };
+			console.log("Station: " + retStation.desc);
+			stations.push(retStation);
+		}
+		inResp.send(stations);
+	});
+});
 
 //	Start the server…
 
