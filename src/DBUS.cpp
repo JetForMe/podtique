@@ -33,7 +33,6 @@
 
 
 
-
 void
 DBUS::Unregister(DBusConnection* inBus, void* inUserData)
 {
