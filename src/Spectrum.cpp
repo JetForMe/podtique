@@ -426,7 +426,7 @@ Spectrum::updateTuning()
 				mCurrentStationIndex = newStationIdx;
 				LogDebug("Tuned station: %s", mStations[mCurrentStationIndex].desc().c_str());
 			
-				if (!openStationTrack())
+				//if (!openStationTrack())
 				{
 				}
 			}
@@ -463,6 +463,8 @@ Spectrum::updateTuning()
 		
 		return lastStationIdx != mCurrentStationIndex;
 	}
+	
+	return false;	//	TODO: finish this implementation!
 }
 
 void

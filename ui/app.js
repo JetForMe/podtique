@@ -59,7 +59,7 @@ setRadioStatus(inOn)
 		path: "/com/latencyzero/podtique",
 		interface: "com.latencyzero.podtique",
 		member: "RadioStatus",
-		signature:"b",
+		signature: "b",
 		body: [inOn]
 	});
 }

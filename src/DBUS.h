@@ -41,9 +41,7 @@ public:
 	
 	void						start();
 	
-	void						open();
-	
-	bool						sendRadioState(bool inOn);
+	virtual	void				open(const char* inPath);
 	
 protected:
 	void						entry();
@@ -56,6 +54,14 @@ protected:
 	
 	static
 	DBusHandlerResult			HandleMessage(DBusConnection* inBus, DBusMessage* inMsg, void* inUserData);
+	
+	virtual
+	DBusHandlerResult			handleMessage(DBusMessage* inMsg);
+	
+	DBusConnection*				connection()				const		{ return mBus; }
+	
+	const char*					getUniqueName()				const		{ return ::dbus_bus_get_unique_name(mBus); }
+	int							requestName(const char* inName, unsigned int inFlags = 0);
 	
 private:
 	std::thread					mDispatchThread;

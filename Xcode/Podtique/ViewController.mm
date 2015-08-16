@@ -30,8 +30,9 @@ viewDidLoad
 {
 	[super viewDidLoad];
 
-	NSURL* dir = [[NSFileManager defaultManager] URLsForDirectory: NSDesktopDirectory inDomains: NSUserDomainMask].lastObject;
-	dir = [dir URLByAppendingPathComponent: @"TAHReencoded"];
+//	NSURL* dir = [[NSFileManager defaultManager] URLsForDirectory: NSDesktopDirectory inDomains: NSUserDomainMask].lastObject;
+//	dir = [dir URLByAppendingPathComponent: @"TAHReencoded"];
+	NSURL* dir = [NSURL fileURLWithPath: @"/Users/rmann/Projects/Podtique/TAHReencoded"];
 	NSLog(@"Content dir: '%@'", dir.path);
 	
 	if (dir != nil)

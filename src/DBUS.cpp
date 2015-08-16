@@ -33,13 +33,6 @@
 
 
 
-const char*	kDestination				=	"com.latencyzero.podtique";
-const char*	kDestinationWeb				=	"com.latencyzero.podtique.ui";
-const char* kPath						=	"/com/latencyzero/podtique";
-const char* kInterface					=	"com.latencyzero.podtique";
-const char* kMethodRadioStatus			=	"RadioStatus";
-
-
 
 void
 DBUS::Unregister(DBusConnection* inBus, void* inUserData)
@@ -50,25 +43,21 @@ DBUS::Unregister(DBusConnection* inBus, void* inUserData)
 DBusHandlerResult
 DBUS::HandleMessage(DBusConnection* inBus, DBusMessage* inMsg, void* inUserData)
 {
-	const char* path = ::dbus_message_get_path(inMsg);
-	LogDebug("HandleMessage. path: %s", path);
-	const char* member = ::dbus_message_get_member(inMsg);
-	LogDebug("HandleMessage. member: %s", member);
-	
-	if (path != NULL && ::strcmp(path, "/com/latencyzero/podtique"))
+	try
 	{
-		if (::dbus_message_is_method_call(inMsg, "com.latencyzero.podtique", "RadioOn"))
-		{
-			LogDebug("RadioOn");
-			return DBUS_HANDLER_RESULT_HANDLED;
-		}
-		else if (::dbus_message_is_method_call(inMsg, "com.latencyzero.podtique", "RadioOff"))
-		{
-			LogDebug("RadioOff");
-			return DBUS_HANDLER_RESULT_HANDLED;
-		}
+		DBUS* self = reinterpret_cast<DBUS*> (inUserData);
+		return self->handleMessage(inMsg);
 	}
 	
+	catch (...)
+	{
+		return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
+	}
+}
+
+DBusHandlerResult
+DBUS::handleMessage(DBusMessage* inMsg)
+{
 	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
 }
 
@@ -96,7 +85,7 @@ filterFunc1(DBusConnection* inConn, DBusMessage* inMsg, void* inUserData)
 }
 
 void
-DBUS::open()
+DBUS::open(const char* inPath)
 {
 	::dbus_threads_init_default();
 	
@@ -108,32 +97,9 @@ DBUS::open()
 	{
 	}
 	
-	//	Test names…
+	//	Register an object…
 	
-	const char* uniqueName = ::dbus_bus_get_unique_name(mBus);
-	LogDebug("Unique name: [%s]", uniqueName);
-	
-	::dbus_error_init(&error);
-	int r = ::dbus_bus_request_name(mBus, kDestination, 0, &error);
-	if (testAndLogError("Error requesting name", error))
-	{
-	}
-	LogDebug("request name result: %d", r);
-	
-	//	Test filter…
-	
-	bool success;
-#if 0
-	success = ::dbus_connection_add_filter(mBus, filterFunc1, this, NULL);
-	if (!success)
-	{
-		LogDebug("Unable to register filter");
-	}
-#endif
-
-	//	Test registering an object…
-	
-	success = ::dbus_connection_register_object_path(mBus, kPath, &sVTable, this);
+	bool success = ::dbus_connection_register_object_path(mBus, inPath, &sVTable, this);
 	if (!success)
 	{
 		LogDebug("Unable to register object");
@@ -159,26 +125,6 @@ DBUS::testAndLogError(const char* inMsg, const DBusError& inError)
 }
 
 bool
-DBUS::sendRadioState(bool inOn)
-{
-	DBus::Message msg(kDestinationWeb,
-						kPath,
-						kInterface,
-						kMethodRadioStatus);
-	msg.setNoReply(true);
-	msg.append(inOn);
-	
-	bool success = send(msg);
-	if (!success)
-	{
-		LogDebug("Unable to send message");
-		return false;
-	}
-	
-	return true;
-}
-
-bool
 DBUS::send(const DBus::Message& inMsg) const
 {
 	bool success = ::dbus_connection_send(mBus, inMsg.dbusMessage(), NULL);
@@ -189,6 +135,23 @@ DBUS::send(const DBus::Message& inMsg) const
 	}
 	LogDebug("Sent message %p", &inMsg);
 	return true;
+}
+
+int
+DBUS::requestName(const char* inName, unsigned int inFlags)
+{
+	DBusError error;
+	::dbus_error_init(&error);
+	int r = ::dbus_bus_request_name(mBus, inName, inFlags, &error);
+	if (testAndLogError("Error in dbus_bus_request_name", error))
+	{
+	}
+	else
+	{
+		LogDebug("request name result: %d", r);
+	}
+	
+	return r;
 }
 
 #pragma mark -

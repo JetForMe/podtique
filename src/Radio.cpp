@@ -29,7 +29,7 @@
 //
 
 #include "AudioDevice.h"
-#include "DBUS.h"
+#include "RadioDBUS.h"
 #include "MP3Decoder.h"
 #include "RadioConstants.h"
 #include "RadioDebug.h"
@@ -82,8 +82,8 @@ Radio::Radio(const std::string& inDataDirectory)
 	mOutputDevice = new AudioDevice();
 	mOutputDevice->setFormat(1, 44100);
 	
-	mBus = new DBUS();
-	mBus->open();
+	mBus = new RadioDBUS(this);
+	mBus->open(kPath);
 	mBus->start();
 	mBus->sendRadioState(true);
 }
