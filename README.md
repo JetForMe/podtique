@@ -84,6 +84,20 @@ The following configuration file works for the Audio-Technica USB audio dongle I
 	  type hw
 	  card 1
 	}
+	
+BBB Cape
+========
+There is a custom Cape for use with the BeagleBone Black. The first version, Podtique1.osm, was developed using [Osmond](http://osmondpcb.com) for OS X, which is available for free.
+
+Podtique Cape 1
+---------------
+This cape has the minimal hardware needed to enable Podtique functionality:
+
+* Audio CODEC
+* Audio amplifier
+* Filtered power for audio circuitry
+* NeoPixel level shifting
+* Front panel interface
 
 Radio Notes
 ===========
