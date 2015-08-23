@@ -1,0 +1,244 @@
+View {
+Width 6.000000000 
+Height 5.000000000 
+Mag 1.9 
+Center 97.02949m 2500 
+Grid 10 10 
+Index 1000 1000 
+PrintScale 0.0 
+FullWidth
+ShowHoles
+ShowNames
+ShowValues
+SolidPads
+SavedFrameString "23 366 1053 757 0 0 1920 1177 " 
+PadFillColor 5898 30146 13107 
+GridColor 57344 57344 65280 
+HoleColor 55000 55000 65535 
+BackgroundColor 65535 65535 65535 
+SelectedSignalTraceColor 12345 54321 6789 
+CustomGrid "45 mm x 31 mm" 
+CustomGrid "10 mm" 
+CustomGrid "2.15 mm x 1.80 mm" 
+CustomGrid "2.15 mm x 3.60 mm" 
+CustomGrid "5.85 mm x 7.25 mm" 
+}
+
+Setup {
+SerialNumber 1520 
+Layers 4 
+TraceWidth 10 
+Spacing 10 
+SolderMaskRing 10 
+DefaultMetric 
+PreferImperial 
+}
+GerberOptions {
+NormalLayers yes 
+NormalLayersFlipOdd no 
+NormalLayersFlipEven no 
+PlaneLayers yes 
+PlaneLayersFlipOdd no 
+PlaneLayersFlipEven no 
+SilkLayers yes 
+SilkLayersFlipOdd no 
+SilkLayersFlipEven no 
+SolderMaskLayers yes 
+SolderMaskLayersFlipOdd no 
+SolderMaskLayersFlipEven no 
+FlattenCopperFlood no 
+DrillFile DRILL.TXT 
+Aux1File AUX1.GBR 
+Aux2File AUX2.GBR 
+Silk1File SILK1.GBR 
+Silk2File SILK2.GBR 
+Mask1File MASK1.GBR 
+Mask2File MASK2.GBR 
+Layer1File LAYER1.GBR 
+Layer2File LAYER2.GBR 
+Layer3File LAYER3.GBR 
+Layer4File LAYER4.GBR 
+LayerXFile LAYER%d.GBR 
+AuxXFile AUX%d.GBR 
+}
+
+PostscriptOptions {
+NormalLayers yes 
+NormalLayersFlipOdd no 
+NormalLayersFlipEven no 
+PlaneLayers yes 
+PlaneLayersFlipOdd no 
+PlaneLayersFlipEven no 
+SilkLayers yes 
+SilkLayersFlipOdd no 
+SilkLayersFlipEven no 
+SolderMaskLayers yes 
+SolderMaskLayersFlipOdd no 
+SolderMaskLayersFlipEven no 
+}
+
+
+Type HDR2X23 {
+NameData { 50 -50 160 0 }
+ValueData { 50 -25 -400 0 }
+Pad A { Rectangle 70 70 }
+Pad B { Circle 70 }
+Pin 1 { A A A 0 0 40 P }
+Pin 10 { B B B 400 100 40 P }
+Pin 11 { B B B 500 0 40 P }
+Pin 12 { B B B 500 100 40 P }
+Pin 13 { B B B 600 0 40 P }
+Pin 14 { B B B 600 100 40 P }
+Pin 15 { B B B 700 0 40 P }
+Pin 16 { B B B 700 100 40 P }
+Pin 17 { B B B 800 0 40 P }
+Pin 18 { B B B 800 100 40 P }
+Pin 19 { B B B 900 0 40 P }
+Pin 2 { B B B 0 100 40 P }
+Pin 20 { B B B 900 100 40 P }
+Pin 21 { B B B 1000 0 40 P }
+Pin 22 { B B B 1000 100 40 P }
+Pin 23 { B B B 1100 0 40 P }
+Pin 24 { B B B 1100 100 40 P }
+Pin 25 { B B B 1200 0 40 P }
+Pin 26 { B B B 1200 100 40 P }
+Pin 27 { B B B 1300 0 40 P }
+Pin 28 { B B B 1300 100 40 P }
+Pin 29 { B B B 1400 0 40 P }
+Pin 3 { B B B 100 0 40 P }
+Pin 30 { B B B 1400 100 40 P }
+Pin 31 { B B B 1500 0 40 P }
+Pin 32 { B B B 1500 100 40 P }
+Pin 33 { B B B 1600 0 40 P }
+Pin 34 { B B B 1600 100 40 P }
+Pin 35 { B B B 1700 0 40 P }
+Pin 36 { B B B 1700 100 40 P }
+Pin 37 { B B B 1800 0 40 P }
+Pin 38 { B B B 1800 100 40 P }
+Pin 39 { B B B 1900 0 40 P }
+Pin 4 { B B B 100 100 40 P }
+Pin 40 { B B B 1900 100 40 P }
+Pin 41 { B B B 2000 0 40 P }
+Pin 42 { B B B 2000 100 40 P }
+Pin 43 { B B B 2100 0 40 P }
+Pin 44 { B B B 2100 100 40 P }
+Pin 45 { B B B 2200 0 40 P }
+Pin 46 { B B B 2200 100 40 P }
+Pin 5 { B B B 200 0 40 P }
+Pin 6 { B B B 200 100 40 P }
+Pin 7 { B B B 300 0 40 P }
+Pin 8 { B B B 300 100 40 P }
+Pin 9 { B B B 400 0 40 P }
+Path Silk
+{ 1100 -50 W 5 S 10 2250 -50 2250 150 -50 150 -50 -50 1100 -50 }
+Path Silk
+{ -60 40 W 10 S 10 -60 -60 40 -60 }
+}
+
+
+Part void { Name HOLE Loc { 1575 3025 }
+NameData { 0 1575 3025 0 }
+ValueData { 0 1575 3025 0 }
+Pad A { Circle 200 }
+Pin HOLE { A A A 1575 3025 125 P }
+}
+Part void { Name HOLE Loc { 4175 1250 }
+NameData { 0 4175 1250 0 }
+ValueData { 0 4175 1250 0 }
+Pad A { Circle 200 }
+Pin HOLE { A A A 4175 1250 125 P }
+}
+Part void { Name HOLE Loc { 4175 2900 }
+NameData { 0 4175 2900 0 }
+ValueData { 0 4175 2900 0 }
+Pad A { Circle 200 }
+Pin HOLE { A A A 4175 2900 125 P }
+}
+Part void { Name HOLE Loc { 1575 1125 }
+NameData { 0 1575 1125 0 }
+ValueData { 0 1575 1125 0 }
+Pad A { Circle 200 }
+Pin HOLE { A A A 1575 1125 125 P }
+}
+Part HDR2X23 { Name P9 Loc { 1775 1075 }
+NameData { 50 1730 1255 0 }
+ValueData { 0 1750 675 0 }
+}
+Part HDR2X23 { Name P8 Loc { 1775 2975 }
+NameData { 50 1730 2855 0 }
+ValueData { 0 1750 2575 0 }
+}
+
+
+
+Layer 1 { Outer
+AnnularRing 20 VoidRing 20 SurroundWidth
+10 PathColor 56000 2000 1500 Invisible
+
+}
+Layer 2 { Inner
+AnnularRing 20 VoidRing 20 SurroundWidth
+10 PathColor 0 0 64000 Invisible
+
+}
+Layer 3 { Inner
+AnnularRing 20 VoidRing 20 SurroundWidth
+10 PathColor 56000 2000 1500 Invisible
+
+}
+Layer 4 { Outer
+AnnularRing 20 VoidRing 20 SurroundWidth
+10 PathColor 0 0 64000 Invisible
+
+}
+
+SilkLayer 1 { Outer
+AnnularRing 20 VoidRing 20 SurroundWidth
+10 PathColor 0 32000 4000 Visible
+
+}
+SilkLayer 2 { Outer
+AnnularRing 20 VoidRing 20 SurroundWidth
+10 PathColor 32000 40000 32000 Visible
+
+}
+
+MaskLayer 1 { Outer
+AnnularRing 20 VoidRing 20 SurroundWidth
+10 PathColor 0 32000 4000 Invisible
+
+}
+MaskLayer 2 { Outer
+AnnularRing 20 VoidRing 20 SurroundWidth
+10 PathColor 32000 40000 32000 Invisible
+
+}
+
+AuxLayer 1 { Outer
+AnnularRing 20 VoidRing 20 SurroundWidth
+10 PathColor 0 32000 4000 Visible
+
+}
+AuxLayer 2 { Outer
+AnnularRing 20 VoidRing 20 SurroundWidth
+10 PathColor 32000 40000 32000 Visible
+
+}
+
+
+
+
+
+
+
+Path A 1 { 1000 1825 W 5 1800 1825 }
+Path A 1 { 1800 1825 W 5 1800 2525 }
+Path A 1 { 1225 2525 W 5 1225 3150 }
+Path A 1 { 1800 2525 W 5 1225 2525 }
+Path A 1 { 1000 1825 W 5 1000 1000 }
+Path A 1 { 1000 1000 W 5 4400 1000 }
+Path A 1 { 4400 1000 W 5 4400 3150 }
+Path A 1 { 4400 3150 W 5 1225 3150 }
+
+
+End
