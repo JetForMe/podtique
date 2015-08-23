@@ -27,11 +27,15 @@
 				<tr><td><%= inStation.desc %></td><td><%= inStation.freq %></td></tr>
 			<% }); %>
 		</table>
+		
+		<form action="/file-upload" class="dropzone" id="uploadZone" style="border: 1px solid gray; width: 80%; height: 5em;">
+		</form>
     </div>
     
 	<script src="/js/jquery-2.1.3.min.js"></script>
 	<script src="/js/socket.io.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/dropzone.js"></script>
 	<script>
 		$(document).ready(function()
 		{

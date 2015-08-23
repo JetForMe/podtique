@@ -174,6 +174,13 @@ app.get("/api/v1/spectrum", function(inReq, inResp)
 	});
 });
 
+var multer = require("multer");
+var upload = multer({dest : "./content/" });
+app.post("/file-upload", upload.array("file"), function(inReq, inResp)
+{
+	console.log(inReq.files);
+});
+
 //	Start the server…
 
 server.listen(8080, function()
