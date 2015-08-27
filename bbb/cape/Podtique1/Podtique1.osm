@@ -1,9 +1,9 @@
 View {
 Width 6.000000000 
 Height 5.000000000 
-Mag 1.9 
-Center 97.02949m 2500 
-Grid 10 10 
+Mag 7.7 
+Center 75.08692m 43.38254m 
+Grid 1m 1m 
 Index 1000 1000 
 PrintScale 0.0 
 FullWidth
@@ -11,27 +11,27 @@ ShowHoles
 ShowNames
 ShowValues
 SolidPads
-SavedFrameString "23 366 1053 757 0 0 1920 1177 " 
+SavedFrameString "48 144 1606 1033 0 0 1920 1177 " 
 PadFillColor 5898 30146 13107 
 GridColor 57344 57344 65280 
 HoleColor 55000 55000 65535 
 BackgroundColor 65535 65535 65535 
 SelectedSignalTraceColor 12345 54321 6789 
-CustomGrid "45 mm x 31 mm" 
-CustomGrid "10 mm" 
-CustomGrid "2.15 mm x 1.80 mm" 
-CustomGrid "2.15 mm x 3.60 mm" 
-CustomGrid "5.85 mm x 7.25 mm" 
+CustomGrid "0.10 mm" 
+CustomGrid "0.20 mm" 
+CustomGrid "0.32500 mm x 2.80 mm" 
+CustomGrid "2 mm x 1.40 mm" 
+CustomGrid "1 mm x 1.50 mm" 
 }
 
 Setup {
 SerialNumber 1520 
 Layers 4 
-TraceWidth 10 
-Spacing 10 
-SolderMaskRing 10 
+TraceWidth 6 
+Spacing 6 
+SolderMaskRing 6 
 DefaultMetric 
-PreferImperial 
+PreferMetric 
 }
 GerberOptions {
 NormalLayers yes 
@@ -77,6 +77,76 @@ SolderMaskLayersFlipOdd no
 SolderMaskLayersFlipEven no 
 }
 
+
+Type PWPSOIC28 {
+NameData { 50 -4.40m 4.20m 0 }
+ValueData { 50 0 -240 0 }
+Pad A { Rectangle 0.25m 1.55m }
+Pad B { Rectangle 6.17m 2.40m Spacing -1m }
+Pad C { Circle 0.50m Spacing -0.50m }
+Pin 1 { A 0 0 -4.22500m -2.80m 0 U }
+Pin 10 { A 0 0 1.62500m -2.80m 0 U }
+Pin 11 { A 0 0 2.27500m -2.80m 0 U }
+Pin 12 { A 0 0 2.92500m -2.80m 0 U }
+Pin 13 { A 0 0 3.57500m -2.80m 0 U }
+Pin 14 { A 0 0 4.22500m -2.80m 0 U }
+Pin 15 { A 0 0 4.22500m 2.80m 0 U }
+Pin 16 { A 0 0 3.57500m 2.80m 0 U }
+Pin 17 { A 0 0 2.92500m 2.80m 0 U }
+Pin 18 { A 0 0 2.27500m 2.80m 0 U }
+Pin 19 { A 0 0 1.62500m 2.80m 0 U }
+Pin 2 { A 0 0 -3.57500m -2.80m 0 U }
+Pin 20 { A 0 0 0.97500m 2.80m 0 U }
+Pin 21 { A 0 0 0.32500m 2.80m 0 U }
+Pin 22 { A 0 0 -0.32500m 2.80m 0 U }
+Pin 23 { A 0 0 -0.97500m 2.80m 0 U }
+Pin 24 { A 0 0 -1.62500m 2.80m 0 U }
+Pin 25 { A 0 0 -2.27500m 2.80m 0 U }
+Pin 26 { A 0 0 -2.92500m 2.80m 0 U }
+Pin 27 { A 0 0 -3.57500m 2.80m 0 U }
+Pin 28 { A 0 0 -4.22500m 2.80m 0 U }
+Pin 3 { A 0 0 -2.92500m -2.80m 0 U }
+Pin 4 { A 0 0 -2.27500m -2.80m 0 U }
+Pin 5 { A 0 0 -1.62500m -2.80m 0 U }
+Pin 6 { A 0 0 -0.97500m -2.80m 0 U }
+Pin 7 { A 0 0 -0.32500m -2.80m 0 U }
+Pin 8 { A 0 0 0.32500m -2.80m 0 U }
+Pin 9 { A 0 0 0.97500m -2.80m 0 U }
+Pin PAD1 { B 0 0 0 0 0 U }
+Pin VIA { C C C 3m 1.50m 15 P NM }
+Pin VIA { C C C 2m -1.50m 15 P NM }
+Pin VIA { C C C 0 1.50m 15 P NM }
+Pin VIA { C C C -2m -1.50m 15 P NM }
+Pin VIA { C C C -4m 1.50m 15 P NM }
+Pin VIA { C C C 1m -1.50m 15 P NM }
+Pin VIA { C C C 4m -1.50m 15 P NM }
+Pin VIA { C C C -3m 1.50m 15 P NM }
+Pin VIA { C C C -4m 0 15 P NM }
+Pin VIA { C C C 0 -1.50m 15 P NM }
+Pin VIA { C C C 1m 1.50m 15 P NM }
+Pin VIA { C C C -2m 1.50m 15 P NM }
+Pin VIA { C C C -3m -1.50m 15 P NM }
+Pin VIA { C C C 2m 1.50m 15 P NM }
+Pin VIA { C C C -4m -1.50m 15 P NM }
+Pin VIA { C C C 4m 0 15 P NM }
+Pin VIA { C C C 3m -1.50m 15 P NM }
+Pin VIA { C C C -1m -1.50m 15 P NM }
+Pin VIA { C C C 4m 1.50m 15 P NM }
+Pin VIA { C C C -1m 1.50m 15 P NM }
+Path Silk
+{ 0 -3.80m W 5 S 10 4.60m -3.80m 4.60m 3.80m -4.60m 3.80m -4.60m -3.80m 0
+-3.80m }
+Path Silk
+{ -4m -4.20m W 5 S 10 -5m -4.20m -5m -4m -5m -2m }
+Path Silk
+{ -0.80m 0 W 5 S 10 0.80m 0 }
+Path Silk
+{ 0 -0.80m W 5 S 10 0 0.80m }
+FloodPath Front
+{ 0 -1.80m W 2 S 10 5m -1.80m 5m 1.80m -5m 1.80m -5m -1.80m 0 -1.80m }
+FloodPath Back
+{ 0 -4.20m W 2 S 10 -5m -4.20m -5m 4.20m 5m 4.20m 5m -4.20m 0 -4.20m }
+}
 
 Type HDR2X23 {
 NameData { 50 -50 160 0 }
@@ -135,7 +205,76 @@ Path Silk
 { -60 40 W 10 S 10 -60 -60 40 -60 }
 }
 
+Type QFN:QFNT325X5 {
+NameData { 50 3m 9.86500m 0 }
+ValueData { 50 1.50m -13.63500m 0 }
+Pad A { Rectangle 0.70m 0.30m }
+Pad B { Rectangle 0.30m 0.70m }
+Pad C { Rectangle 3.40m 3.40m }
+Pin 1 { A 0 0 -2.40m 1.75m 0 U }
+Pin 10 { B 0 0 -1.25m -2.40m 0 U }
+Pin 11 { B 0 0 -0.75m -2.40m 0 U }
+Pin 12 { B 0 0 -0.25m -2.40m 0 U }
+Pin 13 { B 0 0 0.25m -2.40m 0 U }
+Pin 14 { B 0 0 0.75m -2.40m 0 U }
+Pin 15 { B 0 0 1.25m -2.40m 0 U }
+Pin 16 { B 0 0 1.75m -2.40m 0 U }
+Pin 17 { A 0 0 2.40m -1.75m 0 U }
+Pin 18 { A 0 0 2.40m -1.25m 0 U }
+Pin 19 { A 0 0 2.40m -0.75m 0 U }
+Pin 2 { A 0 0 -2.40m 1.25m 0 U }
+Pin 20 { A 0 0 2.40m -0.25m 0 U }
+Pin 21 { A 0 0 2.40m 0.25m 0 U }
+Pin 22 { A 0 0 2.40m 0.75m 0 U }
+Pin 23 { A 0 0 2.40m 1.25m 0 U }
+Pin 24 { A 0 0 2.40m 1.75m 0 U }
+Pin 25 { B 0 0 1.75m 2.40m 0 U }
+Pin 26 { B 0 0 1.25m 2.40m 0 U }
+Pin 27 { B 0 0 0.75m 2.40m 0 U }
+Pin 28 { B 0 0 0.25m 2.40m 0 U }
+Pin 29 { B 0 0 -0.25m 2.40m 0 U }
+Pin 3 { A 0 0 -2.40m 0.75m 0 U }
+Pin 30 { B 0 0 -0.75m 2.40m 0 U }
+Pin 31 { B 0 0 -1.25m 2.40m 0 U }
+Pin 32 { B 0 0 -1.75m 2.40m 0 U }
+Pin 4 { A 0 0 -2.40m 0.25m 0 U }
+Pin 5 { A 0 0 -2.40m -0.25m 0 U }
+Pin 6 { A 0 0 -2.40m -0.75m 0 U }
+Pin 7 { A 0 0 -2.40m -1.25m 0 U }
+Pin 8 { A 0 0 -2.40m -1.75m 0 U }
+Pin 9 { B 0 0 -1.75m -2.40m 0 U }
+Pin PAD { C 0 0 0 0 0 U }
+Path Silk
+{ -2.35m 2.10m W 5 S 10 -2.10m 2.10m -2.10m 2.60m -2.60m 2.60m -2.60m 2.10m
+-2.35m 2.10m }
+Path Silk
+{ 0 -3m W 5 S 10 3m -3m 3m 3m -3m 3m -3m -3m 0 -3m }
+}
 
+Type VIA~1~ {
+NameData { 0 0 0 0 }
+ValueData { 0 0 0 0 }
+Pad A { Circle 50 }
+Pin 1 { A A A 0 0 20 P }
+}
+
+Type VIA2 {
+NameData { 0 3090 1350 0 }
+ValueData { 0 3090 1350 0 }
+Pad A { Circle 25 }
+Pin 1 { A A A 0 0 15 P NM }
+}
+
+Type VIA {
+NameData { 0 0 0 0 }
+ValueData { 0 0 0 0 }
+Pad A { Circle 50 }
+Pin 1 { A A A 0 0 20 P }
+}
+
+
+Part PWPSOIC28 { Name U2 Loc { 95.40m 54.40m }
+}
 Part void { Name HOLE Loc { 1575 3025 }
 NameData { 0 1575 3025 0 }
 ValueData { 0 1575 3025 0 }
@@ -168,12 +307,35 @@ Part HDR2X23 { Name P8 Loc { 1775 2975 }
 NameData { 50 1730 2855 0 }
 ValueData { 0 1750 2575 0 }
 }
+Part QFN:QFNT325X5 { Name U1 Loc { 3150 1500 90 }
+NameData { 50 3040 1635 0 }
+}
+Part VIA~1~ { Name VIA1 Loc { 3100 1350 }
+}
+Part VIA2 { Name VIA2 Loc { 3170 1300 }
+}
 
 
+Signal nReset 
+{ P9-10 U1-31 }
+Signal SCL 
+{ P9-19 U1-8 }
+Signal SDA 
+{ P9-20 U1-9 }
+Signal MCLK 
+{ P9-25 U1-1 }
+Signal DOUT 
+{ P9-28 U1-5 VIA2-1 }
+Signal WCLK 
+{ P9-29 U1-3 }
+Signal DIN 
+{ P9-30 U1-4 }
+Signal BCLK 
+{ P9-31 U1-2 VIA1-1 }
 
 Layer 1 { Outer
 AnnularRing 20 VoidRing 20 SurroundWidth
-10 PathColor 56000 2000 1500 Invisible
+10 PathColor 56000 2000 1500 Visible
 
 }
 Layer 2 { Inner
@@ -188,7 +350,7 @@ AnnularRing 20 VoidRing 20 SurroundWidth
 }
 Layer 4 { Outer
 AnnularRing 20 VoidRing 20 SurroundWidth
-10 PathColor 0 0 64000 Invisible
+10 PathColor 0 0 64000 Visible
 
 }
 
@@ -225,9 +387,33 @@ AnnularRing 20 VoidRing 20 SurroundWidth
 
 }
 
+PinChange { 0 3100 1350 
+Hole { 15 P } NoMask }
+
+PadChange { 1 0 3100 1350 
+Pad { Circle 25 Thermal Circle 70 Spacing 10 } P VIA1-1 Surround 511 }
+PadChange { 2 0 3100 1350 
+Pad { Circle 25 Thermal Circle 60 } P VIA1-1 }
+PadChange { 3 0 3100 1350 
+Pad { Circle 25 Thermal Circle 60 } P VIA1-1 }
+PadChange { 4 0 3100 1350 
+Pad { Circle 25 Thermal Circle 70 Spacing 10 } P VIA1-1 Surround 511 }
 
 
-
+Path L 1 { P P9-10 2175 1175 W 6 S 6 P U1-31 77.61m 36.85m }
+Path L 1 { P P9-20 2675 1175 W 6 S 6 2620 1140 2620 1030 2640 1010 3300 1010 3330
+1050 3330 1240 P U1-9 82.41m 36.35m }
+Path L 1 { P P9-25 2975 1075 W 6 S 6 3020 1120 3020 1330 3080 1380 P U1-1 78.26m
+35.70m }
+Path L 1 { P P9-29 3175 1075 W 6 S 6 3130 1120 P U1-3 79.26m 35.70m }
+Path L 1 { P P9-30 3175 1175 W 6 S 6 3140 1280 P U1-4 79.76m 35.70m }
+Path L 1 { P U1-8 81.76m 35.70m W 6 S 6 3230 1220 3230 1050 3200 1030 2730 1030
+P P9-19 2675 1075 }
+Path L 1 { P VIA2-1 3170 1300 W 6 S 6 P U1-5 80.26m 35.70m }
+Path L 1 { P VIA1-1 3100 1350 W 6 S 6 P U1-2 78.76m 35.70m }
+Path L 4 { P P9-28 3075 1175 W 6 S 6 P VIA2-1 3170 1300 }
+Path L 4 { P P9-31 3275 1075 W 6 S 6 3230 1130 3220 1300 3190 1350 P VIA1-1 3100
+1350 }
 
 
 
