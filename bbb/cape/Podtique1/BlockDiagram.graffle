@@ -46,11 +46,76 @@
 	<key>Creator</key>
 	<string>Roderick Mann</string>
 	<key>DisplayScale</key>
-	<string>1 0/72 in = 1 0/72 in</string>
+	<string>1 0/72 in = 1.0000 in</string>
 	<key>GraphDocumentVersion</key>
 	<integer>8</integer>
 	<key>GraphicsList</key>
 	<array>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>10</integer>
+				<key>Info</key>
+				<integer>4</integer>
+			</dict>
+			<key>ID</key>
+			<integer>47</integer>
+			<key>OrthogonalBarAutomatic</key>
+			<true/>
+			<key>OrthogonalBarPoint</key>
+			<string>{0, 0}</string>
+			<key>OrthogonalBarPosition</key>
+			<real>-1</real>
+			<key>Points</key>
+			<array>
+				<string>{136.2845089969436, 309.82203864571181}</string>
+				<string>{80.799998730421066, 329}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>Legacy</key>
+					<true/>
+					<key>LineType</key>
+					<integer>2</integer>
+					<key>TailArrow</key>
+					<string>FilledArrow</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>46</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{136.75707626342773, 269}, {69.000000051131167, 57.467868804931641}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>46</integer>
+			<key>Shape</key>
+			<string>Rectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\ansi\ansicpg1252\cocoartf1348\cocoasubrtf170
+\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
+
+\f0\fs24 \cf0 U7\
+Cape\
+EEPROM}</string>
+			</dict>
+		</dict>
 		<dict>
 			<key>Class</key>
 			<string>LineGraphic</string>
@@ -66,11 +131,11 @@
 			<key>OrthogonalBarPoint</key>
 			<string>{0, 0}</string>
 			<key>OrthogonalBarPosition</key>
-			<real>6.6853952407836914</real>
+			<real>6.6950225830078125</real>
 			<key>Points</key>
 			<array>
-				<string>{322.41460523302658, 436.23615504436964}</string>
-				<string>{359.58539476697342, 461.29144846449992}</string>
+				<string>{322.40465535745261, 432.56924746087191}</string>
+				<string>{359.59469998851671, 459.56100404497158}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -94,7 +159,7 @@
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{212.4114550207357, 403.95970421859528}, {35, 24}}</string>
+			<string>{{213.31959314168998, 399.60469637186924}, {35, 24}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FitText</key>
@@ -167,11 +232,11 @@
 			<key>OrthogonalBarPoint</key>
 			<string>{0, 0}</string>
 			<key>OrthogonalBarPosition</key>
-			<real>75.851448059082031</real>
+			<real>75.850860595703125</real>
 			<key>Points</key>
 			<array>
 				<string>{95, 397.00000101327896}</string>
-				<string>{270.50289235472093, 415.95970421859528}</string>
+				<string>{270.50172232131712, 411.60469637186924}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -197,7 +262,7 @@
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{271, 398}, {51, 41.536380767822266}}</string>
+			<string>{{271, 388}, {51, 51.536380767822266}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -212,7 +277,8 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 1.8V\
+\f0\fs24 \cf0 U4\
+1.8V\
 Linear}</string>
 			</dict>
 		</dict>
@@ -400,8 +466,8 @@ Linear}</string>
 			<real>-1</real>
 			<key>Points</key>
 			<array>
-				<string>{506.99921941129344, 242.50000000006546}</string>
-				<string>{506.98844356978378, 441.50000002611563}</string>
+				<string>{506.99999467495252, 242.5}</string>
+				<string>{506.99985865883502, 441.50000000000017}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -458,11 +524,11 @@ Linear}</string>
 			<key>OrthogonalBarPoint</key>
 			<string>{0, 0}</string>
 			<key>OrthogonalBarPosition</key>
-			<real>46.131282806396484</real>
+			<real>46.135505676269531</real>
 			<key>Points</key>
 			<array>
-				<string>{340.84946281480194, 212.46897371646872}</string>
-				<string>{383.76006486234871, 328.53153880862203}</string>
+				<string>{341.25686195879888, 212.46455838461449}</string>
+				<string>{387.45286347271764, 328.53556526014745}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -802,11 +868,11 @@ Linear}</string>
 			<key>OrthogonalBarPoint</key>
 			<string>{0, 0}</string>
 			<key>OrthogonalBarPosition</key>
-			<real>18.654880523681641</real>
+			<real>16.67555046081543</real>
 			<key>Points</key>
 			<array>
-				<string>{186.5, 559.43573378090332}</string>
-				<string>{158.25334969455429, 620.54549232215015}</string>
+				<string>{186.5, 563.39935302734375}</string>
+				<string>{158.91729004285605, 620.55045339404819}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -850,7 +916,7 @@ Linear}</string>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{161, 517.39935302734375}, {51, 41.536380767822266}}</string>
+			<string>{{161, 517.39935302734375}, {51, 46}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -872,7 +938,8 @@ Linear}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 1.8V\
+\f0\fs24 \cf0 U6\
+1.8V\
 Linear}</string>
 			</dict>
 		</dict>
@@ -894,8 +961,8 @@ Linear}</string>
 			<real>-1</real>
 			<key>Points</key>
 			<array>
-				<string>{59.500005731666228, 183.50000002291608}</string>
-				<string>{59.500005731666228, 101.26819226833695}</string>
+				<string>{59.500005731666228, 183.50000002291611}</string>
+				<string>{59.500005731666228, 101.26819226834365}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -975,7 +1042,8 @@ Linear}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 Level Shift}</string>
+\f0\fs24 \cf0 U8\
+Level Shift}</string>
 			</dict>
 		</dict>
 		<dict>
@@ -1058,8 +1126,8 @@ Linear}</string>
 			<real>-1</real>
 			<key>Points</key>
 			<array>
-				<string>{454.50000006511112, 80.018243933766854}</string>
-				<string>{399.24999963049476, 80.046243304610499}</string>
+				<string>{454.50000000045969, 80.002791315638078}</string>
+				<string>{399.25000005125656, 80.007075209773177}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1113,7 +1181,8 @@ Linear}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 5V\
+\f0\fs24 \cf0 U3\
+5V\
 DC-DC}</string>
 			</dict>
 		</dict>
@@ -1132,11 +1201,11 @@ DC-DC}</string>
 			<key>OrthogonalBarPoint</key>
 			<string>{0, 0}</string>
 			<key>OrthogonalBarPosition</key>
-			<real>-1</real>
+			<real>13.100314140319824</real>
 			<key>Points</key>
 			<array>
-				<string>{395.39058250156353, 391.49999696757146}</string>
-				<string>{395.21690386943777, 441.50001034267137}</string>
+				<string>{398.83854953330342, 391.49966044453686}</string>
+				<string>{396.99493433958435, 441.5002883298713}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1297,8 +1366,8 @@ DC-DC}</string>
 			<real>-1</real>
 			<key>Points</key>
 			<array>
-				<string>{431.49999927918287, 485.43906437198018}</string>
-				<string>{466.50000222767056, 485.37982139411724}</string>
+				<string>{431.49999994839908, 485.48342614603922}</string>
+				<string>{466.50000015103205, 485.46731267679422}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1335,11 +1404,11 @@ DC-DC}</string>
 			<key>OrthogonalBarPoint</key>
 			<string>{0, 0}</string>
 			<key>OrthogonalBarPosition</key>
-			<real>38.103084564208984</real>
+			<real>38.103080749511719</real>
 			<key>Points</key>
 			<array>
-				<string>{494.23379601220807, 113.49692244932449}</string>
-				<string>{505.38116708188312, 213.50308856388094}</string>
+				<string>{494.2344544421365, 113.49692135058126}</string>
+				<string>{505.38379065896737, 213.50307864961252}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1426,7 +1495,7 @@ Wall Wart}</string>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{364.5, 329}, {62, 62}}</string>
+			<string>{{364.5, 329}, {71, 62}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -1441,7 +1510,8 @@ Wall Wart}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 3.3V Linear\
+\f0\fs24 \cf0 U5\
+3.3V Linear\
 Low Noise}</string>
 			</dict>
 		</dict>
@@ -1462,7 +1532,8 @@ Low Noise}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 CODEC}</string>
+\f0\fs24 \cf0 U1\
+CODEC}</string>
 			</dict>
 		</dict>
 		<dict>
@@ -1482,7 +1553,8 @@ Low Noise}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 Power Amp}</string>
+\f0\fs24 \cf0 U2\
+Power Amp}</string>
 			</dict>
 		</dict>
 	</array>
@@ -1533,7 +1605,7 @@ Low Noise}</string>
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2015-08-24 09:17:20 +0000</string>
+	<string>2015-09-03 10:10:33 +0000</string>
 	<key>Modifier</key>
 	<string>Roderick Mann</string>
 	<key>NotesVisible</key>
@@ -1614,7 +1686,7 @@ Low Noise}</string>
 			</dict>
 		</array>
 		<key>Frame</key>
-		<string>{{277, 267}, {710, 875}}</string>
+		<string>{{1221, 302}, {710, 875}}</string>
 		<key>ListView</key>
 		<true/>
 		<key>OutlineWidth</key>

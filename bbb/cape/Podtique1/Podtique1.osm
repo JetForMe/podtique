@@ -2,8 +2,8 @@ View {
 Width 3.740157480 
 Height 2.362204724 
 Margin 0.019685039 
-Mag 5.2 
-Center 47.50m 31.57887m 
+Mag 4.5 
+Center 47.98734m 36.69845m 
 Grid 1m 1m 
 Index 8.07m 16.92500m 
 PrintScale 0.0 
@@ -12,17 +12,17 @@ ShowHoles
 ShowNames
 ShowValues
 SolidPads
-SavedFrameString "90 103 1437 1028 0 0 1920 1177 " 
+SavedFrameString "47 149 1254 1028 0 0 1920 1177 " 
 PadFillColor 5898 30146 13107 
 GridColor 57344 57344 65280 
 HoleColor 55000 55000 65535 
 BackgroundColor 65535 65535 65535 
 SelectedSignalTraceColor 12345 54321 6789 
-CustomGrid "0.32500 mm x 2.80 mm" 
-CustomGrid "2 mm x 1.40 mm" 
-CustomGrid "1 mm x 1.50 mm" 
 CustomGrid "0.85 mm x 0.10 mm" 
 CustomGrid "5 mm" 
+CustomGrid "0.10 mm" 
+CustomGrid "2.28500 mm x 1 mm" 
+CustomGrid "0.25 mm" 
 }
 
 Setup {
@@ -78,6 +78,36 @@ SolderMaskLayersFlipOdd no
 SolderMaskLayersFlipEven no 
 }
 
+
+Type SOIC:SOIC8~1~ {
+NameData { 1.50m -2.46m 4.25m 0 Center }
+ValueData { 0 100 0 0 }
+Pad A { Rectangle 0.65m 2.30m }
+Pin 1 { A 0 0 -75 -2.60m 0 U }
+Pin 2 { A 0 0 -25 -2.60m 0 U }
+Pin 3 { A 0 0 25 -2.60m 0 U }
+Pin 4 { A 0 0 75 -2.60m 0 U }
+Pin 5 { A 0 0 75 2.60m 0 U }
+Pin 6 { A 0 0 25 2.60m 0 U }
+Pin 7 { A 0 0 -25 2.60m 0 U }
+Pin 8 { A 0 0 -75 2.60m 0 U }
+Path Silk
+{ -2.20999m -0.50m W 0.10m S 10 -1.71001m -0.50m }
+Path Silk
+{ 100 -1m W 0.10m S 10 7.54m -1m 7.54m 1m -2.46m 1m -2.46m -1m 100 -1m }
+Path Silk
+{ -1m 0 W 0.10m S 10 0 0 }
+Path Silk
+{ -0.50m 0.50m W 0.10m S 10 -0.50m -0.50m }
+Path Silk
+{ 100 -4m W 0.10m S 10 7.79m -4m 7.79m 4m -2.71m 4m -2.71m -4m 100 -4m }
+Path Silk
+{ -1.96m -0.75m W 0.10m S 10 -1.86432m -0.73096m -1.78322m -0.67677m -1.72903m
+-0.59567m -1.71m -0.50m -1.72903m -0.40432m -1.78322m -0.32322m -1.86432m
+-0.26903m -1.96m -0.25m -2.05567m -0.26903m -2.13677m -0.32322m -2.19096m
+-0.40432m -2.21m -0.50m -2.19096m -0.59567m -2.13677m -0.67677m -2.05567m
+-0.73096m -1.96m -0.75m }
+}
 
 Type HDR:2x1 {
 NameData { 1.50m -2.54006m -138.5 0 }
@@ -397,6 +427,30 @@ Path Silk
 { 0 -3m W 5 S 10 3m -3m 3m 3m -3m 3m -3m -3m 0 -3m }
 }
 
+Type SOT-23-5N {
+NameData { 1.50m 0 3m 0 Center }
+ValueData { 0 0 0 0 }
+Pad A { Rectangle 0.60m 1.40m }
+Pin 1 { A 0 0 -0.95m -1.25m 0 U }
+Pin 2 { A 0 0 0 -1.25m 0 U }
+Pin 3 { A 0 0 0.95m -1.25m 0 U }
+Pin 4 { A 0 0 0.95m 1.25m 0 U }
+Pin 5 { A 0 0 -0.95m 1.25m 0 U }
+Path Silk
+{ -1.99999m -2.25m W 0.10m S 10 -1.50001m -2.25m }
+Path Silk
+{ -1.45m 0 W 0.10m S 10 -1.45m -2.35m 1.45m -2.35m 1.45m 2.35m -1.45m 2.35m
+-1.45m 0 }
+Path Silk
+{ -2m 0 W 0.10m S 10 -2m -2.50m 2m -2.50m 2m 2.50m -2m 2.50m -2m 0 }
+Path Silk
+{ -1.75m -2.50m W 0.10m S 10 -1.65432m -2.48096m -1.57322m -2.42677m -1.51903m
+-2.34567m -1.50m -2.25m -1.51903m -2.15432m -1.57322m -2.07322m -1.65432m
+-2.01903m -1.75m -2m -1.84567m -2.01903m -1.92677m -2.07322m -1.98096m
+-2.15432m -2m -2.25m -1.98096m -2.34567m -1.92677m -2.42677m -1.84567m
+-2.48096m -1.75m -2.50m }
+}
+
 Type VIA~1~ {
 NameData { 0 0 0 0 }
 ValueData { 0 0 0 0 }
@@ -418,8 +472,158 @@ Pad A { Circle 50 }
 Pin 1 { A A A 0 0 20 P }
 }
 
+Type FB4532 {
+NameData { 1m -1.90m 3.30m 0 }
+ValueData { 1m -1.60m -3.90m 0 }
+Pad A { Rectangle 2m 4.22m }
+Pin 1 { A 0 0 -2.28500m 0 0 U }
+Pin 2 { A 0 0 2.28500m 0 0 U }
+Path Silk
+{ 0 -2.30m W 5 S 5 3.50m -2.30m 3.50m 2.30m -3.50m 2.30m -3.50m -2.30m 0 -2.30m
+}
+Path Silk
+{ -0.50m 0 W 5 S 5 0.50m 0 }
+Path Silk
+{ 0 -0.50m W 5 S 5 0 0.50m }
+}
 
-Part void { Name U4 Loc { 14.54500m 17.42500m 180 }
+Type SOIC:SOIC8 {
+NameData { 1.50m -0.15500m 5.75m 0 Center }
+ValueData { 0 4.84500m 1.50m 0 }
+Pad A { Rectangle 0.65m 2.30m }
+Pin 1 { A 0 0 0.40m -1.10m 0 U }
+Pin 2 { A 0 0 1.67m -1.10m 0 U }
+Pin 3 { A 0 0 2.94m -1.10m 0 U }
+Pin 4 { A 0 0 4.21m -1.10m 0 U }
+Pin 5 { A 0 0 4.21m 4.10m 0 U }
+Pin 6 { A 0 0 2.94m 4.10m 0 U }
+Pin 7 { A 0 0 1.67m 4.10m 0 U }
+Pin 8 { A 0 0 0.40m 4.10m 0 U }
+Path Silk
+{ 0.09501m 1m W 0.10m S 10 0.59499m 1m }
+Path Silk
+{ 4.30500m 0.50m W 0.10m S 10 -0.15500m 0.50m -0.15500m 2.50m 4.80500m 2.50m
+4.80500m 0.50m 4.30500m 0.50m }
+Path Silk
+{ 1.80500m 1.50m W 0.10m S 10 2.30500m 1.50m 2.80500m 1.50m }
+Path Silk
+{ 2.30500m 2m W 0.10m S 10 2.30500m 1m }
+Path Silk
+{ 4.84500m -2.50m W 0.10m S 10 5.05500m -2.50m 5.05500m 5.50m -0.44500m 5.50m
+-0.44500m -2.50m 4.84500m -2.50m }
+Path Silk
+{ 0.34500m 0.75m W 0.10m S 10 0.44068m 0.76904m 0.52178m 0.82323m 0.57597m
+0.90433m 0.59500m 1m 0.57597m 1.09568m 0.52178m 1.17678m 0.44068m 1.23097m
+0.34500m 1.25m 0.24933m 1.23097m 0.16823m 1.17678m 0.11404m 1.09568m 0.09500m
+1m 0.11404m 0.90433m 0.16823m 0.82323m 0.24933m 0.76904m 0.34500m 0.75m
+}
+}
+
+Type SOIC8 {
+NameData { 1.50m -2.46m 4.25m 0 Center }
+ValueData { 0 100 0 0 }
+Pad A { Rectangle 0.65m 2.30m }
+Pin 1 { A 0 0 -75 -2.60m 0 U }
+Pin 2 { A 0 0 -25 -2.60m 0 U }
+Pin 3 { A 0 0 25 -2.60m 0 U }
+Pin 4 { A 0 0 75 -2.60m 0 U }
+Pin 5 { A 0 0 75 2.60m 0 U }
+Pin 6 { A 0 0 25 2.60m 0 U }
+Pin 7 { A 0 0 -25 2.60m 0 U }
+Pin 8 { A 0 0 -75 2.60m 0 U }
+Path Silk
+{ -2.20999m -0.50m W 0.10m S 10 -1.71001m -0.50m }
+Path Silk
+{ 100 -1m W 0.10m S 10 7.54m -1m 7.54m 1m -2.46m 1m -2.46m -1m 100 -1m }
+Path Silk
+{ -1m 0 W 0.10m S 10 0 0 }
+Path Silk
+{ -0.50m 0.50m W 0.10m S 10 -0.50m -0.50m }
+Path Silk
+{ 100 -4m W 0.10m S 10 7.79m -4m 7.79m 4m -2.71m 4m -2.71m -4m 100 -4m }
+Path Silk
+{ -1.96m -0.75m W 0.10m S 10 -1.86432m -0.73096m -1.78322m -0.67677m -1.72903m
+-0.59567m -1.71m -0.50m -1.72903m -0.40432m -1.78322m -0.32322m -1.86432m
+-0.26903m -1.96m -0.25m -2.05567m -0.26903m -2.13677m -0.32322m -2.19096m
+-0.40432m -2.21m -0.50m -2.19096m -0.59567m -2.13677m -0.67677m -2.05567m
+-0.73096m -1.96m -0.75m }
+}
+
+Type SO16N {
+NameData { 1.50m -5m 4.25m 0 Center }
+ValueData { 0 0 0 0 }
+Pad A { Rectangle 0.65m 2.30m }
+Pin 1 { A 0 0 -175 -2.60m 0 U }
+Pin 2 { A 0 0 -125 -2.60m 0 U }
+Pin 3 { A 0 0 -75 -2.60m 0 U }
+Pin 4 { A 0 0 -25 -2.60m 0 U }
+Pin 5 { A 0 0 25 -2.60m 0 U }
+Pin 6 { A 0 0 75 -2.60m 0 U }
+Pin 7 { A 0 0 125 -2.60m 0 U }
+Pin 8 { A 0 0 175 -2.60m 0 U }
+Pin 9 { A 0 0 175 2.60m 0 U }
+Pin 10 { A 0 0 125 2.60m 0 U }
+Pin 11 { A 0 0 75 2.60m 0 U }
+Pin 12 { A 0 0 25 2.60m 0 U }
+Pin 13 { A 0 0 -25 2.60m 0 U }
+Pin 14 { A 0 0 -75 2.60m 0 U }
+Pin 15 { A 0 0 -125 2.60m 0 U }
+Pin 16 { A 0 0 -175 2.60m 0 U }
+Path Silk
+{ -4.74999m -0.50m W 0.10m S 10 -4.25001m -0.50m }
+Path Silk
+{ 0 -1m W 0.10m S 10 5m -1m 5m 1m -5m 1m -5m -1m 0 -1m }
+Path Silk
+{ -0.50m 0 W 0.10m S 10 0.50m 0 }
+Path Silk
+{ 0 0.50m W 0.10m S 10 0 -0.50m }
+Path Silk
+{ 0 -4m W 0.10m S 10 5.25m -4m 5.25m 4m -5.25m 4m -5.25m -4m 0 -4m }
+Path Silk
+{ -4.50m -0.75m W 0.10m S 10 -4.40432m -0.73096m -4.32322m -0.67677m -4.26903m
+-0.59567m -4.25m -0.50m -4.26903m -0.40432m -4.32322m -0.32322m -4.40432m
+-0.26903m -4.50m -0.25m -4.59567m -0.26903m -4.67677m -0.32322m -4.73096m
+-0.40432m -4.75m -0.50m -4.73096m -0.59567m -4.67677m -0.67677m -4.59567m
+-0.73096m -4.50m -0.75m }
+}
+
+Type SOIC8~1~ {
+NameData { 1.50m -5m 4.25m 0 Center }
+ValueData { 0 0 0 0 }
+Pad A { Rectangle 0.65m 2.30m }
+Pin 1 { A 0 0 -175 -2.60m 0 U }
+Pin 2 { A 0 0 -125 -2.60m 0 U }
+Pin 3 { A 0 0 -75 -2.60m 0 U }
+Pin 4 { A 0 0 -25 -2.60m 0 U }
+Pin 5 { A 0 0 -25 2.60m 0 U }
+Pin 6 { A 0 0 -75 2.60m 0 U }
+Pin 7 { A 0 0 -125 2.60m 0 U }
+Pin 8 { A 0 0 -175 2.60m 0 U }
+Path Silk
+{ -4.74999m -0.50m W 0.10m S 10 -4.25001m -0.50m }
+Path Silk
+{ 0 -1m W 0.10m S 10 5m -1m 5m 1m -5m 1m -5m -1m 0 -1m }
+Path Silk
+{ -0.50m 0 W 0.10m S 10 0.50m 0 }
+Path Silk
+{ 0 0.50m W 0.10m S 10 0 -0.50m }
+Path Silk
+{ 0 -4m W 0.10m S 10 5.25m -4m 5.25m 4m -5.25m 4m -5.25m -4m 0 -4m }
+Path Silk
+{ -4.50m -0.75m W 0.10m S 10 -4.40432m -0.73096m -4.32322m -0.67677m -4.26903m
+-0.59567m -4.25m -0.50m -4.26903m -0.40432m -4.32322m -0.32322m -4.40432m
+-0.26903m -4.50m -0.25m -4.59567m -0.26903m -4.67677m -0.32322m -4.73096m
+-0.40432m -4.75m -0.50m -4.73096m -0.59567m -4.67677m -0.67677m -4.59567m
+-0.73096m -4.50m -0.75m }
+}
+
+
+Part SOT-23-5N { Name U6 Loc { 64.82m 12.97500m -90 }
+NameData { 1.50m 63.49398m 15.15942m 0 Center }
+}
+Part SOT-23-5N { Name U4 Loc { 42.72m 20.97500m }
+}
+Part void { Name U3 Loc { 14.54500m 17.42500m 180 }
 NameData { 1m 15.82761m 19.80574m 0 Center }
 ValueData { 0 15.10128m 23.49278m 180 }
 Pad A { Rectangle 0.23m 0.85m Spacing -8 }
@@ -452,13 +656,13 @@ Pin 8 { B 0 0 13.07m 18.17500m 0 U }
 Pin 9 { A 0 0 13.79500m 18.90m 0 U }
 Path S 1 { 14.54500m 19.42500m W 5 S 5 12.54500m 19.42500m 12.54500m 15.42500m
 16.54500m 15.42500m 16.54500m 19.42500m 14.54500m 19.42500m }
-FloodPath S 1 { 16.04500m 16.17500m W 5 S 5 15.79500m 16.17500m 15.79500m 15.67500m
+Path S 1 { 16.04500m 16.17500m W 5 S 5 15.79500m 16.17500m 15.79500m 15.67500m
 16.29500m 15.67500m 16.29500m 16.17500m 16.04500m 16.17500m }
 }
 Part VIA { Name VIA1 Loc { 57.73500m 11.71500m }
 }
-Part HDR:2x1 { Name "Vin 6-17 V" Loc { 9.34m 6.92500m 180 }
-NameData { 1m 6.57m 4.42500m 0 }
+Part HDR:2x1 { Name "Vin 12-14 V" Loc { 9.34m 6.92500m 180 }
+NameData { 1m 5.57m 4.42500m 0 }
 }
 Part TDKVLC { Name L1 Loc { 800 15.07500m -90 }
 NameData { 1m 23.94755m 11.76050m 0 }
@@ -487,6 +691,8 @@ Part VIA { Name VIA51_2 Loc { 12.82m 12.42500m }
 }
 Part VIA { Name VIA53 Loc { 12.57m 20.72500m }
 }
+Part SOIC:SOIC8 { Name U7 Loc { 33.40m 15.82500m }
+}
 Part VIA { Name VIA54 Loc { 14.22m 14.92500m }
 }
 Part CAP2012N { Name C10 Loc { 15.17m 13.17500m }
@@ -503,14 +709,8 @@ Part CAP:CAPC3225 { Name C13 Loc { 8.07m 18.42500m 90 }
 NameData { 1m 6.79500m 14.52500m 0 }
 ValueData { 0 11.87274m 16.85738m 90 }
 }
-Part PWPSOIC28 { Name U2 Loc { 76.39500m 17.82500m -90 }
-NameData { 50 72.39500m 23.19m 0 }
-}
-Part void { Name HOLE Loc { 85.04m 51.08500m }
-NameData { 0 85.04m 51.08500m 0 }
-ValueData { 0 85.04m 51.08500m 0 }
-Pad A { Circle 200 }
-Pin HOLE { A A A 85.04m 51.08500m 125 P }
+Part PWPSOIC28 { Name U2 Loc { 65.87m 29.12500m -90 }
+NameData { 50 61.87m 34.49m 0 }
 }
 Part void { Name HOLE Loc { 19m 6m }
 NameData { 0 19m 6m 0 }
@@ -522,11 +722,11 @@ Part HDR2X23 { Name P9 Loc { 24.08m 4.73m }
 NameData { 50 22.93700m 9.30200m 0 }
 ValueData { 0 23.44500m -5.43m 0 }
 }
-Part void { Name HOLE Loc { 19m 54.26m }
-NameData { 0 19m 54.26m 0 }
-ValueData { 0 19m 54.26m 0 }
+Part void { Name HOLE Loc { 85.04m 51.08500m }
+NameData { 0 85.04m 51.08500m 0 }
+ValueData { 0 85.04m 51.08500m 0 }
 Pad A { Circle 200 }
-Pin HOLE { A A A 19m 54.26m 125 P }
+Pin HOLE { A A A 85.04m 51.08500m 125 P }
 }
 Part void { Name HOLE Loc { 85.04m 9.17500m }
 NameData { 0 85.04m 9.17500m 0 }
@@ -538,10 +738,28 @@ Part HDR2X23 { Name P8 Loc { 24.08m 52.99m }
 NameData { 50 22.93700m 49.94200m 0 }
 ValueData { 0 23.44500m 42.83m 0 }
 }
-Part QFN:QFNT325X5 { Name U1 Loc { 65.39500m 15.82500m }
-NameData { 50 62.39500m 19.05500m 0 }
+Part void { Name HOLE Loc { 19m 54.26m }
+NameData { 0 19m 54.26m 0 }
+ValueData { 0 19m 54.26m 0 }
+Pad A { Circle 200 }
+Pin HOLE { A A A 19m 54.26m 125 P }
 }
-Part VIA2 { Name VIA2 Loc { 59.51300m 10.44500m }
+Part QFN:QFNT325X5 { Name U1 Loc { 55.27m 27.52500m }
+NameData { 50 52.27m 30.75500m 0 }
+}
+Part VIA2 { Name VIA2 Loc { 55.07m 10.92500m }
+}
+Part SOT-23-5N { Name U5 Loc { 42.02m 30.17500m }
+}
+Part VIA { Name VIA3 Loc { 54.07m 43.92500m }
+}
+Part FB4532 { Name L3 Loc { 66.78500m 38.92500m 180 }
+NameData { 1m 63.84m 42.02500m 0 }
+}
+Part FB4532 { Name L2 Loc { 66.78500m 20.92500m -180 }
+NameData { 1m 63.54m 17.32500m 0 }
+}
+Part SOT-23-5N { Name U8 Loc { 51.02m 45.67500m }
 }
 
 
@@ -572,21 +790,36 @@ Signal RightPos
 Signal "**Signal 1**" 
 { C13-2 VIA70-1 }
 Signal Vin 
-{ C13-1 C8-A "Vin 6-17 V-2" }
-Signal "**Signal 4**" 
-{ C10-A C8-B VIA49-1 VIA50-1 VIA51_2-1 }
+{ C13-1 C8-A "Vin 12-14 V-2" }
 Signal "**Signal 5**" 
-{ U4-4 U4-5 }
+{ U3-4 U3-5 }
 Signal "**Signal 6**" 
-{ C9-A U4-8 }
+{ C9-A U3-8 }
 Signal "**Signal 7**" 
-{ C9-B U4-10 U4-11 U4-12 U4-9 VIA53-1 }
+{ C9-B U3-10 U3-11 U3-12 U3-9 VIA53-1 }
 Signal "**Signal 8**" 
 { PWR-A VIA57-1 }
 Signal "**Signal 9**" 
 { PWR-B R3-A }
 Signal +5V 
-{ C10-B L1-2 P9-5 P9-6 R3-B U4-3 VIA54-1 VIA55-1 VIA56-1 }
+{ C10-B L1-2 P9-5 P9-6 U3-3 U5-1 U8-5 VIA54-1 VIA55-1 VIA56-1 }
+Signal +3.3VB 
+{ P9-3 P9-4 U4-1 U6-1 }
+Signal "**Signal 3**" 
+{ U4-3 U5-3 }
+Signal "**Signal 10**" 
+{ L3-1 U2-27 U2-28 }
+Signal "**Signal 11**" 
+{ L2-1 U2-15 U2-16 }
+Signal "**Signal 12**" 
+{ U2-19 U2-24 }
+Signal GND 
+{ C10-A C8-B P8-1 P8-2 P9-1 P9-2 P9-43 P9-44 P9-45 P9-46 U3-1 U3-18 U3-19 U3-2 U3-20 U3-21 U3-22 U3-23 U8-3 VIA3-1 VIA49-1 VIA50-1 VIA51_2-1 "Vin
+12-14 V-1" }
+Signal "**Signal 15**" 
+{ R3-B }
+Signal "**Signal 17**" 
+{ P8-11 U8-2 }
 
 Layer 1 { Outer
 AnnularRing 20 VoidRing 20 SurroundWidth
@@ -643,17 +876,38 @@ AnnularRing 20 VoidRing 20 SurroundWidth
 }
 
 
+PadChange { 1 0 15.04500m 16.92500m 
+Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U3-18 Surround 511
+}
+PadChange { 1 0 14.04500m 16.92500m 
+Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U3-19 Surround 511
+}
+PadChange { 1 0 15.04500m 17.42500m 
+Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U3-20 Surround 511
+}
+PadChange { 1 0 14.04500m 17.42500m 
+Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U3-21 Surround 511
+}
+PadChange { 1 0 15.04500m 17.92500m 
+Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U3-22 Surround 511
+}
+PadChange { 1 0 14.04500m 17.92500m 
+Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U3-23 Surround 511
+}
+PadChange { 1 0 57.73500m 11.71500m 
+Pad { Circle 20 Thermal Circle 70 Spacing 10 } P VIA1-1 Surround 511 }
+PadChange { 1 0 11.07m 16.92500m 
+Pad { Rectangle 1.80m 1.40m Spacing -12 Thermal Rectangle 1.65400m 2.05400m Spacing 10
+} P C8-A Surround 511 }
 PadChange { 1 0 800 17.42500m 
 Pad { Rectangle 6.20m 1.80m Spacing -12 Thermal Rectangle 2.05400m 6.45400m Spacing 10
 } P L1-1 Surround 511 }
-PadChange { 1 0 16.07m 13.17500m 
-Pad { Rectangle 1.20m 1.50m Spacing -12 Thermal Rectangle 1.45400m 1.75400m Spacing 10
-} P C10-B Surround 511 }
 PadChange { 1 0 800 12.72500m 
 Pad { Rectangle 6.20m 1.80m Spacing -12 Thermal Rectangle 2.05400m 6.45400m Spacing 10
 } P L1-2 Surround 511 }
-PadChange { 1 0 24.62m 13.47500m 
-Pad { Circle 20 Thermal Circle 60 Spacing 10 } P VIA56-1 Surround 256 }
+PadChange { 1 0 16.07m 13.17500m 
+Pad { Rectangle 1.20m 1.50m Spacing -12 Thermal Rectangle 1.45400m 1.75400m Spacing 10
+} P C10-B Surround 511 }
 PadChange { 1 0 11.07m 14.12500m 
 Pad { Rectangle 1.80m 1.40m Spacing -12 Thermal Rectangle 1.65400m 2.05400m Spacing 10
 } P C8-B Surround 511 }
@@ -672,29 +926,23 @@ Pad { Connected Circle 20 Spacing -12 Isolated Circle 20 Thermal Circle 60 Spaci
 PadChange { 1 0 8.07m 21.42500m 
 Pad { Connected Circle 20 Spacing -12 Isolated Circle 20 Thermal Circle 60 Spacing 10
 } P VIA70-1 Surround 511 }
-PadChange { 1 0 11.07m 16.92500m 
-Pad { Rectangle 1.80m 1.40m Spacing -12 Thermal Rectangle 1.65400m 2.05400m Spacing 10
-} P C8-A Surround 511 }
-PadChange { 1 0 15.04500m 16.92500m 
-Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U4-18 Surround 511
+PadChange { 2 0 15.04500m 16.92500m 
+Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U3-18 }
+PadChange { 2 0 14.04500m 16.92500m 
+Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U3-19 }
+PadChange { 2 0 15.04500m 17.42500m 
+Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U3-20 }
+PadChange { 2 0 14.04500m 17.42500m 
+Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U3-21 }
+PadChange { 2 0 15.04500m 17.92500m 
+Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U3-22 }
+PadChange { 2 0 14.04500m 17.92500m 
+Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U3-23 }
+PadChange { 2 0 57.73500m 11.71500m 
+Pad { Circle 20 Thermal Circle 60 } P VIA1-1 }
+PadChange { 2 0 10.61m 6.92500m 
+Pad { Rectangle 70 70 Thermal Circle 120 Spacing 40 } P "Vin 12-14 V-1" Surround 341
 }
-PadChange { 1 0 14.04500m 16.92500m 
-Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U4-19 Surround 511
-}
-PadChange { 1 0 15.04500m 17.42500m 
-Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U4-20 Surround 511
-}
-PadChange { 1 0 14.04500m 17.42500m 
-Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U4-21 Surround 511
-}
-PadChange { 1 0 15.04500m 17.92500m 
-Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U4-22 Surround 511
-}
-PadChange { 1 0 14.04500m 17.92500m 
-Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U4-23 Surround 511
-}
-PadChange { 1 0 57.73500m 11.71500m 
-Pad { Circle 20 Thermal Circle 70 Spacing 10 } P VIA1-1 Surround 511 }
 PadChange { 2 0 12.82m 14.02500m 
 Pad { None } P VIA49-1 Surround 256 }
 PadChange { 2 0 18.37m 20.42500m 
@@ -707,8 +955,6 @@ PadChange { 2 0 12.57m 20.72500m
 Pad { Circle 20 Thermal Circle 60 Spacing 10 } P VIA53-1 Surround 477 }
 PadChange { 2 0 8.07m 21.42500m 
 Pad { None } P VIA70-1 Surround 511 }
-PadChange { 2 0 85.04m 51.08500m 
-Pad { Circle 200 Thermal Circle 205 Spacing 40 } P HOLE-HOLE Surround 341 }
 PadChange { 2 0 19m 6m 
 Pad { Circle 200 Thermal Circle 205 Spacing 40 } P HOLE-HOLE Surround 373 }
 PadChange { 2 0 24.08m 4.73m 
@@ -716,7 +962,7 @@ Pad { Rectangle 70 70 Thermal Circle 110 Spacing 30 } P P9-1 Surround 341 }
 PadChange { 2 0 24.08m 7.27m 
 Pad { Circle 70 Thermal Circle 110 Spacing 30 } P P9-2 Surround 341 }
 PadChange { 2 0 64.72m 7.27m 
-Pad { Circle 70 Thermal Circle 110 Spacing 30 } P P9-34 Surround 341 }
+Pad { Circle 70 Thermal Circle 90 Spacing 10 } P P9-34 Surround 511 }
 PadChange { 2 0 77.42m 4.73m 
 Pad { Circle 70 Thermal Circle 110 Spacing 30 } P P9-43 Surround 341 }
 PadChange { 2 0 77.42m 7.27m 
@@ -725,31 +971,32 @@ PadChange { 2 0 79.96m 4.73m
 Pad { Circle 70 Thermal Circle 110 Spacing 30 } P P9-45 Surround 341 }
 PadChange { 2 0 79.96m 7.27m 
 Pad { Circle 70 Thermal Circle 110 Spacing 30 } P P9-46 Surround 341 }
-PadChange { 2 0 19m 54.26m 
-Pad { Circle 200 Thermal Circle 205 Spacing 40 } P HOLE-HOLE Surround 343 }
+PadChange { 2 0 85.04m 51.08500m 
+Pad { Circle 200 Thermal Circle 205 Spacing 40 } P HOLE-HOLE Surround 341 }
 PadChange { 2 0 85.04m 9.17500m 
 Pad { Circle 200 Thermal Circle 205 Spacing 40 } P HOLE-HOLE Surround 341 }
 PadChange { 2 0 24.08m 52.99m 
 Pad { Rectangle 70 70 Thermal Circle 110 Spacing 30 } P P8-1 Surround 341 }
 PadChange { 2 0 24.08m 55.53m 
 Pad { Circle 70 Thermal Circle 110 Spacing 30 } P P8-2 Surround 341 }
-PadChange { 2 0 15.04500m 16.92500m 
-Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U4-18 }
-PadChange { 2 0 14.04500m 16.92500m 
-Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U4-19 }
-PadChange { 2 0 15.04500m 17.42500m 
-Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U4-20 }
-PadChange { 2 0 14.04500m 17.42500m 
-Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U4-21 }
-PadChange { 2 0 15.04500m 17.92500m 
-Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U4-22 }
-PadChange { 2 0 14.04500m 17.92500m 
-Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U4-23 }
-PadChange { 2 0 57.73500m 11.71500m 
+PadChange { 2 0 19m 54.26m 
+Pad { Circle 200 Thermal Circle 205 Spacing 40 } P HOLE-HOLE Surround 343 }
+PadChange { 2 0 54.07m 43.92500m 
+Pad { Circle 20 Thermal Circle 60 Spacing 6 } P VIA3-1 Surround 477 }
+PadChange { 3 0 15.04500m 16.92500m 
+Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U3-18 }
+PadChange { 3 0 14.04500m 16.92500m 
+Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U3-19 }
+PadChange { 3 0 15.04500m 17.42500m 
+Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U3-20 }
+PadChange { 3 0 14.04500m 17.42500m 
+Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U3-21 }
+PadChange { 3 0 15.04500m 17.92500m 
+Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U3-22 }
+PadChange { 3 0 14.04500m 17.92500m 
+Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U3-23 }
+PadChange { 3 0 57.73500m 11.71500m 
 Pad { Circle 20 Thermal Circle 60 } P VIA1-1 }
-PadChange { 2 0 10.61m 6.92500m 
-Pad { Rectangle 70 70 Thermal Circle 120 Spacing 40 } P "Vin 6-17 V-1" Surround 341
-}
 PadChange { 3 0 12.82m 14.02500m 
 Pad { None } P VIA49-1 Surround 511 }
 PadChange { 3 0 12.82m 13.22500m 
@@ -758,83 +1005,76 @@ PadChange { 3 0 12.82m 12.42500m
 Pad { None } P VIA51_2-1 Surround 511 }
 PadChange { 3 0 8.07m 21.42500m 
 Pad { None } P VIA70-1 }
-PadChange { 3 0 15.04500m 16.92500m 
-Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U4-18 }
-PadChange { 3 0 14.04500m 16.92500m 
-Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U4-19 }
-PadChange { 3 0 15.04500m 17.42500m 
-Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U4-20 }
-PadChange { 3 0 14.04500m 17.42500m 
-Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U4-21 }
-PadChange { 3 0 15.04500m 17.92500m 
-Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U4-22 }
-PadChange { 3 0 14.04500m 17.92500m 
-Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U4-23 }
-PadChange { 3 0 57.73500m 11.71500m 
-Pad { Circle 20 Thermal Circle 60 } P VIA1-1 }
-PadChange { 4 0 57.73500m 11.71500m 
-Pad { Circle 20 Thermal Circle 70 Spacing 10 } P VIA1-1 Surround 511 }
 PadChange { 4 0 15.04500m 16.92500m 
-Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U4-18 Surround 511
+Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U3-18 Surround 511
 }
 PadChange { 4 0 14.04500m 16.92500m 
-Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U4-19 Surround 511
+Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U3-19 Surround 511
 }
 PadChange { 4 0 15.04500m 17.42500m 
-Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U4-20 Surround 511
+Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U3-20 Surround 511
 }
 PadChange { 4 0 14.04500m 17.42500m 
-Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U4-21 Surround 511
+Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U3-21 Surround 511
 }
 PadChange { 4 0 15.04500m 17.92500m 
-Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U4-22 Surround 511
+Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U3-22 Surround 511
 }
 PadChange { 4 0 14.04500m 17.92500m 
-Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U4-23 Surround 511
+Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U3-23 Surround 511
 }
+PadChange { 4 0 57.73500m 11.71500m 
+Pad { Circle 20 Thermal Circle 70 Spacing 10 } P VIA1-1 Surround 511 }
 
 
-Path L 1 { P VIA55-1 16.22m 14.92500m W 8 16.22m 13.32500m P C10-B 16.07m 13.17500m
-P L1-2 800 12.72500m P VIA56-1 24.62m 13.47500m { 24.47m 13.72500m P R3-B 24.47m
-20.42500m }
-W 1m 26.52500m 13.47500m S 5 29.16m 10.84m P P9-6 29.16m 7.27m S 0 P P9-5 29.16m
-4.73m }
+Path L 1 { P U6-1 63.57m 13.92500m W 0.50m S 5 46.07m 15.92500m { P P9-4 26.62m 7.27m
+P P9-3 26.62m 4.73m }
+P U4-1 41.77m 19.72500m }
+Path L 1 { P U4-3 43.67m 19.72500m W 6 S 5 P U5-3 42.97m 28.92500m }
+Path L 1 { P U3-3 14.29500m 15.95m W 6 S 6 14.29500m 15m P VIA54-1 14.22m 14.92500m
+}
+Path L 1 { P U3-5 13.07m 16.67500m W 6 13.07m 16.24500m 13.36500m 15.95m P U3-4 13.79500m
+15.95m }
+Path L 1 { P U3-8 13.07m 18.17500m W 6 S 6 13.07m 18.64500m 12.78m 18.93500m P C9-A 11.07m
+18.92500m }
+Path L 1 { P VIA1-1 57.73500m 11.71500m W 6 S 6 P U1-2 52.87m 28.77500m }
+Path L 1 { P "Vin 12-14 V-2" 8.07m 6.92500m W 1m S 5 P C13-1 8.07m 16.92500m P C8-A 11.07m
+16.92500m }
+Path L 1 { P L1-2 800 12.72500m W 8 P C10-B 16.07m 13.17500m 16.22m 13.32500m P VIA55-1 16.22m
+14.92500m }
 Path L 1 { P PWR-B 21.07m 20.42500m W 6 S 6 P R3-A 22.97m 20.42500m }
 Path L 1 { P VIA57-1 18.37m 20.42500m W 6 S 6 P PWR-A 19.57m 20.42500m }
 Path L 1 { P C9-B 11.07m 20.72500m W 8 S 5 P VIA53-1 12.57m 20.72500m 13.37m 20.72500m
-13.79500m 20.30m P U4-9 13.79500m 18.90m P U4-10 14.29500m 18.90m P U4-11 14.79500m
-18.90m P U4-12 15.29500m 18.90m }
-Path L 1 { P U4-3 14.29500m 15.95m W 6 S 6 14.29500m 15m P VIA54-1 14.22m 14.92500m
-}
-Path L 1 { P U4-5 13.07m 16.67500m W 6 13.07m 16.24500m 13.36500m 15.95m P U4-4 13.79500m
-15.95m }
-Path L 1 { P U4-8 13.07m 18.17500m W 6 S 6 13.07m 18.64500m 12.78m 18.93500m P C9-A 11.07m
-18.92500m }
+13.79500m 20.30m P U3-9 13.79500m 18.90m P U3-10 14.29500m 18.90m P U3-11 14.79500m
+18.90m P U3-12 15.29500m 18.90m }
 Path L 1 { P C8-B 11.07m 14.12500m W 6 P VIA49-1 12.82m 14.02500m { P VIA50-1 12.82m
 13.22500m P VIA51_2-1 12.82m 12.42500m }
 P C10-A 14.27m 13.17500m }
 Path L 1 { P VIA70-1 8.07m 21.42500m W 1m S 5 P C13-2 8.07m 19.92500m }
-Path L 1 { P "Vin 6-17 V-2" 8.07m 6.92500m W 1m S 5 P C13-1 8.07m 16.92500m P C8-A 11.07m
-16.92500m }
-Path L 1 { P P9-10 34.24m 7.27m W 6 S 6 P U1-31 64.14500m 18.22500m }
-Path L 1 { P P9-20 46.94m 7.27m W 6 S 6 45.54300m 6.38100m 45.54300m 3.58700m
-46.05100m 3.07900m 62.81500m 3.07900m 63.57700m 4.09500m 63.57700m 8.92100m
-P U1-9 63.64500m 13.42500m }
+Path L 1 { P U2-16 68.67m 25.55m W 6 S 5 P U2-15 68.67m 24.90m P L2-1 69.07m 20.92500m
+}
+Path L 1 { P U2-19 68.67m 27.50m W 6 S 5 70.57m 27.82500m 70.77m 30.22500m P U2-24 68.67m
+30.75m }
+Path L 1 { P U2-27 68.67m 32.70m W 6 S 5 P U2-28 68.67m 33.35m P L3-1 69.07m 38.92500m
+}
+Path L 1 { P P9-10 34.24m 7.27m W 6 S 6 P U1-31 54.02m 29.92500m }
+Path L 1 { P P9-20 46.94m 7.27m W 6 S 6 P U1-9 53.52m 25.12500m }
 Path L 1 { P P9-25 54.56m 4.73m W 6 S 6 55.70300m 5.87300m 55.70300m 11.20700m
-57.22700m 12.47700m P U1-1 62.99500m 17.57500m }
-Path L 1 { P P9-29 59.64m 4.73m W 6 S 6 58.49700m 5.87300m P U1-3 62.99500m 16.57500m
+57.22700m 12.47700m P U1-1 52.87m 29.27500m }
+Path L 1 { P P9-29 59.64m 4.73m W 6 S 6 58.49700m 5.87300m P U1-3 52.87m 28.27500m
 }
-Path L 1 { P P9-30 59.64m 7.27m W 6 S 6 58.75100m 9.93700m P U1-4 62.99500m 16.07500m
+Path L 1 { P P9-30 59.64m 7.27m W 6 S 6 P U1-4 52.87m 27.77500m }
+Path L 1 { P P8-11 36.78m 52.99m W 6 S 5 P U8-2 51.02m 44.42500m }
+Path L 1 { P U1-27 56.02m 29.92500m W 6 S 6 P U2-3 63.07m 32.05m }
+Path L 1 { P U1-28 55.52m 29.92500m W 6 S 6 63.07m 30.42500m P U2-4 63.07m 31.40m
 }
-Path L 1 { P U1-27 66.14500m 18.22500m W 6 S 6 P U2-3 73.59500m 20.75m }
-Path L 1 { P U1-28 65.64500m 18.22500m W 6 S 6 65.39500m 19.32500m P U2-4 73.59500m
-20.10m }
-Path L 1 { P U1-29 65.14500m 18.22500m W 6 S 6 P U2-12 73.59500m 14.90m }
-Path L 1 { P U1-30 64.64500m 18.22500m W 6 S 6 P U2-11 73.59500m 15.55m }
-Path L 1 { P U1-8 62.99500m 14.07500m W 6 S 6 61.03700m 8.41300m 61.03700m 4.09500m
-60.27500m 3.58700m 48.33700m 3.58700m P P9-19 46.94m 4.73m }
-Path L 1 { P VIA2-1 59.51300m 10.44500m W 6 S 6 P U1-5 62.99500m 15.57500m }
-Path L 1 { P VIA1-1 57.73500m 11.71500m W 6 S 6 P U1-2 62.99500m 17.07500m }
+Path L 1 { P U1-29 55.02m 29.92500m W 6 S 6 P U2-12 63.07m 26.20m }
+Path L 1 { P U1-30 54.52m 29.92500m W 6 S 6 P U2-11 63.07m 26.85m }
+Path L 1 { P U1-8 52.87m 25.77500m W 6 S 6 P P9-19 46.94m 4.73m }
+Path L 1 { P VIA2-1 55.07m 10.92500m W 6 S 6 P U1-5 52.87m 27.27500m }
+Path L 1 { P U8-3 51.97m 44.42500m W 6 S 5 P VIA3-1 54.07m 43.92500m }
+Path L 1 { P U8-5 50.07m 46.92500m W 6 S 5 P VIA56-1 24.62m 13.47500m P U5-1 41.07m
+28.92500m }
 FloodPath L 1 { 15.57m 13.97500m W 1 S 5 25.12m 13.97500m 25.12m 11.47500m 15.57m
 11.47500m 15.57m 13.97500m }
 FloodPath L 1 { 15.02m 13.82500m W 1 S 5 15.39500m 14.42500m 15.39500m 16.62500m
@@ -847,10 +1087,15 @@ FloodPath L 1 { 13.42m 17.82500m W 1 S 5 13.42m 16.32500m 10.27m 16.32500m 10.27
 FloodPath L 2 { 47.39500m 3.32500m W 5 90.25500m 3.32500m 90.25500m 56.93500m
 10.61m 56.93500m 10.61m 42.06m 25.21500m 42.06m 25.21500m 23.28m 4.89500m
 23.28m 4.89500m 3.32500m 47.39500m 3.32500m }
-Path L 4 { P VIA54-1 14.22m 14.92500m W 6 S 5 P VIA55-1 16.22m 14.92500m }
-Path L 4 { P P9-28 57.10m 7.27m W 6 S 6 P VIA2-1 59.51300m 10.44500m }
+FloodPath L 3 { 47.39500m 3.32500m W 5 90.25500m 3.32500m 90.25500m 56.93500m
+10.61m 56.93500m 10.61m 42.06m 25.21500m 42.06m 25.21500m 23.28m 4.89500m
+23.28m 4.89500m 3.32500m 47.39500m 3.32500m }
 Path L 4 { P VIA1-1 57.73500m 11.71500m W 6 S 6 60.02100m 11.71500m 60.78300m
 10.44500m 61.03700m 6.12700m P P9-31 62.18m 4.73m }
+Path L 4 { P VIA54-1 14.22m 14.92500m W 6 S 5 P VIA55-1 16.22m 14.92500m }
+Path L 4 { P VIA56-1 24.62m 13.47500m W 1m 26.52m 13.47500m 29.16m 10.83500m
+P P9-6 29.16m 7.27m P P9-5 29.16m 4.73m }
+Path L 4 { P P9-28 57.10m 7.27m W 6 S 6 P VIA2-1 55.07m 10.92500m }
 
 
 
