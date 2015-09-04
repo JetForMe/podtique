@@ -2,10 +2,10 @@ View {
 Width 3.740157480 
 Height 2.362204724 
 Margin 0.019685039 
-Mag 11.6 
-Center 67.76453m 18.81127m 
+Mag 4.4 
+Center 47.49999m 37.55513m 
 Grid 25 25 
-Index 46.94m 4.73m 
+Index 77.42m 55.53m 
 PrintScale 0.0 
 FullWidth
 ShowHoles
@@ -748,7 +748,7 @@ Part HDR:2x1 { Name "Vin 12-14 V" Loc { 9.34m 6.92500m 180 }
 NameData { 1m 5.57m 4.42500m 0 }
 }
 Part TDKVLC { Name L1 Loc { 800 15.07500m -90 }
-NameData { 1m 23.94755m 11.76050m 0 }
+NameData { 1m 17.73m 10.58m 0 }
 ValueData { 0 15.59811m 18.26622m -90 }
 }
 Part VIA { Name VIA49 Loc { 12.82m 14.02500m }
@@ -846,9 +846,6 @@ NameData { 1m 63.54m 17.32500m 0 }
 Part VIA { Name VIA6 ParentGroupID 3 Loc { 62m 20.92500m }
 }
 Part VIA { Name VIA8 ParentGroupID 2 Loc { 61.50m 38.92500m }
-}
-Part SOT-23-5N { Name U6 Loc { 64.81999m 12.97500m -90 }
-NameData { 1m 63.49397m 15.15942m 0 Center }
 }
 Part SOT-23-5N { Name U4 Loc { 42.72m 20.97500m }
 NameData { 1m 42.72m 23.97500m 0 Center }
@@ -999,9 +996,15 @@ Part VIA { Name VIA25 Loc { 47.13m 10.16500m }
 }
 Part VIA { Name VIA24 Loc { 42.16500m 12.93500m }
 }
-Part VIA { Name VIA26 Loc { 64.72m 16.79500m }
+Part VIA { Name VIA26 Loc { 71.07m 14.25500m }
 }
-Part PANEL { Name PANEL Loc { 86.94500m 19.33500m 90 }
+Part PANEL { Name PANEL Loc { 86.94500m 19.97m 90 }
+}
+Part LP5907 { Name U6 Loc { 71.11m 11.40m }
+NameData { 1m 74.61m 13.75500m 0 Center }
+ValueData { 0 71.11m 11.40m 0 }
+}
+Part VIA { Name VIA27 Loc { 68.53m 9.81m }
 }
 Part void { Name NEOPXL Loc { 85.21500m 44.43500m }
 NameData { 1m 81.50500m 46.23500m 0 }
@@ -1084,15 +1087,33 @@ Signal "**Signal 22**"
 { R4-A U7-3 VIA21-1 VIA22-1 }
 Signal "**Signal 24**" 
 { PANEL-2 U6-5 }
+Signal Freq 
+{ P9-39 PANEL-3 }
+Signal Vol 
+{ P9-40 PANEL-4 }
+Signal Tone 
+{ P9-37 PANEL-5 }
+Signal "**Signal 28**" 
+{ P9-27 U6-3 VIA27-1 }
+Signal "**Signal 30**" 
+{ P8-45 PANEL-7 }
+Signal "**Signal 31**" 
+{ P8-44 PANEL-10 }
+Signal "**Signal 32**" 
+{ P8-43 PANEL-8 }
+Signal "**Signal 33**" 
+{ P8-42 PANEL-6 }
+Signal "**Signal 34**" 
+{ P8-46 PANEL-9 }
 
 Layer 1 { Outer
 AnnularRing 20 VoidRing 20 SurroundWidth
-10 PathColor 56000 2000 1500 Visible
+10 PathColor 56000 2000 1500 Invisible
 
 }
 Layer 2 { Inner
 AnnularRing 20 VoidRing 20 SurroundWidth
-10 PathColor 0 0 64000 Visible
+10 PathColor 0 0 64000 Invisible
 
 }
 Layer 3 { Inner
@@ -1102,7 +1123,7 @@ AnnularRing 20 VoidRing 20 SurroundWidth
 }
 Layer 4 { Outer
 AnnularRing 20 VoidRing 20 SurroundWidth
-10 PathColor 0 0 64000 Visible
+10 PathColor 0 0 64000 Invisible
 
 }
 
@@ -1263,7 +1284,7 @@ PadChange { 2 0 34.43m 13.97500m
 Pad { Circle 20 Thermal Circle 40 Spacing 10 } P VIA16-1 Surround 375 }
 PadChange { 2 0 28.71500m 18.42m 
 Pad { Circle 20 Thermal Circle 60 Spacing 10 } P VIA23-1 Surround 477 }
-PadChange { 2 0 88.21500m 14.25500m 
+PadChange { 2 0 88.21500m 14.89m 
 Pad { Rectangle 70 70 Thermal Circle 100 Spacing 20 } P PANEL-1 Surround 341 }
 PadChange { 3 0 15.04500m 16.92500m 
 Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U3-18 }
@@ -1317,8 +1338,8 @@ PadChange { 4 0 24.62m 11.97500m
 Pad { Circle 20 Thermal Circle 60 Spacing 10 } P VIA56_1-1 Surround 511 }
 
 
-Path L 1 { P U6-5 66.06999m 13.92500m W 0.50m S 5 P PANEL-2 85.67500m 14.25500m
-}
+Path L 1 { P U6-5 73.61m 12.35m W 15 78.05500m 12.35m 80.59500m 14.89m P PANEL-2 85.67500m
+14.89m }
 Path L 1 { P U4-3 43.67m 19.72500m W 6 S 5 P U5-3 42.97m 28.92500m }
 Path L 1 { P U3-3 14.29500m 15.95m W 6 S 6 14.29500m 15m P VIA54-1 14.22m 14.92500m
 }
@@ -1397,23 +1418,37 @@ Path L 1 { P VIA25-1 47.13m 10.16500m W 6 S 5 P R6-B 47.13m 11.43500m }
 Path L 1 { P R4-B 34.63m 23.97m W 6 S 5 P R3-B 33.03m 23.97m P R2-B 31.43m 23.97m
 31.33m 23.97m 30.63m 23.27m P U7-8 30.62m 17.27m 28.62m 17.27m 26.62m 15.27m
 P P9-4 26.62m 7.27m W 0.50m P P9-3 26.62m 4.73m }
-Path L 1 { P U6-1 63.56999m 13.92500m W 0.50m S 5 P VIA26-1 64.72m 16.79500m }
+Path L 1 { P U6-1 71.11m 12.35m W 15 P VIA26-1 71.07m 14.25500m }
 Path L 1 { P R6-A 47.13m 12.93500m W 6 S 5 P R5-A 45.34m 12.93500m P VIA24-1 42.16500m
 12.93500m W 0.50m P U4-1 41.77m 19.72500m }
-Path L 1 { P U6-4 66.06999m 12.02500m W 6 S 5 66.06999m 12.97500m P U6-2 63.56999m
-12.97500m }
+Path L 1 { P VIA27-1 68.53m 9.81m W 6 S 5 69.17m 10.45m P U6-3 71.11m 10.45m }
 FloodPath L 2 { 47.39500m 3.32500m W 5 90.25500m 3.32500m 90.25500m 56.93500m
 10.61m 56.93500m 10.61m 42.06m 25.21500m 42.06m 25.21500m 23.28m 4.89500m
 23.28m 4.89500m 3.32500m 47.39500m 3.32500m }
-Path L 3 { P P9-4 26.62m 7.27m W 0.50m S 5 28.08m 9.53m 38.76m 9.53m P VIA24-1 42.16500m
-12.93500m P VIA26-1 64.72m 16.79500m }
-FloodPath L 3 { 47.39500m 3.32500m W 5 90.25500m 3.32500m 90.25500m 56.93500m
-10.61m 56.93500m 10.61m 42.06m 25.21500m 42.06m 25.21500m 23.28m 4.89500m
-23.28m 4.89500m 3.32500m 47.39500m 3.32500m }
+Path L 3 { P P9-27 57.10m 4.73m W 6 S 5 58.37m 6m 67.89500m 6m 68.53m 6.63500m
+P VIA27-1 68.53m 9.81m }
+Path L 3 { P P9-37 69.80m 4.73m W 6 S 5 71.07m 6m 71.07m 9.81m 79.96m 18.70m 86.94500m
+18.70m P PANEL-5 88.21500m 19.97m }
+Path L 3 { P P9-39 72.34m 4.73m W 6 S 5 73.61m 6m 73.61m 8.54m 81.23m 16.16m 86.94500m
+16.16m P PANEL-3 88.21500m 17.43m }
+Path L 3 { P PANEL-4 85.67500m 17.43m W 6 S 5 80.59500m 17.43m 72.34m 9.17500m
+P P9-40 72.34m 7.27m }
+Path L 3 { P PANEL-6 85.67500m 19.97m W 6 S 5 83.13500m 22.51m 83.13500m 32.67m
+76.15m 39.02m 76.15m 54.26m P P8-42 74.88m 55.53m }
+Path L 3 { P P8-43 77.42m 52.99m W 6 S 5 77.42m 39.65500m 84.40500m 33.30500m
+84.40500m 23.78m P PANEL-8 85.67500m 22.51m }
+Path L 3 { P PANEL-10 85.67500m 25.05m W 6 S 5 85.67500m 33.94m 78.69m 40.29m
+78.69m 54.26m P P8-44 77.42m 55.53m }
 Path L 3 { P VIA6-1 62m 20.92500m W 50 S 10 49.78m 30.99m { 35.78m 30.99m 20.78m
 16.99m 20.78m 10.99m 19.78m 9.99m 8.78m 9.99m 8.07m 9.28m P "Vin 12-14 V-2" 8.07m
 6.92500m }
 P VIA5-1 62m 38.92500m }
+Path L 3 { P VIA26-1 71.07m 14.25500m W 0.50m S 5 P VIA24-1 42.16500m 12.93500m
+38.76m 9.53m 28.08m 9.53m P P9-4 26.62m 7.27m }
+Path L 3 { P PANEL-7 88.21500m 22.51m W 6 S 5 86.94500m 23.78m 86.94500m 34.57500m
+79.96m 40.92500m P P8-45 79.96m 52.99m }
+Path L 3 { P PANEL-9 88.21500m 25.05m W 6 S 5 88.21500m 35.21m 81.23m 41.56m 81.23m
+54.26m P P8-46 79.96m 55.53m }
 Path L 4 { P VIA1-1 57.73500m 11.71500m W 6 S 6 60.02100m 11.71500m 60.78300m
 10.44500m 61.03700m 6.12700m P P9-31 62.18m 4.73m }
 Path L 4 { P VIA54-1 14.22m 14.92500m W 6 S 5 P VIA55-1 16.22m 14.92500m }
