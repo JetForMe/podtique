@@ -2,10 +2,10 @@ View {
 Width 3.740157480 
 Height 2.362204724 
 Margin 0.019685039 
-Mag 4.4 
-Center 47.49999m 37.55513m 
-Grid 1m 1m 
-Index 87.75500m 44.43500m 
+Mag 20.4 
+Center 27.45240m 7.71773m 
+Grid 0.50m 0.50m 
+Index 24.62m 13.47500m 
 PrintScale 0.0 
 FullWidth
 ShowHoles
@@ -808,6 +808,8 @@ Path S 1 { 35.03m 45.74m W 4 S 5 35.12568m 45.75904m 35.20678m 45.81323m 35.2609
 46.08568m 34.78m 45.99m 34.79904m 45.89433m 34.85323m 45.81323m 34.93433m
 45.75904m 35.03m 45.74m }
 }
+Part VIA { Name VIA56_1 Loc { 24.62m 11.97500m }
+}
 Part HDR:3 { Name GPSPWR Loc { 20.45200m 122.03500m }
 NameData { 1.50m 15.72925m 118.65979m 0 }
 }
@@ -866,7 +868,7 @@ Signal "**Signal 8**"
 Signal "**Signal 9**" 
 { PWR-B R3-A }
 Signal +5V 
-{ C10-B L1-2 NEOPXL-1 P9-5 P9-6 R3-B U3-3 U5-1 U8-5 VIA4-1 VIA54-1 VIA55-1 VIA56-1 }
+{ C10-B L1-2 NEOPXL-1 P9-5 P9-6 R3-B U3-3 U5-1 U8-5 VIA4-1 VIA54-1 VIA55-1 VIA56-1 VIA56_1-1 }
 Signal +3.3VB 
 { P9-3 P9-4 U4-1 U6-1 U7-8 }
 Signal "**Signal 3**" 
@@ -990,6 +992,12 @@ Pad { Connected Circle 20 Spacing -12 Isolated Circle 20 Thermal Circle 60 Spaci
 PadChange { 1 0 8.07m 21.42500m 
 Pad { Connected Circle 20 Spacing -12 Isolated Circle 20 Thermal Circle 60 Spacing 10
 } P VIA70-1 Surround 511 }
+PadChange { 1 0 24.62m 13.47500m 
+Pad { Circle 20 Spacing -12 Thermal Circle 60 Spacing 10 } P VIA56-1 Surround 511
+}
+PadChange { 1 0 24.62m 11.97500m 
+Pad { Circle 20 Spacing -12 Thermal Circle 60 Spacing 10 } P VIA56_1-1 Surround 511
+}
 PadChange { 2 0 15.04500m 16.92500m 
 Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U3-18 }
 PadChange { 2 0 14.04500m 16.92500m 
@@ -1049,6 +1057,10 @@ PadChange { 2 0 37.73m 44.99m
 Pad { Circle 20 Thermal Circle 60 Spacing 6 } P VIA3-1 Surround 375 }
 PadChange { 2 0 85.21500m 44.43500m 
 Pad { Circle 70 Thermal Circle 100 Spacing 20 } P NEOPXL-2 Surround 341 }
+PadChange { 2 0 24.62m 13.47500m 
+Pad { Circle 20 Thermal Circle 50 } P VIA56-1 }
+PadChange { 2 0 24.62m 11.97500m 
+Pad { Circle 20 Thermal Circle 50 } P VIA56_1-1 }
 PadChange { 3 0 15.04500m 16.92500m 
 Pad { Circle 20 Spacing -10 Thermal Circle 55 } P U3-18 }
 PadChange { 3 0 14.04500m 16.92500m 
@@ -1071,6 +1083,10 @@ PadChange { 3 0 12.82m 12.42500m
 Pad { None } P VIA51_2-1 Surround 511 }
 PadChange { 3 0 8.07m 21.42500m 
 Pad { None } P VIA70-1 }
+PadChange { 3 0 24.62m 13.47500m 
+Pad { Circle 20 Thermal Circle 50 } P VIA56-1 }
+PadChange { 3 0 24.62m 11.97500m 
+Pad { Circle 20 Thermal Circle 50 } P VIA56_1-1 }
 PadChange { 4 0 15.04500m 16.92500m 
 Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U3-18 Surround 511
 }
@@ -1091,6 +1107,10 @@ Pad { Circle 18 Spacing -10 Thermal Circle 1.57m Spacing 10 } P U3-23 Surround 5
 }
 PadChange { 4 0 57.73500m 11.71500m 
 Pad { Circle 20 Thermal Circle 70 Spacing 10 } P VIA1-1 Surround 511 }
+PadChange { 4 0 24.62m 13.47500m 
+Pad { Circle 20 Thermal Circle 60 Spacing 10 } P VIA56-1 Surround 511 }
+PadChange { 4 0 24.62m 11.97500m 
+Pad { Circle 20 Thermal Circle 60 Spacing 10 } P VIA56_1-1 Surround 511 }
 
 
 Path L 1 { P U6-1 63.57m 13.92500m W 0.50m S 5 46.07m 15.92500m { P P9-4 26.62m 7.27m
@@ -1155,8 +1175,8 @@ FloodPath L 1 { 13.42m 17.82500m W 1 S 5 13.42m 16.32500m 10.27m 16.32500m 10.27
 Path L 1 { P C13-2 8.07m 19.92500m W 1m S 5 P VIA70-1 8.07m 21.42500m }
 Path L 1 { P VIA5-1 62m 38.92500m W 50 S 10 P L3-2 64.50m 38.92500m }
 Path L 1 { P VIA6-1 62m 20.92500m W 50 S 10 P L2-2 64.50m 20.92500m }
-Path L 1 { P R3-B 24.47m 20.42500m W 6 S 5 24.47m 13.62500m P VIA56-1 24.62m 13.47500m
-P U5-1 41.07m 28.92500m }
+Path L 1 { P VIA56-1 24.62m 13.47500m W 6 S 5 24.47m 13.62500m P R3-B 24.47m 20.42500m
+}
 FloodPath L 2 { 47.39500m 3.32500m W 5 90.25500m 3.32500m 90.25500m 56.93500m
 10.61m 56.93500m 10.61m 42.06m 25.21500m 42.06m 25.21500m 23.28m 4.89500m
 23.28m 4.89500m 3.32500m 47.39500m 3.32500m }
@@ -1171,9 +1191,11 @@ Path L 4 { P VIA1-1 57.73500m 11.71500m W 6 S 6 60.02100m 11.71500m 60.78300m
 10.44500m 61.03700m 6.12700m P P9-31 62.18m 4.73m }
 Path L 4 { P VIA54-1 14.22m 14.92500m W 6 S 5 P VIA55-1 16.22m 14.92500m }
 Path L 4 { P P9-28 57.10m 7.27m W 6 S 6 P VIA2-1 55.07m 10.92500m }
-Path L 4 { P NEOPXL-1 82.67500m 44.43500m W 1m 81.25500m 44.43500m 76.26500m
-49.42500m P VIA4-1 33.50m 49.42500m 27.62m 43.54500m 27.62m 16.47500m P VIA56-1 24.62m
-13.47500m 29.16m 8.93500m P P9-6 29.16m 7.27m P P9-5 29.16m 4.73m }
+Path L 4 { P VIA56-1 24.62m 13.47500m W 1m 26.62m 13.47500m 27.62m 14.47500m
+27.62m 43.54500m P VIA4-1 33.50m 49.42500m 76.26500m 49.42500m 81.25500m
+44.43500m P NEOPXL-1 82.67500m 44.43500m }
+Path L 4 { P VIA56_1-1 24.62m 11.97500m W 1m 26.62m 11.97500m 29.16m 9.43500m
+P P9-6 29.16m 7.27m P P9-5 29.16m 4.73m }
 
 
 
