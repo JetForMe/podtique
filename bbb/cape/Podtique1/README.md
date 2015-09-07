@@ -29,6 +29,28 @@ The LEDs are AdaFruit NeoPixel (24-LED ring), and driving those requires the use
 
 Note that the sysfs nodes for GPIO must be accessed by root. It might be possible to set up udev rules to set the group and access modes such that a non-root user can access the pins, but I couldn't figure it out. Something like KERNEL=="gpio*", GROUP="gpio", MODE="0660", but I didn't try it.
 
+New Heaer Pins
+--------------
+### P8
+
+* GPIO2\_11 / xx (P8_42 / xx) is on/off input (PANEL 6).
+* GPIO2\_6 / xx (P8_45 / xx) is mode 1 (PANEL 7).
+* GPIO2\_8 / xx (P8_43 / xx) is mode 2 (PANEL 8).
+* GPIO2\_7 / xx (P8_46 / xx) is left momentary (PANEL 9) (not currently installed).
+* GPIO2\_9 / xx (P8_44 / xx) is right momentary (PANEL 10) (not currently installed).
+ 
+There is an output used to control the amplifier’s standby mode:
+
+* GPIO0\_27 / 27 (P8_17 / 11) is an output to control the amplifier.
+
+The LEDs are AdaFruit NeoPixel (24-LED ring), and driving those requires the use of the PRU.
+
+* GPIO1\_13 (P8_11 / 13) is used by the PRU to communicate with the NeoPixel ring.
+
+
+### P9
+
+
 Cape Connectors
 ---------------
 
