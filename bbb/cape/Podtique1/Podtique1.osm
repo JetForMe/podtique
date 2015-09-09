@@ -2,17 +2,16 @@ View {
 Width 3.740157480 
 Height 2.362204724 
 Margin 0.019291339 
-Mag 7.3 
-Center 55.65798m 30m 
-Grid 25 25 
-Index 57.10m 4.73m 
+Mag 39.8 
+Center 65.04345m 34.82790m 
+Grid 5 5 
+Index 39.42999m 22.78500m 
 PrintScale 0.0 
 FullWidth
 ShowHoles
 ShowNames
 ShowValues
 SolidPads
-ShowSelectedSignalTrace
 SavedFrameString "17 76 2341 1341 0 0 2560 1417 " 
 PadFillColor 5898 30146 13107 
 GridColor 57344 57344 65280 
@@ -79,27 +78,6 @@ SolderMaskLayersFlipOdd no
 SolderMaskLayersFlipEven no 
 }
 
-
-Type JMP {
-NameData { 1m 0 1.50m 0 }
-ValueData { 1m 0 -3m 0 }
-Pad A { Rectangle 20 30 }
-Pin 1 { A 0 0 -12.5 0 0 U }
-Pin 2 { A 0 0 12.5 0 0 U }
-Path Silk
-{ 0 -20 W 5 S 5 27.5 -20 27.5 20 -27.5 20 -27.5 -20 0 -20 }
-}
-
-Type CON:HDR127-2 {
-NameData { 1m -70 40 0 }
-ValueData { 1m -70 -1.77m 0 }
-Pad A { Rectangle 1m 1m }
-Pad B { Circle 1m }
-Pin 1 { A A A -50 0 0.70m P }
-Pin 2 { B B B 0 0 0.70m P }
-Path Silk
-{ 0 -30 W 5 S 5 30 -30 30 30 -80 30 -80 -30 0 -30 }
-}
 
 Type LP5907~2~ {
 NameData { 1m 1.09500m 100 0 Center }
@@ -1077,165 +1055,62 @@ Path Front
 { 6 10 6 2 }
 }
 
+Type JMP {
+NameData { 1m 0 1.50m 0 }
+ValueData { 1m 0 -3m 0 }
+Pad A { Rectangle 20 30 }
+Pin 1 { A 0 0 -12.5 0 0 U }
+Pin 2 { A 0 0 12.5 0 0 U }
+Path Silk
+{ 0 -20 W 5 S 5 27.5 -20 27.5 20 -27.5 20 -27.5 -20 0 -20 }
+}
 
-Part JMP { Name A1 Loc { 28.79900m 21.12400m }
-NameData { 1m 26.64900m 20.72400m 0 }
-ValueData { 0 28.79900m 18.12400m 0 }
+Type CON:HDR127-2 {
+NameData { 1m -70 40 0 }
+ValueData { 1m -70 -1.77m 0 }
+Pad A { Rectangle 1m 1m }
+Pad B { Circle 1m }
+Pin 1 { A A A -50 0 0.70m P }
+Pin 2 { B B B 0 0 0.70m P }
+Path Silk
+{ 0 -30 W 5 S 5 30 -30 30 30 -80 30 -80 -30 0 -30 }
 }
-Part CON:HDR127-2 { Name J3 Loc { 60.46m 25.04500m -90 }
-NameData { 1m 59.96m 24.04500m -90 }
+
+
+Part CON:HDR127-2 { Name WEN Loc { 36.38199m 19.73700m -90 }
+ValueData { 0 34.61199m 21.51500m -90 }
 }
-Part CAP:1608P { Name C40 Loc { 60.53m 30.51500m -90 }
-NameData { 1m 60.23m 29.36500m -90 }
+Part VIA { Name VIA79 Loc { 47.18900m 28.99m }
 }
-Part VIA { Name VIA51 Loc { 46.03m 26.56500m }
+Part TDKVLC { Name L1 Loc { 800 15.07500m -90 }
+NameData { 1m 17.73m 10.58m 0 }
+ValueData { 0 15.59811m 18.26622m -90 }
 }
-Part RES:1608 { Name R19 Loc { 62.11m 25.63500m -90 }
-NameData { 1m 61.73m 23.16500m 0 }
+Part RES:1608 { Name R20 Loc { 37.15599m 22.78500m 180 }
+NameData { 1m 35.89799m 23.67400m 0 }
 }
-Part VIA { Name VIA49 Loc { 12.82m 14.02500m }
+Part VIA { Name VIA78 Loc { 45.63m 24.26500m }
 }
-Part RES:1608 { Name C5 Loc { 28.71500m 16.52m -90 }
-NameData { 1m 28.10400m 18.19200m 0 }
-ValueData { 0 26.27974m 18.89466m -90 }
+Part VIA { Name VIA77 Loc { 42.93m 29.46500m }
 }
-Part CON:HDR4 { Name "+R- SPKR -L+" Loc { 83.13500m 31.14600m 90 }
-NameData { 1m 85.66700m 1100 90 }
+Part CAP:1608P { Name C41 Loc { 45.68m 28.66500m 90 }
+NameData { 1m 46.64250m 29.37900m 0 }
 }
-Part VIA { Name VIA52 Loc { 58.22400m 25.99700m }
+Part VIA { Name VIA74 Loc { 45.43m 26.06500m }
 }
-Part VIA { Name VIA48 Loc { 51.03m 26.71500m }
+Part HDR:2x1 { Name "Vin 12-14 V" Loc { 9.34m 6.92500m 180 }
+NameData { 1m 5.57m 4.42500m 0 }
 }
-Part CON:HDR127-3 { Name J2 Loc { 53.53m 35.13m 90 }
-NameData { 1m 52.92500m 37.49600m 0 }
+Part CAP:1608P { Name C42 Loc { 44.08m 28.66500m 90 }
+NameData { 1m 41.20550m 29.88700m 0 }
 }
-Part VIA { Name VIA15 Loc { 58.22400m 41.23700m }
+Part VIA { Name VIA80 Loc { 32.34400m 20.43800m }
 }
-Part RES:1608 { Name C9 Loc { 53.03m 42.96500m -90 }
-NameData { 1m 52.40100m 44.83m 0 }
-ValueData { 0 50.59474m 45.33966m -90 }
+Part VIA { Name VIA75 Loc { 44.05500m 25.56500m }
 }
 Part CAP:1608P { Name C19 Loc { 55.43m 28.11500m 90 }
 NameData { 1m 55.93m 29.76500m 90 }
 ValueData { 0 57.86526m 25.74034m 90 }
-}
-Part VIA { Name VIA55 Loc { 16.22m 14.92500m }
-}
-Part LED:1608 { Name PWR Loc { 800 20.42500m }
-NameData { 1m 18.90963m 21.49949m 0 }
-ValueData { 0 17.94534m 17.98974m 0 }
-}
-Part VIA { Name VIA57 Loc { 18.37m 20.42500m }
-}
-Part VIA { Name VIA50 Loc { 12.82m 13.22500m }
-}
-Part CAP2012N { Name C2 Loc { 11.07m 19.82500m 90 }
-NameData { 1m 11.53165m 21.90482m 0 Center }
-}
-Part FB4532 { Name L3 ParentGroupID 1 Loc { 61.74500m 44.71500m 180 }
-NameData { 1m 58.53m 47.46500m 0 }
-}
-Part VIA { Name VIA48_1 Loc { 48.63m 23.91500m }
-}
-Part VIA { Name VIA67 Loc { 46.48m 30.53m }
-}
-Part VIA { Name VIA48_2 Loc { 51.03m 23.91500m }
-}
-Part FB4532 { Name L2 ParentGroupID 2 Loc { 61.74500m 20.31500m -180 }
-NameData { 1m 58.50m 16.71500m 0 }
-}
-Part VIA { Name VIA17 Loc { 30.03m 19.87m }
-}
-Part VIA { Name VIA18 Loc { 30.13250m 21.12400m }
-}
-Part VIA { Name VIA19 Loc { 33.03m 19.87m }
-}
-Part VIA { Name VIA20 Loc { 31.40250m 21.12400m }
-}
-Part VIA { Name VIA21 Loc { 33.16m 13.97500m }
-}
-Part VIA { Name VIA22 Loc { 34.63m 19.67600m }
-}
-Part LP5907 { Name U6 Loc { 71.11m 11.40m }
-NameData { 1m 74.61m 13.75500m 0 Center }
-ValueData { 0 71.11m 11.40m 0 }
-}
-Part void { Name NEOPXL Loc { 85.21500m 44.43500m }
-NameData { 1m 81.50500m 46.23500m 0 }
-ValueData { 0 85.21500m 42.93500m 0 }
-Pad A { Rectangle 70 70 }
-Pad B { Circle 70 }
-Pin 1 { A A A 82.67500m 44.43500m 40 P }
-Pin 2 { B B B 85.21500m 44.43500m 40 P }
-Pin 3 { B B B 87.75500m 44.43500m 40 P }
-Path S 1 { 85.21500m 43.16500m W 5 S 5 89.02500m 43.16500m 89.02500m 45.70500m
-81.40500m 45.70500m 81.40500m 43.16500m 85.21500m 43.16500m }
-}
-Part VIA { Name VIA76 Loc { 45.33m 26.76500m }
-}
-Part VIA { Name VIA73 Loc { 45.43m 25.06500m }
-}
-Part void { Name HOLE Loc { 19m 54.26m }
-NameData { 0 19m 54.26m 0 }
-ValueData { 0 19m 54.26m 0 }
-Pad A { Circle 200 }
-Pin HOLE { A A A 19m 54.26m 125 P }
-}
-Part VIA { Name VIA9 ParentGroupID 3 Loc { 56.96m 44.21500m }
-}
-Part VIA { Name VIA7 ParentGroupID 3 Loc { 56.96m 45.21500m }
-}
-Part RES:1608 { Name C10 Loc { 68.70999m 12.10m -90 }
-NameData { 1m 68.10999m 13.75m 0 }
-ValueData { 0 66.27473m 14.47466m -90 }
-}
-Part QFN:QFNT325X5 { Name U1 Loc { 49.63m 25.31500m }
-NameData { 1m 46.63m 21.21500m 0 }
-ValueData { 1m 51.13m 11.68m 0 }
-}
-Part LP5907 { Name U4 Loc { 36.93m 26.91500m }
-NameData { 1m 38.52500m 29.77m 0 Center }
-ValueData { 0 36.93m 26.91500m 0 }
-}
-Part VIA { Name VIA2 Loc { 50.38m 29.71500m }
-}
-Part VIA { Name VIA1 Loc { 49.88m 29.21500m }
-}
-Part void { Name U3 Loc { 14.54500m 17.42500m 180 }
-NameData { 1m 15.82761m 19.80574m 0 Center }
-ValueData { 0 15.10128m 23.49278m 180 }
-Pad A { Rectangle 0.23m 0.85m Spacing -8 }
-Pad B { Rectangle 0.85m 0.23m Spacing -8 }
-Pad C { Rectangle 1.70m 1.70m Spacing -12 }
-Pad D { Circle 18 Spacing -10 }
-Pad E { Circle 20 Spacing -10 }
-Pin 1 { A 0 0 15.29500m 15.95m 0 U }
-Pin 10 { A 0 0 14.29500m 18.90m 0 U }
-Pin 11 { A 0 0 14.79500m 18.90m 0 U }
-Pin 12 { A 0 0 15.29500m 18.90m 0 U }
-Pin 13 { B 0 0 16.02m 18.17500m 0 U }
-Pin 14 { B 0 0 16.02m 17.67500m 0 U }
-Pin 15 { B 0 0 16.02m 17.17500m 0 U }
-Pin 16 { B 0 0 16.02m 16.67500m 0 U }
-Pin 17 { C 0 0 14.54500m 17.42500m 0 U }
-Pin 18 { D E D 15.04500m 16.92500m 10 P NM }
-Pin 19 { D E D 14.04500m 16.92500m 10 P NM }
-Pin 2 { A 0 0 14.79500m 15.95m 0 U }
-Pin 20 { D E D 15.04500m 17.42500m 10 P NM }
-Pin 21 { D E D 14.04500m 17.42500m 10 P NM }
-Pin 22 { D E D 15.04500m 17.92500m 10 P NM }
-Pin 23 { D E D 14.04500m 17.92500m 10 P NM }
-Pin 3 { A 0 0 14.29500m 15.95m 0 U }
-Pin 4 { A 0 0 13.79500m 15.95m 0 U }
-Pin 5 { B 0 0 13.07m 16.67500m 0 U }
-Pin 6 { B 0 0 13.07m 17.17500m 0 U }
-Pin 7 { B 0 0 13.07m 17.67500m 0 U }
-Pin 8 { B 0 0 13.07m 18.17500m 0 U }
-Pin 9 { A 0 0 13.79500m 18.90m 0 U }
-Path S 1 { 14.54500m 19.42500m W 5 S 5 12.54500m 19.42500m 12.54500m 15.42500m
-16.54500m 15.42500m 16.54500m 19.42500m 14.54500m 19.42500m }
-Path S 1 { 16.04500m 16.17500m W 5 S 5 15.79500m 16.17500m 15.79500m 15.67500m
-16.29500m 15.67500m 16.29500m 16.17500m 16.04500m 16.17500m }
 }
 Part void { Name U2 Locked Loc { 65.23m 32.49m -90 }
 NameData { 1m 60.91m 37.88500m 0 }
@@ -1273,26 +1148,26 @@ Pin 7 { A 0 0 62.43m 32.81500m 0 U }
 Pin 8 { A 0 0 62.43m 32.16500m 0 U }
 Pin 9 { A 0 0 62.43m 31.51500m 0 U }
 Pin PAD1 { C 0 0 65.23m 32.49m 0 U }
-Pin VIA { D D D 66.73m 29.49m 15 P NM }
-Pin 1VIA { D D D 63.73m 30.49m 15 P NM }
-Pin VIA { D D D 66.73m 32.49m 15 P NM }
-Pin VIA { D D D 63.73m 34.49m 15 P NM }
-Pin VIA { D D D 66.73m 36.49m 15 P NM }
-Pin VIA { D D D 63.73m 31.49m 15 P NM }
-Pin VIA { D D D 63.73m 28.49m 15 P NM }
-Pin VIA { D D D 66.73m 35.49m 15 P NM }
-Pin VIA { D D D 65.23m 36.49m 15 P NM }
-Pin VIA { D D D 63.73m 32.49m 15 P NM }
-Pin VIA { D D D 66.73m 31.49m 15 P NM }
-Pin VIA { D D D 66.73m 34.49m 15 P NM }
-Pin VIA { D D D 63.73m 35.49m 15 P NM }
-Pin VIA { D D D 66.73m 30.49m 15 P NM }
-Pin VIA { D D D 63.73m 36.49m 15 P NM }
-Pin VIA { D D D 65.23m 28.49m 15 P NM }
-Pin VIA { D D D 63.73m 29.49m 15 P NM }
-Pin VIA { D D D 63.73m 33.49m 15 P NM }
-Pin VIA { D D D 66.73m 28.49m 15 P NM }
-Pin VIA { D D D 66.73m 33.49m 15 P NM }
+Pin VIA { D D D 66.73m 29.49m 10 P NM }
+Pin 1VIA { D D D 63.73m 30.49m 10 P NM }
+Pin VIA { D D D 66.73m 32.49m 10 P NM }
+Pin VIA { D D D 63.73m 34.49m 10 P NM }
+Pin VIA { D D D 66.73m 36.49m 10 P NM }
+Pin VIA { D D D 63.73m 31.49m 10 P NM }
+Pin VIA { D D D 63.73m 28.49m 10 P NM }
+Pin VIA { D D D 66.73m 35.49m 10 P NM }
+Pin VIA { D D D 65.23m 36.49m 10 P NM }
+Pin VIA { D D D 63.73m 32.49m 10 P NM }
+Pin VIA { D D D 66.73m 31.49m 10 P NM }
+Pin VIA { D D D 66.73m 34.49m 10 P NM }
+Pin VIA { D D D 63.73m 35.49m 10 P NM }
+Pin VIA { D D D 66.73m 30.49m 10 P NM }
+Pin VIA { D D D 63.73m 36.49m 10 P NM }
+Pin VIA { D D D 65.23m 28.49m 10 P NM }
+Pin VIA { D D D 63.73m 29.49m 10 P NM }
+Pin VIA { D D D 63.73m 33.49m 10 P NM }
+Pin VIA { D D D 66.73m 28.49m 10 P NM }
+Pin VIA { D D D 66.73m 33.49m 10 P NM }
 Path S 1 { 61.43m 32.49m W 5 S 10 61.43m 27.89m 69.03m 27.89m 69.03m 37.09m
 61.43m 37.09m 61.43m 32.49m }
 Path S 1 { 61.03m 36.49m W 5 S 10 61.03m 37.49m 61.23m 37.49m 63.23m 37.49m
@@ -1304,121 +1179,183 @@ Path L 1 { 63.43m 32.49m W 2 S 10 63.43m 27.49m 67.03m 27.49m 67.03m 37.49m
 Path L 4 { 61.03m 32.49m W 2 S 10 61.03m 37.49m 69.43m 37.49m 69.43m 27.49m
 61.03m 27.49m 61.03m 32.49m }
 }
-Part CAP:CAPC3225 { Name C1 Loc { 8.07m 18.42500m 90 }
-NameData { 1m 6.79500m 14.52500m 0 }
-ValueData { 0 11.87274m 16.85738m 90 }
+Part void { Name U3 Loc { 14.54500m 17.42500m 180 }
+NameData { 1m 15.82761m 19.80574m 0 Center }
+ValueData { 0 15.10128m 23.49278m 180 }
+Pad A { Rectangle 0.23m 0.85m Spacing -8 }
+Pad B { Rectangle 0.85m 0.23m Spacing -8 }
+Pad C { Rectangle 1.70m 1.70m Spacing -12 }
+Pad D { Circle 18 Spacing -10 }
+Pad E { Circle 20 Spacing -10 }
+Pin 1 { A 0 0 15.29500m 15.95m 0 U }
+Pin 10 { A 0 0 14.29500m 18.90m 0 U }
+Pin 11 { A 0 0 14.79500m 18.90m 0 U }
+Pin 12 { A 0 0 15.29500m 18.90m 0 U }
+Pin 13 { B 0 0 16.02m 18.17500m 0 U }
+Pin 14 { B 0 0 16.02m 17.67500m 0 U }
+Pin 15 { B 0 0 16.02m 17.17500m 0 U }
+Pin 16 { B 0 0 16.02m 16.67500m 0 U }
+Pin 17 { C 0 0 14.54500m 17.42500m 0 U }
+Pin 18 { D E D 15.04500m 16.92500m 10 P NM }
+Pin 19 { D E D 14.04500m 16.92500m 10 P NM }
+Pin 2 { A 0 0 14.79500m 15.95m 0 U }
+Pin 20 { D E D 15.04500m 17.42500m 10 P NM }
+Pin 21 { D E D 14.04500m 17.42500m 10 P NM }
+Pin 22 { D E D 15.04500m 17.92500m 10 P NM }
+Pin 23 { D E D 14.04500m 17.92500m 10 P NM }
+Pin 3 { A 0 0 14.29500m 15.95m 0 U }
+Pin 4 { A 0 0 13.79500m 15.95m 0 U }
+Pin 5 { B 0 0 13.07m 16.67500m 0 U }
+Pin 6 { B 0 0 13.07m 17.17500m 0 U }
+Pin 7 { B 0 0 13.07m 17.67500m 0 U }
+Pin 8 { B 0 0 13.07m 18.17500m 0 U }
+Pin 9 { A 0 0 13.79500m 18.90m 0 U }
+Path S 1 { 14.54500m 19.42500m W 5 S 5 12.54500m 19.42500m 12.54500m 15.42500m
+16.54500m 15.42500m 16.54500m 19.42500m 14.54500m 19.42500m }
+Path S 1 { 16.04500m 16.17500m W 5 S 5 15.79500m 16.17500m 15.79500m 15.67500m
+16.29500m 15.67500m 16.29500m 16.17500m 16.04500m 16.17500m }
 }
-Part void { Name HOLE Loc { 19m 6m }
-NameData { 0 19m 6m 0 }
-ValueData { 0 19m 6m 0 }
+Part VIA { Name VIA1 Loc { 49.88m 29.21500m }
+}
+Part VIA { Name VIA2 Loc { 50.38m 29.71500m }
+}
+Part LP5907 { Name U4 Loc { 36.93m 26.91500m }
+NameData { 1m 38.52500m 29.77m 0 Center }
+ValueData { 0 36.93m 26.91500m 0 }
+}
+Part QFN:QFNT325X5 { Name U1 Loc { 49.63m 25.31500m }
+NameData { 1m 46.63m 21.21500m 0 }
+ValueData { 1m 51.13m 11.68m 0 }
+}
+Part RES:1608 { Name C10 Loc { 68.70999m 12.10m -90 }
+NameData { 1m 68.10999m 13.75m 0 }
+ValueData { 0 66.27473m 14.47466m -90 }
+}
+Part VIA { Name VIA7 ParentGroupID 1 Loc { 56.96m 45.21500m }
+}
+Part VIA { Name VIA9 ParentGroupID 1 Loc { 56.96m 44.21500m }
+}
+Part void { Name HOLE Loc { 19m 54.26m }
+NameData { 0 19m 54.26m 0 }
+ValueData { 0 19m 54.26m 0 }
 Pad A { Circle 200 }
-Pin HOLE { A A A 19m 6m 125 P }
+Pin HOLE { A A A 19m 54.26m 125 P }
 }
-Part HDR2X23 { Name P9 Loc { 24.08m 4.73m }
-NameData { 50 22.93700m 9.30200m 0 }
-ValueData { 0 23.44500m -5.43m 0 }
+Part VIA { Name VIA73 Loc { 45.43m 25.06500m }
 }
-Part void { Name HOLE Loc { 85.04m 51.08500m }
-NameData { 0 85.04m 51.08500m 0 }
-ValueData { 0 85.04m 51.08500m 0 }
-Pad A { Circle 200 }
-Pin HOLE { A A A 85.04m 51.08500m 125 P }
+Part VIA { Name VIA76 Loc { 45.33m 26.76500m }
 }
-Part void { Name HOLE Loc { 85.04m 9.17500m }
-NameData { 0 85.04m 9.17500m 0 }
-ValueData { 0 85.04m 9.17500m 0 }
-Pad A { Circle 200 }
-Pin HOLE { A A A 85.04m 9.17500m 125 P }
+Part VIA { Name VIA55 Loc { 16.22m 14.92500m }
+}
+Part FB4532 { Name L2 ParentGroupID 2 Loc { 61.74500m 20.31500m -180 }
+NameData { 1m 58.50m 16.71500m 0 }
+}
+Part VIA { Name VIA48_2 Loc { 51.03m 23.91500m }
+}
+Part VIA { Name VIA67 Loc { 46.48m 30.53m }
+}
+Part VIA { Name VIA48_1 Loc { 48.63m 23.91500m }
+}
+Part FB4532 { Name L3 ParentGroupID 3 Loc { 61.74500m 44.71500m 180 }
+NameData { 1m 58.53m 47.46500m 0 }
+}
+Part CAP2012N { Name C2 Loc { 11.07m 19.82500m 90 }
+NameData { 1m 11.53165m 21.90482m 0 Center }
+}
+Part VIA { Name VIA50 Loc { 12.82m 13.22500m }
+}
+Part VIA { Name VIA15 Loc { 58.22400m 41.23700m }
+}
+Part RES:1608 { Name C9 Loc { 53.03m 42.96500m -90 }
+NameData { 1m 52.40100m 44.83m 0 }
+ValueData { 0 50.59474m 45.33966m -90 }
+}
+Part LED:1608 { Name PWR Loc { 800 20.42500m }
+NameData { 1m 18.90963m 21.49949m 0 }
+ValueData { 0 17.94534m 17.98974m 0 }
+}
+Part VIA { Name VIA57 Loc { 18.37m 20.42500m }
+}
+Part VIA { Name VIA17 Loc { 30.03m 19.87m }
+}
+Part CON:HDR127-3 { Name J2 Loc { 53.53m 35.13m 90 }
+NameData { 1m 52.92500m 37.49600m 0 }
+}
+Part CON:HDR4 { Name "+R- SPKR -L+" Loc { 83.13500m 31.14600m 90 }
+NameData { 1m 85.66700m 1100 90 }
+}
+Part RES:1608 { Name C5 Loc { 28.71500m 16.52m -90 }
+NameData { 1m 28.10400m 18.19200m 0 }
+ValueData { 0 26.27974m 18.89466m -90 }
+}
+Part VIA { Name VIA48 Loc { 51.03m 26.71500m }
+}
+Part CAP:1608P { Name C40 Loc { 60.53m 30.51500m -90 }
+NameData { 1m 60.13099m 34.34200m -90 }
+}
+Part VIA { Name VIA49 Loc { 12.82m 14.02500m }
+}
+Part VIA { Name VIA51 Loc { 46.03m 26.56500m }
+}
+Part VIA { Name VIA43 Loc { 73.03m 43.21500m }
+}
+Part VIA { Name VIA12 ParentGroupID 4 Loc { 56.46m 20.31500m }
+}
+Part VIA { Name VIA29_1 Loc { 44.73m 42.21500m }
+}
+Part VIA { Name VIA30_1 Loc { 53.03m 41.21500m }
 }
 Part HDR2X23 { Name P8 Loc { 24.08m 52.99m }
 NameData { 50 22.93700m 49.94200m 0 }
 ValueData { 0 23.44500m 42.83m 0 }
 }
-Part VIA { Name VIA28 Loc { 28.71500m 14.60300m }
+Part VIA { Name VIA22 Loc { 34.63m 19.67600m }
 }
-Part VIA { Name VIA30 Loc { 76.01m 10.35m }
+Part VIA { Name VIA70 Loc { 8.07m 21.42500m -180 }
 }
-Part RES:1608 { Name C6 Loc { 34.52999m 27.61500m -90 }
-NameData { 1m 33.92999m 29.26500m 0 }
-ValueData { 0 32.09473m 29.98966m -90 }
+Part VIA { Name VIA10 ParentGroupID 1 Loc { 57.46m 44.71500m }
 }
-Part RES:1608 { Name C8 Loc { 45.73m 42.96500m -90 }
-NameData { 1m 45.13m 44.61500m 0 }
-ValueData { 0 43.29474m 45.33966m -90 }
+Part VIA { Name VIA11 ParentGroupID 4 Loc { 56.96m 20.81500m }
 }
-Part VIA { Name VIA51_2 Loc { 12.82m 12.42500m }
+Part VIA { Name VIA26_1_1 Loc { 43.83m 43.71500m }
 }
-Part VIA { Name VIA53 Loc { 12.57m 20.72500m }
+Part CON:HDR127-3 { Name J1 Loc { 55.33m 35.13m 90 }
+NameData { 1m 54.81400m 37.49600m 0 }
 }
-Part VIA { Name VIA54 Loc { 14.22m 14.92500m }
+Part VIA { Name VIA41 Loc { 72.53m 42.71500m }
 }
-Part CAP2012N { Name C4 Loc { 15.17m 13.17500m }
-NameData { 1m 15.43828m 10.82860m 0 Center }
+Part VIA { Name VIA39 Loc { 73.53m 22.31500m }
 }
-Part CAP3216N { Name C3 Loc { 11.07m 15.52500m -90 }
-NameData { 1m 11.50344m 12.01436m 0 Center }
+Part VIA { Name VIA44 Loc { 73.53m 42.71500m }
 }
-Part VIA { Name VIA56 Loc { 24.62m 13.47500m }
+Part VIA { Name VIA27_1_1 Loc { 41.78m 41.31500m }
 }
-Part CAP:1608P { Name C24 Loc { 58.68m 33.96500m }
-NameData { 1m 58.73m 32.23m 0 }
-ValueData { 0 56.30534m 31.52974m 0 }
+Part CAP:CAPC3225 { Name C1 Loc { 8.07m 18.42500m 90 }
+NameData { 1m 6.79500m 14.52500m 0 }
+ValueData { 0 11.87274m 16.85738m 90 }
 }
-Part CAP:1608P { Name C21 Loc { 55.43m 24.71500m 90 }
-NameData { 1m 55.87m 20.94m 90 }
-ValueData { 0 57.86526m 22.34034m 90 }
+Part void { Name NEOPXL Loc { 85.21500m 44.43500m }
+NameData { 1m 81.50500m 46.23500m 0 }
+ValueData { 0 85.21500m 42.93500m 0 }
+Pad A { Rectangle 70 70 }
+Pad B { Circle 70 }
+Pin 1 { A A A 82.67500m 44.43500m 40 P }
+Pin 2 { B B B 85.21500m 44.43500m 40 P }
+Pin 3 { B B B 87.75500m 44.43500m 40 P }
+Path S 1 { 85.21500m 43.16500m W 5 S 5 89.02500m 43.16500m 89.02500m 45.70500m
+81.40500m 45.70500m 81.40500m 43.16500m 85.21500m 43.16500m }
 }
-Part VIA { Name VIA26_1 Loc { 27.62m 28.55900m }
+Part RES:1608 { Name C11 Loc { 76.01m 12.10m -90 }
+NameData { 1m 76.81m 12.75m 0 }
+ValueData { 0 73.57474m 14.47466m -90 }
 }
-Part RES:1608 { Name R4 Loc { 34.63m 23.22m 90 }
-NameData { 1m 35.13m 24.77m 90 }
-ValueData { 0 37.06526m 20.84534m 90 }
+Part VIA { Name VIA36 Loc { 73.03m 42.71500m }
 }
-Part VIA { Name VIA27_1 Loc { 36.89m 24.05500m }
+Part VIA { Name VIA37 Loc { 72.53m 22.31500m }
 }
-Part VIA { Name VIA29 Loc { 33.53m 26.86500m }
+Part VIA { Name VIA19 Loc { 33.03m 19.87m }
 }
-Part CAP:1608P { Name C27 Loc { 83.38900m 15.64m 90 }
-NameData { 1m 83.76200m 17.43m 90 }
-ValueData { 0 85.82426m 13.26534m 90 }
-}
-Part VIA { Name VIA47 Loc { 58.22400m 23.96500m }
-}
-Part CAP:1608P { Name C18 Loc { 53.63m 28.11500m 90 }
-NameData { 1m 54.13m 29.76500m 90 }
-ValueData { 0 56.06526m 25.74034m 90 }
-}
-Part VIA { Name VIA5 ParentGroupID 3 Loc { 56.96m 44.71500m }
-}
-Part VIA { Name VIA45 Loc { 73.03m 42.21500m }
-}
-Part VIA { Name VIA71 Loc { 43.43m 37.51500m }
-}
-Part VIA { Name VIA35 Loc { 73.03m 22.31500m }
-}
-Part RES:1608 { Name R18 Loc { 44.38m 36.68m 90 }
-NameData { 1m 44.88m 38.23m 90 }
-}
-Part VIA { Name VIA69 Loc { 44.38m 30.83m }
-}
-Part CAP:1608P { Name C30 Loc { 73.44300m 33.98500m 90 }
-NameData { 1m 72.54300m 32.71100m 90 }
-}
-Part CAP:1608P { Name C16 Loc { 67.28m 26.51500m 180 }
-NameData { 1m 63.53m 26.06500m 0 }
-ValueData { 0 69.65466m 28.95026m 180 }
-}
-Part VIA { Name VIA38 Loc { 73.03m 22.81500m }
-}
-Part VIA { Name VIA42 Loc { 73.03m 42.71500m }
-}
-Part VIA { Name VIA43 Loc { 73.03m 43.21500m }
-}
-Part VIA { Name VIA40 Loc { 73.03m 21.81500m }
-}
-Part CAP:1608P { Name C15 Loc { 67.28m 38.51500m 180 }
-NameData { 1m 63.53500m 38.00700m 0 }
-ValueData { 0 69.65466m 40.95026m 180 }
+Part VIA { Name VIA34 Loc { 65.43m 25.71500m }
 }
 Part VIA { Name VIA33 Loc { 65.63m 39.51500m }
 }
@@ -1430,48 +1367,45 @@ Part CAP:1608P { Name C14 Loc { 67.28m 40.31500m 180 }
 NameData { 1m 63.53500m 40.00700m 0 }
 ValueData { 0 69.65466m 42.75026m 180 }
 }
-Part VIA { Name VIA34 Loc { 65.43m 25.71500m }
+Part RES:1608 { Name R3 Loc { 33.03m 23.22m 90 }
+NameData { 1m 33.53m 24.77m 90 }
+ValueData { 0 35.46526m 20.84534m 90 }
 }
-Part VIA { Name VIA37 Loc { 72.53m 22.31500m }
+Part VIA { Name VIA16 Loc { 34.43m 13.97500m }
 }
-Part VIA { Name VIA36 Loc { 73.03m 42.71500m }
+Part VIA { Name VIA29_1_1 Loc { 67.71m 11.35m }
 }
-Part VIA { Name VIA39 Loc { 73.53m 22.31500m }
+Part RES:1608 { Name R2 Loc { 31.43m 23.22m 90 }
+NameData { 1m 31.83m 24.77m 90 }
 }
-Part VIA { Name VIA44 Loc { 73.53m 42.71500m }
+Part VIA { Name VIA56_1 Loc { 24.62m 11.97500m }
 }
-Part VIA { Name VIA41 Loc { 72.53m 42.71500m }
+Part CAP:1608P { Name C28 Locked Loc { 71.06600m 35.92300m }
+NameData { 1m 72.64300m 35.81100m 0 }
 }
-Part CON:HDR127-3 { Name J1 Loc { 55.33m 35.13m 90 }
-NameData { 1m 54.81400m 37.49600m 0 }
+Part VIA { Name VIA28 Loc { 28.71500m 14.60300m }
 }
-Part VIA { Name VIA26_1_1 Loc { 43.83m 43.71500m }
+Part RES:1608 { Name C6 Loc { 34.52999m 27.61500m -90 }
+NameData { 1m 33.92999m 29.26500m 0 }
+ValueData { 0 32.09473m 29.98966m -90 }
 }
-Part LP5907 { Name U5 Loc { 48.13m 42.26500m }
-NameData { 1m 49.82300m 44.47400m 0 Center }
-ValueData { 0 48.13m 42.26500m 0 }
+Part VIA { Name VIA53 Loc { 12.57m 20.72500m }
 }
-Part VIA { Name VIA27_1_1 Loc { 41.78m 41.31500m }
+Part VIA { Name VIA51_2 Loc { 12.82m 12.42500m }
 }
-Part VIA { Name VIA30_1 Loc { 53.03m 41.21500m }
+Part VIA { Name VIA30 Loc { 76.01m 10.35m }
 }
-Part RES:1608 { Name C11 Loc { 76.01m 12.10m -90 }
-NameData { 1m 76.81m 12.75m 0 }
-ValueData { 0 73.57474m 14.47466m -90 }
+Part RES:1608 { Name C8 Loc { 45.73m 42.96500m -90 }
+NameData { 1m 45.13m 44.61500m 0 }
+ValueData { 0 43.29474m 45.33966m -90 }
 }
-Part VIA { Name VIA29_1 Loc { 44.73m 42.21500m }
+Part RES:1608 { Name R21 Loc { 67.78m 9.81m }
 }
-Part VIA { Name VIA70 Loc { 8.07m 21.42500m -180 }
-}
-Part VIA { Name VIA10 ParentGroupID 3 Loc { 57.46m 44.71500m }
-}
-Part VIA { Name VIA11 ParentGroupID 4 Loc { 56.96m 20.81500m }
-}
-Part VIA { Name VIA12 ParentGroupID 4 Loc { 56.46m 20.31500m }
-}
-Part VIA { Name VIA13 ParentGroupID 4 Loc { 56.96m 19.81500m }
-}
-Part VIA { Name VIA14 ParentGroupID 4 Loc { 57.46m 20.31500m }
+Part void { Name HOLE Loc { 85.04m 9.17500m }
+NameData { 0 85.04m 9.17500m 0 }
+ValueData { 0 85.04m 9.17500m 0 }
+Pad A { Circle 200 }
+Pin HOLE { A A A 85.04m 9.17500m 125 P }
 }
 Part VIA { Name VIA4 Loc { 33.50m 49.42500m }
 }
@@ -1495,10 +1429,156 @@ Path S 1 { 35.03m 45.74m W 4 S 5 35.12568m 45.75904m 35.20678m 45.81323m 35.2609
 46.08568m 34.78m 45.99m 34.79904m 45.89433m 34.85323m 45.81323m 34.93433m
 45.75904m 35.03m 45.74m }
 }
-Part VIA { Name VIA56_1 Loc { 24.62m 11.97500m }
+Part VIA { Name VIA20 Loc { 31.40250m 21.12400m }
 }
-Part CAP:1608P { Name C28 Locked Loc { 71.06600m 35.92300m }
-NameData { 1m 72.64300m 35.81100m 0 }
+Part VIA { Name VIA14 ParentGroupID 4 Loc { 57.46m 20.31500m }
+}
+Part VIA { Name VIA13 ParentGroupID 4 Loc { 56.96m 19.81500m }
+}
+Part CAP:1608P { Name C15 Loc { 67.28m 38.51500m 180 }
+NameData { 1m 63.53500m 38.00700m 0 }
+ValueData { 0 69.65466m 40.95026m 180 }
+}
+Part VIA { Name VIA54 Loc { 14.22m 14.92500m }
+}
+Part CAP2012N { Name C4 Loc { 15.17m 13.17500m }
+NameData { 1m 15.43828m 10.82860m 0 Center }
+}
+Part CAP3216N { Name C3 Loc { 11.07m 15.52500m -90 }
+NameData { 1m 11.50344m 12.01436m 0 Center }
+}
+Part VIA { Name VIA56 Loc { 24.62m 13.47500m }
+}
+Part CAP:1608P { Name C24 Loc { 58.68m 33.96500m }
+NameData { 1m 57.36099m 36.76300m 0 }
+ValueData { 0 56.30534m 31.52974m 0 }
+}
+Part CAP:1608P { Name C21 Loc { 55.43m 24.71500m 90 }
+NameData { 1m 55.87m 20.94m 90 }
+ValueData { 0 57.86526m 22.34034m 90 }
+}
+Part VIA { Name VIA26_1 Loc { 27.62m 28.55900m }
+}
+Part RES:1608 { Name R4 Loc { 34.63m 23.22m 90 }
+NameData { 1m 35.13m 24.77m 90 }
+ValueData { 0 37.06526m 20.84534m 90 }
+}
+Part VIA { Name VIA27_1 Loc { 39.42999m 21.51500m }
+}
+Part VIA { Name VIA29 Loc { 33.53m 26.86500m }
+}
+Part CAP:1608P { Name C27 Loc { 83.38900m 15.64m 90 }
+NameData { 1m 83.76200m 17.43m 90 }
+ValueData { 0 85.82426m 13.26534m 90 }
+}
+Part VIA { Name VIA47 Loc { 58.22400m 23.96500m }
+}
+Part CAP:1608P { Name C18 Loc { 53.63m 28.11500m 90 }
+NameData { 1m 54.13m 29.76500m 90 }
+ValueData { 0 56.06526m 25.74034m 90 }
+}
+Part VIA { Name VIA5 ParentGroupID 1 Loc { 56.96m 44.71500m }
+}
+Part VIA { Name VIA45 Loc { 73.03m 42.21500m }
+}
+Part VIA { Name VIA71 Loc { 43.43m 37.51500m }
+}
+Part VIA { Name VIA35 Loc { 73.03m 22.31500m }
+}
+Part RES:1608 { Name R18 Loc { 44.38m 36.68m 90 }
+NameData { 1m 44.88m 38.23m 90 }
+}
+Part VIA { Name VIA69 Loc { 44.38m 30.83m }
+}
+Part VIA { Name VIA40 Loc { 73.03m 21.81500m }
+}
+Part VIA { Name VIA21 Loc { 33.16m 13.97500m }
+}
+Part CAP:1608P { Name C30 Loc { 73.44300m 33.98500m 90 }
+NameData { 1m 72.54300m 32.71100m 90 }
+}
+Part CAP:1608P { Name C16 Loc { 67.28m 26.51500m 180 }
+NameData { 1m 63.53m 26.06500m 0 }
+ValueData { 0 69.65466m 28.95026m 180 }
+}
+Part VIA { Name VIA38 Loc { 73.03m 22.81500m }
+}
+Part JMP { Name A1 Loc { 28.79900m 21.12400m }
+NameData { 1m 26.64900m 20.72400m 0 }
+ValueData { 0 28.79900m 18.12400m 0 }
+}
+Part LP5907 { Name U5 Loc { 48.13m 42.26500m }
+NameData { 1m 49.82300m 44.47400m 0 Center }
+ValueData { 0 48.13m 42.26500m 0 }
+}
+Part LP5907 { Name U6 Loc { 71.11m 11.40m }
+NameData { 1m 74.61m 13.75500m 0 Center }
+ValueData { 0 71.11m 11.40m 0 }
+}
+Part RES:1608 { Name R19 Loc { 62.11m 25.63500m -90 }
+NameData { 1m 61.73m 23.16500m 0 }
+}
+Part VIA { Name VIA18 Loc { 30.13250m 21.12400m }
+}
+Part void { Name HOLE Loc { 85.04m 51.08500m }
+NameData { 0 85.04m 51.08500m 0 }
+ValueData { 0 85.04m 51.08500m 0 }
+Pad A { Circle 200 }
+Pin HOLE { A A A 85.04m 51.08500m 125 P }
+}
+Part RES:1608 { Name L7 Loc { 73.53m 26.66500m -90 }
+NameData { 1m 74.03m 23.91500m 90 }
+}
+Part RES:1608 { Name R7 Loc { 47.18m 36.68m 90 }
+NameData { 1m 47.68m 38.33m 90 }
+ValueData { 0 49.61526m 34.30534m 90 }
+}
+Part VIA { Name VIA52 Loc { 58.22400m 25.99700m }
+}
+Part VIA { Name VIA58 Loc { 81.98900m 16.79m }
+}
+Part CAP:1608P { Name C20 Loc { 53.63m 24.71500m 90 }
+NameData { 1m 54.13m 20.96500m 90 }
+ValueData { 0 56.06526m 22.34034m 90 }
+}
+Part VIA { Name VIA46 Loc { 50.88m 28.98500m }
+}
+Part CON:HDR127-2 { Name J3 Loc { 60.46m 25.04500m -90 }
+NameData { 1m 59.96m 24.04500m -90 }
+}
+Part VIA { Name VIA31 Locked Loc { 71.81600m 40.32300m }
+}
+Part void { Name HOLE Loc { 19m 6m }
+NameData { 0 19m 6m 0 }
+ValueData { 0 19m 6m 0 }
+Pad A { Circle 200 }
+Pin HOLE { A A A 19m 6m 125 P }
+}
+Part CAP:1608P { Name C39 Loc { 75.13m 26.66500m 90 }
+NameData { 1m 75.63m 22.81500m 90 }
+}
+Part HDR2X23 { Name P9 Loc { 24.08m 4.73m }
+NameData { 50 22.93700m 9.30200m 0 }
+ValueData { 0 23.44500m -5.43m 0 }
+}
+Part VIA { Name VIA42 Loc { 73.03m 42.71500m }
+}
+Part CAP:1608P { Name C23 Loc { 58.18m 30.26500m }
+NameData { 1m 56.03m 31.13m 0 }
+ValueData { 0 55.80534m 27.82974m 0 }
+}
+Part CAP:1608P { Name C26 Loc { 83.42500m 42.02200m }
+NameData { 1m 85.21500m 41.64900m 0 }
+ValueData { 0 81.05034m 39.58674m 0 }
+}
+Part VIA { Name VIA60 Loc { 76.33m 27.41500m }
+}
+Part CAP:1608P { Name C31 Loc { 73.44300m 30.96100m -90 }
+NameData { 1m 72.44300m 30.21100m 90 }
+}
+Part CAP:D8 { Name C13 Loc { 70.53m 20.31500m -90 }
+NameData { 1m 68.93m 15.66500m 0 }
+ValueData { 0 64.93m 21.96500m -90 }
 }
 Part void { Name U7 Loc { 30.22m 13.17m }
 NameData { 1m 30.92200m 9.56400m 0 Center }
@@ -1525,20 +1605,18 @@ Path S 1 { 30.56500m 13.92m W 0.10m S 10 30.66068m 13.93904m 30.74178m 13.99323m
 30.33404m 14.26568m 30.31500m 14.17m 30.33404m 14.07433m 30.38823m 13.99323m
 30.46933m 13.93904m 30.56500m 13.92m }
 }
-Part RES:1608 { Name R3 Loc { 33.03m 23.22m 90 }
-NameData { 1m 33.53m 24.77m 90 }
-ValueData { 0 35.46526m 20.84534m 90 }
+Part VIA { Name VIA23 Loc { 28.60850m 22.39400m }
 }
-Part VIA { Name VIA16 Loc { 34.43m 13.97500m }
+Part RES:1608 { Name R8 Loc { 48.78m 36.68m -90 }
+NameData { 1m 49.21396m 38.24571m 90 }
+ValueData { 0 46.34474m 39.05466m -90 }
 }
-Part VIA { Name VIA29_1_1 Loc { 67.71m 11.35m }
+Part VIA { Name VIA6 ParentGroupID 4 Loc { 56.96m 20.31500m }
 }
-Part RES:1608 { Name R2 Loc { 31.43m 23.22m 90 }
-NameData { 1m 31.83m 24.77m 90 }
+Part VIA { Name VIA8 ParentGroupID 1 Loc { 56.46m 44.71500m }
 }
-Part CAP:D8 { Name C13 Loc { 70.53m 20.31500m -90 }
-NameData { 1m 68.93m 15.66500m 0 }
-ValueData { 0 64.93m 21.96500m -90 }
+Part RES:1608 { Name R5 Loc { 45.34m 12.18500m -90 }
+NameData { 1m 45.72500m 13.97500m 90 }
 }
 Part CAP:D8 { Name C12 Loc { 70.53m 44.71500m -90 }
 NameData { 1m 69.13m 48.56500m 0 }
@@ -1546,55 +1624,9 @@ ValueData { 0 64.93m 46.36500m -90 }
 }
 Part VIA { Name VIA3 Loc { 37.73m 44.99m 90 }
 }
-Part VIA { Name VIA6 ParentGroupID 4 Loc { 56.96m 20.31500m }
-}
-Part VIA { Name VIA8 ParentGroupID 3 Loc { 56.46m 44.71500m }
-}
-Part RES:1608 { Name R5 Loc { 45.34m 12.18500m -90 }
-NameData { 1m 45.72500m 13.97500m 90 }
-}
-Part RES:1608 { Name R7 Loc { 47.18m 36.68m 90 }
-NameData { 1m 47.68m 38.33m 90 }
-ValueData { 0 49.61526m 34.30534m 90 }
-}
-Part VIA { Name VIA23 Loc { 28.60850m 22.39400m }
-}
-Part RES:1608 { Name R8 Loc { 48.78m 36.68m -90 }
-NameData { 1m 49.21396m 38.24571m 90 }
-ValueData { 0 46.34474m 39.05466m -90 }
-}
 Part VIA { Name VIA30_1_1 Loc { 41.83m 25.86500m }
 }
 Part VIA { Name VIA48_3 Loc { 48.63m 26.71500m }
-}
-Part VIA { Name VIA46 Loc { 50.88m 28.98500m }
-}
-Part CAP:1608P { Name C20 Loc { 53.63m 24.71500m 90 }
-NameData { 1m 54.13m 20.96500m 90 }
-ValueData { 0 56.06526m 22.34034m 90 }
-}
-Part VIA { Name VIA58 Loc { 81.98900m 16.79m }
-}
-Part CAP:1608P { Name C26 Loc { 83.42500m 42.02200m }
-NameData { 1m 85.21500m 41.64900m 0 }
-ValueData { 0 81.05034m 39.58674m 0 }
-}
-Part CAP:1608P { Name C23 Loc { 58.18m 30.26500m }
-NameData { 1m 56.03m 31.13m 0 }
-ValueData { 0 55.80534m 27.82974m 0 }
-}
-Part VIA { Name VIA31 Locked Loc { 71.81600m 40.32300m }
-}
-Part VIA { Name VIA60 Loc { 76.33m 27.41500m }
-}
-Part CAP:1608P { Name C31 Loc { 73.44300m 30.96100m -90 }
-NameData { 1m 72.44300m 30.21100m 90 }
-}
-Part CAP:1608P { Name C39 Loc { 75.13m 26.66500m 90 }
-NameData { 1m 75.63m 22.81500m 90 }
-}
-Part RES:1608 { Name L7 Loc { 73.53m 26.66500m -90 }
-NameData { 1m 74.03m 23.91500m 90 }
 }
 Part VIA { Name VIA64 Loc { 62.18m 40.88500m }
 }
@@ -1602,7 +1634,7 @@ Part RES:1608 { Name R13 Loc { 44.38m 32.58m 90 }
 NameData { 1m 40.43m 31.76500m 90 }
 }
 Part CAP:1608P { Name C25 Loc { 58.68m 35.76500m }
-NameData { 1m 57.83m 36.76500m 0 }
+NameData { 1m 57.36099m 38.02500m 0 }
 ValueData { 0 56.30534m 33.32974m 0 }
 }
 Part CAP:1608P { Name C22 Loc { 58.18m 28.56500m }
@@ -1712,39 +1744,15 @@ Part VIA { Name VIA26 Loc { 66.81m 12.85m }
 Part PANEL { Name PANEL Loc { 86.94500m 19.97m 90 }
 NameData { 1m 84.06400m 21.99600m 90 }
 }
-Part HDR:2x1 { Name "Vin 12-14 V" Loc { 9.34m 6.92500m 180 }
-NameData { 1m 5.57m 4.42500m 0 }
+Part VIA { Name VIA81 Loc { 65.35500m 9.81m }
 }
-Part TDKVLC { Name L1 Loc { 800 15.07500m -90 }
-NameData { 1m 17.73m 10.58m 0 }
-ValueData { 0 15.59811m 18.26622m -90 }
-}
-Part VIA { Name VIA78 Loc { 45.63m 24.26500m }
-}
-Part VIA { Name VIA74 Loc { 45.43m 26.06500m }
-}
-Part CAP:1608P { Name C42 Loc { 44.08m 28.66500m 90 }
-NameData { 1m 41.20550m 29.88700m 0 }
-}
-Part CAP:1608P { Name C41 Loc { 45.68m 28.66500m 90 }
-NameData { 1m 46.64250m 29.37900m 0 }
-}
-Part VIA { Name VIA75 Loc { 44.05500m 25.56500m }
-}
-Part VIA { Name VIA79 Loc { 47.18900m 28.99m }
-}
-Part CON:HDR127-2 { Name WEN Loc { 36.38199m 19.73700m -90 }
-ValueData { 0 34.61199m 21.51500m -90 }
-}
-Part VIA { Name VIA77 Loc { 42.93m 29.46500m }
-}
-Part VIA { Name VIA80 Loc { 32.34400m 20.43800m }
-}
-Part RES:1608 { Name R20 Loc { 37.15599m 22.78500m 180 }
-NameData { 1m 38.69199m 22.28500m 0 }
+Part VIA { Name VIA27 Loc { 40.92999m 21.51500m }
 }
 Part JMP { Name A0 Loc { 28.79900m 19.85400m }
 NameData { 1m 26.64900m 19.45400m 0 }
+}
+Part RES:1608 { Name R22 Loc { 40.17999m 22.78500m }
+NameData { 1m 39.17599m 23.67400m 0 }
 }
 
 
@@ -1792,7 +1800,7 @@ Signal "**Signal 11**"
 Signal AGND 
 { C12-K C13-K C14-B C15-B C16-B C17-B C18-B C19-B C20-B C21-B C36-B C37-B C38-B C39-B C41-B C42-B C6-B C7-B C8-B C9-B R10-B R11-B R12-B R16-A R18-B R8-A R9-B U1-17 U1-21 U1-26 U1-PAD U2-10 U2-19 U2-1VIA U2-24 U2-VIA U4-2 U4-4 U5-2 U5-4 VIA29-1 VIA29_1-1 VIA30_1-1 VIA30_1_1-1 VIA31-1 VIA32-1 VIA33-1 VIA34-1 VIA35-1 VIA36-1 VIA37-1 VIA38-1 VIA39-1 VIA40-1 VIA41-1 VIA42-1 VIA43-1 VIA44-1 VIA45-1 VIA46-1 VIA48-1 VIA48_1-1 VIA48_2-1 VIA48_3-1 VIA59-1 VIA60-1 VIA61-1 VIA62-1 VIA63-1 VIA66-1 VIA71-1 VIA72-1 VIA77-1 }
 Signal GND 
-{ A0-1 A1-1 C1-2 C10-B C11-B C26-B C27-B C3-B C4-A C5-B NEOPXL-2 P8-1 P8-2 P9-1 P9-2 P9-43 P9-44 P9-45 P9-46 PANEL-1 U1-6 U3-1 U3-18 U3-19 U3-2 U3-20 U3-21 U3-22 U3-23 U6-2 U6-4 U7-4 U8-3 VIA16-1 VIA23-1 VIA28-1 VIA29_1_1-1 VIA3-1 VIA30-1 VIA49-1 VIA50-1 VIA51_2-1 VIA58-1 VIA70-1 VIA78-1 "Vin
+{ A0-1 A1-1 C1-2 C10-B C11-B C26-B C27-B C3-B C4-A C5-B NEOPXL-2 P8-1 P8-2 P9-1 P9-2 P9-43 P9-44 P9-45 P9-46 PANEL-1 R21-A R22-B U1-6 U3-1 U3-18 U3-19 U3-2 U3-20 U3-21 U3-22 U3-23 U6-2 U6-4 U7-4 U8-3 VIA16-1 VIA23-1 VIA27-1 VIA28-1 VIA29_1_1-1 VIA3-1 VIA30-1 VIA49-1 VIA50-1 VIA51_2-1 VIA58-1 VIA70-1 VIA78-1 VIA81-1 "Vin
 12-14 V-1" }
 Signal LED 
 { P8-11 U8-2 }
@@ -1813,7 +1821,7 @@ Signal Vol
 Signal Tone 
 { P9-37 PANEL-5 }
 Signal "**Signal 28**" 
-{ P9-27 U6-3 }
+{ P9-27 R21-B U6-3 }
 Signal "**Signal 30**" 
 { P8-45 }
 Signal "**Signal 31**" 
@@ -1829,7 +1837,7 @@ Signal nReset
 Signal "**Signal 1**" 
 { U5-1 }
 Signal "**Signal 12**" 
-{ P9-14 U4-3 U5-3 VIA27_1-1 VIA27_1_1-1 }
+{ P9-14 R22-A U4-3 U5-3 VIA27_1-1 VIA27_1_1-1 }
 Signal "**Signal 14**" 
 { C18-A C19-A C20-A C21-A C9-A U1-18 U1-24 U1-25 U5-5 VIA15-1 VIA47-1 VIA52-1 }
 Signal LLON 
@@ -1963,6 +1971,46 @@ AnnularRing 20 VoidRing 20 SurroundWidth
 
 }
 
+PinChange { 0 66.73m 29.49m 
+Hole { 10 P } NoMask }
+PinChange { 0 63.73m 30.49m 
+Hole { 10 P } NoMask }
+PinChange { 0 66.73m 32.49m 
+Hole { 10 P } NoMask }
+PinChange { 0 63.73m 34.49m 
+Hole { 10 P } NoMask }
+PinChange { 0 66.73m 36.49m 
+Hole { 10 P } NoMask }
+PinChange { 0 63.73m 31.49m 
+Hole { 10 P } NoMask }
+PinChange { 0 63.73m 28.49m 
+Hole { 10 P } NoMask }
+PinChange { 0 66.73m 35.49m 
+Hole { 10 P } NoMask }
+PinChange { 0 65.23m 36.49m 
+Hole { 10 P } NoMask }
+PinChange { 0 63.73m 32.49m 
+Hole { 10 P } NoMask }
+PinChange { 0 66.73m 31.49m 
+Hole { 10 P } NoMask }
+PinChange { 0 66.73m 34.49m 
+Hole { 10 P } NoMask }
+PinChange { 0 63.73m 35.49m 
+Hole { 10 P } NoMask }
+PinChange { 0 66.73m 30.49m 
+Hole { 10 P } NoMask }
+PinChange { 0 63.73m 36.49m 
+Hole { 10 P } NoMask }
+PinChange { 0 65.23m 28.49m 
+Hole { 10 P } NoMask }
+PinChange { 0 63.73m 29.49m 
+Hole { 10 P } NoMask }
+PinChange { 0 63.73m 33.49m 
+Hole { 10 P } NoMask }
+PinChange { 0 66.73m 28.49m 
+Hole { 10 P } NoMask }
+PinChange { 0 66.73m 33.49m 
+Hole { 10 P } NoMask }
 
 PadChange { 1 0 12.82m 14.02500m 
 Pad { Circle 20 Spacing -12 Thermal Circle 60 Spacing 10 } P VIA49-1 Surround 511
@@ -2235,6 +2283,10 @@ PadChange { 2 0 36.38199m 19.73700m
 Pad { Circle 1m Thermal Circle 80 Spacing 10 } P WEN-2 Surround 375 }
 PadChange { 2 0 42.93m 29.46500m 
 Pad { Circle 20 Thermal Circle 60 Spacing 10 } P VIA77-1 Surround 375 }
+PadChange { 2 0 40.92999m 21.51500m 
+Pad { Circle 20 Thermal Circle 60 Spacing 10 } P VIA27-1 Surround 375 }
+PadChange { 2 0 65.35500m 9.81m 
+Pad { Circle 20 Thermal Circle 60 Spacing 10 } P VIA81-1 Surround 375 }
 PadChange { 3 0 12.82m 14.02500m 
 Pad { None } P VIA49-1 Surround 511 }
 PadChange { 3 0 51.03m 26.71500m 
@@ -2325,6 +2377,7 @@ Pad { Circle 20 Spacing -12 Thermal Circle 60 Spacing 10 } P VIA48_3-1 Surround 
 }
 
 
+Path L 1 { P A1-2 29.11650m 21.12400m W 6 S 5 P VIA18-1 30.13250m 21.12400m }
 Path L 1 { P C5-B 28.71500m 15.77m W 6 S 5 28.71m 14.85m P VIA28-1 28.71500m 14.60300m
 }
 Path L 1 { P VIA52-1 58.22400m 25.99700m W 6 S 5 57.71600m 25.99700m 56.70m 27.36500m
@@ -2332,14 +2385,12 @@ P C19-A 55.43m 27.36500m P C18-A 53.63m 27.36500m 53.63m 27.06500m P U1-24 52.03
 27.06500m P U1-25 51.38m 27.71500m }
 Path L 1 { P J2-2 53.53m 35.13m W 5 S 5 53.90799m 34.97700m 54.38999m 34.49500m
 56.60m 34.49500m 57.13m 33.96500m P C24-A 57.93m 33.96500m }
-Path L 1 { P C9-A 53.03m 43.71500m W 6 S 5 54.95500m 43.71500m 55.43m 43.24m 55.43m
+Path L 1 { P C9-A 53.03m 43.71500m W 6 54.95500m 43.71500m S 5 55.43m 43.24m 55.43m
 41.97m 56.19200m 41.23700m P VIA15-1 58.22400m 41.23700m }
 Path L 1 { P VIA57-1 18.37m 20.42500m W 6 S 6 P PWR-A 19.57m 20.42500m }
 Path L 1 { P C2-B 11.07m 20.72500m W 8 S 5 P VIA53-1 12.57m 20.72500m 13.37m 20.72500m
 13.79500m 20.30m P U3-9 13.79500m 18.90m P U3-10 14.29500m 18.90m P U3-11 14.79500m
 18.90m P U3-12 15.29500m 18.90m }
-Path L 1 { P A0-2 29.11650m 19.85400m W 6 S 5 P VIA17-1 30.03m 19.87m }
-Path L 1 { P A1-2 29.11650m 21.12400m W 6 S 5 P VIA18-1 30.13250m 21.12400m }
 Path L 1 { P NEOPXL-1 82.67500m 44.43500m W 15 S 5 P C26-A 82.67500m 42.02200m }
 Path L 1 { P NEOPXL-2 85.21500m 44.43500m W 15 S 5 84.17500m 43.39500m P C26-B 84.17500m
 42.02200m }
@@ -2410,8 +2461,6 @@ Path L 1 { P U2-VIA 66.73m 30.49m W 15 S 5 66.88700m 30.86500m P U2-19 68.03m 30
 Path L 1 { P C1-2 8.07m 19.92500m W 1m S 5 P VIA70-1 8.07m 21.42500m }
 Path L 1 { P P9-19 46.94m 4.73m W 6 S 5 45.67m 6m 36.14500m 6m 35.51m 6.63500m
 35.51m 13.65m 33.16m 16m P U7-6 33.16m 17.27m }
-Path L 1 { P U6-3 71.11m 10.45m W 6 S 5 69.16500m 10.44500m 68.53m 9.81m 68.53m
-6.63500m 67.89500m 6m 58.37m 6m P P9-27 57.10m 4.73m }
 Path L 1 { P C6-A 34.52999m 28.36500m W 15 S 5 27.81400m 28.36500m P VIA26_1-1 27.62m
 28.55900m }
 Path L 1 { P C8-A 45.73m 43.71500m W 6 P VIA26_1_1-1 43.83m 43.71500m }
@@ -2424,8 +2473,6 @@ P U1-21 52.03m 25.56500m 51.03m 25.56500m P VIA48-1 51.03m 26.71500m 50.88m
 26.86500m P U1-26 50.88m 27.71500m P VIA46-1 50.88m 28.98500m 53.42m 28.98500m
 P C18-B 53.63m 28.86500m P C19-B 55.43m 28.86500m }
 Path L 1 { P R4-A 34.63m 22.47m W 6 S 5 P VIA22-1 34.63m 19.67600m }
-Path L 1 { P VIA27_1-1 36.89m 24.05500m W 6 S 5 36.89m 25.92500m P U4-3 36.93m 25.96500m
-}
 Path L 1 { P C27-B 83.38900m 16.39m W 6 S 5 82.38900m 16.39m P VIA58-1 81.98900m
 16.79m }
 Path L 1 { P VIA47-1 58.22400m 23.96500m W 6 S 5 P C21-A 55.43m 23.96500m P C20-A 53.63m
@@ -2469,8 +2516,6 @@ Path L 1 { P R7-A 47.18m 35.93m W 6 S 5 P R8-B 48.78m 35.93m 51.23m 33.11500m 60
 33.11500m 61.63m 34.11500m P U2-5 62.43m 34.11500m }
 Path L 1 { P R7-B 47.18m 37.43m W 6 S 5 P VIA68-1 46.48m 38.53m P R17-B 45.78m 37.43m
 }
-Path L 1 { P A0-1 28.48150m 19.85400m W 6 S 5 P A1-1 28.48150m 21.12400m 28.60850m
-21.25100m P VIA23-1 28.60850m 22.39400m }
 Path L 1 { P R8-A 48.78m 37.43m W 6 S 5 48.86500m 37.51500m P VIA72-1 49.83m 37.51500m
 }
 Path L 1 { P C23-A 57.43m 30.26500m W 6 S 5 56.73m 30.66500m 49.68m 30.71500m
@@ -2531,6 +2576,9 @@ Path L 1 { P R20-B 36.40599m 22.78500m W 6 S 5 36.38199m 22.80900m 36.12799m 23.
 P R2-B 31.43m 23.97m 31.33m 23.97m 30.63m 23.27m P U7-8 30.62m 17.27m P C5-A 28.71500m
 17.27m 27.44500m 17.27m 26.62m 16.44500m P P9-4 26.62m 7.27m W 0.50m P P9-3 26.62m
 4.73m }
+Path L 1 { P A0-1 28.48150m 19.85400m W 6 S 5 P A1-1 28.48150m 21.12400m 28.60850m
+21.25100m P VIA23-1 28.60850m 22.39400m }
+Path L 1 { P A0-2 29.11650m 19.85400m W 6 S 5 P VIA17-1 30.03m 19.87m }
 FloodPath L 1 { 15.57m 13.97500m W 1 S 5 25.12m 13.97500m 25.12m 11.47500m 15.57m
 11.47500m 15.57m 13.97500m }
 FloodPath L 1 { 15.02m 13.82500m W 1 S 5 15.39500m 14.42500m 15.39500m 16.62500m
@@ -2544,6 +2592,13 @@ FloodPath L 1 { 68.00650m 28.05200m 68.70500m 28.05200m 68.70500m 29.06800m
 67.30800m 29.06800m 67.30800m 28.05200m 68.00650m 28.05200m }
 FloodPath L 1 { 68.00650m 35.92600m 68.70500m 35.92600m 68.70500m 36.81500m
 67.30800m 36.81500m 67.30800m 35.92600m 68.00650m 35.92600m }
+Path L 1 { P P9-27 57.10m 4.73m W 6 S 5 58.37m 6m 67.89500m 6m 68.53m 6.63500m
+P R21-B 68.53m 9.81m 69.16500m 10.44500m P U6-3 71.11m 10.45m }
+Path L 1 { P R21-A 67.03m 9.81m W 6 S 5 P VIA81-1 65.35500m 9.81m }
+Path L 1 { P R22-B 40.92999m 22.78500m W 6 S 5 P VIA27-1 40.92999m 21.51500m }
+Path L 1 { P VIA27_1-1 39.42999m 21.51500m W 6 S 5 P R22-A 39.42999m 22.78500m 39.42999m
+23.67001m 38.68500m 24.41500m 37.41500m 24.41500m 36.93m 24.90m P U4-3 36.93m
+25.96500m }
 FloodPath L 2 { 47.39500m 3.32500m W 5 90.25500m 3.32500m 90.25500m 56.93500m
 10.61m 56.93500m 10.61m 42.06m 25.21500m 42.06m 25.21500m 23.28m 4.89500m
 23.28m 4.89500m 3.32500m 47.39500m 3.32500m }
@@ -2570,15 +2625,15 @@ Path L 3 { P P8-16 41.86m 55.53m W 6 S 5 43.13m 54.26m 43.13m 52.35500m 43.76500
 P PANEL-10 85.67500m 25.05m }
 Path L 3 { P P8-18 44.40m 55.53m W 6 S 5 45.67m 56.80m 88.21500m 56.80m 89.48500m
 55.53m 89.48500m 26.32m P PANEL-9 88.21500m 25.05m }
-Path L 3 { P VIA27_1-1 36.89m 24.05500m W 6 S 5 36.89m 36.42500m P VIA27_1_1-1 41.78m
-41.31500m }
+Path L 3 { P VIA27_1-1 39.42999m 21.51500m W 6 S 5 39.42999m 39.93m 40.81499m
+41.31500m P VIA27_1_1-1 41.78m 41.31500m }
 Path L 3 { P VIA47-1 58.22400m 23.96500m W 6 S 5 P VIA52-1 58.22400m 25.99700m P VIA15-1 58.22400m
 41.23700m }
 Path L 3 { P VIA11-1 56.96m 20.81500m W 50 S 10 P VIA5-1 56.96m 44.71500m }
 Path L 3 { P VIA65-1 60.91m 40.88500m W 6 S 5 60.91m 47.91m 59.64m 49.18m 40.59m
 49.18m 38.05m 51.72m 38.05m 54.26m P P8-12 36.78m 55.53m }
-Path L 3 { P VIA26-1 66.81m 12.85m W 0.50m S 5 P VIA24-1 43.16500m 12.93500m 39.36500m
-9.53500m 28.08m 9.53m P P9-4 26.62m 7.27m }
+Path L 3 { P P9-4 26.62m 7.27m W 0.50m S 5 32.28500m 12.93500m P VIA24-1 43.16500m
+12.93500m P VIA26-1 66.81m 12.85m }
 Path L 3 { P PANEL-4 85.67500m 17.43m W 6 S 5 80.59500m 17.43m 72.34m 9.17500m
 P P9-40 72.34m 7.27m }
 Path L 3 { P PANEL-7 88.21500m 22.51m W 6 S 5 86.94500m 23.78m 86.94500m 25.68500m
@@ -2602,8 +2657,8 @@ Path L 4 { P VIA76-1 45.33m 26.76500m W 6 S 5 44.21m 26.76500m 43.42m 25.97500m
 43.42m 19.04500m 53.29m 9.17500m 53.29m 6m P P9-25 54.56m 4.73m }
 Path L 4 { P VIA1-1 49.88m 29.21500m W 6 S 5 49.88m 31.21500m 51.88m 32.71500m
 53.38m 32.71500m 53.53m 32.86500m P J2-1 53.53m 33.86m }
-Path L 4 { P P9-14 39.32m 7.27m W 6 S 5 39.32m 21.62500m P VIA27_1-1 36.89m 24.05500m
-}
+Path L 4 { P P9-14 39.32m 7.27m W 6 S 5 39.42999m 7.54500m P VIA27_1-1 39.42999m
+21.51500m }
 Path L 4 { P P9-30 59.64m 7.27m W 6 S 5 59.64m 7.90500m 57.10m 10.44500m 53.92500m
 10.44500m 45.03500m 19.33500m 45.03500m 24.41500m P VIA73-1 45.43m 25.06500m
 }
@@ -2639,6 +2694,6 @@ Path A 1 { 90.75500m 2.82500m W 5 90.75500m 57.43500m }
 Path A 1 { 90.75500m 57.43500m W 5 10.11m 57.43500m }
 
 
-PartGroup { 1 3 }
+PartGroup { 3 1 }
 PartGroup { 2 4 }
 End
