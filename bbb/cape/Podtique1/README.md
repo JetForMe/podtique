@@ -29,9 +29,19 @@ The LEDs are AdaFruit NeoPixel (24-LED ring), and driving those requires the use
 
 Note that the sysfs nodes for GPIO must be accessed by root. It might be possible to set up udev rules to set the group and access modes such that a non-root user can access the pins, but I couldn't figure it out. Something like KERNEL=="gpio*", GROUP="gpio", MODE="0660", but I didn't try it.
 
+Audio CODEC
+-----------
+i2c address is 0x30. Shares i2c bus 2 with EEPROM, which defaults to 0x57.
+
 New Header Pins
-------------c---
+---------------
 ### P8
+
+|Header|GPIO|$PINS	|GPIO #|Mode|Use|
+|---|-------|----|-----|------|----|
+|P8-11|gpio1[13]|13|45|x|NeoPixel data out|
+|P8-42			|GPIO2_11	|9		|23			|
+|P8-45			|GPIO2_6	|
 
 * GPIO2\_11 / xx (P8_42 / xx) is on/off input (PANEL 6).
 * GPIO2\_6 / xx (P8_45 / xx) is mode 1 (PANEL 7).
@@ -57,6 +67,10 @@ The LEDs are AdaFruit NeoPixel (24-LED ring), and driving those requires the use
 
 ### P9
 
+|Header|GPIO|$PINS	|GPIO #|Mode|Use|
+|---|-------|----|-----|------|----|
+|P9-27|gpio3[19]|105|115|7|Front panel 1.8V power|
+|P9-14|gpio1[18]|18|50|7|CODEC core 1.8V and amp 3.3V|
 
 Cape Connectors
 ---------------
@@ -90,3 +104,4 @@ Three-pin header goes to NeoPixel LEDs to illuminate the radio.
 * Pin 8: Mode 2
 * Pin 9: Left Momentary
 * Pin 10: Right Momentary
+
