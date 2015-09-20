@@ -1,0 +1,152 @@
+/*
+	Device Tree Overlay for the Latency: Zero, LLC Podtique, version 1.
+	
+	Based on the EBB-PRU-Example.dts from Derek Molloy:
+	This overlay is based on the BB-PRU-01 overlay
+	Written by Derek Molloy for the book "Exploring BeagleBone: Tools and 
+	Techniques for Building with Embedded Linux" by John Wiley & Sons, 2014
+	ISBN 9781118935125.
+	
+	Please see the file README.md in the repository root 
+	directory for copyright and license information.
+*/
+
+/dts-v1/;
+/plugin/;
+
+/ {
+   compatible = "ti,beaglebone-black";
+
+   part-number = "LZ-PODTIQUE1";
+   version = "00A0";
+
+   /* This overlay uses the following resources */
+   exclusive-use =
+		"P8.11",
+		"P8.12",
+		"P8.13",
+		"P8.14",
+		"P8.15",
+		"P8.16",
+		"P8.17",
+		"P8.18",
+		
+		"P9.19",		//	REDUNDANT?
+		"P9.20",		//	REDUNDANT?
+		
+		"P9.25",
+		"P9.27",
+		"P9.28",
+		"P9.29",
+		"P9.30",
+		"P9.31",
+		"P9.37",
+		"P9.39",
+		"P9.40",
+		"pru0";
+
+	fragment@0 {
+	  target = <&am33xx_pinmux>;
+	  __overlay__ {
+
+		 gpio_pins: pinmux_gpio_pins {         // The GPIO pins
+			pinctrl-single,pins = <
+//				0x034 (PIN_OUTPUT_PULLDOWN | MUX_MODE7)			//	P8_11, NeoPixels (driven by PRU)
+				0x030 (PIN_INPUT_PULLUP | MUX_MODE7)			//	P8_12, Amp nFault
+				0x024 (PIN_OUTPUT_PULLDOWN | MUX_MODE7)			//	P8_13, Amp nSD
+				0x028 (PIN_INPUT_PULLUP | MUX_MODE7)			//	P8_14, Front Panel Pin 6
+				0x03c (PIN_INPUT_PULLUP | MUX_MODE7)			//	P8_15, Front Panel Pin 8
+				0x038 (PIN_INPUT_PULLUP | MUX_MODE7)			//	P8_16, Front Panel Pin 10
+				0x02c (PIN_INPUT_PULLUP | MUX_MODE7)			//	P8_17, Front Panel Pin 7
+				0x08c (PIN_INPUT_PULLUP | MUX_MODE7)			//	P8_18, Front Panel Pin 9
+			
+//				0x17c (PIN_INPUT_PULLUP | MUX_MODE3)			//	P9_19 I2C 2 SCL uart1_rtsn.i2c2_scl	REDUNDANT?
+//				0x178 (PIN_INPUT_PULLUP | MUX_MODE3)			//	P9_20 I2C 2 SDA uart1_ctsn.i2c2_sda	REDUNDANT?
+			
+				0x1a4 (PIN_OUTPUT_PULLDOWN | MUX_MODE7)			//	P9_27, Front Panel Power 1.8V
+
+//				0x1ac (PIN_OUTPUT | MUX_MODE0)					//	P9_25 mcasp0.ahclkx
+//				0x19c (PIN_OUTPUT | MUX_MODE2)					//	P9_28 mcasp0.axr2
+//				0x194 (PIN_OUTPUT | MUX_MODE0)					//	P9_29 mcasp0.fsx
+//				0x198 (PIN_OUTPUT | MUX_MODE0)					//	P9_30 mcasp0.axr0
+//				0x190 (PIN_OUTPUT | MUX_MODE0)					//	P9_31 mcasp0.aclkx
+			>;
+		 };
+
+		 pru_pru_pins: pinmux_pru_pru_pins {   // The PRU pin modes
+			pinctrl-single,pins = <
+				0x034 (PIN_OUTPUT_PULLDOWN | MUX_MODE6)			//	P8_11, NeoPixels (driven by PRU pr1_pru0_pru_r30_15)
+			>;
+		 };
+
+		i2c2_pins: pinmux_i2c2_pins {
+			pinctrl-single,pins = <
+				0x17c (PIN_INPUT_PULLUP | MUX_MODE3)			//	P9_19 I2C 2 SCL uart1_rtsn.i2c2_scl	REDUNDANT?
+				0x178 (PIN_INPUT_PULLUP | MUX_MODE3)			//	P9_20 I2C 2 SDA uart1_ctsn.i2c2_sda	REDUNDANT?
+			>;
+		};
+
+		 podtique_audio_pins: pinmux_podtique_audio_pins {   // The McASP0 pin modes
+			pinctrl-single,pins = <
+				0x1ac (PIN_OUTPUT | MUX_MODE0)					//	P9_25 mcasp0.ahclkx
+				0x19c (PIN_OUTPUT | MUX_MODE2)					//	P9_28 mcasp0.axr2
+				0x194 (PIN_OUTPUT | MUX_MODE0)					//	P9_29 mcasp0.fsx
+				0x198 (PIN_OUTPUT | MUX_MODE0)					//	P9_30 mcasp0.axr0
+				0x190 (PIN_OUTPUT | MUX_MODE0)					//	P9_31 mcasp0.aclkx
+			>;
+		 };
+	  };
+	};
+
+	fragment@1 {         // Enable the PRUSS
+	  target = <&pruss>;
+	  __overlay__ {
+		 status = "okay";
+		 pinctrl-names = "default";
+		 pinctrl-0 = <&pru_pru_pins>;
+	  };
+	};
+
+	fragment@2 {         // Enable the GPIOs
+	  target = <&ocp>;
+	  __overlay__ {
+		 gpio_helper {
+			compatible = "gpio-of-helper";
+			status = "okay";
+			pinctrl-names = "default";
+			pinctrl-0 = <&gpio_pins>;
+		 };
+	  };
+	};
+
+	fragment@3 {
+		target = <&i2c2>;
+		__overlay__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			clock-frequency = <100000>;
+			status = "okay";
+			pinctrl-names = "default";
+			pinctrl-0 = <&i2c2_pins>;
+
+
+			tlv320aic3x: tlv320aic3x@18 {
+				compatible = "ti,tlv320aic3x";
+				reg = <0x18>;
+				status = "okay";
+			};
+		};
+	};
+
+	fragment@4 {         // Enable the McASP0
+	  target = <&mcasp0>;
+	  __overlay__ {
+		 gpio_helper {
+			compatible = "gpio-of-helper";
+			status = "okay";
+			pinctrl-names = "default";
+			pinctrl-0 = <&podtique_audio_pins>;
+		 };
+	  };
+	};
+};
