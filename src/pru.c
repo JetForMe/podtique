@@ -12,8 +12,8 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <unistd.h>
-#include "am335x/app_loader/include/prussdrv.h"
-#include "am335x/app_loader/include/pruss_intc_mapping.h"
+#include <prussdrv.h>
+#include <pruss_intc_mapping.h>
 #include "pru.h"
 
 
