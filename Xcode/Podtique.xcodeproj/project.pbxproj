@@ -38,6 +38,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C609BAE61BAFEECD007EAD92 /* ledscape.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ledscape.c; sourceTree = "<group>"; };
+		C609BAE71BAFEECD007EAD92 /* ledscape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ledscape.h; sourceTree = "<group>"; };
+		C609BAE81BAFEECD007EAD92 /* pru.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pru.c; sourceTree = "<group>"; };
+		C609BAE91BAFEECD007EAD92 /* pru.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pru.h; sourceTree = "<group>"; };
+		C609BAEA1BAFEECD007EAD92 /* util.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = util.c; sourceTree = "<group>"; };
+		C609BAEB1BAFEECD007EAD92 /* util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
 		C618FFA91A43989E00A66EE6 /* BandPassFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BandPassFilter.cpp; sourceTree = "<group>"; };
 		C618FFAA1A43989E00A66EE6 /* BandPassFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BandPassFilter.h; sourceTree = "<group>"; };
 		C6200C7B1A4FF99400FB48AD /* Semaphore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Semaphore.cpp; sourceTree = "<group>"; };
@@ -108,6 +114,12 @@
 				C6B5DFC91A31A8D500A3A9ED /* BBBMain.cpp */,
 				C6200C801A50162F00FB48AD /* GPIO.h */,
 				C6200C7F1A50162F00FB48AD /* GPIO.cpp */,
+				C609BAE61BAFEECD007EAD92 /* ledscape.c */,
+				C609BAE71BAFEECD007EAD92 /* ledscape.h */,
+				C609BAE81BAFEECD007EAD92 /* pru.c */,
+				C609BAE91BAFEECD007EAD92 /* pru.h */,
+				C609BAEA1BAFEECD007EAD92 /* util.c */,
+				C609BAEB1BAFEECD007EAD92 /* util.h */,
 			);
 			name = BBB;
 			sourceTree = "<group>";
