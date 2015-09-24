@@ -25,7 +25,8 @@
 		
 		/* the hardware ip uses */
 		"gpio1_18", "gpio1_19",
-		"mcasp0";
+		"mcasp0",
+		"tscadc";
 
 	fragment@0 {
 		target = <&am33xx_pinmux>;
