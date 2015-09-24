@@ -18,6 +18,11 @@
 		"P9.29",	/* mcasp0: mcasp0_fsx */
 		"P9.28",	/* mcasp0: mcasp0_axr2 */
 		"P9.25",	/* mcasp0: mcasp0_ahclkx */
+		
+		"P9.39",	/* AIN0 */
+		"P9.40",	/* AIN1 */
+		"P9.37",	/* AIN2 */
+		
 		/* the hardware ip uses */
 		"gpio1_18", "gpio1_19",
 		"mcasp0";
@@ -121,7 +126,18 @@
 
 	};
 	
-	fragment@4 {         // Enable the PRUSS
+	fragment@4 {
+		target = <&tscadc>;
+		__overlay__ {
+
+			status = "okay";
+			adc {
+				ti,adc-channels = <0 1 2>;
+			};
+		};
+	};
+	
+	fragment@5 {         // Enable the PRUSS
 		target = <&pruss>;
 		__overlay__ {
 			status = "okay";
