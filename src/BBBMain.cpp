@@ -118,8 +118,8 @@ Podtique::run()
 	//	Init the LEDs…
 	
 	mLEDs = ::ledscape_init_with_programs(kNumPixels,
-													"/home/rmann/LEDscape/pru/bin/ws281x-inverted-single-channel-pru0.bin",
-													"/home/rmann/LEDscape/pru/bin/ws281x-inverted-single-channel-pru1.bin");
+													"/home/rmann/LEDscape/pru/bin/ws281x-single-channel-pru0.bin",
+													"/home/rmann/LEDscape/pru/bin/ws281x-single-channel-pru1.bin");
 	setBacklightColor(255, 0, 0);
 	std::this_thread::sleep_for(std::chrono::milliseconds(333));
 	setBacklightColor(0, 255, 0);
