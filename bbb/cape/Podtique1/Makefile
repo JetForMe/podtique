@@ -6,9 +6,18 @@
 
 
 
-all:
-	dtc -O dtb -o P1-00A0.dtbo -b 0 -@ P1.dts
-	dtc -O dtb -o BB-ENABLE-PRU-00A0.dtbo -b 0 -@ BB-ENABLE-PRU.dts
-	#dtc -O dtb -o LZ-PODTIQUE1-00A0.dtbo -b 0 -@ LZ-PODTIQUE1.dts
-	sudo cp P1-00A0.dtbo BB-ENABLE-PRU-00A0.dtbo /lib/firmware
+all: LZ-P1-00A0.dtbo BB-ENABLE-PRU-00A0.dtbo
+	
+LZ-P1-00A0.dtbo: LZ-P1.dts  Makefile
+	cpp -Wp,-MD,$(<).dep -nostdinc -I/home/debian/dtb-rebuilder/include -undef -x assembler-with-cpp -o $(<).tmp $(<)
+	dtc -O dtb -b 0 -@ -I dts -o $(@) $(<).tmp
+	sudo cp $(@) /lib/firmware
+
+BB-ENABLE-PRU-00A0.dtbo: BB-ENABLE-PRU.dts Makefile
+	cpp -Wp,-MD,$(<).dep -nostdinc -I/home/debian/dtb-rebuilder/include -undef -x assembler-with-cpp -o $(<).tmp $(<)
+	dtc -O dtb -b 0 -@ -I dts -o $(@) $(<).tmp
+	sudo cp $(@) /lib/firmware
+
+clean:
+	rm -f *.dtbo *.dep *.tmp
 	
