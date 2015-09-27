@@ -43,7 +43,8 @@ class
 Podtique
 {
 public:
-	Podtique();
+					Podtique();
+	virtual			~Podtique();
 	
 	void			setDataDir(const std::string& inDataDir)				{ mDataDir = inDataDir; }
 	void			run();
@@ -76,15 +77,22 @@ Podtique::Podtique()
 {
 }
 
+Podtique::~Podtique()
+{
+}
+
+void
+Podtique::init()
+{
+}
+
 void
 Podtique::initLEDs(uint16_t inNumLEDs, const std::string& inPRU0FirmwarePath, const std::string& inPRU1FirmwarePath)
 {
 	//	Init the LEDs…
 	
 	mNumLEDs = inNumLEDs;
-	mLEDs = ::ledscape_init_with_programs(inNumLEDs,
-											"/home/rmann/LEDscape/pru/bin/ws281x-inverted-single-channel-pru0.bin",
-											"/home/rmann/LEDscape/pru/bin/ws281x-inverted-single-channel-pru1.bin");
+	mLEDs = ::ledscape_init_with_programs(inNumLEDs, inPRU0FirmwarePath.c_str(), inPRU1FirmwarePath.c_str());
 	setBacklightColor(255, 0, 0);
 	std::this_thread::sleep_for(std::chrono::milliseconds(333));
 	setBacklightColor(0, 255, 0);
@@ -131,25 +139,7 @@ Podtique::readADC(int inChannel)
 void
 Podtique::run()
 {
-	//	Configure the GPIOs…
-	
-	
-	mAudioMute.setOutput();
-	mAudioMute.set(true);
-	
-	//	Init the LEDs…
-	
-	mLEDs = ::ledscape_init_with_programs(kNumPixels,
-													"/home/rmann/LEDscape/pru/bin/ws281x-single-channel-pru0.bin",
-													"/home/rmann/LEDscape/pru/bin/ws281x-single-channel-pru1.bin");
-	setBacklightColor(255, 0, 0);
-	std::this_thread::sleep_for(std::chrono::milliseconds(333));
-	setBacklightColor(0, 255, 0);
-	std::this_thread::sleep_for(std::chrono::milliseconds(333));
-	setBacklightColor(0, 0, 255);
-	std::this_thread::sleep_for(std::chrono::milliseconds(333));
-	setBacklightColor(0, 0, 0);
-	
+	init();
 	
 	//	Create the radio…
 	
@@ -268,7 +258,6 @@ Podtique::stop()
 {
 	mute(true);
 	setBacklightColor(0, 0, 0);
-	
 }
 
 
@@ -297,13 +286,24 @@ private:
 
 PodtiquePrototype1::PodtiquePrototype1()
 {
-	mOffOn.setGPIONumber(66);
-	mAudioMute.setGPIONumber(27);
 }
 
 void
 PodtiquePrototype1::init()
 {
+	Podtique::init();
+	
+	//	Configure the GPIOs…
+	
+	mOffOn.setGPIONumber(66);
+	mOffOn.setInput();
+	
+	mAudioMute.setGPIONumber(27);
+	mAudioMute.setOutput();
+	mAudioMute.set(true);
+	
+	//	Init LEDs…
+	
 	initLEDs(24,
 				"/home/rmann/LEDscape/pru/bin/ws281x-inverted-single-channel-pru0.bin",
 				"/home/rmann/LEDscape/pru/bin/ws281x-inverted-single-channel-pru1.bin");
@@ -355,12 +355,27 @@ public:
 protected:
 	virtual	void	init();
 	virtual	bool	isOn();
+
+private:
+	GPIO			mOffOn;				//	"on" when low
 };
+
+PodtiquePT1::PodtiquePT1()
+{
+}
 
 void
 PodtiquePT1::init()
 {
+	Podtique::init();
+	
+	//	Configure the GPIOs…
+	
+	mOffOn.setGPIONumber(26);		//	P8_14
 	mOffOn.setInput();
+	
+	//	Init LEDs…
+	
 	initLEDs(16,
 				"/home/rmann/LEDscape/pru/bin/ws281x-single-channel-pru0.bin",
 				"/home/rmann/LEDscape/pru/bin/ws281x-single-channel-pru1.bin");
@@ -371,6 +386,14 @@ PodtiquePT1::mute(bool inMute)
 {
 }
 
+bool
+PodtiquePT1::isOn()
+{
+	std::chrono::milliseconds dur(100);
+	std::this_thread::sleep_for(dur);
+	bool off = mOffOn.get();
+	return !off;
+}
 
 
 
@@ -459,8 +482,10 @@ main(int inArgCount, const char** inArgs)
 	::signal(SIGHUP, intHandler);
 	::signal(SIGINT, intHandler);
 	
+	//sPodtique = new PodtiquePrototype1;
+	sPodtique = new PodtiquePT1;
 	std::string p(dataDir);
-	sPodtique = new PodtiquePrototype1(p);
+	sPodtique->setDataDir(p);
 	sPodtique->run();
 	
 	return 0;
