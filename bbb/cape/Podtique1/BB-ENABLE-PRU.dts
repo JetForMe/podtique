@@ -17,10 +17,20 @@
 		target = <&am33xx_pinmux>;
 		__overlay__ {
 
-			lz_podtique_reg_pins: pinmux_lz_podtique_reg_pins {
-				pinctrl-single,pins = <
-					0x048 (PIN_OUTPUT_PULLDOWN | MUX_MODE7)					//	P9_14, CODEC regulator enable
-					0x04c (PIN_OUTPUT_PULLDOWN | MUX_MODE7)					//	P9_16, CODEC nRESET
+			lzpt_gpio_pins: pinmux_lzpt_gpio_pins {
+				pinctrl-single,pins = <							//	Hdr		PINS	GPIO	Mode7		Desc
+																//	-----	----	----	---------	----------------------
+					0x048 (PIN_OUTPUT_PULLDOWN | MUX_MODE7)		//	P9_14					gpio1[18]	CODEC regulator enable
+					0x04c (PIN_OUTPUT_PULLDOWN | MUX_MODE7)		//	P9_16					gpio1[19]	CODEC nRESET
+					
+					0x030 (PIN_INPUT_PULLUP | MUX_MODE7)		//	P8_12	12		44		gpio1[12]	amp nFAULT
+					0x024 (PIN_OUTPUT_PULLDOWN | MUX_MODE7)		//	P8_13	9		23		gpio0[23]	amp nSD
+					
+					0x028 (PIN_INPUT_PULLUP | MUX_MODE7)		//	P8_14	10		26		gpio0[26]	Front panel pin 6
+					0x03c (PIN_INPUT_PULLUP | MUX_MODE7)		//	P8_15	15		47		gpio1[15]	Front panel pin 8
+					0x038 (PIN_INPUT_PULLUP | MUX_MODE7)		//	P8_16	14		46		gpio1[14]	Front panel pin 10
+					0x02c (PIN_INPUT_PULLUP | MUX_MODE7)		//	P8_17	11		27		gpio0[27]	Front panel pin 7
+					0x08c (PIN_INPUT_PULLUP | MUX_MODE7)		//	P8_18	35		65		gpio2[1]	Front panel pin 9
 				>;
 			};
 			
@@ -32,12 +42,13 @@
 			};
 
 			i2s_pins: pinmux_i2s_pins {
-				pinctrl-single,pins = <					//	Hdr		I2S		TLV		SoC
-					0x190 (PIN_INPUT | MUX_MODE0)		//	P9_31	BCLK	BCLK	mcasp0_aclkx
-					0x194 (PIN_INPUT | MUX_MODE0)		//	P9_29	WCLK	WCLK	mcasp0_fsx
-					0x198 (PIN_INPUT | MUX_MODE0)		//	P9_30 	RX		SDOUT	mcasp0_axr0
-					0x19c (PIN_INPUT | MUX_MODE2)		//	P9_28	TX		SDIN	mcasp0_axr2
-					0x1ac (PIN_INPUT | MUX_MODE0)		//	P9_25	MCLK	MCLK	mcasp0_ahclkx
+				pinctrl-single,pins = <						//	Hdr		I2S		TLV		SoC
+															//	-----	----	----	-------------
+					0x190 (PIN_INPUT | MUX_MODE0)			//	P9_31	BCLK	BCLK	mcasp0_aclkx
+					0x194 (PIN_INPUT | MUX_MODE0)			//	P9_29	WCLK	WCLK	mcasp0_fsx
+					0x198 (PIN_INPUT | MUX_MODE0)			//	P9_30 	RX		SDOUT	mcasp0_axr0
+					0x19c (PIN_INPUT | MUX_MODE2)			//	P9_28	TX		SDIN	mcasp0_axr2
+					0x1ac (PIN_INPUT | MUX_MODE0)			//	P9_25	MCLK	MCLK	mcasp0_ahclkx
 				>;
 			};
 		};
@@ -50,7 +61,7 @@
 				compatible = "gpio-of-helper";
 				status = "okay";
 				pinctrl-names = "default";
-				pinctrl-0 = <&lz_podtique_reg_pins>;
+				pinctrl-0 = <&lzpt_gpio_pins>;
 			};
 		};
 	};

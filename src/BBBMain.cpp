@@ -215,7 +215,7 @@ Podtique::run()
 		{
 			setBacklightColor(0, 0, 0);
 		}
-		//LogDebug("On: %u", !!on);
+		//LogDebug("On: %u", on);
 		mRadio->setFrequency(f);
 		//LogDebug("Set frequency to: %.3f", f);
 		mRadio->setVolume(v);
