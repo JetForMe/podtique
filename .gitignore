@@ -5,3 +5,7 @@ node_modules
 /radio
 ui/content
 *.dtbo
+*.dep
+*.o
+*.d
+*.tmp
