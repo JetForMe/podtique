@@ -1,3 +1,6 @@
+#include "dt-bindings/gpio/gpio.h"
+#include "dt-bindings/pinctrl/am33xx.h"
+
 /dts-v1/;
 /plugin/;
 
@@ -10,7 +13,147 @@
     /* version */
     version = "00A0";
 
-	fragment@0 {         // Enable the PRUSS
+	fragment@0 {
+		target = <&am33xx_pinmux>;
+		__overlay__ {
+
+			lz_podtique_reg_pins: pinmux_lz_podtique_reg_pins {
+				pinctrl-single,pins = <
+					0x048 (PIN_OUTPUT_PULLDOWN | MUX_MODE7)					//	P9_14, CODEC regulator enable
+					0x04c (PIN_OUTPUT_PULLDOWN | MUX_MODE7)					//	P9_16, CODEC nRESET
+				>;
+			};
+			
+			i2c2_pins: pinmux_i2c2_pins {
+				pinctrl-single,pins = <
+					0x150 (SLEWCTRL_SLOW | PIN_INPUT_PULLUP | MUX_MODE2)	//	P9_22, spi0_scl.i2c2_sda
+					0x154 (SLEWCTRL_SLOW | PIN_INPUT_PULLUP | MUX_MODE2)	//	P9_21, spi0_d0.i2c2_scl
+				>;
+			};
+
+			i2s_pins: pinmux_i2s_pins {
+				pinctrl-single,pins = <					//	Hdr		I2S		TLV		SoC
+					0x190 (PIN_INPUT | MUX_MODE0)		//	P9_31	BCLK	BCLK	mcasp0_aclkx
+					0x194 (PIN_INPUT | MUX_MODE0)		//	P9_29	WCLK	WCLK	mcasp0_fsx
+					0x198 (PIN_INPUT | MUX_MODE0)		//	P9_30 	RX		SDOUT	mcasp0_axr0
+					0x19c (PIN_INPUT | MUX_MODE2)		//	P9_28	TX		SDIN	mcasp0_axr2
+					0x1ac (PIN_INPUT | MUX_MODE0)		//	P9_25	MCLK	MCLK	mcasp0_ahclkx
+				>;
+			};
+		};
+	};
+	
+	fragment@2 {
+		target = <&ocp>;
+		__overlay__ {
+			gpio_helper {
+				compatible = "gpio-of-helper";
+				status = "okay";
+				pinctrl-names = "default";
+				pinctrl-0 = <&lz_podtique_reg_pins>;
+			};
+		};
+	};
+	
+	fragment@3 {
+		target-path="/";
+		__overlay__ {
+			lz_codec_reg: fixedregulator@1 {
+				compatible = "regulator-fixed";
+				regulator-name = "lz-codec-reg";
+				gpio = <&gpio1 18 GPIO_ACTIVE_HIGH>;	//	GPIO_ACTIVE_HIGH is ignored by regulator-fixed,
+				enable-active-high;						//	need to also have enable-active-high.
+			};
+		};
+	};
+	
+	fragment@4 {
+		target = <&i2c2>;
+		__overlay__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			clock-frequency = <100000>;
+			status = "okay";
+			pinctrl-names = "default";
+			pinctrl-0 = <&i2c2_pins>;
+
+			tlv320aic3104: tlv320aic3104@0 {
+				#sound-dai-cells = <0>;
+				compatible = "ti,tlv320aic3104";
+				reg = <0x18>;
+				gpio-reset = <&gpio1 19 GPIO_ACTIVE_LOW>;
+				
+				AVDD-supply = <&lz_codec_reg>;
+				IOVDD-supply = <&lz_codec_reg>;
+				DRVDD-supply = <&lz_codec_reg>;
+				DVDD-supply = <&lz_codec_reg>;
+			};
+		};
+	};
+
+	fragment@5 {
+		target = <&mcasp0>;
+		__overlay__ {
+			#sound-dai-cells = <0>;
+			pinctrl-names = "default";
+			pinctrl-0 = <&i2s_pins>;
+
+			status = "okay";
+
+			op-mode = <0>;          /* MCASP_IIS_MODE */
+			tdm-slots = <2>;
+			num-serializer = <16>;
+			serial-dir = <  /* 0: INACTIVE, 1: TX, 2: RX */
+				2 0 1 0
+				0 0 0 0
+				0 0 0 0
+				0 0 0 0
+			>;
+			tx-num-evt = <1>;
+			rx-num-evt = <1>;
+		};
+	};
+
+	fragment@6 {
+		target-path="/";
+		__overlay__ {
+			sound {
+				compatible = "simple-audio-card";
+				simple-audio-card,name = "Podtique Cape Rev A";
+				simple-audio-card,widgets =
+					"Speaker",				"External Speaker";
+				simple-audio-card,routing =
+					"External Speaker",		"LLOUT",
+					"External Speaker",		"RLOUT";
+				simple-audio-card,format = "dsp_b";
+				simple-audio-card,bitclock-master = <&sound_master>;
+				simple-audio-card,frame-master = <&sound_master>;
+				simple-audio-card,bitclock-inversion;
+
+				simple-audio-card,cpu {
+					sound-dai = <&mcasp0>;
+				};
+
+				sound_master: simple-audio-card,codec {
+					sound-dai = <&tlv320aic3104>;
+					system-clock-frequency = <12000000>;
+				};
+			};
+		};
+	};
+	
+	fragment@7 {
+		target = <&tscadc>;
+		__overlay__ {
+
+			status = "okay";
+			adc {
+				ti,adc-channels = <0 1 2>;
+			};
+		};
+	};
+	
+	fragment@8 {         // Enable the PRUSS
 		target = <&pruss>;
 		__overlay__ {
 			status = "okay";
