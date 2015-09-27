@@ -1,4 +1,11 @@
-radio
-*.d
+project.xcworkspace
+xcuserdata
+.DS_Store
+node_modules
+/radio
+ui/content
+*.dtbo
+*.dep
 *.o
-
+*.d
+*.tmp

@@ -3,7 +3,7 @@
 //  Podtique
 //
 //  Created by Roderick Mann on 12/28/14.
-//  Copyright (c) 2014 Latency: Zero. All rights reserved.
+//  Copyright (c) 2015 Latency: Zero, LLC. All rights reserved.
 //
 
 #ifndef __Podtique__GPIO__
@@ -18,9 +18,13 @@ class
 GPIO
 {
 public:
-						GPIO(uint16_t inNumber);
-						
-	void				init();
+						GPIO();
+	
+						/**
+							You can set the GPIO number once. Another attempt will assert.
+						*/
+	
+	void				setGPIONumber(uint16_t inNumber);
 	
 	void				setInput();
 	void				setOutput();

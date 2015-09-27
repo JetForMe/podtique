@@ -3,7 +3,7 @@
 //  WoodenRadio
 //
 //  Created by Roderick Mann on 12/4/14.
-//  Copyright (c) 2014 Latency: Zero. All rights reserved.
+//  Copyright (c) 2015 Latency: Zero, LLC. All rights reserved.
 //
 
 #ifndef __WoodenRadio__Radio__
