@@ -12,6 +12,7 @@
 //	Standard Includes
 //
 
+#include <cassert>
 #include <fstream>
 #include <sstream>
 #include <thread>
@@ -37,6 +38,8 @@ GPIO::GPIO()
 void
 GPIO::setGPIONumber(uint16_t inNumber)
 {
+	assert(mNumber == 0);
+	
 	mNumber = inNumber;
 	std::stringstream ss;
 	ss << sGPIOPath << "gpio" << mNumber << "/";
