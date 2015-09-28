@@ -42,13 +42,13 @@
 			};
 
 			i2s_pins: pinmux_i2s_pins {
-				pinctrl-single,pins = <						//	Hdr		I2S		TLV		SoC
-															//	-----	----	----	-------------
-					0x190 (PIN_INPUT | MUX_MODE0)			//	P9_31	BCLK	BCLK	mcasp0_aclkx
-					0x194 (PIN_INPUT | MUX_MODE0)			//	P9_29	WCLK	WCLK	mcasp0_fsx
-					0x198 (PIN_INPUT | MUX_MODE0)			//	P9_30 	RX		SDOUT	mcasp0_axr0
-					0x19c (PIN_INPUT | MUX_MODE2)			//	P9_28	TX		SDIN	mcasp0_axr2
-					0x1ac (PIN_INPUT | MUX_MODE0)			//	P9_25	MCLK	MCLK	mcasp0_ahclkx
+				pinctrl-single,pins = <								//	Hdr		I2S		TLV		SoC
+																	//	-----	----	----	-------------
+					0x190 (PIN_INPUT_PULLDOWN | MUX_MODE0)			//	P9_31	BCLK	BCLK	mcasp0_aclkx
+					0x194 (PIN_INPUT_PULLDOWN | MUX_MODE0)			//	P9_29	WCLK	WCLK	mcasp0_fsx
+					0x198 (PIN_INPUT_PULLDOWN | MUX_MODE0)			//	P9_30 	RX		SDOUT	mcasp0_axr0
+					0x19c (PIN_INPUT_PULLDOWN | MUX_MODE2)			//	P9_28	TX		SDIN	mcasp0_axr2
+					0x1ac (PIN_OUTPUT_PULLDOWN | MUX_MODE0)			//	P9_25	MCLK	MCLK	mcasp0_ahclkx
 				>;
 			};
 		};
