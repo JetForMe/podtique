@@ -47,7 +47,7 @@
 					0x190 (PIN_INPUT_PULLDOWN | MUX_MODE0)			//	P9_31	BCLK	BCLK	mcasp0_aclkx
 					0x194 (PIN_INPUT_PULLDOWN | MUX_MODE0)			//	P9_29	WCLK	WCLK	mcasp0_fsx
 					0x198 (PIN_INPUT_PULLDOWN | MUX_MODE0)			//	P9_30 	RX		SDOUT	mcasp0_axr0
-					0x19c (PIN_INPUT_PULLDOWN | MUX_MODE2)			//	P9_28	TX		SDIN	mcasp0_axr2
+					0x19c (PIN_OUTPUT_PULLDOWN | MUX_MODE2)			//	P9_28	TX		SDIN	mcasp0_axr2
 					0x1ac (PIN_OUTPUT_PULLDOWN | MUX_MODE0)			//	P9_25	MCLK	MCLK	mcasp0_ahclkx
 				>;
 			};
@@ -125,30 +125,46 @@
 		};
 	};
 
-	fragment@6 {
+// 	fragment@6 {
+// 		target-path="/";
+// 		__overlay__ {
+// 			sound {
+// 				compatible = "simple-audio-card";
+// 				simple-audio-card,name = "Podtique Simple Audio Card";
+// 				simple-audio-card,widgets =
+// 					"Speaker",				"External Speaker";
+// 				simple-audio-card,routing =
+// 					"External Speaker",		"LLOUT",
+// 					"External Speaker",		"RLOUT";
+// 				simple-audio-card,format = "dsp_b";
+// 				simple-audio-card,bitclock-master = <&sound_master>;
+// 				simple-audio-card,frame-master = <&sound_master>;
+// 				simple-audio-card,bitclock-inversion;
+// 
+// 				simple-audio-card,cpu {
+// 					sound-dai = <&mcasp0>;
+// 				};
+// 
+// 				sound_master: simple-audio-card,codec {
+// 					sound-dai = <&tlv320aic3104>;
+// 					system-clock-frequency = <12000000>;
+// 				};
+// 			};
+// 		};
+// 	};
+	
+	fragment@9 {
 		target-path="/";
 		__overlay__ {
 			sound {
-				compatible = "simple-audio-card";
-				simple-audio-card,name = "Podtique Cape Rev A";
-				simple-audio-card,widgets =
-					"Speaker",				"External Speaker";
-				simple-audio-card,routing =
-					"External Speaker",		"LLOUT",
-					"External Speaker",		"RLOUT";
-				simple-audio-card,format = "dsp_b";
-				simple-audio-card,bitclock-master = <&sound_master>;
-				simple-audio-card,frame-master = <&sound_master>;
-				simple-audio-card,bitclock-inversion;
-
-				simple-audio-card,cpu {
-					sound-dai = <&mcasp0>;
-				};
-
-				sound_master: simple-audio-card,codec {
-					sound-dai = <&tlv320aic3104>;
-					system-clock-frequency = <12000000>;
-				};
+				compatible = "ti,da830-evm-audio";
+				ti,model = "Podtique DaVinci EVM";
+				ti,audio-codec = <&tlv320aic3104>;
+				ti,mcasp-controller = <&mcasp0>;
+				ti,codec-clock-rate = <12000000>;
+				ti,audio-routing =
+					"Line Out",             "LLOUT",
+					"Line Out",             "RLOUT";
 			};
 		};
 	};
