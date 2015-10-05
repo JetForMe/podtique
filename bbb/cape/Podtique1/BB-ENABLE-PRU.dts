@@ -34,12 +34,12 @@
 				>;
 			};
 			
-			i2c2_pins: pinmux_i2c2_pins {
-				pinctrl-single,pins = <
-					0x150 (SLEWCTRL_SLOW | PIN_INPUT_PULLUP | MUX_MODE2)	//	P9_22, spi0_scl.i2c2_sda
-					0x154 (SLEWCTRL_SLOW | PIN_INPUT_PULLUP | MUX_MODE2)	//	P9_21, spi0_d0.i2c2_scl
-				>;
-			};
+// 			i2c2_pins: pinmux_i2c2_pins {
+// 				pinctrl-single,pins = <
+// 					0x178 (SLEWCTRL_SLOW | PIN_INPUT_PULLUP | MUX_MODE2)	//	P9_20, spi0_scl.i2c2_sda
+// 					0x17c (SLEWCTRL_SLOW | PIN_INPUT_PULLUP | MUX_MODE2)	//	P9_19, spi0_d0.i2c2_scl
+// 				>;
+// 			};
 
 			i2s_pins: pinmux_i2s_pins {
 				pinctrl-single,pins = <								//	Hdr		I2S		TLV		SoC
@@ -83,10 +83,10 @@
 		__overlay__ {
 			#address-cells = <1>;
 			#size-cells = <0>;
-			clock-frequency = <100000>;
-			status = "okay";
-			pinctrl-names = "default";
-			pinctrl-0 = <&i2c2_pins>;
+// 			clock-frequency = <100000>;
+// 			status = "okay";
+// 			pinctrl-names = "default";
+// 			pinctrl-0 = <&i2c2_pins>;
 
 			tlv320aic3104: tlv320aic3104@0 {
 				#sound-dai-cells = <0>;
@@ -154,7 +154,7 @@
 // 	};
 	
 	fragment@9 {
-		target-path="/";
+		target = <&ocp>;
 		__overlay__ {
 			sound {
 				compatible = "ti,da830-evm-audio";
@@ -169,21 +169,21 @@
 		};
 	};
 	
-	fragment@7 {
-		target = <&tscadc>;
-		__overlay__ {
-
-			status = "okay";
-			adc {
-				ti,adc-channels = <0 1 2>;
-			};
-		};
-	};
-	
-	fragment@8 {         // Enable the PRUSS
-		target = <&pruss>;
-		__overlay__ {
-			status = "okay";
-		};
-	};
+// 	fragment@7 {
+// 		target = <&tscadc>;
+// 		__overlay__ {
+// 
+// 			status = "okay";
+// 			adc {
+// 				ti,adc-channels = <0 1 2>;
+// 			};
+// 		};
+// 	};
+// 	
+// 	fragment@8 {         // Enable the PRUSS
+// 		target = <&pruss>;
+// 		__overlay__ {
+// 			status = "okay";
+// 		};
+// 	};
 };
