@@ -35,15 +35,6 @@
 																//	-----	----	----	---------	----------------------
 					0x048 0x07 //(PIN_OUTPUT_PULLDOWN | MUX_MODE7)		//	P9_14					gpio1[18]	CODEC regulator enable
 					0x04c 0x07 //(PIN_OUTPUT_PULLDOWN | MUX_MODE7)		//	P9_16					gpio1[19]	CODEC nRESET
-					
-// 					0x030 (PIN_INPUT_PULLUP | MUX_MODE7)		//	P8_12	12		44		gpio1[12]	amp nFAULT
-// 					0x024 (PIN_OUTPUT_PULLDOWN | MUX_MODE7)		//	P8_13	9		23		gpio0[23]	amp nSD
-// 					
-// 					0x028 (PIN_INPUT_PULLUP | MUX_MODE7)		//	P8_14	10		26		gpio0[26]	Front panel pin 6
-// 					0x03c (PIN_INPUT_PULLUP | MUX_MODE7)		//	P8_15	15		47		gpio1[15]	Front panel pin 8
-// 					0x038 (PIN_INPUT_PULLUP | MUX_MODE7)		//	P8_16	14		46		gpio1[14]	Front panel pin 10
-// 					0x02c (PIN_INPUT_PULLUP | MUX_MODE7)		//	P8_17	11		27		gpio0[27]	Front panel pin 7
-// 					0x08c (PIN_INPUT_PULLUP | MUX_MODE7)		//	P8_18	35		65		gpio2[1]	Front panel pin 9
 				>;
 			};
 			
