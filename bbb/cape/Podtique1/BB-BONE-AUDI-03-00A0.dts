@@ -1,0 +1,157 @@
+/*
+ * Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+/dts-v1/;
+/plugin/;
+
+/ {
+	compatible = "ti,beaglebone", "ti,beaglebone-black";
+
+	/* identification */
+	part-number = "BB-BONE-AUDI-02";
+	version = "00A0", "A0";
+
+	/* state the resources this cape uses */
+	exclusive-use =
+		/* the pin header uses */
+		"P9.31",	/* mcasp0: mcasp0_aclkx */
+		"P9.29",	/* mcasp0: mcasp0_fsx */
+		"P9.28",	/* mcasp0: mcasp0_axr2 */
+		"P9.25",	/* mcasp0: mcasp0_ahclkx */
+		/* the hardware ip uses */
+		"gpio1_18", "gpio1_19",
+		"mcasp0";
+
+	fragment@0 {
+		target = <&am33xx_pinmux>;
+		__overlay__ {
+
+			lzpt_gpio_pins: pinmux_lzpt_gpio_pins {
+				pinctrl-single,pins = <							//	Hdr		PINS	GPIO	Mode7		Desc
+																//	-----	----	----	---------	----------------------
+					0x048 0x07 //(PIN_OUTPUT_PULLDOWN | MUX_MODE7)		//	P9_14					gpio1[18]	CODEC regulator enable
+					0x04c 0x07 //(PIN_OUTPUT_PULLDOWN | MUX_MODE7)		//	P9_16					gpio1[19]	CODEC nRESET
+					
+// 					0x030 (PIN_INPUT_PULLUP | MUX_MODE7)		//	P8_12	12		44		gpio1[12]	amp nFAULT
+// 					0x024 (PIN_OUTPUT_PULLDOWN | MUX_MODE7)		//	P8_13	9		23		gpio0[23]	amp nSD
+// 					
+// 					0x028 (PIN_INPUT_PULLUP | MUX_MODE7)		//	P8_14	10		26		gpio0[26]	Front panel pin 6
+// 					0x03c (PIN_INPUT_PULLUP | MUX_MODE7)		//	P8_15	15		47		gpio1[15]	Front panel pin 8
+// 					0x038 (PIN_INPUT_PULLUP | MUX_MODE7)		//	P8_16	14		46		gpio1[14]	Front panel pin 10
+// 					0x02c (PIN_INPUT_PULLUP | MUX_MODE7)		//	P8_17	11		27		gpio0[27]	Front panel pin 7
+// 					0x08c (PIN_INPUT_PULLUP | MUX_MODE7)		//	P8_18	35		65		gpio2[1]	Front panel pin 9
+				>;
+			};
+			
+			i2c2_pins: pinmux_i2c2_pins {
+				pinctrl-single,pins = <
+					0x150 0x72 	/*spi0_scl.i2c2_sda,SLEWCTRL_SLOW | INPUT_PULLUP |MODE2*/
+					0x154 0x72	/*spi0_d0.i2c2_scl,SLEWCTRL_SLOW | INPUT_PULLUP | MODE2*/
+				>;
+			};
+
+			bone_audio_cape_audio_pins: pinmux_bone_audio_cape_audio_pins {
+				pinctrl-single,pins = <
+					0x1ac 0x00      /* mcasp0_ahclkx,             MODE0 | INPUT */
+					0x19c 0x22		/* mcasp0_ahclkr, */
+					0x194 0x20      /* mcasp0_fsx,         	      MODE0 | OUTPUT  */
+					0x190 0x20      /* mcasp0_aclkr.mcasp0_aclkx, MODE0 | OUTPUT_PULLDOWN */
+					0x198 0x20
+				>;
+			};
+		};
+	};
+
+	fragment@5 {
+		target = <&ocp>;
+		__overlay__ {
+			gpio_helper {
+				compatible = "gpio-of-helper";
+				status = "okay";
+				pinctrl-names = "default";
+				pinctrl-0 = <&lzpt_gpio_pins>;
+			};
+		};
+	};
+	
+	fragment@4 {
+		//target-path = "/";							//	Not available pre-4.x
+		target = <&vmmcsd_fixed>;						//	Gotta target something (comment out in 4.x)
+		__overlay__ {
+			lz_codec_reg: fixedregulator@1 {
+				compatible = "regulator-fixed";
+				regulator-name = "lz-codec-reg";
+				gpio = <&gpio1 18 1>;					//	GPIO_ACTIVE_HIGH is ignored by regulator-fixed,
+				enable-active-high;						//	need to also have enable-active-high.
+			};
+		};
+	};
+	
+	fragment@1 {
+		target = <&i2c2>;
+		__overlay__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			clock-frequency = <100000>;
+			status = "okay";
+			pinctrl-names = "default";
+			pinctrl-0 = <&i2c2_pins>;
+
+
+			tlv320aic3x: tlv320aic3x@18 {
+				compatible = "ti,tlv320aic3x";
+				reg = <0x18>;
+				status = "okay";
+				gpio-reset = <&gpio1 19 0>;
+				
+				AVDD-supply = <&lz_codec_reg>;
+				IOVDD-supply = <&lz_codec_reg>;
+				DRVDD-supply = <&lz_codec_reg>;
+				DVDD-supply = <&lz_codec_reg>;
+			};
+		};
+	};
+
+	fragment@2 {
+		target = <&mcasp0>;
+		__overlay__ {
+			pinctrl-names = "default";
+			pinctrl-0 = <&bone_audio_cape_audio_pins>;
+
+			status = "okay";
+
+			op-mode = <0>;          /* MCASP_IIS_MODE */
+			tdm-slots = <2>;
+			num-serializer = <16>;
+			serial-dir = <  /* 0: INACTIVE, 1: TX, 2: RX */
+				2 0 1 0
+				0 0 0 0
+				0 0 0 0
+				0 0 0 0
+			>;
+			tx-num-evt = <1>;
+			rx-num-evt = <1>;
+		};
+	};
+
+	fragment@3 {
+		target = <&ocp>;
+		__overlay__ {
+			sound {
+				compatible = "ti,da830-evm-audio";
+				ti,model = "DA830 EVM";
+				ti,audio-codec = <&tlv320aic3x>;
+				ti,mcasp-controller = <&mcasp0>;
+				ti,codec-clock-rate = <12000000>;
+				ti,audio-routing =
+					"Line Out",             "LLOUT",
+					"Line Out",             "RLOUT";
+			};
+		};
+	};
+	
+};
