@@ -154,7 +154,7 @@
 // 	};
 	
 	fragment@9 {
-		target-path="/";
+		target = <&ocp>;
 		__overlay__ {
 			sound {
 				compatible = "ti,da830-evm-audio";
