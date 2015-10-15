@@ -23,6 +23,7 @@
 
 #include "picojson.h"
 
+#include "AACDecoder.h"
 #include "MP3Decoder.h"
 #include "RadioConstants.h"
 #include "RadioDebug.h"
@@ -113,6 +114,13 @@ Station::getAudioData(void* inBuffer, size_t inBufferSize, size_t& outBytesDecod
 	return success;
 }
 
+bool
+hasSuffix(const std::string& inStr, const std::string& inSuffix)
+{
+    return inStr.size() >= inSuffix.size() &&
+           inStr.compare(inStr.size() - inSuffix.size(), inSuffix.size(), inSuffix) == 0;
+}
+
 /**
 	Opens the current station’s current track.
 */
@@ -128,6 +136,15 @@ Station::openTrack()
 	while (true)
 	{
 		const std::string& path = trackPath();
+		if (hasSuffix(path, ".m4a"))
+		{
+			mDecoder = new AACDecoder();
+		}
+		else //if (hasSuffix(path, ".mp3"))
+		{
+			mDecoder = new MP3Decoder();
+		}
+		
 		bool success = mDecoder->open(path);
 		if (!success)
 		{
@@ -178,13 +195,13 @@ Station::openTrack()
 	return true;
 }
 
-MP3Decoder*
+Decoder*
 Station::decoder() const
 {
 	if (mDecoder == NULL)
 	{
 		Station* self = const_cast<Station*> (this);
-		self->mDecoder = new MP3Decoder();
+		//self->mDecoder = new MP3Decoder();
 		self->openTrack();
 	}
 	

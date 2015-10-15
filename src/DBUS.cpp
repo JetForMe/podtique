@@ -91,7 +91,8 @@ DBUS::open(const char* inPath)
 	DBusError error;
 	::dbus_error_init(&error);
 	
-	mBus = ::dbus_bus_get(DBUS_BUS_SESSION, &error);
+	//mBus = ::dbus_bus_get(DBUS_BUS_SESSION, &error);
+	mBus = ::dbus_connection_open("podtique", &error);
 	if (testAndLogError("Error opening DBUS", error))
 	{
 	}

@@ -25,7 +25,7 @@
 
 
 
-class MP3Decoder;
+class Decoder;
 
 
 
@@ -62,7 +62,7 @@ public:
 	void							nextTrack();
 	uint32_t						trackIdx()							const		{ return mCurrentTrackIdx; }
 	
-	MP3Decoder*						decoder()							const;
+	Decoder*						decoder()							const;
 	
 	size_t							minimumBufferSize()					const;
 	int								numChannels()						const;
@@ -82,7 +82,7 @@ private:
 	uint32_t						mCurrentTrackIdx;
 	off_t							mLastPausedFrame;
 
-	MP3Decoder*						mDecoder;
+	Decoder*						mDecoder;
 };
 
 

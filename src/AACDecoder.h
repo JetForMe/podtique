@@ -1,13 +1,13 @@
 //
-//  MP3Decoder.h
-//  WoodenRadio
+//  AACDecoder.hpp
+//  Podtique
 //
-//  Created by Roderick Mann on 12/4/14.
-//  Copyright (c) 2014 Latency: Zero. All rights reserved.
+//  Created by Roderick Mann on 10/14/2015.
+//  Copyright © 2015 Latency: Zero. All rights reserved.
 //
 
-#ifndef __WoodenRadio__MP3Decoder__
-#define __WoodenRadio__MP3Decoder__
+#ifndef AACDecoder_hpp
+#define AACDecoder_hpp
 
 #include "Decoder.h"
 
@@ -21,26 +21,23 @@
 //	Library Includes
 //
 
-#include <mpg123.h>
-
-
-
+#include <neaacdec.h>
 
 
 
 class
-MP3Decoder : public Decoder
+AACDecoder : public Decoder
 {
 public:
-							MP3Decoder();
-	virtual					~MP3Decoder();
+							AACDecoder();
+	virtual					~AACDecoder();
 	
 	virtual	bool			open(const std::string& inPath);
 	virtual	void			close();
 	
 	virtual	bool			read(void* inBuffer, size_t inBufferSize, size_t& outBytesDecoded);
+
 	virtual	bool			done()								const				{ return mDone; }
-	
 	virtual	int				encoding()							const				{ return mEncoding; }
 	virtual	int				numChannels()						const				{ return mNumChannels; }
 	virtual	long			rate()								const				{ return mRate; }
@@ -49,47 +46,13 @@ public:
 	virtual	void			setCurrentFrame(off_t inFrame);
 	
 	virtual	size_t			minimumBufferSize()					const;
-	
-protected:
-	bool					createDecoder();
-	void					releaseDecoder();
-	
+
 private:
-	mpg123_handle*			mMPG;
+	NeAACDecHandle			mHandle;
 	bool					mDone;
 	long					mRate;
 	int						mNumChannels;
 	int						mEncoding;
-
-
-	class
-	Init
-	{
-	public:
-		Init();
-		~Init();
-		
-		bool				mInitialized;
-	};
-	
-	static	Init			sInit;
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#endif /* defined(__WoodenRadio__MP3Decoder__) */
+#endif	//	AACDecoder_hpp

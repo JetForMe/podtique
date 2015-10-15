@@ -22,6 +22,7 @@ On OS X, you also need to install [Xcode](https://developer.apple.com/xcode/). G
 	$ brew update
 	$ brew install libao
 	$ brew install mpg123
+	$ brew install faad2
 
 Open the Xcode project, and click the Run button.
 

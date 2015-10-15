@@ -17,6 +17,7 @@ COMMON = \
 	$(SRC)/util.c \
 	
 CPPSRC = \
+	$(SRC)/AACDecoder.cpp \
 	$(SRC)/AudioDevice.cpp \
 	$(SRC)/BBBMain.cpp \
 	$(SRC)/GPIO.cpp \

@@ -28,6 +28,7 @@
 //	Project Includes
 //
 
+#include "AACDecoder.h"
 #include "AudioDevice.h"
 #include "RadioDBUS.h"
 #include "MP3Decoder.h"

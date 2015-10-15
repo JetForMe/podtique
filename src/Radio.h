@@ -32,7 +32,6 @@
 
 class AudioDevice;
 class RadioDBUS;
-class MP3Decoder;
 class Spectrum;
 class SndFile;
 
