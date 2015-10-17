@@ -457,19 +457,17 @@ Spectrum::updateTuning()
 			df = std::fabs(df);
 			if (df > kStationHalfBand) df = kStationHalfBand;
 			
-			df = kStationHalfBand - df;
-			mContentWeight = df / kStationHalfBand;
+			//df = kStationHalfBand - df;
+			mContentWeight = 1.0 - (df / kStationHalfBand);
 			
-			//	If we’re close to the center frequency, just kill the noise…
+			//	If the content weight is nearly one, round it up…
 			
-			if (df < 0.003)
+			if (mContentWeight > 0.99)
 			{
-				mStaticWeight = 0.0;
+				mContentWeight = 1.0;
 			}
-			else
-			{
-				mStaticWeight = 1.0 - mContentWeight;
-			}
+			
+			mStaticWeight = 1.0 - mContentWeight;
 			//LogDebug("df: %f %f", df, f);
 		}
 		else

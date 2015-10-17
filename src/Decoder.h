@@ -32,7 +32,7 @@ public:
 
 	virtual	int			encoding()							const								=	0;
 	virtual	int			numChannels()						const								=	0;
-	virtual	long		rate()								const								=	0;
+	virtual	uint32_t	rate()								const								=	0;
 	
 	virtual	off_t		currentFrame()						const								=	0;
 	virtual	void		setCurrentFrame(off_t inFrame)											=	0;

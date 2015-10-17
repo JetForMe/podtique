@@ -120,6 +120,7 @@ public:
 	
 	size_t							minimumBufferSize()					const;
 	bool							getStationAudioData(void* inBuffer, size_t inBufferSize, size_t& outBytesDecoded) const;
+	const Station&					currentStation()					const		{ return mStations[mCurrentStationIndex]; }
 	
 protected:
 	bool							parseSpectrum(const picojson::value& inJSON);

@@ -32,17 +32,21 @@ RadioDBUS::RadioDBUS(Radio* inRadio)
 {
 }
 
-void
+bool
 RadioDBUS::open(const char* inPath)
 {
-	DBUS::open(inPath);
+	bool success = DBUS::open(inPath);
+	if (!success)
+	{
+		return false;
+	}
 	
 	//	Test names…
 	
 	const char* uniqueName = getUniqueName();
 	LogDebug("Unique name: [%s]", uniqueName);
 	
-	requestName(kDestination);
+	//requestName(kDestination);
 	
 	//	Test filter…
 	
@@ -54,6 +58,7 @@ RadioDBUS::open(const char* inPath)
 	}
 #endif
 
+	return true;
 }
 
 bool

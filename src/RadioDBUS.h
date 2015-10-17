@@ -24,7 +24,7 @@ public:
 	
 	bool						sendRadioState(bool inOn);
 	
-	virtual	void				open(const char* inPath);
+	virtual	bool				open(const char* inPath);
 
 protected:
 	virtual

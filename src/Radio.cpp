@@ -14,7 +14,9 @@
 
 #include <cstdio>
 #include <mutex>
+#include <string>
 #include <thread>
+#include <vector>
 
 //
 //	Library Includes
@@ -161,6 +163,8 @@ Radio::entry()
 {
 	LogDebug("Radio::entry()");
 	
+	mOutputDevice->setFormat(1, 44100);
+	
 	//	Decode bytes, send them to the output channel…
 	
 	uint8_t* buffer = NULL;
@@ -189,11 +193,11 @@ Radio::entry()
 #if 0
 		if (mSpectrum->stationTuned())
 		{
-			mOutputDevice->setFormat(mSpectrum->numChannels(), mSpectrum->rate());
+			mOutputDevice->setFormat(mSpectrum->currentStation().decoder()->numChannels(), mSpectrum->currentStation().decoder()->rate());
 		}
 		else
 		{
-			mOutputDevice->setFormat(1, 44100);
+			//mOutputDevice->setFormat(1, 44100);
 		}
 #endif
 
@@ -213,6 +217,10 @@ Radio::entry()
 		{
 			//LogDebug("Decoded %lu bytes", bytesDecoded);
 			
+			if (mSpectrum->stationTuned())
+			{
+				mOutputDevice->setFormat(mSpectrum->currentStation().decoder()->numChannels(), mSpectrum->currentStation().decoder()->rate());
+			}
 			processAudioAndOutput(buffer, bytesDecoded);
 		}
 		else

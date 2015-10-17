@@ -43,7 +43,7 @@ public:
 	
 	virtual	int				encoding()							const				{ return mEncoding; }
 	virtual	int				numChannels()						const				{ return mNumChannels; }
-	virtual	long			rate()								const				{ return mRate; }
+	virtual	uint32_t		rate()								const				{ return mRate; }
 	
 	virtual	off_t			currentFrame()						const;
 	virtual	void			setCurrentFrame(off_t inFrame);
@@ -57,7 +57,7 @@ protected:
 private:
 	mpg123_handle*			mMPG;
 	bool					mDone;
-	long					mRate;
+	uint32_t				mRate;
 	int						mNumChannels;
 	int						mEncoding;
 

@@ -41,7 +41,7 @@ public:
 	
 	void						start();
 	
-	virtual	void				open(const char* inPath);
+	virtual	bool				open(const char* inPath);
 	
 protected:
 	void						entry();

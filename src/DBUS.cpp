@@ -83,7 +83,7 @@ filterFunc1(DBusConnection* inConn, DBusMessage* inMsg, void* inUserData)
 	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
 }
 
-void
+bool
 DBUS::open(const char* inPath)
 {
 	::dbus_threads_init_default();
@@ -92,9 +92,10 @@ DBUS::open(const char* inPath)
 	::dbus_error_init(&error);
 	
 	//mBus = ::dbus_bus_get(DBUS_BUS_SESSION, &error);
-	mBus = ::dbus_connection_open("podtique", &error);
+	mBus = ::dbus_connection_open("launchd:env=DBUS_LAUNCHD_SESSION_BUS_SOCKET", &error);		//	Bad address
 	if (testAndLogError("Error opening DBUS", error))
 	{
+		return false;
 	}
 	
 	//	Register an object…
@@ -103,7 +104,10 @@ DBUS::open(const char* inPath)
 	if (!success)
 	{
 		LogDebug("Unable to register object");
+		return false;
 	}
+	
+	return true;
 }
 
 bool
@@ -127,6 +131,11 @@ DBUS::testAndLogError(const char* inMsg, const DBusError& inError)
 bool
 DBUS::send(const DBus::Message& inMsg) const
 {
+	if (mBus == NULL)
+	{
+		return false;
+	}
+	
 	bool success = ::dbus_connection_send(mBus, inMsg.dbusMessage(), NULL);
 	if (!success)
 	{
@@ -140,6 +149,11 @@ DBUS::send(const DBus::Message& inMsg) const
 int
 DBUS::requestName(const char* inName, unsigned int inFlags)
 {
+	if (mBus == NULL)
+	{
+		return -1;
+	}
+	
 	DBusError error;
 	::dbus_error_init(&error);
 	int r = ::dbus_bus_request_name(mBus, inName, inFlags, &error);
@@ -160,11 +174,6 @@ DBUS::requestName(const char* inName, unsigned int inFlags)
 void
 DBUS::start()
 {
-	
-	//	Open the JSON file…
-	
-	//	TODO: For now, just open a specific MP3 file and play it…
-	
 	//	Start the primary thread…
 	
 	mDispatchThread = std::thread(&DBUS::entry, this);
@@ -173,6 +182,11 @@ DBUS::start()
 void
 DBUS::entry()
 {
+	if (mBus == NULL)
+	{
+		return;
+	}
+	
 	LogDebug("DBUS::entry()");
 	
 	do

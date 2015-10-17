@@ -105,7 +105,8 @@ MP3Decoder::open(const std::string& inPath)
 	
 	//	Get its format…
 	
-	err = ::mpg123_getformat(mMPG, &mRate, &mNumChannels, &mEncoding);
+	long rate;
+	err = ::mpg123_getformat(mMPG, &rate, &mNumChannels, &mEncoding);
 	if (err != MPG123_OK)
 	{
 		LogDebug("Unable to get mp3 format: %s", ::mpg123_plain_strerror(err));
@@ -113,6 +114,7 @@ MP3Decoder::open(const std::string& inPath)
 		close();
 		return false;
 	}
+	mRate = static_cast<uint32_t> (rate);
 	
 	//	Example code says this prevents format changes?
 	
