@@ -151,6 +151,8 @@ Radio::entry()
 {
 	LogDebug("Radio::entry()");
 	
+	mOutputDevice->setFormat(1, 44100);
+	
 	//	Decode bytes, send them to the output channel…
 	
 	uint8_t* buffer = NULL;

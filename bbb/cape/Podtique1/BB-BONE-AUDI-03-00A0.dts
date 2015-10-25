@@ -12,7 +12,7 @@
 	compatible = "ti,beaglebone", "ti,beaglebone-black";
 
 	/* identification */
-	part-number = "BB-BONE-AUDI-02";
+	part-number = "BB-BONE-AUDI-03";
 	version = "00A0", "A0";
 
 	/* state the resources this cape uses */
@@ -33,8 +33,12 @@
 			lzpt_gpio_pins: pinmux_lzpt_gpio_pins {
 				pinctrl-single,pins = <							//	Hdr		PINS	GPIO	Mode7		Desc
 																//	-----	----	----	---------	----------------------
-					0x048 0x07 //(PIN_OUTPUT_PULLDOWN | MUX_MODE7)		//	P9_14					gpio1[18]	CODEC regulator enable
-					0x04c 0x07 //(PIN_OUTPUT_PULLDOWN | MUX_MODE7)		//	P9_16					gpio1[19]	CODEC nRESET
+					0x048 0x07 //(PIN_OUTPUT_PULLDOWN | MUX_MODE7)		//	P9_14	18	50			gpio1[18]	CODEC regulator enable
+					0x04c 0x07 //(PIN_OUTPUT_PULLDOWN | MUX_MODE7)		//	P9_16	19	51			gpio1[19]	CODEC nRESET
+					
+					0x1a4 0x07 //(PIN_OUTPUT_PULLDOWN | MUX_MODE7)		//	P9_27	105	115			gpio3[19]	Front panel power 1.8V
+					0x028 0x37 //(PIN_INPUT_PULLUP | MUX_MODE7)			//	P8_14	10	26			gpio0[26]	Front Panel Pin 6
+					
 				>;
 			};
 			
@@ -145,4 +149,21 @@
 		};
 	};
 	
+	fragment@6 {
+		target = <&tscadc>;
+		__overlay__ {
+
+			status = "okay";
+			adc {
+				ti,adc-channels = <0 1 2>;
+			};
+		};
+	};
+	
+	fragment@7 {         // Enable the PRUSS
+		target = <&pruss>;
+		__overlay__ {
+			status = "okay";
+		};
+	};
 };
