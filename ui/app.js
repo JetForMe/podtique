@@ -19,8 +19,10 @@ var name = "com.latencyzero.podtique.ui";
 var bus;
 if (process.env.DBUS_LAUNCHD_SESSION_BUS_SOCKET)
 {
-	console.log("Finding session dbus: " + process.env.DBUS_LAUNCHD_SESSION_BUS_SOCKET);
-	bus = dbus.sessionBus({ busAddress : "unix:path=" + process.env.DBUS_LAUNCHD_SESSION_BUS_SOCKET.toString() });
+	console.log("Connecting to sessionBus 'unix:path=" + process.env.DBUS_LAUNCHD_SESSION_BUS_SOCKET.toString() + "'");
+	bus = dbus.sessionBus({ socket : process.env.DBUS_LAUNCHD_SESSION_BUS_SOCKET });
+	//bus = dbus.sessionBus({ busAddress : "unix:path=" + process.env.DBUS_LAUNCHD_SESSION_BUS_SOCKET.toString() });
+	//bus = dbus.createConnection({ busAddress : "launchd:env=DBUS_LAUNCHD_SESSION_BUS_SOCKET" });
 }
 else
 {

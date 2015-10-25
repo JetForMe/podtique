@@ -96,8 +96,8 @@ Three-pin header goes to NeoPixel LEDs to illuminate the radio.
 
 * Pin 1: Agnd
 * Pin 2: 1.8 V (regulator enabled from GPIO3\_19, P9_27)
-* Pin 3: Frequency input
-* Pin 4: Volume input
+* Pin 3: Volume input
+* Pin 4: Frequency input
 * Pin 5: Other input (tone?)
 * Pin 6: On/off
 * Pin 7: Mode 1
