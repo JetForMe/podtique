@@ -199,7 +199,7 @@ Radio::entry()
 		bool success = mSpectrum->getStationAudioData(buffer, bufSize, bytesDecoded);
 		if (success)
 		{
-			//LogDebug("Decoded %lu bytes", bytesDecoded);
+			//LogDebug("Decoded %u bytes", bytesDecoded);
 			
 			processAudioAndOutput(buffer, bytesDecoded);
 		}
