@@ -3,7 +3,7 @@
 //  Podtique
 //
 //  Created by Roderick Mann on 12/28/14.
-//  Copyright (c) 2014 Latency: Zero. All rights reserved.
+//  Copyright (c) 2015 Latency: Zero, LLC. All rights reserved.
 //
 
 #include "GPIO.h"
@@ -12,6 +12,7 @@
 //	Standard Includes
 //
 
+#include <cassert>
 #include <fstream>
 #include <sstream>
 #include <thread>
@@ -28,19 +29,22 @@
 
 std::string			GPIO::sGPIOPath			=	"/sys/class/gpio/";
 
-GPIO::GPIO(uint16_t inNumber)
+GPIO::GPIO()
 	:
-	mNumber(inNumber)
+	mNumber(0)
 {
+}
+
+void
+GPIO::setGPIONumber(uint16_t inNumber)
+{
+	assert(mNumber == 0);
+	
+	mNumber = inNumber;
 	std::stringstream ss;
 	ss << sGPIOPath << "gpio" << mNumber << "/";
 	mPath = ss.str();
 	exportGPIO();
-}
-
-void
-GPIO::init()
-{
 }
 
 void
