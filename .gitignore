@@ -9,3 +9,4 @@ ui/content
 *.o
 *.d
 *.tmp
+*.xcuserstate
