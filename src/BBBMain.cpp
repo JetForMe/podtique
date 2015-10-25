@@ -3,7 +3,7 @@
 //  WoodenRadio
 //
 //  Created by Roderick Mann on 12/4/14.
-//  Copyright (c) 2014 Latency: Zero. All rights reserved.
+//  Copyright (c) 2015 Latency: Zero, LLC. All rights reserved.
 //
 
 //
@@ -34,7 +34,6 @@
 
 
 
-const uint32_t kNumPixels = 24;
 
 static sig_atomic_t				sHandledSignal;
 
@@ -44,32 +43,72 @@ class
 Podtique
 {
 public:
-	Podtique(const std::string& inDataDir);
+					Podtique();
+	virtual			~Podtique();
+	
+	void			setDataDir(const std::string& inDataDir)				{ mDataDir = inDataDir; }
 	void			run();
 	void			stop();
+	virtual	void	mute(bool inMute) = 0;
 	
 protected:
-	float			readADC(int inChannel);
+	virtual	void	init();
+	void			initLEDs(uint16_t inNumPixels, const std::string& inPRU0FirmwarePath, const std::string& inPRU1FirmwarePath);
 	void			setBacklightColor(uint8_t inRed, uint8_t inGreen, uint8_t inBlue);
 	
+	virtual	bool	isOn() const = 0;
+	
+	virtual	float	readVol() const = 0;
+	virtual	float	readFreq() const = 0;
+	
+	static	float	readADC(int inChannel);
+
 private:
 	std::string		mDataDir;
-	GPIO			mOffOn;				//	"on" when low
-	GPIO			mAudioMute;			//	Audio is muted when GPIO is high (FET pulls STBY line low, which mutes things, despite what the data sheet says)
 	Radio*			mRadio;
+	
+	uint32_t		mNumLEDs;
 	ledscape_t* 	mLEDs;
 	uint8_t			mLEDBufferIdx;
 };
 
 
-Podtique::Podtique(const std::string& inDataDir)
+Podtique::Podtique()
 	:
-	mDataDir(inDataDir),
-	mOffOn(66),
-	mAudioMute(27),
 	mRadio(NULL),
+	mNumLEDs(0),
 	mLEDBufferIdx(0)
 {
+}
+
+Podtique::~Podtique()
+{
+}
+
+void
+Podtique::init()
+{
+}
+
+void
+Podtique::initLEDs(uint16_t inNumLEDs, const std::string& inPRU0FirmwarePath, const std::string& inPRU1FirmwarePath)
+{
+	//	Init the LEDs…
+	
+	LogDebug("Loading PRU firmware:\n    %s\n    %s", inPRU0FirmwarePath.c_str(), inPRU1FirmwarePath.c_str());
+	
+	mNumLEDs = inNumLEDs;
+	mLEDs = ::ledscape_init_with_programs(inNumLEDs, inPRU0FirmwarePath.c_str(), inPRU1FirmwarePath.c_str());
+	
+	//	Color-cycle the LEDs to indicate we’re running…
+	
+	setBacklightColor(255, 0, 0);
+	std::this_thread::sleep_for(std::chrono::milliseconds(333));
+	setBacklightColor(0, 255, 0);
+	std::this_thread::sleep_for(std::chrono::milliseconds(333));
+	setBacklightColor(0, 0, 255);
+	std::this_thread::sleep_for(std::chrono::milliseconds(333));
+	setBacklightColor(0, 0, 0);
 }
 
 float
@@ -84,7 +123,7 @@ Podtique::readADC(int inChannel)
 		return -1.0;
 	}
 	
-	float result = 0.0;
+	float result = -1.0;
 	
 	char buf[16];
 	ssize_t bytesRead = ::read(fd, buf, sizeof (buf) - 1);
@@ -97,7 +136,7 @@ Podtique::readADC(int inChannel)
 	}
 	else
 	{
-		LogDebug("Bytes read: %u/%u", bytesRead, sizeof (buf) - 1);
+		LogDebug("Read %d bytes out of %u from path %s", bytesRead, sizeof (buf) - 1, path);
 	}
 	
 	::close(fd);
@@ -105,29 +144,11 @@ Podtique::readADC(int inChannel)
 	return result;
 }
 
+
 void
 Podtique::run()
 {
-	//	Configure the GPIOs…
-	
-	mOffOn.setInput();
-	
-	mAudioMute.setOutput();
-	mAudioMute.set(true);
-	
-	//	Init the LEDs…
-	
-	mLEDs = ::ledscape_init_with_programs(kNumPixels,
-													"/home/rmann/LEDscape/pru/bin/ws281x-inverted-single-channel-pru0.bin",
-													"/home/rmann/LEDscape/pru/bin/ws281x-inverted-single-channel-pru1.bin");
-	setBacklightColor(255, 0, 0);
-	std::this_thread::sleep_for(std::chrono::milliseconds(333));
-	setBacklightColor(0, 255, 0);
-	std::this_thread::sleep_for(std::chrono::milliseconds(333));
-	setBacklightColor(0, 0, 255);
-	std::this_thread::sleep_for(std::chrono::milliseconds(333));
-	setBacklightColor(0, 0, 0);
-	
+	init();
 	
 	//	Create the radio…
 	
@@ -147,7 +168,7 @@ Podtique::run()
 	//	and updating the radio…
 	
 	dur = std::chrono::milliseconds(50);
-	bool lastOff = true;
+	bool lastOn = true;
 	while (true)
 	{
 		if (sHandledSignal > 0)
@@ -164,29 +185,20 @@ Podtique::run()
 		//	Read GPIOs and ADCs (with a delay before each, since
 		//	reading these too rapidly leads to a hang)…
 		
-		std::this_thread::sleep_for(dur);
-		bool off = mOffOn.get();
-		
-		std::this_thread::sleep_for(dur);
-		float f = readADC(0);
-		if (f < 0.0) f = 0.100;
-		
-		std::this_thread::sleep_for(dur);
-		float v = readADC(1);
-		if (v < 0.0) v = 0.4;
+		bool on = isOn();
 		
 		//	Enable the audio with the radio…
 		
-		if (lastOff != off)
+		if (lastOn != !on)
 		{
 			std::this_thread::sleep_for(dur);
-			mAudioMute.set(off);
-			lastOff = off;
+			mute(!on);
+			lastOn = !on;
 			
 			//	If turning on, delay a bit before turning on
 			//	the radio to reduce the content missed…
 			
-			if (!off)
+			if (on)
 			{
 				std::chrono::milliseconds turnOnDelay(500);
 				std::this_thread::sleep_for(turnOnDelay);
@@ -195,20 +207,29 @@ Podtique::run()
 		
 		//	Update the radio’s state…
 			
-		mRadio->setOn(!off);
-		if (off)
-		{
-			setBacklightColor(0, 0, 0);
-		}
-		else
+		mRadio->setOn(on);
+		if (on)
 		{
 			setBacklightColor(30, 30, 10);
 		}
-		//LogDebug("On: %u", !off);
+		else
+		{
+			setBacklightColor(0, 0, 0);
+		}
+		
+		//	Update the analog values…
+		
+		float f = readFreq();
+		float v = readVol();
+		
 		mRadio->setFrequency(f);
-		//LogDebug("Set frequency to: %.3f", f);
 		mRadio->setVolume(v);
-		//LogDebug("Set vol: %.3f", v);
+		
+#if 0
+		LogDebug("On: %u", on);
+		LogDebug("Set frequency to: %.3f", f);
+		LogDebug("Set vol: %.3f", v);
+#endif
 		
 		//std::this_thread::sleep_for(dur);
 	}
@@ -223,7 +244,7 @@ Podtique::setBacklightColor(uint8_t inRed, uint8_t inGreen, uint8_t inBlue)
 {
 	mLEDBufferIdx = (mLEDBufferIdx + 1) % 2;
 	ledscape_frame_t* const frame = ::ledscape_frame(mLEDs, mLEDBufferIdx);
-	for (uint32_t idx = 0; idx < kNumPixels; ++idx)
+	for (uint32_t idx = 0; idx < mNumLEDs; ++idx)
 	{
 		::ledscape_set_color(
 			frame,
@@ -245,10 +266,228 @@ Podtique::setBacklightColor(uint8_t inRed, uint8_t inGreen, uint8_t inBlue)
 void
 Podtique::stop()
 {
-	mAudioMute.set(true);		//	Mute audio
+	mute(true);
 	setBacklightColor(0, 0, 0);
-	
 }
+
+
+#pragma mark -
+
+/**
+	The original proof-of-concept prototype, built with USB
+	sound card, SparkFun amplifier, inverted WS2812 LED channel,
+	etc.
+*/
+
+class
+PodtiquePrototype1 : public Podtique
+{
+public:
+	PodtiquePrototype1();
+
+	virtual	void	mute(bool inMute);
+
+protected:
+	virtual	void	init();
+	virtual	bool	isOn() const;
+
+	virtual	float	readVol() const;
+	virtual	float	readFreq() const;
+
+private:
+	GPIO			mOffOn;				//	"on" when low
+	GPIO			mAudioMute;			//	Audio is muted when GPIO is high (FET pulls STBY line low, which mutes things, despite what the data sheet says)
+};
+
+PodtiquePrototype1::PodtiquePrototype1()
+{
+}
+
+void
+PodtiquePrototype1::init()
+{
+	Podtique::init();
+	
+	//	Configure the GPIOs…
+	
+	mOffOn.setGPIONumber(66);
+	mOffOn.setInput();
+	
+	mAudioMute.setGPIONumber(27);
+	mAudioMute.setOutput();
+	mAudioMute.set(true);
+	
+	//	Init LEDs…
+	
+	initLEDs(24,
+				"/lib/firmware/ws281x-inverted-single-channel-pru0.bin",
+				"/lib/firmware/ws281x-inverted-single-channel-pru1.bin");
+}
+
+void
+PodtiquePrototype1::mute(bool inMute)
+{
+	mAudioMute.set(inMute);
+}
+
+bool
+PodtiquePrototype1::isOn() const
+{
+	std::chrono::milliseconds dur(100);
+	std::this_thread::sleep_for(dur);
+	bool off = mOffOn.get();
+	return !off;
+}
+
+float
+PodtiquePrototype1::readVol() const
+{
+	if (isOn())
+	{
+		std::chrono::milliseconds dur(50);
+		std::this_thread::sleep_for(dur);
+		float v = readADC(1);
+		if (v < 0.0) v = 0.4;
+
+		return v;
+	}
+	else
+	{
+		return 0.0;
+	}
+}
+
+float
+PodtiquePrototype1::readFreq() const
+{
+	if (isOn())
+	{
+		std::chrono::milliseconds dur(50);
+		std::this_thread::sleep_for(dur);
+		float f = readADC(0);
+		if (f < 0.0) f = 0.100;
+	
+		return f;
+	}
+	else
+	{
+		return 0.0;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark -
+
+/**
+	First custom Cape, Podtique1 or PT1.
+	
+	• TLV320AIC3104 CODEC connected to McASP/I2S
+	• TPA3140D2 10 W audio power amp
+	• Non-inverted WS2812 with proper level shifter
+	• Low-noise LDOs for analog supplies, GPIO-enableable.
+	• Differnet GPIOs and ADCs for front panel
+*/
+
+class
+PodtiquePT1 : public Podtique
+{
+public:
+	PodtiquePT1();
+	
+	virtual	void	mute(bool inMute);
+
+protected:
+	virtual	void	init();
+	virtual	bool	isOn() const;
+
+	virtual	float	readVol() const;
+	virtual	float	readFreq() const;
+
+private:
+	GPIO			mOffOn;				//	"on" when low
+};
+
+PodtiquePT1::PodtiquePT1()
+{
+}
+
+void
+PodtiquePT1::init()
+{
+	Podtique::init();
+	
+	//	Configure the GPIOs…
+	
+	mOffOn.setGPIONumber(26);		//	P8_14
+	mOffOn.setInput();
+	
+	//	Init LEDs…
+	
+	initLEDs(16,
+				"/lib/firmware/ws281x-single-channel-pru0.bin",
+				"/lib/firmware/ws281x-single-channel-pru1.bin");
+}
+
+void
+PodtiquePT1::mute(bool inMute)
+{
+}
+
+bool
+PodtiquePT1::isOn() const
+{
+	std::chrono::milliseconds dur(100);
+	std::this_thread::sleep_for(dur);
+	bool off = mOffOn.get();
+	return !off;
+}
+
+float
+PodtiquePT1::readVol() const
+{
+	if (isOn())
+	{
+		std::chrono::milliseconds dur(50);
+		std::this_thread::sleep_for(dur);
+		float v = readADC(0);
+		if (v < 0.0) v = 0.4;
+
+		return v;
+	}
+	else
+	{
+		return 0.0;
+	}
+}
+
+float
+PodtiquePT1::readFreq() const
+{
+	if (isOn())
+	{
+		std::chrono::milliseconds dur(50);
+		std::this_thread::sleep_for(dur);
+		float f = readADC(1);
+		if (f < 0.0) f = 0.100;
+	
+		return f;
+	}
+	else
+	{
+		return 0.0;
+	}
+}
+
+
 
 #pragma mark -
 #pragma mark • Startup Code
@@ -335,8 +574,10 @@ main(int inArgCount, const char** inArgs)
 	::signal(SIGHUP, intHandler);
 	::signal(SIGINT, intHandler);
 	
+	//sPodtique = new PodtiquePrototype1;
+	sPodtique = new PodtiquePT1;
 	std::string p(dataDir);
-	sPodtique = new Podtique(p);
+	sPodtique->setDataDir(p);
 	sPodtique->run();
 	
 	return 0;
