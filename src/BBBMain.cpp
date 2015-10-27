@@ -225,7 +225,7 @@ Podtique::run()
 		mRadio->setFrequency(f);
 		mRadio->setVolume(v);
 		
-#if 1
+#if 0
 		LogDebug("On: %u", on);
 		LogDebug("Set frequency to: %.3f", f);
 		LogDebug("Set vol: %.3f", v);
@@ -445,7 +445,7 @@ PodtiquePT1::mute(bool inMute)
 bool
 PodtiquePT1::isOn() const
 {
-	std::chrono::milliseconds dur(100);
+	std::chrono::milliseconds dur(10);
 	std::this_thread::sleep_for(dur);
 	bool off = mOffOn.get();
 	return !off;
@@ -456,9 +456,9 @@ PodtiquePT1::readVol() const
 {
 	if (isOn())
 	{
-		std::chrono::milliseconds dur(50);
+		std::chrono::milliseconds dur(10);
 		std::this_thread::sleep_for(dur);
-		float v = readADC(0);
+		float v = readADC(1);
 		if (v < 0.0) v = 0.6;
 
 		return v;
@@ -474,9 +474,9 @@ PodtiquePT1::readFreq() const
 {
 	if (isOn())
 	{
-		std::chrono::milliseconds dur(50);
+		std::chrono::milliseconds dur(10);
 		std::this_thread::sleep_for(dur);
-		float f = readADC(1);
+		float f = readADC(2);
 		if (f < 0.0) f = 0.000;
 	
 		return f;
