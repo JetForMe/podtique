@@ -74,7 +74,7 @@ RadioDBUS::sendRadioState(bool inOn)
 	bool success = send(msg);
 	if (!success)
 	{
-		LogDebug("Unable to send message");
+// 		LogDebug("Unable to send message");
 		return false;
 	}
 	
