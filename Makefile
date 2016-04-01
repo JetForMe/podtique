@@ -4,9 +4,9 @@ SRC	=	src
 
 CC		= gcc
 CPP		= g++
-CFLAGS	= -g -Wall -I. -ISDL -D_REENTRANT -Wno-unknown-pragmas
+CFLAGS	= -g -Wall -I. -I/usr/include/dbus-1.0 -I/usr/lib/arm-linux-gnueabihf/dbus-1.0/include -ISDL -D_REENTRANT -Wno-unknown-pragmas
 CPPFLAGS  = $(CFLAGS) -std=gnu++0x
-LDFLAGS = -L/usr/local/lib  -L. -Wl,-rpath,/usr/local/lib -lao -lmpg123 -lprussdrv -lpthread -lsndfile
+LDFLAGS = -L/usr/local/lib  -L-L. -Wl,-rpath,/usr/local/lib -lao -ldbus-1 -lfaad -lmp4ff -lmpg123 -lprussdrv -lpthread -lsndfile
 
 
 CORE   = \
@@ -20,9 +20,13 @@ CPPSRC = \
 	$(SRC)/AACDecoder.cpp \
 	$(SRC)/AudioDevice.cpp \
 	$(SRC)/BBBMain.cpp \
+	$(SRC)/DBUS.cpp \
+	$(SRC)/DBusMessage.cpp \
+	$(SRC)/Decoder.cpp \
 	$(SRC)/GPIO.cpp \
 	$(SRC)/MP3Decoder.cpp \
 	$(SRC)/Radio.cpp \
+	$(SRC)/RadioDBUS.cpp \
 	$(SRC)/Spectrum.cpp \
 	$(SRC)/SndFile.cpp \
 

@@ -34,7 +34,7 @@ Message::Message(const char* inBusName,
 	:
 	mMsg(NULL)
 {
-	LogDebug("Creating message %s: %p", inMethod, this);
+// 	LogDebug("Creating message %s: %p", inMethod, this);
 	mMsg = ::dbus_message_new_method_call(inBusName,
 											inPath,
 											inInterface,
