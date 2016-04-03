@@ -1,5 +1,4 @@
-Install Robert Nelson’s console flasher. I used BBB-eMMC-flasher-debian-8.2-console-armhf-2015-09-13-2gb
-for these steps. Get it here: 
+Install Robert Nelson’s console flasher. I used BBB-eMMC-flasher-debian-8.3-console-armhf-2016-03-27-2gb.img for these steps. Get it here: 
 
 Power-cycle board to get the newly flashed OS running. Plug in an Ethernet cable
 
@@ -7,13 +6,24 @@ Before doing anything else, log in and run this:
 
 	$ sudo su
 	# apt-get update
+	# apt-get upgrade -y
 	# apt-get install -y aptitude
 
 # Software Setup
 
 ### Locale Crap
+
+These instructions no longer seem to work on Debian 8.3. Not sure what the right steps are, but running
+
+	# locale-gen en_US.UTF-8
+	# dpkg-reconfigure locales
+	
+brought up a menut that let me choose some locales. It still doesn't like the env vars I’ve tried to set up, though.
+
 `apt-get` bitches about locale if you don’t do these [things](https://www.thomas-krenn.com/en/wiki/Perl_warning_Setting_locale_failed_in_Debian) first.
 
+	# apt-get install -y locales
+	# apt-get install -y debconfg (necessary?)
 	# locale-gen en_US.UTF-8
 	# export LANGUAGE=en_US.UTF-8
 	# export LANG=en_US.UTF-8
@@ -23,11 +33,13 @@ Before doing anything else, log in and run this:
 
 ## Networking Setup
 
+Used to do 1a and 2. Now do 1b and 2.
+
 ### 1a. Set up Wi-Fi (old)
 Plug in the wifi dongle (not sure if this is necessary, but it was plugged in and
 magically there was a modules-load.d .conf file for it).
 
-	# apt-get install wireless-tools
+	# apt-get install -y wireless-tools
 
 ### 1b. Set up Wi-Fi (new)
 (From [https://wiki.archlinux.org/index.php/Wireless_network_configuration#Wireless_management](https://wiki.archlinux.org/index.php/Wireless_network_configuration#Wireless_management))
@@ -35,8 +47,8 @@ magically there was a modules-load.d .conf file for it).
 Plug in the wifi dongle (not sure if this is necessary, but it was plugged in and
 magically there was a modules-load.d .conf file for it).
 
-	# apt-get install iw
-	# apt-get install wpasupplicant
+	# apt-get install -y iw
+	# apt-get install -y wpasupplicant
 
 ### 2. Configure Wi-Fi (both)
 Calculate the WPA PSK for the SSID:
@@ -71,32 +83,54 @@ Make it go (with iw tools from 1b above):
 	# ifup wlan0
 
 ### 3. Install Bonjour
-	# apt-get install avahi-daemon avahi-discover libnss-mdns
+
+	# apt-get install -y avahi-daemon avahi-discover libnss-mdns
 
 ### 4. Install NTP
-	# apt-get ntp
 
+	# apt-get install -y ntp
+
+## Development Tools
+
+	# apt-get install -y build-essential
+	# apt-get install -y git
+	
 ## Audio Support
 
 ### libao
 
 Install the libao shared libraries (this also installs libao-common).
 
-	# apt-get install libao4
+	# apt-get install -y libao4
 	
 ### libmpg123
-Note: It doesn't seem to work to install from apt. Need to build from source.
+
+Note: It doesn't seem to work to install from apt. Need to build from source. Note: previously used 1.22.4.
 	
-	$ wget http://downloads.sourceforge.net/project/mpg123/mpg123/1.22.4/mpg123-1.22.4.tar.bz2?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fmpg123%2Ffiles%2Fmpg123%2F&ts=1445939685&use_mirror=superb-dca2
+	# apt-get install -y bzip2
+	$ wget http://downloads.sourceforge.net/project/mpg123/mpg123/1.23.3/mpg123-1.23.3.tar.bz2
 	$ tar -jxf mpg123-1.22.4.tar.bz2
 	$ cd mpg123-1.22.4
 	$ ./configure
-
-	# apt-get install libmpg123-0
+	$ make
+	# make install
 	
+	This doesn’t work:
+	# apt-get install -y libmpg123-0
+	
+### AAC and mp4 Support
+
+	$ http://downloads.sourceforge.net/faac/faad2-2.7.tar.bz2
+	$ jar -jxf faad2-2.7.tar.bz2
+	$ cd faad2-2.7
+	$ ./configure
+	$ make
+	# make install
+	# cp common/mp4ff/mp4ff_int_types.h /usr/local/include
+
 ### libsndfile
 
-	# apt-get install libsndfile1
+	# apt-get install -y libsndfile1
 
 ### ALSA
 
@@ -106,11 +140,21 @@ Note: It doesn't seem to work to install from apt. Need to build from source.
 
 You'll need to install development versions of the above packages to be able to compile the code on the BBB:
 
-	# apt-get install libao-dev libmpg123-dev libsndfile-dev libdbus-1-dev libasound2-dev
+	# apt-get install -y libao-dev libmpg123-dev libsndfile-dev libdbus-1-dev libasound2-dev
 	
 ## Other Peripherals
 
 ### ADC & HDMI
+
+BeagleBone Green has no HDMI on it. BBB has HDMI that needs to be disabled.
+
+#### For BBGreen (not BBB)
+
+Edit `/boot/uEnv.txt` to enable BB-ADC.
+
+	cape_enable=bone_capemgr.enable_partno=BB-ADC         
+
+#### For BBB (not BBGreen)
 
 Edit `/boot/uEnv.txt` to enable BB-ADC and disable BB-BONELT-HDMI,BB-BONELT-HDMIN:
 
@@ -118,7 +162,12 @@ Edit `/boot/uEnv.txt` to enable BB-ADC and disable BB-BONELT-HDMI,BB-BONELT-HDMI
 	cape_enable=bone_capemgr.enable_partno=BB-ADC         
 
 ### PRU Support
-	# apt-get install am335x-pru-package
+
+Need to investigate this further. 4.1 kernel from TI loses support for this. Not sure how to proceed.
+
+[PRU.Kernel Thread](https://groups.google.com/forum/#!category-topic/beagleboard/3iJ-J-x0-Ko)
+
+	# apt-get install -y am335x-pru-package
 
 Seems libprussdrv needs to be rebuilt for 4.1.
 
@@ -149,13 +198,19 @@ Turn the regulators on and off with:
 	# echo 0 > gpio115/value
 
 ## Audio CODEC
+
 i2c address is 0x30. Shares i2c bus 2 with EEPROM, which defaults to 0x57.
 
 ## EEPROM
+
 [BBCape_EEPROM Generator](https://github.com/picoflamingo/BBCape_EEPROM)
 
+## Setting up capemgr shortcuts
 
-# Miscellanea
+	# As of Debian 8.3: export SLOTS=/sys/devices/platform/bone_capemgr/slots
+	
+## Miscellanea
+
 * A reboot cycle will occur if the power supply limits current too much during boot.
 * Boot log after installing EEPROM [available](http://pastebin.com/dkPr33Dw).
 * See [this page](https://help.github.com/articles/generating-ssh-keys/#platform-linux) for information on how to set up SSH access to github from the BBB.
@@ -204,3 +259,8 @@ Need to build [patched](http://www.embedded-things.com/bbb/patching-the-device-t
 		
 2. Remove SD card
 3. Remove power
+
+# Building the Kernel
+
+[RCN's build repo](https://github.com/RobertCNelson/linux-dev)
+
