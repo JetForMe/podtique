@@ -185,7 +185,7 @@ Station::openTrack()
 		|| (mDecoder->numChannels() != 2 && mDecoder->numChannels() != 1)
 		|| mDecoder->rate() != 44100)
 	{
-		LogDebug("Unexpected encoding (%d), rate (%ld), or num channels (%d)",
+		LogDebug("Unexpected encoding (%d), rate (%u), or num channels (%d)",
 					mDecoder->encoding(),
 					mDecoder->rate(),
 					mDecoder->numChannels());

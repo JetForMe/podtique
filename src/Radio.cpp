@@ -139,7 +139,7 @@ Radio::setVolume(float inVal)
 	std::lock_guard<std::mutex>		lock(mConfigMutex);
 	mVolume = v;
 	
-	//LogDebug("Volume set: %f", mVolume);
+	LogDebug("Volume set: %f", mVolume);
 }
 
 void

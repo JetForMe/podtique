@@ -36,12 +36,14 @@ brought up a menut that let me choose some locales. It still doesn't like the en
 Used to do 1a and 2. Now do 1b and 2.
 
 ### 1a. Set up Wi-Fi (old)
+
 Plug in the wifi dongle (not sure if this is necessary, but it was plugged in and
 magically there was a modules-load.d .conf file for it).
 
 	# apt-get install -y wireless-tools
 
 ### 1b. Set up Wi-Fi (new)
+
 (From [https://wiki.archlinux.org/index.php/Wireless_network_configuration#Wireless_management](https://wiki.archlinux.org/index.php/Wireless_network_configuration#Wireless_management))
 
 Plug in the wifi dongle (not sure if this is necessary, but it was plugged in and
@@ -51,6 +53,7 @@ magically there was a modules-load.d .conf file for it).
 	# apt-get install -y wpasupplicant
 
 ### 2. Configure Wi-Fi (both)
+
 Calculate the WPA PSK for the SSID:
 
 	# wpa_passphrase SSID Password
@@ -82,9 +85,9 @@ Make it go (with iw tools from 1b above):
 
 	# ifup wlan0
 
-### 3. Install Bonjour
+### 3. Install Bonjour (Avahi)
 
-	# apt-get install -y avahi-daemon avahi-discover libnss-mdns
+	# apt-get install -y avahi-daemon avahi-discover avahi-utils libnss-mdns
 
 ### 4. Install NTP
 
@@ -144,11 +147,40 @@ You'll need to install development versions of the above packages to be able to 
 	
 ## Other Peripherals
 
+Need to install the overlays (as of 2016-04-03, the console image doesn't come with the overlays). Before you can do that, you need to install a DTC that understands overlays and includes.
+
+## dtc
+
+### 4.1.x and leter kernels
+
+	# apt-get install -y device-tree-compiler
+	
+### Pre 4.1.x kernels
+
+Need to build [patched](http://www.embedded-things.com/bbb/patching-the-device-tree-compiler-for-ubuntu/) version of dtc.
+
+	$ git clone git://git.kernel.org/pub/scm/utils/dtc/dtc.git
+	$ cd dtc
+	$ git reset --hard f8cb5dd94903a5cfa1609695328b8f1d5557367f
+	$ wget https://patchwork.kernel.org/patch/1934471/raw/ -O dynamic-symbols.patch
+	$ git apply dynamic-symbols.patch
+	(warning about whitespace errors seems benign)
+	$ make
+
+## Overlays
+
+	# git clone https://github.com/beagleboard/bb.org-overlays
+	# cd bb.org-overlays
+	# sudo ./install.sh
+
+
 ### ADC & HDMI
 
 BeagleBone Green has no HDMI on it. BBB has HDMI that needs to be disabled.
 
 #### For BBGreen (not BBB)
+
+BBGreen has no HDMI hardware, so it doesn't need to be disabled (the base DTB never enables it).
 
 Edit `/boot/uEnv.txt` to enable BB-ADC.
 
@@ -162,6 +194,12 @@ Edit `/boot/uEnv.txt` to enable BB-ADC and disable BB-BONELT-HDMI,BB-BONELT-HDMI
 	cape_enable=bone_capemgr.enable_partno=BB-ADC         
 
 ### PRU Support
+
+PRU support requires:
+
+* A kernel that supports it. 4.4.6-bone-rt-r6 seems to
+* The module needs to be in the kernel; not sure if it has to be loaded manually.
+* A DTB needs to enable it. One possible way is via echo BB-ENABLE-PRU > $SLOTS. Obviously, the podtique DTB should do this.
 
 Need to investigate this further. 4.1 kernel from TI loses support for this. Not sure how to proceed.
 
@@ -184,8 +222,8 @@ Still need to determine if I can do this via DTB.
 Configure pins with the following:
 
 	# cd /sys/class/gpio
-	# echo 50 > export
-	# echo 115 > export
+	# echo 50 > export                # Audio power
+	# echo 115 > export               # Front panel power
 	# echo out > gpio50/direction
 	# echo out > gpio115/direction
 
@@ -197,6 +235,12 @@ Turn the regulators on and off with:
 	# echo 0 > gpio50/value
 	# echo 0 > gpio115/value
 
+# Other Radio Files
+
+Need data directory with spectrum.json file, pinknoise.wav.
+
+# Other Stuff
+
 ## Audio CODEC
 
 i2c address is 0x30. Shares i2c bus 2 with EEPROM, which defaults to 0x57.
@@ -205,10 +249,25 @@ i2c address is 0x30. Shares i2c bus 2 with EEPROM, which defaults to 0x57.
 
 [BBCape_EEPROM Generator](https://github.com/picoflamingo/BBCape_EEPROM)
 
-## Setting up capemgr shortcuts
+## Setting up capemgr shortcuts (OBSOLETE?)
 
 	# As of Debian 8.3: export SLOTS=/sys/devices/platform/bone_capemgr/slots
 	
+## Fixing Bad `uEnv.txt`
+
+While messing around with device tree and kernels and related things on BBB, it’s possible to end up with a `uEnv.txt` file that won’t boot. Here’s how to fix it:
+
+1. Insert **non-flasher** SD card, hold button, boot. Then:
+
+		$ sudo mkdir -p /mnt/eMMC
+		$ sudo mount /dev/mmcblk1p1 /mnt/eMMC
+		$ sudo nano /mnt/eMMC/boot/uEnv.txt
+		…edit uEnv.txt to fix the problem…
+		$ sudo shutdown -h now
+		
+2. Remove SD card
+3. Remove power
+
 ## Miscellanea
 
 * A reboot cycle will occur if the power supply limits current too much during boot.
@@ -235,30 +294,6 @@ This should fix the annoying perl locale warnings.
 	
 		[FAILED] Failed to start Store Sound Card State.
 		See 'systemctl status alsa-store.service' for details.
-
-## dtc
-
-Need to build [patched](http://www.embedded-things.com/bbb/patching-the-device-tree-compiler-for-ubuntu/) version of dtc.
-
-	$ git clone git://git.kernel.org/pub/scm/utils/dtc/dtc.git
-	$ cd dtc
-	$ git reset --hard f8cb5dd94903a5cfa1609695328b8f1d5557367f
-	$ wget https://patchwork.kernel.org/patch/1934471/raw/ -O dynamic-symbols.patch
-	$ git apply dynamic-symbols.patch
-	(warning about whitespace errors seems benign)
-	$ make
-
-## Fixing Bad `uEnv.txt`
-
-1. Insert **non-flasher** SD card, hold button, boot. Then:
-
-		$ sudo mkdir -p /mnt/eMMC
-		$ sudo mount /dev/mmcblk1p1 /mnt/eMMC
-		$ sudo nano /mnt/eMMC/boot/uEnv.txt
-		$ sudo shutdown -h now
-		
-2. Remove SD card
-3. Remove power
 
 # Building the Kernel
 

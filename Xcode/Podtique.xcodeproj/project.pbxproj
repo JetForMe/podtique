@@ -54,7 +54,6 @@
 		C61BC6271BD0F921007AA330 /* mp4sample.c in Sources */ = {isa = PBXBuildFile; fileRef = C61BC6201BD0F921007AA330 /* mp4sample.c */; };
 		C61BC6281BD0F921007AA330 /* mp4tagupdate.c in Sources */ = {isa = PBXBuildFile; fileRef = C61BC6211BD0F921007AA330 /* mp4tagupdate.c */; };
 		C61BC6291BD0F921007AA330 /* mp4util.c in Sources */ = {isa = PBXBuildFile; fileRef = C61BC6221BD0F921007AA330 /* mp4util.c */; };
-		C61C5F061BCF35AD008BE1F8 /* AACDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C61C5F041BCF35AD008BE1F8 /* AACDecoder.cpp */; };
 		C61C5F091BCF35CF008BE1F8 /* Decoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C61C5F071BCF35CF008BE1F8 /* Decoder.cpp */; };
 		C6200C7D1A4FF99400FB48AD /* Semaphore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6200C7B1A4FF99400FB48AD /* Semaphore.cpp */; };
 		C6200C811A501C8300FB48AD /* GPIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6200C7F1A50162F00FB48AD /* GPIO.cpp */; };
@@ -74,6 +73,7 @@
 		C6B5DFEC1A34E9AF00A3A9ED /* AudioDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6B5DFEA1A34E9AF00A3A9ED /* AudioDevice.cpp */; };
 		C6B5DFF01A35AD8200A3A9ED /* SndFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6B5DFEE1A35AD8200A3A9ED /* SndFile.cpp */; };
 		C6B5DFF21A35B49700A3A9ED /* libsndfile.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B5DFF11A35B49700A3A9ED /* libsndfile.1.dylib */; };
+		C6EDA8AD1CB1C5810051623C /* AACDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6EDA8AB1CB1C5810051623C /* AACDecoder.cpp */; };
 		C6F066751AAFE1D400EDC3E9 /* libdbus-1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C6F066741AAFE1D400EDC3E9 /* libdbus-1.3.dylib */; };
 		C6F066781AAFF00C00EDC3E9 /* DBUS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6F066761AAFF00C00EDC3E9 /* DBUS.cpp */; };
 		C6F0667B1AB03E5000EDC3E9 /* DBusMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6F066791AB03E5000EDC3E9 /* DBusMessage.cpp */; };
@@ -202,8 +202,6 @@
 		C61BC6201BD0F921007AA330 /* mp4sample.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mp4sample.c; path = "../../../../Downloads/faad2-2.7/common/mp4ff/mp4sample.c"; sourceTree = "<group>"; };
 		C61BC6211BD0F921007AA330 /* mp4tagupdate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mp4tagupdate.c; path = "../../../../Downloads/faad2-2.7/common/mp4ff/mp4tagupdate.c"; sourceTree = "<group>"; };
 		C61BC6221BD0F921007AA330 /* mp4util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mp4util.c; path = "../../../../Downloads/faad2-2.7/common/mp4ff/mp4util.c"; sourceTree = "<group>"; };
-		C61C5F041BCF35AD008BE1F8 /* AACDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AACDecoder.cpp; sourceTree = "<group>"; };
-		C61C5F051BCF35AD008BE1F8 /* AACDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AACDecoder.h; sourceTree = "<group>"; };
 		C61C5F071BCF35CF008BE1F8 /* Decoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Decoder.cpp; sourceTree = "<group>"; };
 		C61C5F081BCF35CF008BE1F8 /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
 		C6200C7B1A4FF99400FB48AD /* Semaphore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Semaphore.cpp; sourceTree = "<group>"; };
@@ -247,6 +245,10 @@
 		C6B5DFEE1A35AD8200A3A9ED /* SndFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SndFile.cpp; sourceTree = "<group>"; };
 		C6B5DFEF1A35AD8200A3A9ED /* SndFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SndFile.h; sourceTree = "<group>"; };
 		C6B5DFF11A35B49700A3A9ED /* libsndfile.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsndfile.1.dylib; path = /usr/local/Cellar/libsndfile/1.0.25/lib/libsndfile.1.dylib; sourceTree = "<absolute>"; };
+		C6EDA8AB1CB1C5810051623C /* AACDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AACDecoder.cpp; sourceTree = "<group>"; };
+		C6EDA8AC1CB1C5810051623C /* AACDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AACDecoder.h; sourceTree = "<group>"; };
+		C6EDA8AE1CB1D09B0051623C /* pru.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pru.c; sourceTree = "<group>"; };
+		C6EDA8AF1CB1D09B0051623C /* pru.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pru.h; sourceTree = "<group>"; };
 		C6F066741AAFE1D400EDC3E9 /* libdbus-1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libdbus-1.3.dylib"; path = "/usr/local/Cellar/d-bus/1.8.14/lib/libdbus-1.3.dylib"; sourceTree = "<absolute>"; };
 		C6F066761AAFF00C00EDC3E9 /* DBUS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DBUS.cpp; sourceTree = "<group>"; };
 		C6F066771AAFF00C00EDC3E9 /* DBUS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBUS.h; sourceTree = "<group>"; };
@@ -411,6 +413,8 @@
 		C6200C7E1A50161600FB48AD /* BBB */ = {
 			isa = PBXGroup;
 			children = (
+				C6EDA8AE1CB1D09B0051623C /* pru.c */,
+				C6EDA8AF1CB1D09B0051623C /* pru.h */,
 				C6B5DFC91A31A8D500A3A9ED /* BBBMain.cpp */,
 				C6200C801A50162F00FB48AD /* GPIO.h */,
 				C6200C7F1A50162F00FB48AD /* GPIO.cpp */,
@@ -489,6 +493,8 @@
 		C6B5DFC81A31A8D500A3A9ED /* src */ = {
 			isa = PBXGroup;
 			children = (
+				C6EDA8AC1CB1C5810051623C /* AACDecoder.h */,
+				C6EDA8AB1CB1C5810051623C /* AACDecoder.cpp */,
 				C6B5DFEB1A34E9AF00A3A9ED /* AudioDevice.h */,
 				C6B5DFEA1A34E9AF00A3A9ED /* AudioDevice.cpp */,
 				C618FFAA1A43989E00A66EE6 /* BandPassFilter.h */,
@@ -501,8 +507,6 @@
 				C69796461B804A430024511B /* RadioDBUS.cpp */,
 				C61C5F081BCF35CF008BE1F8 /* Decoder.h */,
 				C61C5F071BCF35CF008BE1F8 /* Decoder.cpp */,
-				C61C5F051BCF35AD008BE1F8 /* AACDecoder.h */,
-				C61C5F041BCF35AD008BE1F8 /* AACDecoder.cpp */,
 				C6B5DFCD1A31A8D500A3A9ED /* MP3Decoder.h */,
 				C6B5DFCC1A31A8D500A3A9ED /* MP3Decoder.cpp */,
 				C6B5DFCE1A31A8D500A3A9ED /* picojson.h */,
@@ -674,7 +678,6 @@
 				C61BC6041BCF95DB007AA330 /* specrec.c in Sources */,
 				C6B5DFAB1A31A89A00A3A9ED /* main.m in Sources */,
 				C61BC6131BCF95DB007AA330 /* tns.c in Sources */,
-				C61C5F061BCF35AD008BE1F8 /* AACDecoder.cpp in Sources */,
 				C61BC59E1BCF95DA007AA330 /* cfft.c in Sources */,
 				C61BC5D41BCF95DB007AA330 /* output.c in Sources */,
 				C61BC5E31BCF95DB007AA330 /* rvlc.c in Sources */,
@@ -685,6 +688,7 @@
 				C61BC6011BCF95DB007AA330 /* sbr_tf_grid.c in Sources */,
 				C61BC6231BD0F921007AA330 /* mp4atom.c in Sources */,
 				C61BC5F21BCF95DB007AA330 /* sbr_hfadj.c in Sources */,
+				C6EDA8AD1CB1C5810051623C /* AACDecoder.cpp in Sources */,
 				C61BC5B31BCF95DA007AA330 /* hcr.c in Sources */,
 				C61BC6291BD0F921007AA330 /* mp4util.c in Sources */,
 				C6B5DFDA1A31A8D500A3A9ED /* Radio.cpp in Sources */,

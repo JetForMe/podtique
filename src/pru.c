@@ -41,8 +41,11 @@ pru_init(
 
 	int ret = prussdrv_open(PRU_EVTOUT_0);
 	if (ret)
-		die("prussdrv_open open PRU_EVTOUT_0 failed %d: %s\n", ret, strerror(errno));
-
+	{
+		warn("prussdrv_open open PRU_EVTOUT_0 failed %d: %s\n", ret, strerror(errno));
+		return NULL;
+	}
+	
 	tpruss_intc_initdata pruss_intc_initdata = PRUSS_INTC_INITDATA;
 	prussdrv_pruintc_init(&pruss_intc_initdata);
 
@@ -54,8 +57,13 @@ pru_init(
 
 	const int mem_fd = open("/dev/mem", O_RDWR);
 	if (mem_fd < 0)
-		die("Failed to open /dev/mem: %s\n", strerror(errno));
-
+	{
+		warn("Failed to open /dev/mem: %s\n", strerror(errno));
+		//	TODO: better cleanup
+		prussdrv_exit();
+		return NULL;
+	}
+	
 	const uintptr_t ddr_addr = proc_read("/sys/class/uio/uio0/maps/map1/addr");
 	const uintptr_t ddr_size = proc_read("/sys/class/uio/uio0/maps/map1/size");
 
@@ -72,12 +80,18 @@ pru_init(
 		mem_fd,
 		ddr_offset
 	);
+	
 	if (ddr_mem == MAP_FAILED)
-		die("Failed to mmap offset %"PRIxPTR" @ %zu bytes: %s\n",
+	{
+		warn("Failed to mmap offset %"PRIxPTR" @ %zu bytes: %s\n",
 			ddr_offset,
 			ddr_filelen,
 			strerror(errno)
 		);
+		//	TODO: better cleanup
+		close(mem_fd);
+		return NULL;
+	}
 
 	close(mem_fd);
 
