@@ -1,7 +1,5 @@
-Podtique
-========
 
-A podcast and music player that simulates the interface and sound quality of an antique radio.
+Podtique is a podcast and music player that simulates the interface and sound quality (and eventually the behavior) of an antique radio.
 
 <img src="https://farm8.staticflickr.com/7513/16266541492_0c1e3a7c20_n.jpg" style="display: block; margin-left: auto; margin-right: auto;"/>
 
@@ -9,13 +7,11 @@ The code is designed to be simulated on OS X and deployed onto a [BeagleBone Bla
 
 As of this writing, the code barely plays something, and what it plays is hard-coded.
 
-Building the Code
-=================
+# Building the Code
 
 Podtique uses [libao](https://www.xiph.org/ao/) and [libmpg123](http://www.mpg123.de).
 
-OS X
-----
+## OS X
 
 On OS X, you also need to install [Xcode](https://developer.apple.com/xcode/). Get Xcode from Apple, and use [Homebrew](http://brew.sh) for the rest:
 
@@ -26,20 +22,17 @@ On OS X, you also need to install [Xcode](https://developer.apple.com/xcode/). G
 
 Open the Xcode project, and click the Run button.
 
-Linux
------
+## Linux
 
 Use your favorite package manager or download libao and libmpg123. cd to the podtique directory and make:
 
 	$ make
 
-Cross-Compiling for BBB
------------------------
+## Cross-Compiling for BBB
 
-It’s not yet possible to cross-compile for BBB. I’m hosting the build on Ubuntu 14.04. I need to figure out how to get ARM-targeted versions of libao and libmpg123. ALSA will be needed on the target as well. The Makefile needs to be enhanced to support cross-compiling or host compiling.
+It’s not possible to cross-compile for BBB on macOS (maybe, with a *lot* of work). I’m hosting the build on Ubuntu 16.04. I need to figure out how to get ARM-targeted versions of libao and libmpg123. ALSA will be needed on the target as well. The Makefile needs to be enhanced to support cross-compiling or host compiling.
 
-Pin and Peripheral Assignments
-------------------------------
+## Pin and Peripheral Assignments
 
 Most of the I/O is done via sysfs (gross, but speed isn't critical).
 
@@ -67,8 +60,9 @@ The LEDs are AdaFruit NeoPixel (24-LED ring), and driving those requires the use
 
 Note that the sysfs nodes for GPIO must be accessed by root. It might be possible to set up udev rules to set the group and access modes such that a non-root user can access the pins, but I couldn't figure it out. Something like KERNEL=="gpio*", GROUP="gpio", MODE="0660", but I didn't try it.
 
-Linux Audio Configuration
--------------------------
+## Linux Audio Configuration
+
+**Note:** This only applies to a USB audio dongle used in the initial prototype, and not to the custom cape.
 
 Make sure the user running the program has audio privileges (generally means adding that user to the audio group).
 
@@ -86,12 +80,12 @@ The following configuration file works for the Audio-Technica USB audio dongle I
 	  card 1
 	}
 	
-BBB Cape
-========
+# BBB Cape
+
 There is a custom Cape for use with the BeagleBone Black. The first version, Podtique1.osm, was developed using [Osmond](http://osmondpcb.com) for OS X, which is available for free.
 
-Podtique Cape 1
----------------
+## Podtique Cape 1
+
 This cape has the minimal hardware needed to enable Podtique functionality:
 
 * Audio CODEC
@@ -100,8 +94,7 @@ This cape has the minimal hardware needed to enable Podtique functionality:
 * NeoPixel level shifting
 * Front panel interface
 
-Radio Notes
-===========
+# Radio Notes
 
 * Screws in bottom to hold everything in place.
 * Add battery switch and wiring harness.
@@ -110,8 +103,8 @@ Radio Notes
 * Try turning off eth0 config at boot and config after (wicd/connman).
 * modprobe uio_pruss at boot.
 
-Done
-----
+## Done
+
 * Turn off LEDs on everything.
 * Add dial LEDs as needed.
 * Add amp control GPIO to avoid power-on pop.
@@ -126,8 +119,8 @@ Done
 * Make sure top of back isn't so tall as to prevent assembly.
 
 
-Later Version
--------------
+## Later Version
+
 * Make tube amplifier to show tubes in back?
 * Investigate sleep modes for BBB.
 * Mid-pass filter effect?
