@@ -143,8 +143,17 @@ ledscape_t * ledscape_init_with_programs(
 )
 {
 	pru_t * const pru0 = pru_init(0);
+	if (pru0 == NULL)
+	{
+		return NULL;
+	}
+	
 	pru_t * const pru1 = pru_init(1);
-
+	if (pru1 == NULL)
+	{
+		return NULL;
+	}
+	
 	const size_t frame_size = num_pixels * LEDSCAPE_NUM_STRIPS * 4;
 
 	if (2*frame_size > pru0->ddr_size)

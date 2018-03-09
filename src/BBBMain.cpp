@@ -179,8 +179,11 @@ Podtique::run()
 			break;
 		}
 		
-		::ledscape_wait(mLEDs);
-		::ledscape_draw(mLEDs, 0);
+		if (mLEDs != NULL)			//	Allow running even if PRUs aren't working
+		{
+			::ledscape_wait(mLEDs);
+			::ledscape_draw(mLEDs, 0);
+		}
 		
 		//	Read GPIOs and ADCs (with a delay before each, since
 		//	reading these too rapidly leads to a hang)…
@@ -242,6 +245,11 @@ Podtique::run()
 void
 Podtique::setBacklightColor(uint8_t inRed, uint8_t inGreen, uint8_t inBlue)
 {
+	if (mLEDs == NULL)			//	Allow running even if PRUs aren't working
+	{
+		return;
+	}
+	
 	mLEDBufferIdx = (mLEDBufferIdx + 1) % 2;
 	ledscape_frame_t* const frame = ::ledscape_frame(mLEDs, mLEDBufferIdx);
 	for (uint32_t idx = 0; idx < mNumLEDs; ++idx)

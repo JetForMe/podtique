@@ -210,6 +210,8 @@
 		C6200C801A50162F00FB48AD /* GPIO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GPIO.h; sourceTree = "<group>"; };
 		C69796461B804A430024511B /* RadioDBUS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RadioDBUS.cpp; sourceTree = "<group>"; };
 		C69796471B804A430024511B /* RadioDBUS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioDBUS.h; sourceTree = "<group>"; };
+		C698F28E205289C300208471 /* ledscape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ledscape.h; sourceTree = "<group>"; };
+		C698F28F205289C400208471 /* ledscape.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ledscape.c; sourceTree = "<group>"; };
 		C6B2152C1A3C3B2D0043E3FD /* ExampleSpectrum.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ExampleSpectrum.json; sourceTree = "<group>"; };
 		C6B5DFA21A31A89A00A3A9ED /* Podtique.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Podtique.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6B5DFA61A31A89A00A3A9ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -413,6 +415,8 @@
 		C6200C7E1A50161600FB48AD /* BBB */ = {
 			isa = PBXGroup;
 			children = (
+				C698F28F205289C400208471 /* ledscape.c */,
+				C698F28E205289C300208471 /* ledscape.h */,
 				C6EDA8AE1CB1D09B0051623C /* pru.c */,
 				C6EDA8AF1CB1D09B0051623C /* pru.h */,
 				C6B5DFC91A31A8D500A3A9ED /* BBBMain.cpp */,
