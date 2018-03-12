@@ -1,0 +1,11 @@
+#!/bin/bash
+
+config-pin p8.12 in+
+config-pin p8.13 out
+config-pin p8.14 in+
+config-pin p8.15 in+
+config-pin p8.16 in+
+config-pin p8.17 in+
+config-pin p8.18 in+
+config-pin p9.14 out
+
