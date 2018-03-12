@@ -104,7 +104,7 @@ AACDecoder::open(const std::string& inPath)
 	mInputDataSize = mInputStream.gcount();
 	if (!mInputStream.good())
 	{
-		LogDebug("WARNING: Unable to read %lu bytes from file [%s]", mInputBufferSize, inPath.c_str());
+		LogDebug("WARNING: Unable to read %zd bytes from file [%s]", mInputBufferSize, inPath.c_str());
 	}
 	
 	mInputStream.seekg(0);				//	Return to the start of the file

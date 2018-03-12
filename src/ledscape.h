@@ -93,6 +93,14 @@ ledscape_draw(
 	unsigned frame
 );
 
+extern void ledscape_pixel_set_color(
+	ledscape_pixel_t * const out_pixel,
+	color_channel_order_t color_channel_order,
+	uint8_t r,
+	uint8_t g,
+	uint8_t b
+);
+
 extern inline void ledscape_set_color(
 	ledscape_frame_t * const frame,
 	color_channel_order_t color_channel_order,
@@ -110,14 +118,6 @@ extern inline void ledscape_set_color(
 		b
 	);
 };
-
-extern inline void ledscape_pixel_set_color(
-	ledscape_pixel_t * const out_pixel,
-	color_channel_order_t color_channel_order,
-	uint8_t r,
-	uint8_t g,
-	uint8_t b
-);
 
 extern void
 ledscape_wait(
