@@ -85,6 +85,32 @@ Make it go (with iw tools from 1b above):
 
 	# ifup wlan0
 
+## Using IoT images from Mar 2018
+
+### Runtime Support
+
+	# aptinstall -y libsndfile1 libao4 mpg123 libfaad2 alsaplayer libasound2 alsaplayer-common 
+
+### Development Support
+
+	# aptinstall -y libao-dev libmpg123-dev libsndfile-dev libdbus-1-dev libasound2-dev
+
+#### MP4 Container Support
+
+I haven’t been able to find an apt package that supplies the `mp4ff.h` header file (which is part of `faad2`). So you need to do this:
+
+	$ wget http://downloads.sourceforge.net/faac/faad2-2.7.tar.bz2
+	$ jar -jxf faad2-2.7.tar.bz2
+	$ cd faad2-2.7
+	$ ./configure
+	$ make
+	# make install
+	# cp common/mp4ff/mp4ff_int_types.h /usr/local/include
+
+
+
+## Older Instructions
+
 ### 3. Install Bonjour (Avahi)
 
 	# apt-get install -y avahi-daemon avahi-discover avahi-utils libnss-mdns
@@ -99,6 +125,7 @@ Make it go (with iw tools from 1b above):
 	# apt-get install -y git
 	
 ## Audio Support
+
 
 ### libao
 
@@ -123,7 +150,7 @@ Note: It doesn't seem to work to install from apt. Need to build from source. No
 	
 ### AAC and mp4 Support
 
-	$ http://downloads.sourceforge.net/faac/faad2-2.7.tar.bz2
+	$ wget http://downloads.sourceforge.net/faac/faad2-2.7.tar.bz2
 	$ jar -jxf faad2-2.7.tar.bz2
 	$ cd faad2-2.7
 	$ ./configure

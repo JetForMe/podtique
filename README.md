@@ -124,3 +124,4 @@ This cape has the minimal hardware needed to enable Podtique functionality:
 * Make tube amplifier to show tubes in back?
 * Investigate sleep modes for BBB.
 * Mid-pass filter effect?
+* Fast boot (U-Boot Falcon mode?)

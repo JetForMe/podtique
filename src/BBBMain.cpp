@@ -524,7 +524,7 @@ main(int inArgCount, const char** inArgs)
 	//	Process arguments…
 	
 	const char* dd = getenv("DATA_DIR");
-	if (hd == NULL)
+	if (dd == NULL)
 	{
 		fprintf(stderr, "DATA_DIR environment variable not set\n");
 		return -1;

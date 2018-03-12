@@ -59,13 +59,13 @@ private:
 	static	uint32_t		MP4Seek(void* inUserData, uint64_t inPosition);
 	
 private:
-	std::ifstream			mInputStream;
+	NeAACDecHandle			mHandle;
 	mp4ff_callback_t		mMP4Callbacks;
 	mp4ff_t*				mMP4File;
 	uint32_t				mFrameSize;
 	int						mTrack;
 	
-	NeAACDecHandle			mHandle;
+	std::ifstream			mInputStream;
 	uint8_t*				mInputBuffer;			//	Remove this from object
 	size_t					mInputBufferSize;
 	size_t					mInputDataSize;

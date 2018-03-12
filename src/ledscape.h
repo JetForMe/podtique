@@ -101,7 +101,15 @@ extern inline void ledscape_set_color(
 	uint8_t r,
 	uint8_t g,
 	uint8_t b
-);
+) {
+	ledscape_pixel_set_color(
+		&frame[pixel].strip[strip],
+		color_channel_order,
+		r,
+		g,
+		b
+	);
+};
 
 extern inline void ledscape_pixel_set_color(
 	ledscape_pixel_t * const out_pixel,

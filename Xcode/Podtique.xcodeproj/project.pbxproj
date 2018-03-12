@@ -415,8 +415,8 @@
 		C6200C7E1A50161600FB48AD /* BBB */ = {
 			isa = PBXGroup;
 			children = (
-				C698F28F205289C400208471 /* ledscape.c */,
 				C698F28E205289C300208471 /* ledscape.h */,
+				C698F28F205289C400208471 /* ledscape.c */,
 				C6EDA8AE1CB1D09B0051623C /* pru.c */,
 				C6EDA8AF1CB1D09B0051623C /* pru.h */,
 				C6B5DFC91A31A8D500A3A9ED /* BBBMain.cpp */,
