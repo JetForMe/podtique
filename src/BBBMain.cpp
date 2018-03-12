@@ -591,8 +591,8 @@ main(int inArgCount, const char** inArgs)
 	::signal(SIGHUP, intHandler);
 	::signal(SIGINT, intHandler);
 	
-	sPodtique = new PodtiquePrototype1;
-	//sPodtique = new PodtiquePT1;
+	//sPodtique = new PodtiquePrototype1;
+	sPodtique = new PodtiquePT1;
 	std::string p(dataDir);
 	sPodtique->setDataDir(p);
 	sPodtique->run();
