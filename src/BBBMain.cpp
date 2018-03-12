@@ -119,7 +119,7 @@ Podtique::readADC(int inChannel)
 	int fd = ::open(path, O_RDONLY);
 	if (fd < 0)
 	{
-		LogDebug("Unable to open ADC0: %s", std::strerror(errno));
+		LogDebug("Unable to open ADC%u: %s", inChannel, std::strerror(errno));
 		return -1.0;
 	}
 	
@@ -130,7 +130,7 @@ Podtique::readADC(int inChannel)
 	if (bytesRead > 0)
 	{
 		buf[bytesRead] = 0;
-		//LogDebug("Read %s", buf);
+//		LogDebug("Read ADC%u: %s", inChannel, buf);
 		int v = ::atoi(buf);
 		result = v / 4095.0;
 	}
@@ -591,8 +591,8 @@ main(int inArgCount, const char** inArgs)
 	::signal(SIGHUP, intHandler);
 	::signal(SIGINT, intHandler);
 	
-	//sPodtique = new PodtiquePrototype1;
-	sPodtique = new PodtiquePT1;
+	sPodtique = new PodtiquePrototype1;
+	//sPodtique = new PodtiquePT1;
 	std::string p(dataDir);
 	sPodtique->setDataDir(p);
 	sPodtique->run();

@@ -13,21 +13,36 @@ Most of the I/O is done via sysfs (gross, and we need to look into speeding up r
 
 The digital inputs all have the internal pull-up enabled. The connected switches pull them down.
 
-* GPIO2\_11 / xx (P8_42 / xx) is on/off input (PANEL 6).
-* GPIO2\_6 / xx (P8_45 / xx) is mode 1 (PANEL 7).
-* GPIO2\_8 / xx (P8_43 / xx) is mode 2 (PANEL 8).
-* GPIO2\_7 / xx (P8_46 / xx) is left momentary (PANEL 9) (not currently installed).
-* GPIO2\_9 / xx (P8_44 / xx) is right momentary (PANEL 10) (not currently installed).
+**Note:** only the P8/P9 header pin numbers are correct below:
+
+* GPIO2\_11 / xx (P8_14 / xx) is on/off input (PANEL 6).
+* GPIO2\_6 / xx (P8_15 / xx) is mode 1 (PANEL 7).
+* GPIO2\_8 / xx (P8_16 / xx) is mode 2 (PANEL 8).
+* GPIO2\_7 / xx (P8_17 / xx) is left momentary (PANEL 9) (not currently installed).
+* GPIO2\_9 / xx (P8_18 / xx) is right momentary (PANEL 10) (not currently installed).
  
 There is an output used to control the amplifier’s standby mode:
 
-* GPIO0\_27 / 27 (P8_17 / 11) is an output to control the amplifier.
+* GPIOxx / xx (P8_12 / xx) input, amplifier fault (nFAULT, active low).
+* GPIOxx / xx (P8_13 / xx) output, amplifier shutdown (nSD, active low).
 
 The LEDs are AdaFruit NeoPixel (24-LED ring), and driving those requires the use of the PRU.
 
 * GPIO1\_13 (P8_11 / 13) is used by the PRU to communicate with the NeoPixel ring.
 
 Note that the sysfs nodes for GPIO must be accessed by root. It might be possible to set up udev rules to set the group and access modes such that a non-root user can access the pins, but I couldn't figure it out. Something like KERNEL=="gpio*", GROUP="gpio", MODE="0660", but I didn't try it.
+
+## Manual Pin Configuration
+
+	$ config-pin p8.12 in+		#	p8.12 is input with pullup enabled
+	$ config-pin p8.13 out		#	p8.13 is output
+	$ config-pin p8.14 in+		#	p8.14 is input with pullup enabled
+	$ config-pin p8.15 in+		#	p8.15 is input with pullup enabled
+	$ config-pin p8.16 in+		#	p8.16 is input with pullup enabled
+	$ config-pin p8.17 in+		#	p8.17 is input with pullup enabled
+	$ config-pin p8.18 in+		#	p8.18 is input with pullup enabled
+	$ config-pin p9.14 out		#	p9.14 is output
+	
 
 Audio CODEC
 -----------
@@ -43,11 +58,11 @@ New Header Pins
 |P8-42			|GPIO2_11	|9		|23			|
 |P8-45			|GPIO2_6	|
 
-* GPIO2\_11 / xx (P8_42 / xx) is on/off input (PANEL 6).
-* GPIO2\_6 / xx (P8_45 / xx) is mode 1 (PANEL 7).
-* GPIO2\_8 / xx (P8_43 / xx) is mode 2 (PANEL 8).
-* GPIO2\_7 / xx (P8_46 / xx) is left momentary (PANEL 9) (not currently installed).
-* GPIO2\_9 / xx (P8_44 / xx) is right momentary (PANEL 10) (not currently installed).
+* GPIO2\_11 / xx (P8_14 / xx) is on/off input (PANEL 6).
+* GPIO2\_6 / xx (P8_15 / xx) is mode 1 (PANEL 7).
+* GPIO2\_8 / xx (P8_16 / xx) is mode 2 (PANEL 8).
+* GPIO2\_7 / xx (P8_17 / xx) is left momentary (PANEL 9) (not currently installed).
+* GPIO2\_9 / xx (P8_18 / xx) is right momentary (PANEL 10) (not currently installed).
  
 Amplifier:
 
@@ -58,7 +73,7 @@ CODEC:
 
 * GPIOxx / xx (P9_16 / xx) output, CODEC reset (nRESET, active low).
 * GPIOxx / xx (P9_20 / xx) CODEC SDA.
-* GPIOxx / xx (P9_19 / xx) cCODEC SCL.
+* GPIOxx / xx (P9_19 / xx) CODEC SCL.
 
 The LEDs are AdaFruit NeoPixel (24-LED ring), and driving those requires the use of the PRU.
 
