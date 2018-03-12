@@ -5,8 +5,8 @@ Pin and Peripheral Assignments
 
 Most of the I/O is done via sysfs (gross, and we need to look into speeding up reading the ports so volume and tuning changes are smoother).
 
-* AIN0 (P9_39) is the desired frequency input (PANEL 3)
-* AIN1 (P9_40) is the desired volume input (PANEL 4).
+* AIN0 (P9_39) is the desired volume input (PANEL 4).
+* AIN1 (P9_40) is the desired frequency input (PANEL 3)
 * AIN2 (P9_37) is the desired tone (or other) input (PANEL 5) (currently unsupported in the software).
 * GPIO3\_19 (P9_27) enables the 1.8V regulator to power the potentiometers.
 * AGnd (P9_34) is potentiometer ground.

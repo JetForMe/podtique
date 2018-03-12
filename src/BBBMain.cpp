@@ -468,7 +468,7 @@ PodtiquePT1::readVol() const
 	{
 		std::chrono::milliseconds dur(kDelay);
 		std::this_thread::sleep_for(dur);
-		float v = readADC(1);
+		float v = readADC(0);
 		if (v < 0.0) v = 0.6;
 
 		return v;
@@ -486,7 +486,7 @@ PodtiquePT1::readFreq() const
 	{
 		std::chrono::milliseconds dur(kDelay);
 		std::this_thread::sleep_for(dur);
-		float f = readADC(2);
+		float f = readADC(1);
 		if (f < 0.0) f = 0.000;
 	
 		return f;
