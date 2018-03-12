@@ -256,7 +256,7 @@ Radio::processAudioAndOutput(void* ioBuffer, size_t inBufSize)
 			std::lock_guard<std::mutex>		lock(mConfigMutex);
 			volume = mVolume;
 		}
-		p[i] = mVolume * (p[i] * mSpectrum->contentWeight() + noise * mSpectrum->staticWeight() * 0.2);
+		p[i] = volume * (p[i] * mSpectrum->contentWeight() + noise * mSpectrum->staticWeight() * 0.2);
 	}
 	
 	//	Output the result…
