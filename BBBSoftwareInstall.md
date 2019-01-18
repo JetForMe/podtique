@@ -11,6 +11,13 @@ Before doing anything else, log in and run this:
 
 # Software Setup
 
+### Timezone
+
+Use your appropriate time zone, of course. This seems to be flaky; didn't work on March 2018 MachineKit Stretch; second step would overwrite first.
+
+	# echo "America/Los_Angeles" > /etc/timezone 
+	# dpkg-reconfigure -f noninteractive tzdata
+
 ### Locale Crap
 
 These instructions no longer seem to work on Debian 8.3. Not sure what the right steps are, but running
