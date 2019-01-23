@@ -183,14 +183,25 @@ Station::openTrack()
 	//	Verify the encoder parameters…
 	//	TODO: Need to re-configure everything when this changes.
 	
-	if (mDecoder->encoding() != MPG123_ENC_SIGNED_16
-		|| (mDecoder->numChannels() != 2 && mDecoder->numChannels() != 1)
-		|| mDecoder->rate() != 44100)
+	LogDebug("Encoding (%d), rate (%u), num channels (%d)",
+				mDecoder->encoding(),
+				mDecoder->rate(),
+				mDecoder->numChannels());
+	if (mDecoder->encoding() != MPG123_ENC_SIGNED_16)
 	{
-		LogDebug("Unexpected encoding (%d), rate (%u), or num channels (%d)",
-					mDecoder->encoding(),
-					mDecoder->rate(),
-					mDecoder->numChannels());
+		LogDebug("Unexpected encoding (%d)", mDecoder->encoding());
+		return false;
+	}
+	
+	if (mDecoder->numChannels() != 2 && mDecoder->numChannels() != 1)
+	{
+		LogDebug("Unexpected num channels (%d)", mDecoder->numChannels());
+		return false;
+	}
+	
+	if (mDecoder->rate() != 44100)
+	{
+		LogDebug("Unexpected rate (%u)", mDecoder->rate());
 		return false;
 	}
 
@@ -384,6 +395,7 @@ Spectrum::setFrequency(float inFrequency)
 	{
 		mFrequency = inFrequency;
 		mNeedsTuning = true;
+		LogDebug("Selected frequency: %0.3f", mFrequency);
 	}
 }
 

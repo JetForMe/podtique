@@ -13,7 +13,7 @@
 
 
 const float kMinimumFrequencyChange					=	0.001;
-const float	kStationHalfBand						=	0.05;
+const float	kStationHalfBand						=	0.03;
 
 
 
