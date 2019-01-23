@@ -107,14 +107,18 @@ Make it go (with iw tools from 1b above):
 I haven’t been able to find an apt package that supplies the `mp4ff.h` header file (which is part of `faad2`). So you need to do this:
 
 	$ wget http://downloads.sourceforge.net/faac/faad2-2.7.tar.bz2
-	$ jar -jxf faad2-2.7.tar.bz2
+	$ tar -jxf faad2-2.7.tar.bz2
 	$ cd faad2-2.7
 	$ ./configure
 	$ make
 	# make install
 	# cp common/mp4ff/mp4ff_int_types.h /usr/local/include
 
+#### DBUS
 
+Hopefully deprecated after the whole thing is rewritten in Swift (with embedded server).
+
+	$ sudo apt install libdbus-1-dev
 
 ## Older Instructions
 
