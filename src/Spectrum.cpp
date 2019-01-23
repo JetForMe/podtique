@@ -138,10 +138,12 @@ Station::openTrack()
 		const std::string& path = trackPath();
 		if (hasSuffix(path, ".m4a"))
 		{
+			LogDebug("Opening m4a track");
 			mDecoder = new AACDecoder();
 		}
 		else //if (hasSuffix(path, ".mp3"))
 		{
+			LogDebug("Opening other (mp3?) track");
 			mDecoder = new MP3Decoder();
 		}
 		
